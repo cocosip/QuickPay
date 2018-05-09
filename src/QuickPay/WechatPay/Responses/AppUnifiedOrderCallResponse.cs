@@ -5,7 +5,7 @@ namespace QuickPay.WechatPay.Responses
 
     /// <summary>App支付统一支付唤起支付
     /// </summary>
-    public class AppUnifiedOrderCallResponse : BaseWechatPayResponse
+    public class AppUnifiedOrderCallResponse : WechatPayTradeResponse
     {
         /// <summary>微信开放平台审核通过的应用APPID
         /// </summary>

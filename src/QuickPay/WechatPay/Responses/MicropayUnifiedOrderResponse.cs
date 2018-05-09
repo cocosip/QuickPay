@@ -2,7 +2,9 @@
 
 namespace QuickPay.WechatPay.Responses
 {
-    public class MicropayUnifiedOrderResponse : BaseWechatPayResponse
+    /// <summary>刷卡支付统一下单
+    /// </summary>
+    public class MicropayUnifiedOrderResponse : WechatPayCommonResponse
     {
         /********************以下字段在return_code为SUCCESS的时候有返回********************/
 

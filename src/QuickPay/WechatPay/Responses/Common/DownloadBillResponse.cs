@@ -2,7 +2,7 @@
 {
     /// <summary>下载对账单
     /// </summary>
-    public class DownloadBillResponse : BaseWechatPayResponse
+    public class DownloadBillResponse : WechatPayCommonResponse
     {
 
     }

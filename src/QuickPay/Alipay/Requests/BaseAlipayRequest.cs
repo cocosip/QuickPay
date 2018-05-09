@@ -12,6 +12,8 @@ namespace QuickPay.Alipay.Requests
 
         public override string SignFieldName => AlipaySettings.DefaultSignFieldName;
 
+        public override string SignTypeName => "";
+
         /// <summary>AppId
         /// </summary>
         [PayElement("app_id")]
@@ -51,6 +53,10 @@ namespace QuickPay.Alipay.Requests
         /// </summary>
         [PayElement("biz_content")]
         public string BizContent { get; set; }
+
+        /// <summary>BizContent请求
+        /// </summary>
+        public BaseBizContentRequest BizContentRequest { get; set; }
 
         public virtual void SetNecessary(AlipayConfig config, AlipayApp app)
         {

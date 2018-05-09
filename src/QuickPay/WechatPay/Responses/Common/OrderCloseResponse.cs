@@ -4,7 +4,7 @@ namespace QuickPay.WechatPay.Responses
 {
     /// <summary>关闭订单
     /// </summary>
-    public class OrderCloseResponse : BaseWechatPayResponse
+    public class OrderCloseResponse : WechatPayCommonResponse
     {
         [PayElement("appid")]
         public string AppId { get; set; }

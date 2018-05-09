@@ -2,7 +2,7 @@
 {
     /// <summary>上报
     /// </summary>
-    public class ReportResponse : BaseWechatPayResponse
+    public class ReportResponse : WechatPayCommonResponse
     {
     }
 }

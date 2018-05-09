@@ -4,6 +4,8 @@ using QuickPay.WechatPay.Responses;
 
 namespace QuickPay.WechatPay.Requests
 {
+    /// <summary>刷卡支付
+    /// </summary>
     public class MicropayUnifiedOrderRequest : BaseWechatPayRequest<MicropayUnifiedOrderResponse>
     {
         public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/micropay";

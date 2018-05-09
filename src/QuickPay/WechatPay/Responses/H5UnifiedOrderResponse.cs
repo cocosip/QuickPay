@@ -2,7 +2,7 @@
 
 namespace QuickPay.WechatPay.Responses
 {
-    public class H5UnifiedOrderResponse : BaseWechatPayResponse
+    public class H5UnifiedOrderResponse : WechatPayTradeResponse
     {
         /********************以下字段在return_code为SUCCESS的时候有返回********************/
 

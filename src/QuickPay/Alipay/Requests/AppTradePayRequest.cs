@@ -1,7 +1,7 @@
-﻿using QuickPay.Alipay.Responses;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using DotCommon.Extensions;
+using QuickPay.Alipay.Apps;
+using QuickPay.Alipay.Responses;
+using QuickPay.Infrastructure.RequestData;
 
 namespace QuickPay.Alipay.Requests
 {
@@ -9,6 +9,34 @@ namespace QuickPay.Alipay.Requests
     /// </summary>
     public class AppTradePayRequest : BaseAlipayRequest<AppTradePayResponse>
     {
-        public override string Method => "";
+        public override string Method => "alipay.trade.app.pay";
+
+        /// <summary>支付宝服务器主动通知商户服务器里指定的页面http/https路径。建议商户使用https
+        /// </summary>
+        [PayElement("notify_url")]
+        public string NotifyUrl { get; set; }
+
+        public AppTradePayRequest()
+        {
+
+        }
+
+        public AppTradePayRequest(AppTradeBizContentPayRequest bizContentRequest, string notifyUrl)
+        {
+            BizContentRequest = bizContentRequest;
+            NotifyUrl = notifyUrl;
+        }
+
+
+        public override void SetNecessary(AlipayConfig config, AlipayApp app)
+        {
+            base.SetNecessary(config, app);
+            if (NotifyUrl.IsNullOrWhiteSpace())
+            {
+                NotifyUrl = config.GetDefaultNotifyUrl();
+            }
+        }
+
+
     }
 }

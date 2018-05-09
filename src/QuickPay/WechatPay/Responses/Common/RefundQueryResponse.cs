@@ -4,7 +4,7 @@ namespace QuickPay.WechatPay.Responses
 {
     /// <summary>退款查询
     /// </summary>
-    public class RefundQueryResponse : BaseWechatPayResponse
+    public class RefundQueryResponse : WechatPayCommonResponse
     {
         /// <summary>公众号Id
         /// </summary>

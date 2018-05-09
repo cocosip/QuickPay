@@ -1,4 +1,5 @@
 ﻿using DotCommon.Http;
+using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using System;
 using System.Threading.Tasks;
@@ -29,6 +30,8 @@ namespace QuickPay.Middleware
                 catch (Exception ex)
                 {
                     Logger.Error(context.Request.GetLogFormat($"调用Execute出错,{ex.Message}"), ex);
+                    SetPipelineError(context, new ExecuteError("调用远程服务出错"));
+                    return;
                 }
             }
             await _next.Invoke(context);

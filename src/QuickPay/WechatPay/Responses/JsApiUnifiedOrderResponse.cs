@@ -4,7 +4,7 @@ namespace QuickPay.WechatPay.Responses
 {
     /// <summary>JsApi提交订单返回
     /// </summary>
-    public class JsApiUnifiedOrderResponse : BaseWechatPayResponse
+    public class JsApiUnifiedOrderResponse : WechatPayCommonResponse
     {
         /********************以下字段在return_code为SUCCESS的时候有返回********************/
 

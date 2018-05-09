@@ -9,7 +9,12 @@ namespace QuickPay.WechatPay.Requests
     public abstract class BaseWechatPayRequest<T> : BasePayRequest<T> where T : PayResponse
     {
         public override string Provider => QuickPaySettings.Provider.WechatPay;
+
         public override string SignFieldName => WechatPaySettings.DefaultSignFieldName;
+
+        //微信默认用MD5
+        public override string SignTypeName => WechatPaySettings.SignType.Md5;
+
         public abstract string RequestUrl { get; }
 
         [PayElement("appid")]
@@ -18,7 +23,7 @@ namespace QuickPay.WechatPay.Requests
         /// <summary>微信支付分配的商户号
         /// </summary>
         [PayElement("mch_id")]
-        public string MchId { get; protected set; }
+        public string MchId { get; set; }
 
         /// <summary>商户系统内部的订单号,32个字符内、可包含字母
         /// </summary>

@@ -4,8 +4,14 @@
     {
         SignError = 1,
 
-        PayDataTransform = 2,
+        SetUniqueIdError = 2,
 
-        ParseResponse = 3
+        PayDataTransform = 3,
+
+        ExecuteError = 4,
+
+        ParseResponse = 5,
+
+
     }
 }

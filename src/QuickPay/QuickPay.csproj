@@ -6,10 +6,9 @@
 
   <ItemGroup>
     <PackageReference Include="DotCommon" Version="2.9.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="WechatPay\Services\" />
+    <PackageReference Include="DotCommon.AutoMapper" Version="2.9.0" />
+    <PackageReference Include="DotCommon.Caching" Version="2.9.0" />
+    <PackageReference Include="DotCommon.Json4Net" Version="2.9.0" />
   </ItemGroup>
 
 </Project>

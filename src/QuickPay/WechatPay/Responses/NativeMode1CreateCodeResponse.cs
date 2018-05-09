@@ -4,7 +4,7 @@ namespace QuickPay.WechatPay.Responses
 {
     /// <summary>微信扫码支付(Native)模式1,生成二维码
     /// </summary>
-    public class NativeMode1CreateCodeResponse : BaseWechatPayResponse
+    public class NativeMode1CreateCodeResponse : WechatPayTradeResponse
     {
         /// <summary>公众账号ID
         /// </summary>

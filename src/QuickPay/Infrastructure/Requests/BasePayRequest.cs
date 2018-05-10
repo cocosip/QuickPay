@@ -9,7 +9,7 @@ namespace QuickPay.Infrastructure.Requests
         public string UniqueId { get; set; }
 
         public string BusinessCode { get; set; } = QuickPaySettings.DefaultBusinessCode;
-
+        public abstract string TradeTypeName { get; }
         public abstract string SignFieldName { get; }
         public abstract string SignTypeName { get; }
     }

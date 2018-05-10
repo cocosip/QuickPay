@@ -12,6 +12,7 @@ namespace QuickPay.Alipay.Requests
         /// <summary>
         /// </summary>
         public override string Method => "alipay.trade.page.pay";
+        public override string TradeTypeName => AlipaySettings.TradeType.Page;
 
         /// <summary>HTTP/HTTPS开头字符串,同步结果通知
         /// </summary>
@@ -27,7 +28,7 @@ namespace QuickPay.Alipay.Requests
         {
 
         }
- 
+
         public PageTradePayRequest(PageTradeBizContentPayRequest bizContentRequest, string returnUrl, string notifyUrl)
         {
             BizContentRequest = bizContentRequest;

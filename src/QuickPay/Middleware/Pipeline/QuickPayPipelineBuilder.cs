@@ -24,14 +24,13 @@ namespace QuickPay.Middleware.Pipeline
         {
             QuickPayExecuteDelegate app = context =>
             {
+                context.Response = null;
                 return Task.CompletedTask;
             };
-
             foreach (var component in _middlewares.Reverse())
             {
                 app = component(app);
             }
-
             return app;
         }
     }

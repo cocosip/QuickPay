@@ -8,6 +8,7 @@ namespace QuickPay.Infrastructure.Requests
         string Provider { get; }
         string UniqueId { get; set; }
         string BusinessCode { get; set; }
+        string TradeTypeName { get; }
         string SignFieldName { get; }
         string SignTypeName { get; }
     }

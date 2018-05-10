@@ -12,6 +12,8 @@ namespace QuickPay.Alipay.Requests
         //统一收单线下交易预创建
         public override string Method => "alipay.trade.precreate";
 
+        public override string TradeTypeName => AlipaySettings.TradeType.QrcodePay;
+
         /// <summary>支付宝服务器主动通知商户服务器里指定的页面http/https路径。建议商户使用https
         /// </summary>
         [PayElement("notify_url")]

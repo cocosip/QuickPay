@@ -3,6 +3,7 @@ using QuickPay.Alipay.Util;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Middleware;
+using System;
 using System.Threading.Tasks;
 
 namespace QuickPay.Alipay.Middleware
@@ -19,32 +20,41 @@ namespace QuickPay.Alipay.Middleware
 
         public async Task Invoke(ExecuteContext context)
         {
-            if (context.Request.Provider == QuickPaySettings.Provider.Alipay)
+            try
             {
-                var app = (AlipayApp)context.App;
-                var bizContentField = "biz_content";
-                //开启加密
-                if (app.EnableEncrypt)
+                if (context.Request.Provider == QuickPaySettings.Provider.Alipay)
                 {
-                    //未设置BizContent
-                    if (!context.RequestPayData.IsSet(bizContentField))
+                    var app = (AlipayApp)context.App;
+                    var bizContentField = "biz_content";
+                    //开启加密
+                    if (app.EnableEncrypt)
                     {
-                        SetPipelineError(context, new SignError("支付宝加密biz_content未设置"));
-                        return;
+                        //未设置BizContent
+                        if (!context.RequestPayData.IsSet(bizContentField))
+                        {
+                            SetPipelineError(context, new SignError("支付宝加密biz_content未设置"));
+                            return;
+                        }
+                        var encryptedContent = AlipayUtil.AesEncrypt(app.EncryptKey, context.RequestPayData.GetValue(bizContentField).ToString(), app.Charset);
+                        //加密后的数据替换未加密的
+                        context.RequestPayData.SetValue(bizContentField, encryptedContent);
+                        context.RequestPayData.SetValue("encrypt_type", app.EncryptType);
                     }
-                    var encryptedContent = AlipayUtil.AesEncrypt(app.EncryptKey, context.RequestPayData.GetValue(bizContentField).ToString(), app.Charset);
-                    //加密后的数据替换未加密的
-                    context.RequestPayData.SetValue(bizContentField, encryptedContent);
-                    context.RequestPayData.SetValue("encrypt_type", app.EncryptType);
-                }
-                //等待签名字符串
-                var signContent = AlipaySignature.GetSignContent(context.RequestPayData.GetValues());
-                //签名
-                var sign = AlipaySignature.RSASign(signContent, app.PrivateKey, app.Charset, app.SignType);
-                //将签名添加到数据
-                context.RequestPayData.SetValue(context.SignFieldName, sign);
-                Logger.Info(context.Request.GetLogFormat($"等待签名字符串:[{signContent}],签名:[{sign}],签名后完整数据:{context.RequestPayData.ToJson()}"));
+                    //等待签名字符串
+                    var signContent = AlipaySignature.GetSignContent(context.RequestPayData.GetValues());
+                    //签名
+                    var sign = AlipaySignature.RSASign(signContent, app.PrivateKey, app.Charset, app.SignType);
+                    //将签名添加到数据
+                    context.RequestPayData.SetValue(context.SignFieldName, sign);
+                    Logger.Info(context.Request.GetLogFormat($"等待签名字符串:[{signContent}],签名:[{sign}],签名后完整数据:{context.RequestPayData.ToJson()}"));
 
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(context.Request.GetLogFormat($"支付宝签名发生错误,{ex.Message}"));
+                SetPipelineError(context, new SignError("支付宝签名发生错误"));
+                return;
             }
             await _next.Invoke(context);
         }

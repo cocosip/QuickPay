@@ -3,6 +3,7 @@ using QuickPay.Infrastructure.Requests;
 using QuickPay.Infrastructure.Responses;
 using QuickPay.Middleware;
 using QuickPay.Middleware.Pipeline;
+using System;
 using System.Threading.Tasks;
 
 namespace QuickPay.Infrastructure.Executers
@@ -11,8 +12,6 @@ namespace QuickPay.Infrastructure.Executers
     /// </summary>
     public class DefaultRequestExecuter : IRequestExecuter
     {
-
-
         private readonly IQuickPayPipelineBuilder _quickPayPipelineBuilder;
         private readonly IExecuteContextFactory _executeContextFactory;
         private readonly IQuickPayConfigManager _quickPayConfigManager;
@@ -25,13 +24,25 @@ namespace QuickPay.Infrastructure.Executers
 
         public async Task<T> ExecuteAsync<T>(IPayRequest<T> request, QuickPayApp app) where T : PayResponse
         {
-            var firstDelegate = _quickPayPipelineBuilder.Build();
-            //当前请求的配置
-            var config = _quickPayConfigManager.GetCurrentConfig(request.Provider);
+            try
+            {
+                var firstDelegate = _quickPayPipelineBuilder.Build();
+                //当前请求的配置
+                var config = _quickPayConfigManager.GetCurrentConfig(request.Provider);
 
-            var context = _executeContextFactory.CreateContext<T>(request, config, app, QuickPaySettings.RequestHandler.Execute);
-            await firstDelegate(context);
-            return context.Response as T;
+                var context = _executeContextFactory.CreateContext<T>(request, config, app, QuickPaySettings.RequestHandler.Execute);
+                await firstDelegate(context);
+
+                if (context.Response != null)
+                {
+                    return context.Response as T;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
 

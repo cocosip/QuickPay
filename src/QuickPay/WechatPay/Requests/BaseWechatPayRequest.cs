@@ -11,6 +11,8 @@ namespace QuickPay.WechatPay.Requests
         public override string Provider => QuickPaySettings.Provider.WechatPay;
 
         public override string SignFieldName => WechatPaySettings.DefaultSignFieldName;
+        public override string TradeTypeName => "";
+
 
         //微信默认用MD5
         public override string SignTypeName => WechatPaySettings.SignType.Md5;

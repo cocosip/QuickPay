@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace QuickPay.Infrastructure.RequestData
 {
@@ -35,6 +37,11 @@ namespace QuickPay.Infrastructure.RequestData
             object o;
             _values.TryGetValue(key, out o);
             return o;
+        }
+
+        public object GetValue(Func<KeyValuePair<string, object>, bool> selector)
+        {
+            return _values.Where(selector).FirstOrDefault();
         }
 
 

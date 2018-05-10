@@ -10,6 +10,8 @@ namespace QuickPay.WechatPay.Requests
     {
         public override string RequestUrl => "";
 
+        public override string TradeTypeName => WechatPaySettings.TradeType.Native;
+
         /// <summary>SUCCESS/FAIL,此字段是通信标识
         /// </summary>
         [PayElement("return_code")]

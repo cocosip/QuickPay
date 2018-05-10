@@ -12,7 +12,9 @@ namespace QuickPay.Alipay.Services
         /// </summary>
         Task<PageTradePayResponse> TradePay(PageTradePayInput input);
 
-
+        /// <summary>PC网站支付生成订单Get请求字符串
+        /// </summary>
+        Task<string> TradePayStringResponse(PageTradePayInput input);
 
     }
 }

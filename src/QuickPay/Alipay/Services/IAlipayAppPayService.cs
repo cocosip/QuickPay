@@ -12,7 +12,7 @@ namespace QuickPay.Alipay.Services
         /// </summary>
         Task<AppTradePayResponse> TradePay(AppTradePayInput input);
 
-        /// <summary>支付宝支付生成支付信息
+        /// <summary>支付宝支付生成支付信息返回可以直接提交的字符串
         /// </summary>
         Task<string> TradePayStringResponse(AppTradePayInput input);
     }

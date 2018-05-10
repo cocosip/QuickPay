@@ -27,7 +27,7 @@ namespace QuickPay.Alipay.Services.Impl
             return response;
         }
 
-        /// <summary>支付宝支付生成支付信息
+        /// <summary>支付宝支付生成支付信息返回可以直接提交的字符串
         /// </summary>
         public async Task<string> TradePayStringResponse(AppTradePayInput input)
         {

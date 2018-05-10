@@ -17,6 +17,13 @@ namespace QuickPay.Alipay.Requests
 
         }
 
+
+        public TradeBillDownloadUrlRequest(TradeBillDownloadUrlBizContentRequest bizContentRequest)
+        {
+            BizContentRequest = bizContentRequest;
+        }
+
+
         public TradeBillDownloadUrlRequest(TradeBillDownloadUrlBizContentRequest bizContentRequest, string appAuthToken)
         {
             BizContentRequest = bizContentRequest;

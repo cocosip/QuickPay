@@ -8,6 +8,7 @@ namespace QuickPay.WechatPay.Requests
     public class AppUnifiedOrderCallRequest : BaseWechatPayRequest<AppUnifiedOrderCallResponse>
     {
         public override string RequestUrl => "";
+        public override string TradeTypeName => WechatPaySettings.TradeType.App;
 
         /// <summary>微信支付分配的商户号
         /// </summary>

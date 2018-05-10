@@ -11,6 +11,8 @@ namespace QuickPay.Alipay.Requests
     {
         public override string Method => "alipay.trade.wap.pay";
 
+        public override string TradeTypeName => AlipaySettings.TradeType.Wap;
+
         /// <summary>HTTP/HTTPS开头字符串,同步结果通知
         /// </summary>
         [PayElement("return_url", false)]

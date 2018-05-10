@@ -11,6 +11,8 @@ namespace QuickPay.WechatPay.Requests
     {
         public override string RequestUrl => "";
 
+        public override string TradeTypeName => WechatPaySettings.TradeType.Native;
+
         /// <summary>系统当前时间
         /// </summary>
         [PayElement("time_stamp")]

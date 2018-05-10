@@ -1,16 +1,18 @@
 ﻿using QuickPay.Infrastructure.RequestData;
-using QuickPay.WechatPay.Apps;
-using QuickPay.WechatPay.Responses;
+using QuickPay.Infrastructure.Requests;
+using QuickPay.Infrastructure.Responses;
 
-namespace QuickPay.WechatPay.Requests
+namespace QuickPay.UnitTest.Infrastructure.Util
 {
-    /// <summary>Native扫码支付模式2统一下单
-    /// </summary>
-    public class NativeMode2UnifiedOrderRequest : BaseWechatPayRequest<NativeMode2UnifiedOrderResponse>
+    public class TestRequest : BasePayRequest<TestResponse>
     {
-        public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/unifiedorder";
+        public override string Provider => "Test";
 
-        public override string TradeTypeName => WechatPaySettings.TradeType.Native;
+        public override string TradeTypeName => "Test";
+
+        public override string SignFieldName => "Sign";
+
+        public override string SignTypeName => "MD5";
 
         /// <summary>商品简单描述，该字段请按照规范传递
         /// </summary>
@@ -37,27 +39,12 @@ namespace QuickPay.WechatPay.Requests
         [PayElement("notify_url")]
         public string NotifyUrl { get; set; }
 
-        /// <summary>交易类型,取值如下：JSAPI，NATIVE，APP等
-        /// </summary>
-        [PayElement("trade_type")]
-        public string TradeType { get; set; } = WechatPaySettings.TradeType.App;
-
-        /// <summary>签名类型
-        /// </summary>
-        [PayElement("sign_type")]
-        public string SignType { get; set; }
-
-        public override void SetNecessary(WechatPayConfig config, WechatPayApp app)
-        {
-            base.SetNecessary(config, app);
-            SignType = config.SignType;
-        }
-
-        public NativeMode2UnifiedOrderRequest()
+        public TestRequest()
         {
 
         }
-        public NativeMode2UnifiedOrderRequest(string body, string outTradeNo, int totalFee, string spbillCreateIp, string notifyUrl)
+
+        public TestRequest(string body, string outTradeNo, int totalFee, string spbillCreateIp, string notifyUrl)
         {
             Body = body;
             OutTradeNo = outTradeNo;
@@ -65,5 +52,10 @@ namespace QuickPay.WechatPay.Requests
             SpbillCreateIp = spbillCreateIp;
             NotifyUrl = notifyUrl;
         }
+    }
+
+    public class TestResponse : PayResponse
+    {
+
     }
 }

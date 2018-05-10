@@ -17,4 +17,13 @@
     <ProjectReference Include="..\..\src\QuickPay\QuickPay.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="ConfigDemo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="ConfigTest.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

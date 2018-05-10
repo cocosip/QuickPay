@@ -9,6 +9,8 @@ namespace QuickPay.WechatPay.Requests
     {
         public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/unifiedorder";
 
+        public override string TradeTypeName => WechatPaySettings.TradeType.H5;
+
         /// <summary>商品简单描述，该字段请按照规范传递
         /// </summary>
         [PayElement("body")]

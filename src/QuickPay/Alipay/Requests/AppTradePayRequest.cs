@@ -11,6 +11,8 @@ namespace QuickPay.Alipay.Requests
     {
         public override string Method => "alipay.trade.app.pay";
 
+        public override string TradeTypeName => AlipaySettings.TradeType.App;
+
         /// <summary>支付宝服务器主动通知商户服务器里指定的页面http/https路径。建议商户使用https
         /// </summary>
         [PayElement("notify_url")]

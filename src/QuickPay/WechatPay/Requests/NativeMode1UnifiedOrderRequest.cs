@@ -10,6 +10,8 @@ namespace QuickPay.WechatPay.Requests
     {
         public override string RequestUrl => "";
 
+        public override string TradeTypeName => WechatPaySettings.TradeType.Native;
+
         /// <summary>商品简单描述，该字段请按照规范传递
         /// </summary>
         [PayElement("body")]

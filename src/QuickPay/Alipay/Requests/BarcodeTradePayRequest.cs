@@ -12,6 +12,7 @@ namespace QuickPay.Alipay.Requests
         /// <summary>统一下单
         /// </summary>
         public override string Method => "alipay.trade.pay";
+        public override string TradeTypeName => AlipaySettings.TradeType.BarcodePay;
 
         /// <summary>支付宝服务器主动通知商户服务器里指定的页面http/https路径。建议商户使用https
         /// </summary>

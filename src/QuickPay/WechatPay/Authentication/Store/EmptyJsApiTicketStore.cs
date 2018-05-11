@@ -13,9 +13,9 @@ namespace QuickPay.WechatPay.Authentication
             Logger = IocManager.GetContainer().Resolve<ILoggerFactory>().Create(QuickPaySettings.LoggerName);
         }
 
-        public static EmptyAccessTokenStore Instance()
+        public static EmptyJsApiTicketStore Instance()
         {
-            return new EmptyAccessTokenStore();
+            return new EmptyJsApiTicketStore();
         }
 
         public Task CreateOrUpdateJsApiTicketAsync(JsApiTicket jsApiTicket)

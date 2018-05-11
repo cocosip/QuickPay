@@ -53,7 +53,7 @@ namespace QuickPay.Middleware.Pipeline
                 Array.Copy(args, 0, ctorArgs, 1, args.Length);
 
                 //??
-                var instance = IocManager.GetContainer().Resolve(middleware);
+                var instance = IocManager.GetContainer().Resolve(middleware, ctorArgs);
                 var quickPayExecuteDelegate = (QuickPayExecuteDelegate)methodinfo.CreateDelegate(typeof(QuickPayExecuteDelegate), instance);
 
                 return context =>

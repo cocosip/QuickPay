@@ -10,9 +10,8 @@ using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Authentication;
 using QuickPay.WechatPay.Services;
 using QuickPay.WechatPay.Services.Impl;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Reflection;
 
 namespace QuickPay
 {
@@ -20,12 +19,12 @@ namespace QuickPay
     /// </summary>
     public class QuickPayRegister
     {
-        /// <summary>注册快捷支付
-        /// </summary>
-        public static void RegisterQuickPay(IIocContainer container, Func<WechatPayConfig> wechatPayMethod, Func<AlipayConfig> alipayMethod)
+
+        public static void RegisterQuickPay(IIocContainer container, AlipayConfig alipayConfig, WechatPayConfig wechatPayConfig)
         {
-            container.Register<WechatPayConfig>(wechatPayMethod());
-            container.Register<AlipayConfig>(alipayMethod());
+            container.Register<AlipayConfig>(alipayConfig);
+            container.Register<WechatPayConfig>(wechatPayConfig);
+
             container.Register<QuickPayConfigLoader>();
             container.Register<IExecuteContextFactory, ExecuteContextFactory>();
             container.Register<IRequestExecuter, DefaultRequestExecuter>();
@@ -52,8 +51,20 @@ namespace QuickPay
             container.Register<IWechatMicroPayService, WechatMicroPayService>();
             container.Register<IWechatNativePayService, WechatNativePayService>();
             container.Register<IWechatPayTradeCommonService, WechatPayTradeCommonService>();
+            
+            //注册pipeline
+            RegisterPipeline(container);
+        }
 
-
+        //注册Pipeline
+        public static void RegisterPipeline(IIocContainer container)
+        {
+            var assemply = Assembly.Load(AssemblyName.GetAssemblyName(QuickPaySettings.AssemblyName));
+            var middlewareTypies = assemply.GetTypes().Where(x => typeof(QuickPayMiddleware).IsAssignableFrom(x));
+            foreach (var middlewareType in middlewareTypies)
+            {
+                container.Register(middlewareType, DependencyLifeStyle.Transient);
+            }
         }
 
     }

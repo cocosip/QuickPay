@@ -1,5 +1,6 @@
 ﻿using DotCommon.Reflecting;
 using QuickPay.Infrastructure.RequestData;
+using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Requests;
 using System.Reflection;
 using Xunit;
@@ -12,7 +13,7 @@ namespace QuickPay.UnitTest.Infrastructure.RequestData
         public void OverridePayElementTest()
         {
             var request = new AppUnifiedOrderCallRequest("123456");
-            request.SetNecessary(new WechatPay.Apps.WechatPayConfig(), new WechatPay.Apps.WechatPayApp());
+            request.SetNecessary(new WechatPayConfig(), new WechatPayApp());
 
             PayElementAttribute noncestrAttr = null;
             var properties = PropertyInfoUtil.GetProperties(request.GetType());

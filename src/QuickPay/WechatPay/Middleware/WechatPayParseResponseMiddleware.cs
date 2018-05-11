@@ -20,8 +20,7 @@ namespace QuickPay.WechatPay.Middleware
             {
                 if (context.RequestHandler == QuickPaySettings.RequestHandler.Execute)
                 {
-                    var payData = new PayData();
-                    payData = payData.FromXml(context.HttpResponseString);
+                    var payData = context.RequestPayData.FromXml(context.HttpResponseString);
                     context.Response = (PayResponse)RequestReflectUtil.ToResponse(payData, context.Request.GetType());
                     context.ResponsePayData = new PayData(payData.GetValues());
                 }

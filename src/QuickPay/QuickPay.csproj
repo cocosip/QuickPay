@@ -1,14 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotCommon" Version="2.9.0" />
-    <PackageReference Include="DotCommon.AutoMapper" Version="2.9.0" />
-    <PackageReference Include="DotCommon.Caching" Version="2.9.0" />
-    <PackageReference Include="DotCommon.Json4Net" Version="2.9.0" />
+    <PackageReference Include="DotCommon" Version="2.9.1" />
+    <PackageReference Include="DotCommon.AutoMapper" Version="2.9.1" />
+    <PackageReference Include="DotCommon.Caching" Version="2.9.1" />
+    <PackageReference Include="DotCommon.Json4Net" Version="2.9.1" />
   </ItemGroup>
 
 </Project>

@@ -2,6 +2,7 @@
 using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Services;
 using QuickPay.Alipay.Services.Impl;
+using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.Executers;
 using QuickPay.Middleware;
 using QuickPay.Middleware.Pipeline;
@@ -27,31 +28,32 @@ namespace QuickPay
 
             container.Register<QuickPayConfigLoader>();
             container.Register<IExecuteContextFactory, ExecuteContextFactory>();
+            container.Register<IQuickPayConfigManager, QuickPayConfigManager>();
             container.Register<IRequestExecuter, DefaultRequestExecuter>();
             container.Register<IQuickPayPipelineBuilder, QuickPayPipelineBuilder>();
-            container.Register<IAuthenticationService, AuthenticationService>();
+            container.Register<IAuthenticationService, AuthenticationService>(DependencyLifeStyle.Transient);
 
             //支付数据存储
-            container.Register<IPaymentStore, EmptyPaymentStore>();
-            container.Register<IRefundStore, EmptyRefundStore>();
-            container.Register<IAccessTokenStore, EmptyAccessTokenStore>();
-            container.Register<IJsApiTicketStore, EmptyJsApiTicketStore>();
+            container.Register<IPaymentStore, EmptyPaymentStore>(DependencyLifeStyle.Transient);
+            container.Register<IRefundStore, EmptyRefundStore>(DependencyLifeStyle.Transient);
+            container.Register<IAccessTokenStore, EmptyAccessTokenStore>(DependencyLifeStyle.Transient);
+            container.Register<IJsApiTicketStore, EmptyJsApiTicketStore>(DependencyLifeStyle.Transient);
 
             //支付宝Service
-            container.Register<IAlipayAppPayService, AlipayAppPayService>();
-            container.Register<IAlipayBarcodePayService, AlipayBarcodePayService>();
-            container.Register<IAlipayPagePayService, AlipayPagePayService>();
-            container.Register<IAlipayQrcodePayService, AlipayQrcodePayService>();
-            container.Register<IAlipayWapPayService, AlipayWapPayService>();
-            container.Register<IAlipayTradeCommonService, AlipayTradeCommonService>();
+            container.Register<IAlipayAppPayService, AlipayAppPayService>(DependencyLifeStyle.Transient);
+            container.Register<IAlipayBarcodePayService, AlipayBarcodePayService>(DependencyLifeStyle.Transient);
+            container.Register<IAlipayPagePayService, AlipayPagePayService>(DependencyLifeStyle.Transient);
+            container.Register<IAlipayQrcodePayService, AlipayQrcodePayService>(DependencyLifeStyle.Transient);
+            container.Register<IAlipayWapPayService, AlipayWapPayService>(DependencyLifeStyle.Transient);
+            container.Register<IAlipayTradeCommonService, AlipayTradeCommonService>(DependencyLifeStyle.Transient);
             //微信Service
-            container.Register<IWechatAppPayService, WechatAppPayService>();
-            container.Register<IWechatH5PayService, WechatH5PayService>();
-            container.Register<IWechatJsApiPayService, WechatJsApiPayService>();
-            container.Register<IWechatMicroPayService, WechatMicroPayService>();
-            container.Register<IWechatNativePayService, WechatNativePayService>();
-            container.Register<IWechatPayTradeCommonService, WechatPayTradeCommonService>();
-            
+            container.Register<IWechatAppPayService, WechatAppPayService>(DependencyLifeStyle.Transient);
+            container.Register<IWechatH5PayService, WechatH5PayService>(DependencyLifeStyle.Transient);
+            container.Register<IWechatJsApiPayService, WechatJsApiPayService>(DependencyLifeStyle.Transient);
+            container.Register<IWechatMicroPayService, WechatMicroPayService>(DependencyLifeStyle.Transient);
+            container.Register<IWechatNativePayService, WechatNativePayService>(DependencyLifeStyle.Transient);
+            container.Register<IWechatPayTradeCommonService, WechatPayTradeCommonService>(DependencyLifeStyle.Transient);
+
             //注册pipeline
             RegisterPipeline(container);
         }

@@ -1,25 +1,24 @@
 ﻿using Autofac;
-using Autofac.Core;
 using AutoMapper;
+using Castle.Windsor;
 using DotCommon.Configurations;
-using DotCommon.Dependency;
-using QuickPay.Middleware;
-using QuickPay.UnitTest.Middleware.Pipeline;
 
-namespace QuickPay.UnitTest
+namespace QuickPay.ConsoleTest
 {
     using DotCommonConfiguration = DotCommon.Configurations.Configuration;
-    public class TestBase
+    public class Bootstraper
     {
-        static TestBase()
+        public static void Initialize()
         {
             var builder = new ContainerBuilder();
+            //var windsorContainer = new WindsorContainer();
             var configuration = DotCommonConfiguration.Create()
                  .UseAutofac(builder)
+                 //.UseCastleWindsor(windsorContainer)
                  .RegisterCommonComponent()
-                 .UseMemoryCache()
                  .UseJson4Net()
                  .UseLog4Net()
+                 .UseMemoryCache()
                  .AddQuickPay("QuickPayConfig.xml")
                  .AutofacBuild()
                  .UseQuickPay();
@@ -30,9 +29,6 @@ namespace QuickPay.UnitTest
                 config.CreateQuickPayMaps();
             });
 
-
-
         }
-
     }
 }

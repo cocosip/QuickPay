@@ -17,6 +17,7 @@ namespace QuickPay.WechatPay.Services.Impl
         protected ILogger Logger { get; }
         public BaseWechatPayService(IAmbientScopeProvider<WechatPayAppOverride> wechatPayAppOverrideScopeProvider)
         {
+            WechatPayAppOverrideScopeProvider = wechatPayAppOverrideScopeProvider;
             Config = IocManager.GetContainer().Resolve<WechatPayConfig>();
             Executer = IocManager.GetContainer().Resolve<IRequestExecuter>();
             Logger = IocManager.GetContainer().Resolve<ILoggerFactory>().Create(QuickPaySettings.LoggerName);

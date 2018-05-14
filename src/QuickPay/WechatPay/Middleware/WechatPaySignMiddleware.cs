@@ -35,16 +35,21 @@ namespace QuickPay.WechatPay.Middleware
                         return;
                     }
 
+                    var sign = "";
+
                     if (context.SignType == WechatPaySettings.SignType.Md5)
                     {
-                        var sign = WechatPayUtil.MakeSign(context.RequestPayData, (WechatPayApp)context.App);
+                        sign = WechatPayUtil.MakeSign(context.RequestPayData, (WechatPayApp)context.App);
                         context.RequestPayData.SetValue(context.SignFieldName, sign);
                     }
                     else if (context.SignType == WechatPaySettings.SignType.Md5)
                     {
-                        var sign = WechatPayUtil.Sha1Sign(context.RequestPayData);
+                        sign = WechatPayUtil.Sha1Sign(context.RequestPayData);
                         context.RequestPayData.SetValue(context.SignFieldName, sign);
                     }
+
+                    Logger.Info(context.Request.GetLogFormat($"签名字段:{context.SignFieldName},签名:{sign},签名后数据:[{ context.RequestPayData.ToXml()}]"));
+                    Logger.Debug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
                 }
             }
             catch (Exception ex)

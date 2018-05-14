@@ -2,7 +2,7 @@
 {
     public class PayDataTransformError : Error
     {
-        public PayDataTransformError(string message) : base(message, (int)QuickPayErrorCodes.PayDataTransform)
+        public PayDataTransformError(string message) : base(message, (int)QuickPayErrorCodes.PayDataTransformError)
         {
 
         }

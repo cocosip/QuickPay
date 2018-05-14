@@ -4,6 +4,7 @@ using QuickPay.Alipay.Services;
 using QuickPay.Alipay.Services.Impl;
 using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.Executers;
+using QuickPay.Infrastructure.Requests;
 using QuickPay.Middleware;
 using QuickPay.Middleware.Pipeline;
 using QuickPay.PayAux.Store;
@@ -25,12 +26,14 @@ namespace QuickPay
         {
             container.Register<AlipayConfig>(alipayConfig);
             container.Register<WechatPayConfig>(wechatPayConfig);
+            //RequestType Finder
+            container.Register<IRequestTypeFinder, RequestTypeFinder>(DependencyLifeStyle.Singleton);
 
             container.Register<QuickPayConfigLoader>();
             container.Register<IExecuteContextFactory, ExecuteContextFactory>();
             container.Register<IQuickPayConfigManager, QuickPayConfigManager>();
             container.Register<IRequestExecuter, DefaultRequestExecuter>();
-            container.Register<IQuickPayPipelineBuilder, QuickPayPipelineBuilder>();
+            container.Register<IQuickPayPipelineBuilder, QuickPayPipelineBuilder>(DependencyLifeStyle.Singleton);
             container.Register<IAuthenticationService, AuthenticationService>(DependencyLifeStyle.Transient);
 
             //支付数据存储

@@ -4,7 +4,7 @@ namespace QuickPay.Alipay.Responses
 {
     /// <summary>手机网站支付
     /// </summary>
-    public class WapTradePayResponse : AlipayTradeResponse
+    public class WapTradePayResponse : AlipayTradeSourceResponse
     {
         /// <summary>同步通知地址
         /// </summary>

@@ -1,4 +1,6 @@
-﻿using QuickPay.Infrastructure.Apps;
+﻿using DotCommon.Dependency;
+using DotCommon.Logging;
+using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Infrastructure.Responses;
 using QuickPay.Middleware;
@@ -15,11 +17,14 @@ namespace QuickPay.Infrastructure.Executers
         private readonly IQuickPayPipelineBuilder _quickPayPipelineBuilder;
         private readonly IExecuteContextFactory _executeContextFactory;
         private readonly IQuickPayConfigManager _quickPayConfigManager;
+        private readonly ILogger _logger;
         public DefaultRequestExecuter(IQuickPayPipelineBuilder quickPayPipelineBuilder, IExecuteContextFactory executeContextFactory, IQuickPayConfigManager quickPayConfigManager)
         {
             _quickPayPipelineBuilder = quickPayPipelineBuilder;
             _executeContextFactory = executeContextFactory;
             _quickPayConfigManager = quickPayConfigManager;
+
+            _logger = IocManager.GetContainer().Resolve<ILoggerFactory>().Create(QuickPaySettings.LoggerName);
         }
 
         public async Task<T> ExecuteAsync<T>(IPayRequest<T> request, QuickPayApp app) where T : PayResponse
@@ -48,13 +53,24 @@ namespace QuickPay.Infrastructure.Executers
 
         public async Task<T> SignRequest<T>(IPayRequest<T> request, QuickPayApp app) where T : PayResponse
         {
-            var firstDelegate = _quickPayPipelineBuilder.Build();
-            //当前请求的配置
-            var config = _quickPayConfigManager.GetCurrentConfig(request.Provider);
+            try
+            {
+                var firstDelegate = _quickPayPipelineBuilder.Build();
+                //当前请求的配置
+                var config = _quickPayConfigManager.GetCurrentConfig(request.Provider);
 
-            var context = _executeContextFactory.CreateContext<T>(request, config, app, QuickPaySettings.RequestHandler.Sign);
-            await firstDelegate(context);
-            return context.Response as T;
+                var context = _executeContextFactory.CreateContext<T>(request, config, app, QuickPaySettings.RequestHandler.Sign);
+                await firstDelegate(context);
+                if (context.Response != null)
+                {
+                    return context.Response as T;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
     }

@@ -48,6 +48,8 @@ namespace QuickPay.Alipay.Middleware
                     context.RequestPayData.SetValue(context.SignFieldName, sign);
                     Logger.Info(context.Request.GetLogFormat($"等待签名字符串:[{signContent}],签名:[{sign}],签名后完整数据:{context.RequestPayData.ToJson()}"));
 
+                    //模块
+                    Logger.Debug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
                 }
             }
             catch (Exception ex)

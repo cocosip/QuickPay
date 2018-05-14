@@ -4,6 +4,7 @@ using QuickPay.Infrastructure.Requests;
 using QuickPay.Infrastructure.Responses;
 using QuickPay.Infrastructure.Util;
 using QuickPay.Middleware;
+using QuickPay.WechatPay.Responses;
 using QuickPay.WechatPay.Util;
 using System;
 using System.Threading.Tasks;
@@ -23,16 +24,30 @@ namespace QuickPay.WechatPay.Middleware
             {
                 if (context.Request.Provider == QuickPaySettings.Provider.WechatPay)
                 {
+                    var responseType = context.Request.GetType().BaseType.GetGenericArguments()[0];
+
                     if (context.RequestHandler == QuickPaySettings.RequestHandler.Execute)
                     {
                         var payData = context.RequestPayData.FromXml(context.HttpResponseString);
                         context.ResponsePayData = new PayData(payData.GetValues());
 
-                        var responseType = context.Request.GetType().BaseType.GetGenericArguments()[0];
                         context.Response = (PayResponse)(RequestReflectUtil.ToResponse(payData, responseType));
                     }
-                }
+                    else
+                    {
+                        //如果是签名的请求,那么直接设置Response
+                        //将PayData转换为对象
+                        context.Response = (PayResponse)RequestReflectUtil.ToResponse(context.RequestPayData, responseType);
+                        //ResponsPayData
+                        context.ResponsePayData = new PayData(context.RequestPayData.GetValues());
 
+                        //判断Response对象是包含PayData数据的
+                        if (typeof(WechatPayTradeSourceResponse).IsAssignableFrom(responseType))
+                        {
+                            ((WechatPayTradeSourceResponse)context.Response).PayData = new PayData(context.RequestPayData.GetValues());
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {

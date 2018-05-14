@@ -1,9 +1,13 @@
 ﻿using QuickPay.Alipay.Apps;
+using QuickPay.Alipay.Responses;
 using QuickPay.Alipay.Util;
+using QuickPay.Errors;
 using QuickPay.Infrastructure.RequestData;
+using QuickPay.Infrastructure.Requests;
 using QuickPay.Infrastructure.Responses;
 using QuickPay.Infrastructure.Util;
 using QuickPay.Middleware;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,35 +23,61 @@ namespace QuickPay.Alipay.Middleware
 
         public async Task Invoke(ExecuteContext context)
         {
-            if (context.Request.Provider == QuickPaySettings.Provider.Alipay)
+            try
             {
-                if (context.RequestHandler == QuickPaySettings.RequestHandler.Execute)
+                if (context.Request.Provider == QuickPaySettings.Provider.Alipay)
                 {
-                    var payData = new PayData();
-                    payData = payData.FromJson(context.HttpResponseString);
-                    //获取签名Sign
-                    var signKv = payData.GetValue(context.SignFieldName);
-                    //数据
-                    var responseWapper = payData.GetValues().FirstOrDefault(x => x.Key != context.SignFieldName);
-
-                    var app = (AlipayApp)context.App;
-                    var sourceJson = "";
-                    if (app.EnableEncrypt)
+                    var responseType = context.Request.GetType().BaseType.GetGenericArguments()[0];
+                    if (context.RequestHandler == QuickPaySettings.RequestHandler.Execute)
                     {
-                        sourceJson = AlipayUtil.AesDecrypt(app.EncryptKey, responseWapper.ToString(), app.Charset);
+                        var payData = new PayData();
+                        payData = payData.FromJson(context.HttpResponseString);
+                        //获取签名Sign
+                        var signKv = payData.GetValue(context.SignFieldName);
+                        //数据
+                        var responseWapper = payData.GetValues().FirstOrDefault(x => x.Key != context.SignFieldName);
+
+                        var app = (AlipayApp)context.App;
+                        var sourceJson = "";
+                        if (app.EnableEncrypt)
+                        {
+                            sourceJson = AlipayUtil.AesDecrypt(app.EncryptKey, responseWapper.ToString(), app.Charset);
+                        }
+                        else
+                        {
+                            //未使用加密
+                            sourceJson = JsonSerializer.Serialize(responseWapper);
+                        }
+                        payData = payData.FromJson(sourceJson);
+                        payData.SetValue(context.SignFieldName, signKv);
+                        //将PayData转换为对象
+                        context.Response = (PayResponse)RequestReflectUtil.ToResponse(payData, responseType);
+                        //ResponsPayData
+                        context.ResponsePayData = new PayData(payData.GetValues());
                     }
                     else
                     {
-                        //未使用加密
-                        sourceJson = JsonSerializer.Serialize(responseWapper);
+                        //如果是签名的请求,那么直接设置Response
+                        //将PayData转换为对象
+                        context.Response = (PayResponse)RequestReflectUtil.ToResponse(context.RequestPayData, responseType);
+                        //ResponsPayData
+                        context.ResponsePayData = new PayData(context.RequestPayData.GetValues());
+                        //判断Response对象是包含PayData数据的
+                        if (typeof(AlipayTradeSourceResponse).IsAssignableFrom(responseType))
+                        {
+                            ((AlipayTradeSourceResponse)context.Response).PayData = new PayData(context.RequestPayData.GetValues());
+                        }
                     }
-                    payData = payData.FromJson(sourceJson);
-                    payData.SetValue(context.SignFieldName, signKv);
-                    //将PayData转换为对象
-                    context.Response = (PayResponse)RequestReflectUtil.ToResponse(payData, context.Response.GetType());
-                    //ResponsPayData
-                    context.ResponsePayData = new PayData(payData.GetValues());
+
+                    Logger.Debug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
+
                 }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(context.Request.GetLogFormat($"转换返回结果PayData错误,{ex.Message}"));
+                SetPipelineError(context, new ParseResponseError("转换返回结果PayData错误"));
+                return;
             }
             await _next.Invoke(context);
         }

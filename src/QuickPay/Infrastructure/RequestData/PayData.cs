@@ -41,7 +41,7 @@ namespace QuickPay.Infrastructure.RequestData
 
         public object GetValue(Func<KeyValuePair<string, object>, bool> selector)
         {
-            return _values.Where(selector).FirstOrDefault();
+            return _values.Where(selector).FirstOrDefault().Value;
         }
 
 

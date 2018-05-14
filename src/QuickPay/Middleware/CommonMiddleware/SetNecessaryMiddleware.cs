@@ -1,6 +1,5 @@
 ﻿using QuickPay.Alipay.Apps;
 using QuickPay.Errors;
-using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.WechatPay.Apps;
 using System;
@@ -37,8 +36,7 @@ namespace QuickPay.Middleware
                     setNecessaryMethod((WechatPayConfig)context.Config, (WechatPayApp)context.App);
                 }
 
-                // await _next.Invoke(context);
-
+                Logger.Debug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
             }
             catch (Exception ex)
             {

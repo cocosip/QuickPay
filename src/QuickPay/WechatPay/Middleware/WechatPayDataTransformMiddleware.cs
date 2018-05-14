@@ -29,6 +29,9 @@ namespace QuickPay.WechatPay.Middleware
                 try
                 {
                     context.RequestPayData = RequestReflectUtil.ToPayData(context.Request);
+
+        
+                    Logger.Debug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
                 }
                 catch (Exception ex)
                 {

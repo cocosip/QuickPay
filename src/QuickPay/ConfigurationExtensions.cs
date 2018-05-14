@@ -77,8 +77,10 @@ namespace QuickPay
             //数据返回格式化
             pipelineBuilder.UseMiddleware<AlipayParseResponseMiddleware>();
             pipelineBuilder.UseMiddleware<WechatPayParseResponseMiddleware>();
-            //存储
+            //支付存储
             pipelineBuilder.UseMiddleware<PaymentStoreMiddleware>();
+            //退款存储
+            pipelineBuilder.UseMiddleware<RefundStoreMiddleware>();
 
             //结束
             pipelineBuilder.UseMiddleware<EndMiddleware>();

@@ -46,6 +46,8 @@ namespace QuickPay.Alipay.Middleware
                     bizContentProperty.SetValue(context.Request, bizContent);
                     //将Request转换为PayData
                     context.RequestPayData = RequestReflectUtil.ToPayData(context.Request);
+
+                    Logger.Debug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
                 }
                 catch (Exception ex)
                 {

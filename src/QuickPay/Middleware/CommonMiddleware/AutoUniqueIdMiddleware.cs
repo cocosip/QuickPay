@@ -52,6 +52,8 @@ namespace QuickPay.Middleware
                         context.Request.BusinessCode = ((BaseBizContentRequest)bizContentRequest).BusinessCode;
                     }
                 }
+
+                Logger.Debug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
             }
             catch (Exception ex)
             {

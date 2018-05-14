@@ -38,6 +38,8 @@ namespace QuickPay.WechatPay.Middleware
                         context.RequestBuilder = RequestBuilder.Instance(urlProperty.GetValue(context.Request).ToString(), RequestConsts.Methods.Post)
                                 .SetPost(PostType.Xml, requestXml);
                     }
+
+                    Logger.Debug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
                 }
             }
             catch (Exception ex)

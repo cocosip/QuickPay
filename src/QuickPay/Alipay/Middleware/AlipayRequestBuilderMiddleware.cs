@@ -33,6 +33,8 @@ namespace QuickPay.Alipay.Middleware
                         context.RequestBuilder = RequestBuilder.Instance(config.Gateway, RequestConsts.Methods.Post)
                             //.SetUrlEncode()
                             .SetPost(PostType.FormUrlEncoded, requestStr);
+
+                        Logger.Debug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
                     }
                 }
 

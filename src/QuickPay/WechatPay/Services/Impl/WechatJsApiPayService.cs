@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using DotCommon.AutoMapper;
+﻿using DotCommon.AutoMapper;
 using DotCommon.Runtime;
 using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Authentication;
@@ -10,6 +6,8 @@ using QuickPay.WechatPay.Requests;
 using QuickPay.WechatPay.Responses;
 using QuickPay.WechatPay.Services.DTOs;
 using QuickPay.WechatPay.Util;
+using System;
+using System.Threading.Tasks;
 
 namespace QuickPay.WechatPay.Services.Impl
 {

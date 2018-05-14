@@ -6,12 +6,14 @@
 
         SetUniqueIdError = 2,
 
-        PayDataTransform = 3,
+        PayDataTransformError = 3,
 
         ExecuteError = 4,
 
-        ParseResponse = 5,
+        ParseResponseError = 5,
 
+        PaymentStoreError = 6,
 
+        RefundStoreError = 7,
     }
 }

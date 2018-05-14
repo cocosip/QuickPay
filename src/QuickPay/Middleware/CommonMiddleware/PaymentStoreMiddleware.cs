@@ -1,12 +1,14 @@
 ﻿using DotCommon.Utility;
 using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Requests;
+using QuickPay.Alipay.Util;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Infrastructure.Util;
 using QuickPay.PayAux;
 using QuickPay.PayAux.Store;
 using QuickPay.WechatPay.Apps;
+using QuickPay.WechatPay.Util;
 using System;
 using System.Threading.Tasks;
 
@@ -69,9 +71,10 @@ namespace QuickPay.Middleware
                 var property = context.Request.GetType().GetProperty("BizContentRequest");
                 var bizContentRequest = property.GetValue(context.Request);
                 var payData = RequestReflectUtil.ToPayData((BaseBizContentRequest)bizContentRequest);
-                payment.OutTradeNo = payData.GetValue(x => x.Key.ToLower() == "out_trade_no").ToString();
-                //支付金额,以元为单位,微信是以分为单位,需要进行转换
-                payment.Amount = Convert.ToDecimal(payData.GetValue(x => x.Key.ToLower() == "total_amount"));
+                payment.OutTradeNo = payData.GetAlipayOutTradeNo();
+                //支付宝支付金额
+                payment.Amount = payData.GetTotalAmount();
+
 
             }
             else
@@ -80,10 +83,11 @@ namespace QuickPay.Middleware
                 payment.AppId = ((WechatPayApp)context.App).AppId;
 
                 //交易号,本系统唯一
-                payment.OutTradeNo = context.RequestPayData.GetValue(x => x.Key.ToLower() == "out_trade_no").ToString();
+                payment.OutTradeNo = context.RequestPayData.GetWechatOutTradeNo();
+
 
                 //支付金额,以元为单位,微信是以分为单位,需要进行转换
-                payment.Amount = Convert.ToDecimal(Convert.ToInt32(context.RequestPayData.GetValue(x => x.Key.ToLower() == "total_fee")) / 100.0);
+                payment.Amount = context.RequestPayData.GetTotalFeeYuan();
             }
             return payment;
         }

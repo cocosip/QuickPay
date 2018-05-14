@@ -65,5 +65,12 @@ namespace QuickPay.Alipay.Util
         }
         #endregion
 
+        /// <summary>格式化日志
+        /// </summary>
+        public static string ParseLog(string text)
+        {
+            return $"【支付宝】:[{text}]";
+        }
+
     }
 }

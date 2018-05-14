@@ -60,5 +60,13 @@ namespace QuickPay.Infrastructure.RequestData
         {
             return _values;
         }
+
+        /// <summary>获取AppId,微信和支付宝通用
+        /// </summary>
+        public string GetAppId()
+        {
+            return _values.FirstOrDefault(x => x.Key.ToLower() == "appid").ToString();
+        }
+
     }
 }

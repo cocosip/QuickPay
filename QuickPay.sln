@@ -9,7 +9,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B82345B4-9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.UnitTest", "test\QuickPay.UnitTest\QuickPay.UnitTest.csproj", "{F96B15F1-B344-4E74-9E82-5FFA28B23F69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickPay.ConsoleTest", "test\QuickPay.ConsoleTest\QuickPay.ConsoleTest.csproj", "{2B6ACF79-C779-451C-981A-393B786ED2FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.ConsoleTest", "test\QuickPay.ConsoleTest\QuickPay.ConsoleTest.csproj", "{2B6ACF79-C779-451C-981A-393B786ED2FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{085E40CE-EFA2-4038-BC29-41326EC963CB}"
+	ProjectSection(SolutionItems) = preProject
+		docs\README.md = docs\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

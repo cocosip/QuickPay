@@ -23,9 +23,9 @@ namespace QuickPay.Middleware
             {
                 try
                 {
-                    var response = await _httpClient.ExecuteAsync(context.RequestBuilder);
-                    context.HttpResponseString = response.GetResponseString();
-                    Logger.Info(context.Request.GetLogFormat($"执行Execute返回结果:[{response.GetResponseString()}]"));
+                    var response = await _httpClient.ExecuteAsync(context.HttpRequest);
+                    context.HttpResponseString = response.Content;
+                    Logger.Info(context.Request.GetLogFormat($"执行Execute返回结果:[{response.Content}]"));
                     Logger.Debug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
                 }
                 catch (Exception ex)

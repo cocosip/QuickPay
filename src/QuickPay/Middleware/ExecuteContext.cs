@@ -22,7 +22,7 @@ namespace QuickPay.Middleware
         public string SignType { get; set; }
         public string SignFieldName { get; set; }
 
-        public RequestBuilder RequestBuilder { get; set; }
+        public IHttpRequest HttpRequest { get; set; }
         public string HttpResponseString { get; set; }
         public List<Error> Errors { get; } = new List<Error>();
         public bool IsError => Errors.Any();

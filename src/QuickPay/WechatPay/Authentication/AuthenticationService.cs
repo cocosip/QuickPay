@@ -80,15 +80,15 @@ namespace QuickPay.WechatPay.Authentication
             }
 
             var url = $"https://api.weixin.qq.com/sns/oauth2/access_token";
-            var builder = RequestBuilder.Instance(url, RequestConsts.Methods.Get)
-                .AttachParam("appId", appId)
-                .AttachParam("secret", appSecret)
-                .AttachParam("code", code)
-                .AttachParam("grant_type", "authorization_code");
-            var response = await _httpClient.ExecuteAsync(builder);
+            IHttpRequest httpRequest = new HttpRequest(url, Method.GET)
+                .AddQueryParameter("appId", appId)
+                .AddQueryParameter("secret", appSecret)
+                .AddQueryParameter("code", code)
+                .AddQueryParameter("grant_type", "authorization_code");
+            var response = await _httpClient.ExecuteAsync(httpRequest);
             //记录日志
-            Logger.Info(WechatPayUtil.ParseLog($"获取用户OpenId返回结果,{response.GetResponseString()}"));
-            var getUserOpenIdResponse = _jsonSerializer.Deserialize<UserOpenIdResponse>(response.GetResponseString());
+            Logger.Info(WechatPayUtil.ParseLog($"获取用户OpenId返回结果,{response.Content}"));
+            var getUserOpenIdResponse = _jsonSerializer.Deserialize<UserOpenIdResponse>(response.Content);
             return getUserOpenIdResponse.OpenId;
         }
 
@@ -177,14 +177,14 @@ namespace QuickPay.WechatPay.Authentication
         protected virtual async Task<AccessTokenResponse> GetAccessTokenInternal(string appId, string appSecret)
         {
             var url = $"https://api.weixin.qq.com/cgi-bin/token";
-            var builder = RequestBuilder.Instance(url, RequestConsts.Methods.Get)
-                .AttachParam("grant_type", "client_credential")
-                .AttachParam("appid", appId)
-                .AttachParam("secret", appSecret);
-            var response = await _httpClient.ExecuteAsync(builder);
+            IHttpRequest httpRequest = new HttpRequest(url, Method.GET)
+                .AddQueryParameter("grant_type", "client_credential")
+                .AddQueryParameter("appid", appId)
+                .AddQueryParameter("secret", appSecret);
+            var response = await _httpClient.ExecuteAsync(httpRequest);
             //记录日志
-            Logger.Info(WechatPayUtil.ParseLog($"获取公众号AccessToekn返回结果,{response.GetResponseString()}"));
-            var getAccessTokenResponse = _jsonSerializer.Deserialize<AccessTokenResponse>(response.GetResponseString());
+            Logger.Info(WechatPayUtil.ParseLog($"获取公众号AccessToekn返回结果,{response.Content}"));
+            var getAccessTokenResponse = _jsonSerializer.Deserialize<AccessTokenResponse>(response.Content);
             //如果返回的不是有效的accessToken的json格式,代表出错了
             if (getAccessTokenResponse.AccessToken.IsNullOrWhiteSpace())
             {
@@ -198,13 +198,13 @@ namespace QuickPay.WechatPay.Authentication
         protected virtual async Task<JsApiTicketResponse> GetJsApiTicketInternal(string appId, string accessToken)
         {
             var url = $"https://api.weixin.qq.com/cgi-bin/ticket/getticket";
-            var builder = RequestBuilder.Instance(url, RequestConsts.Methods.Get)
-                .AttachParam("access_token", accessToken)
-                .AttachParam("type", WechatPaySettings.TradeType.JsApi);
-            var response = await _httpClient.ExecuteAsync(builder);
+            IHttpRequest httpRequest = new HttpRequest(url, Method.GET)
+                .AddQueryParameter("access_token", accessToken)
+                .AddQueryParameter("type", WechatPaySettings.TradeType.JsApi);
+            var response = await _httpClient.ExecuteAsync(httpRequest);
             //记录日志
-            Logger.Info(WechatPayUtil.ParseLog($"获取公众号JsApi_Ticket返回结果,{response.GetResponseString()}"));
-            var getJsApiTicketResponse = _jsonSerializer.Deserialize<JsApiTicketResponse>(response.GetResponseString());
+            Logger.Info(WechatPayUtil.ParseLog($"获取公众号JsApi_Ticket返回结果,{response.Content}"));
+            var getJsApiTicketResponse = _jsonSerializer.Deserialize<JsApiTicketResponse>(response.Content);
             if (getJsApiTicketResponse.Ticket.IsNullOrWhiteSpace())
             {
                 throw new ArgumentException("获取JsApiTicket失败");

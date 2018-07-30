@@ -49,7 +49,7 @@ namespace QuickPay.ConsoleTest
                  .UseLog4Net()
                  .UseMemoryCache()
                  .AddQuickPay("QuickPayConfig.xml")
-                 .AddQuickPay(() => alipayConfig, () => wechatPayConfig)
+                 //.AddQuickPay(() => alipayConfig, () => wechatPayConfig)
                  .AutofacBuild()
                  .UseQuickPay();
             //AutoMapper映射

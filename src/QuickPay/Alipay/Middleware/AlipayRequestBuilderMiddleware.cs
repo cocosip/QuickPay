@@ -27,12 +27,13 @@ namespace QuickPay.Alipay.Middleware
                     {
                         var app = (AlipayApp)context.App;
                         var config = (AlipayConfig)context.Config;
-                        //转换成请求的数据
-                        var requestStr = AlipayUtil.BuildQuery(context.RequestPayData.GetValues(), app.Charset);
                         //发送http请求
-                        context.RequestBuilder = RequestBuilder.Instance(config.Gateway, RequestConsts.Methods.Post)
-                            //.SetUrlEncode()
-                            .SetPost(PostType.FormUrlEncoded, requestStr);
+                        IHttpRequest httpRequest = new HttpRequest(config.Gateway, Method.POST);
+                        foreach (var pValue in context.RequestPayData.GetValues())
+                        {
+                            httpRequest.AddParameter(pValue.Key, pValue.Value);
+                        }
+                        context.HttpRequest = httpRequest;
 
                         Logger.Debug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
                     }

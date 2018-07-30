@@ -35,22 +35,22 @@ namespace QuickPay.ConsoleTest
 
             _stopwatch.Start();
             //微信
-            //AsyncHelper.RunSync(() =>
-            //{
-            //    //微信App下单
-            //    return WechatAppUnifiedOrder();
-            //    //微信JsApi下单
-            //    // return WechatJsApiUnifiedOrder();
-            //});
-
-            //支付宝
             AsyncHelper.RunSync(() =>
             {
-                //支付宝App下单
-                return AlipayAppTradePay();
-                //支付宝PC下单
-                //return AlipayPageTradePay();
+                //微信App下单
+                return WechatAppUnifiedOrder();
+                //微信JsApi下单
+                // return WechatJsApiUnifiedOrder();
             });
+
+            //支付宝
+            //AsyncHelper.RunSync(() =>
+            //{
+            //    //支付宝App下单
+            //    return AlipayAppTradePay();
+            //    //支付宝PC下单
+            //    //return AlipayPageTradePay();
+            //});
 
 
             _stopwatch.Stop();

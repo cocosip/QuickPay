@@ -33,10 +33,10 @@ namespace QuickPay.WechatPay.Middleware
                             SetPipelineError(context, new ExecuteError($"{QuickPaySettings.RequestHandler.Execute},必须要有请求url"));
                             return;
                         }
-
-                        //发送http请求
-                        context.RequestBuilder = RequestBuilder.Instance(urlProperty.GetValue(context.Request).ToString(), RequestConsts.Methods.Post)
-                                .SetPost(PostType.Xml, requestXml);
+                        //准备Http请求
+                        IHttpRequest httpRequest = new HttpRequest(urlProperty.GetValue(context.Request).ToString(), Method.POST);
+                        httpRequest.AddXmlBody(requestXml);
+                        context.HttpRequest = httpRequest;
                     }
 
                     Logger.Debug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));

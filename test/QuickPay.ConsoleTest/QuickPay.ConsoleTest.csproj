@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotCommon.CastleWindsor" Version="2.9.3" />
+    <PackageReference Include="DotCommon.CastleWindsor" Version="2.9.5.1" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,5 +1,6 @@
 ﻿using DotCommon.Extensions;
 using DotCommon.Utility;
+using Microsoft.Extensions.Logging;
 using QuickPay.Alipay.Requests;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
@@ -13,9 +14,10 @@ namespace QuickPay.Middleware
     public class AutoUniqueIdMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
-        public AutoUniqueIdMiddleware(QuickPayExecuteDelegate next)
+        public AutoUniqueIdMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger)
         {
             _next = next;
+            Logger = logger;
         }
 
         public async Task Invoke(ExecuteContext context)
@@ -53,11 +55,11 @@ namespace QuickPay.Middleware
                     }
                 }
 
-                Logger.Debug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
+                Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
             }
             catch (Exception ex)
             {
-                Logger.Error(context.Request.GetLogFormat($"设置AutoUniqueId发生错误,{ex.Message}"));
+                Logger.LogError(context.Request.GetLogFormat($"设置AutoUniqueId发生错误,{ex.Message}"));
                 SetPipelineError(context, new SetUniqueIdError("设置UniqueId发生错误"));
                 return;
             }

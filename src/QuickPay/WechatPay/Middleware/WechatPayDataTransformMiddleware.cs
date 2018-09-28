@@ -1,4 +1,5 @@
-﻿using QuickPay.Errors;
+﻿using Microsoft.Extensions.Logging;
+using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Infrastructure.Util;
 using QuickPay.Middleware;
@@ -12,8 +13,9 @@ namespace QuickPay.WechatPay.Middleware
     public class WechatPayDataTransformMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
-        public WechatPayDataTransformMiddleware(QuickPayExecuteDelegate next)
+        public WechatPayDataTransformMiddleware(QuickPayExecuteDelegate next,ILogger<QuickPayLoggerName> logger)
         {
+            Logger = logger;
             _next = next;
         }
 
@@ -31,11 +33,11 @@ namespace QuickPay.WechatPay.Middleware
                     context.RequestPayData = RequestReflectUtil.ToPayData(context.Request);
 
         
-                    Logger.Debug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
+                    Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(context.Request.GetLogFormat($"转换PayData发生错误,{ex.Message}"));
+                    Logger.LogError(context.Request.GetLogFormat($"转换PayData发生错误,{ex.Message}"));
                     SetPipelineError(context, new PayDataTransformError("转换PayData发生错误"));
                     return;
                 }

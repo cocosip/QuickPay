@@ -1,4 +1,5 @@
 ﻿using DotCommon.Http;
+using Microsoft.Extensions.Logging;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using System;
@@ -10,9 +11,10 @@ namespace QuickPay.Middleware
     {
         private readonly QuickPayExecuteDelegate _next;
         private readonly IHttpClient _httpClient;
-        public ExecuterExecutedMiddleware(QuickPayExecuteDelegate next, IHttpClient httpClient)
+        public ExecuterExecutedMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, IHttpClient httpClient)
         {
             _next = next;
+            Logger = logger;
             _httpClient = httpClient;
         }
 
@@ -25,12 +27,12 @@ namespace QuickPay.Middleware
                 {
                     var response = await _httpClient.ExecuteAsync(context.HttpRequest);
                     context.HttpResponseString = response.Content;
-                    Logger.Info(context.Request.GetLogFormat($"执行Execute返回结果:[{response.Content}]"));
-                    Logger.Debug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
+                    Logger.LogInformation(context.Request.GetLogFormat($"执行Execute返回结果:[{response.Content}]"));
+                    Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(context.Request.GetLogFormat($"调用Execute出错,{ex.Message}"), ex);
+                    Logger.LogError(context.Request.GetLogFormat($"调用Execute出错,{ex.Message}"), ex);
                     SetPipelineError(context, new ExecuteError("调用远程服务出错"));
                     return;
                 }

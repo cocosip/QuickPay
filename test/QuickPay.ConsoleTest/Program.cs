@@ -1,13 +1,11 @@
-﻿using DotCommon.Dependency;
-using DotCommon.Logging;
-using DotCommon.Threading;
-using DotCommon.Utility;
+﻿using DotCommon.Utility;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Responses;
 using QuickPay.Alipay.Services;
 using QuickPay.Alipay.Services.DTOs;
 using QuickPay.WechatPay.Apps;
-using QuickPay.WechatPay.Requests;
 using QuickPay.WechatPay.Services;
 using QuickPay.WechatPay.Services.DTOs;
 using System;
@@ -22,18 +20,19 @@ namespace QuickPay.ConsoleTest
         private static WechatPayConfig _wechatPayConfig;
         private static AlipayConfig _alipayConfig;
         private static Stopwatch _stopwatch = new Stopwatch();
+        private static IServiceProvider _provider;
         static void Main(string[] args)
         {
 
             //初始化
-            Bootstraper.Initialize();
-            _logger = IocManager.GetContainer().Resolve<ILoggerFactory>().Create(QuickPaySettings.LoggerName);
-            _wechatPayConfig = IocManager.GetContainer().Resolve<WechatPayConfig>();
-            _alipayConfig = IocManager.GetContainer().Resolve<AlipayConfig>();
-            _logger.Info($"初始化完成");
-
+            _provider = Bootstraper.Initialize();
+            _logger = _provider.GetService<ILogger<QuickPayLoggerName>>();
+            _wechatPayConfig = _provider.GetService<WechatPayConfig>();
+            _alipayConfig = _provider.GetService<AlipayConfig>();
+            _logger.LogInformation($"初始化完成");
 
             _stopwatch.Start();
+
             //微信
             AsyncHelper.RunSync(() =>
             {
@@ -55,7 +54,7 @@ namespace QuickPay.ConsoleTest
 
             _stopwatch.Stop();
 
-            _logger.Info(_stopwatch.Elapsed);
+            _logger.LogInformation(_stopwatch.Elapsed.ToString());
 
 
             Console.ReadLine();
@@ -65,7 +64,7 @@ namespace QuickPay.ConsoleTest
         /// </summary>
         static async Task WechatAppUnifiedOrder()
         {
-            var appService = IocManager.GetContainer().Resolve<IWechatAppPayService>();
+            var appService = _provider.GetService<IWechatAppPayService>();
             using (appService.Use(_wechatPayConfig.GetByName("App1")))
             {
                 var input = new AppUnifiedOrderInput("测试支付1", ObjectId.GenerateNewStringId(), 10);
@@ -77,7 +76,7 @@ namespace QuickPay.ConsoleTest
         /// </summary>
         static async Task WechatJsApiUnifiedOrder()
         {
-            var jsApiService = IocManager.GetContainer().Resolve<IWechatJsApiPayService>();
+            var jsApiService = _provider.GetService<IWechatJsApiPayService>();
             using (jsApiService.Use(_wechatPayConfig.GetByName("App2")))
             {
                 var input = new JsApiUnifiedOrderInput("JsApi支付测试", ObjectId.GenerateNewStringId(), 1, "8.8.8.8", "http://114.55.101.33", "opaInxF28ub-ea5JVrZOosDHyXZY");
@@ -89,7 +88,7 @@ namespace QuickPay.ConsoleTest
         /// </summary>
         static async Task<string> AlipayAppTradePay()
         {
-            var appPayService = IocManager.GetContainer().Resolve<IAlipayAppPayService>();
+            var appPayService = _provider.GetService<IAlipayAppPayService>();
             using (appPayService.Use(_alipayConfig.GetByName("App1")))
             {
                 var input = new AppTradePayInput("测试1", "支付宝测试支付", ObjectId.GenerateNewStringId(), "0.1");
@@ -102,7 +101,7 @@ namespace QuickPay.ConsoleTest
         /// </summary>
         static async Task<PageTradePayResponse> AlipayPageTradePay()
         {
-            var pagePayService = IocManager.GetContainer().Resolve<IAlipayPagePayService>();
+            var pagePayService = _provider.GetService<IAlipayPagePayService>();
             using (pagePayService.Use(_alipayConfig.GetByName("App1")))
             {
                 var input = new PageTradePayInput("测试1", "支付宝测试支付", ObjectId.GenerateNewStringId(), "0.1")

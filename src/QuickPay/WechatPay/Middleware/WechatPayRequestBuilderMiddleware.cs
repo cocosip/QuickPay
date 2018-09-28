@@ -1,11 +1,11 @@
 ﻿using DotCommon.Http;
+using Microsoft.Extensions.Logging;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Middleware;
 using QuickPay.WechatPay.Util;
 using System;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace QuickPay.WechatPay.Middleware
@@ -13,9 +13,10 @@ namespace QuickPay.WechatPay.Middleware
     public class WechatPayRequestBuilderMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
-        public WechatPayRequestBuilderMiddleware(QuickPayExecuteDelegate next)
+        public WechatPayRequestBuilderMiddleware(QuickPayExecuteDelegate next,ILogger<QuickPayLoggerName> logger)
         {
             _next = next;
+            Logger = logger;
         }
 
         public async Task Invoke(ExecuteContext context)
@@ -39,12 +40,12 @@ namespace QuickPay.WechatPay.Middleware
                         context.HttpRequest = httpRequest;
                     }
 
-                    Logger.Debug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
+                    Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
                 }
             }
             catch (Exception ex)
             {
-                Logger.Error(context.Request.GetLogFormat($"构建RequestBuilder错误,{ex.Message}"));
+                Logger.LogError(context.Request.GetLogFormat($"构建RequestBuilder错误,{ex.Message}"));
                 SetPipelineError(context, new ExecuteError("微信构建RequestBuilder错误"));
                 return;
             }

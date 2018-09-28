@@ -1,4 +1,5 @@
-﻿using QuickPay.Alipay.Requests;
+﻿using Microsoft.Extensions.Logging;
+using QuickPay.Alipay.Requests;
 using QuickPay.Alipay.Util;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
@@ -14,9 +15,12 @@ namespace QuickPay.Alipay.Middleware
     public class AlipayPayDataTransformMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
-        public AlipayPayDataTransformMiddleware(QuickPayExecuteDelegate next)
+        private readonly AlipayPayDataHelper _alipayPayDataHelper;
+        public AlipayPayDataTransformMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, AlipayPayDataHelper alipayPayDataHelper)
         {
             _next = next;
+            Logger = logger;
+            _alipayPayDataHelper = alipayPayDataHelper;
         }
 
         public async Task Invoke(ExecuteContext context)
@@ -41,17 +45,18 @@ namespace QuickPay.Alipay.Middleware
                         return;
                     }
                     //bizContent内容(string)
-                    var bizContent = RequestReflectUtil.ToPayData((BaseBizContentRequest)bizContentRequest).ToJson();
+
+                    var bizContent = _alipayPayDataHelper.ToJson(RequestReflectUtil.ToPayData((BaseBizContentRequest)bizContentRequest));
                     var bizContentProperty = context.Request.GetType().GetProperty("BizContent");
                     bizContentProperty.SetValue(context.Request, bizContent);
                     //将Request转换为PayData
                     context.RequestPayData = RequestReflectUtil.ToPayData(context.Request);
 
-                    Logger.Debug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
+                    Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(context.Request.GetLogFormat($"转换PayData发生错误,{ex.Message}"));
+                    Logger.LogError(context.Request.GetLogFormat($"转换PayData发生错误,{ex.Message}"));
                     SetPipelineError(context, new PayDataTransformError("转换PayData发生错误"));
                     return;
                 }

@@ -1,6 +1,5 @@
-﻿using DotCommon.Configurations;
-using DotCommon.Dependency;
-using DotCommon.Extensions;
+﻿using DotCommon.Extensions;
+using Microsoft.Extensions.DependencyInjection;
 using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Middleware;
 using QuickPay.Middleware;
@@ -8,42 +7,18 @@ using QuickPay.Middleware.Pipeline;
 using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Middleware;
 using System;
-
 namespace QuickPay
 {
-    public static class ConfigurationExtensions
+    public static class ServiceProviderExtensions
     {
-
-        public static Configuration AddQuickPay(this Configuration configuration, string file, string format = QuickPaySettings.ConfigFormat.Xml)
+        public static void QuickPayConfigure(this IServiceProvider provider)
         {
-            IocManager.GetContainer().Register<QuickPayConfigFile>(new QuickPayConfigFile()
-            {
-                FileName = file,
-                Format = format
-            });
-            QuickPayRegister.RegisterQuickPay(IocManager.GetContainer(), new AlipayConfig(), new WechatPayConfig());
-            return configuration;
-        }
-
-        public static Configuration AddQuickPay(this Configuration configuration, Func<AlipayConfig> alipayConfig, Func<WechatPayConfig> wechatPayConfig)
-        {
-            IocManager.GetContainer().Register<QuickPayConfigFile>(new QuickPayConfigFile()
-            {
-                FileName = "",
-                Format = ""
-            });
-            QuickPayRegister.RegisterQuickPay(IocManager.GetContainer(), alipayConfig(), wechatPayConfig());
-            return configuration;
-        }
-
-        public static Configuration UseQuickPay(this Configuration configuration)
-        {
-            var configFile = IocManager.GetContainer().Resolve<QuickPayConfigFile>();
+            var configFile = provider.GetService<QuickPayConfigFile>();
             if (!configFile.FileName.IsNullOrWhiteSpace() && !configFile.Format.IsNullOrWhiteSpace())
             {
-                var configLoader = IocManager.GetContainer().Resolve<QuickPayConfigLoader>();
-                var alipayConfig = IocManager.GetContainer().Resolve<AlipayConfig>();
-                var wechatPayConfig = IocManager.GetContainer().Resolve<WechatPayConfig>();
+                var configLoader = provider.GetService<QuickPayConfigLoader>();
+                var alipayConfig = provider.GetService<AlipayConfig>();
+                var wechatPayConfig = provider.GetService<WechatPayConfig>();
 
                 var configWapper = configLoader.LoadConfigWapper(configFile.FileName, configFile.Format);
                 if (configWapper != null && configWapper.AlipayConfig != null && configWapper.WechatPayConfig != null)
@@ -53,7 +28,7 @@ namespace QuickPay
                 }
             }
             //Pipeline
-            var pipelineBuilder = IocManager.GetContainer().Resolve<IQuickPayPipelineBuilder>();
+            var pipelineBuilder = provider.GetService<IQuickPayPipelineBuilder>();
             //设置必要参数
             pipelineBuilder.UseMiddleware<SetNecessaryMiddleware>();
             //自动UniqueId
@@ -84,9 +59,6 @@ namespace QuickPay
 
             //结束
             pipelineBuilder.UseMiddleware<EndMiddleware>();
-
-            return configuration;
         }
-
     }
 }

@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using DotCommon.AutoMapper;
-using DotCommon.Runtime;
+﻿using DotCommon.AutoMapper;
+using DotCommon.Threading;
 using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Requests;
 using QuickPay.Alipay.Responses;
 using QuickPay.Alipay.Services.DTOs;
 using QuickPay.Alipay.Util;
+using System;
+using System.Threading.Tasks;
 
 namespace QuickPay.Alipay.Services.Impl
 {
@@ -16,7 +14,7 @@ namespace QuickPay.Alipay.Services.Impl
     /// </summary>
     public class AlipayWapPayService : BaseAlipayService, IAlipayWapPayService
     {
-        public AlipayWapPayService(IAmbientScopeProvider<AlipayAppOverride> alipayAppOverrideScopeProvider) : base(alipayAppOverrideScopeProvider)
+        public AlipayWapPayService(IServiceProvider provider, IAmbientScopeProvider<AlipayAppOverride> alipayAppOverrideScopeProvider) : base(provider, alipayAppOverrideScopeProvider)
         {
 
         }

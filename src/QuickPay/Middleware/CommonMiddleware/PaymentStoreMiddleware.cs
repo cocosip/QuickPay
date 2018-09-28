@@ -1,4 +1,5 @@
 ﻿using DotCommon.Utility;
+using Microsoft.Extensions.Logging;
 using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Requests;
 using QuickPay.Alipay.Util;
@@ -21,11 +22,14 @@ namespace QuickPay.Middleware
         private readonly QuickPayExecuteDelegate _next;
         private readonly IPaymentStore _paymentStore;
         private readonly IRequestTypeFinder _requestTypeFinder;
-        public PaymentStoreMiddleware(QuickPayExecuteDelegate next, IPaymentStore paymentStore, IRequestTypeFinder requestTypeFinder)
+        private readonly AlipayPayDataHelper _alipayPayDataHelper;
+        public PaymentStoreMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, IPaymentStore paymentStore, IRequestTypeFinder requestTypeFinder, AlipayPayDataHelper alipayPayDataHelper)
         {
             _next = next;
+            Logger = logger;
             _paymentStore = paymentStore;
             _requestTypeFinder = requestTypeFinder;
+            _alipayPayDataHelper = alipayPayDataHelper;
         }
 
         public async Task Invoke(ExecuteContext context)
@@ -41,12 +45,12 @@ namespace QuickPay.Middleware
             }
             catch (Exception ex)
             {
-                Logger.Error(context.Request.GetLogFormat($"存储支付信息发生错误,{ex.Message}"));
+                Logger.LogError(context.Request.GetLogFormat($"存储支付信息发生错误,{ex.Message}"));
                 SetPipelineError(context, new PaymentStoreError("存储支付信息发生错误"));
                 return;
             }
 
-            Logger.Debug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
+            Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
             await _next.Invoke(context);
         }
 
@@ -71,10 +75,9 @@ namespace QuickPay.Middleware
                 var property = context.Request.GetType().GetProperty("BizContentRequest");
                 var bizContentRequest = property.GetValue(context.Request);
                 var payData = RequestReflectUtil.ToPayData((BaseBizContentRequest)bizContentRequest);
-                payment.OutTradeNo = payData.GetAlipayOutTradeNo();
+                payment.OutTradeNo = _alipayPayDataHelper.GetAlipayOutTradeNo(payData);
                 //支付宝支付金额
-                payment.Amount = payData.GetTotalAmount();
-
+                payment.Amount = _alipayPayDataHelper.GetTotalAmount(payData);
 
             }
             else

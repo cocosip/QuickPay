@@ -1,4 +1,6 @@
-﻿using DotCommon.Runtime;
+﻿using DotCommon.Threading;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Util;
 using QuickPay.Exceptions;
@@ -7,7 +9,6 @@ using QuickPay.PayAux;
 using QuickPay.PayAux.Store;
 using System;
 using System.Threading.Tasks;
-
 namespace QuickPay.Alipay.Services.Impl
 {
     /// <summary>支付宝辅助服务
@@ -15,9 +16,11 @@ namespace QuickPay.Alipay.Services.Impl
     public class AlipayAssistService : BaseAlipayService, IAlipayAssistService
     {
         private readonly IPaymentStore _paymentStore;
-        public AlipayAssistService(IAmbientScopeProvider<AlipayAppOverride> alipayAppOverrideScopeProvider, IPaymentStore paymentStore) : base(alipayAppOverrideScopeProvider)
+        private readonly AlipayPayDataHelper _alipayPayDataHelper;
+        public AlipayAssistService(IServiceProvider provider, IAmbientScopeProvider<AlipayAppOverride> alipayAppOverrideScopeProvider, IPaymentStore paymentStore) : base(provider, alipayAppOverrideScopeProvider)
         {
             _paymentStore = paymentStore;
+            _alipayPayDataHelper = provider.GetService<AlipayPayDataHelper>();
         }
 
         /// <summary>签名验证
@@ -30,7 +33,7 @@ namespace QuickPay.Alipay.Services.Impl
             }
             catch (Exception ex)
             {
-                Logger.Error(AlipayUtil.ParseLog($"支付回调签名验证出现异常:{ex.Message}"));
+                Logger.LogError(AlipayUtil.ParseLog($"支付回调签名验证出现异常:{ex.Message}"));
                 return false;
             }
         }
@@ -45,13 +48,13 @@ namespace QuickPay.Alipay.Services.Impl
             {
                 throw new QuickPayException($"签名不正确");
             }
-            var payment = await _paymentStore.GetAsync((int)PayPlat.Alipay, App.AppId, payData.GetAlipayOutTradeNo());
+            var payment = await _paymentStore.GetAsync((int)PayPlat.Alipay, App.AppId, _alipayPayDataHelper.GetAlipayOutTradeNo(payData));
             if (payment == null)
             {
                 throw new QuickPayException($"支付不存在");
             }
             //支付宝流水号
-            string tradeNo = payData.GetAlipayTradeNo();
+            string tradeNo = _alipayPayDataHelper.GetAlipayTradeNo(payData);
 
             try
             {
@@ -62,14 +65,14 @@ namespace QuickPay.Alipay.Services.Impl
                 }
                 //支付宝那边的订单状态验证
                 //交易成功
-                if (payData.GetTradeStatus() != AlipaySettings.TradeStatus.TradeSuccess)
+                if (_alipayPayDataHelper.GetTradeStatus(payData) != AlipaySettings.TradeStatus.TradeSuccess)
                 {
-                    throw new QuickPayException(101, $"交易状态不为交易成功:{payData.GetTradeStatus()}");
+                    throw new QuickPayException(101, $"交易状态不为交易成功:{_alipayPayDataHelper.GetTradeStatus(payData)}");
                 }
                 //金额
-                if (payment.Amount != payData.GetTotalAmount())
+                if (payment.Amount != _alipayPayDataHelper.GetTotalAmount(payData))
                 {
-                    throw new QuickPayException(101, $"订单金额不正确,系统存储的金额为:{payment.Amount},回调金额为:{payData.GetTotalAmount()}");
+                    throw new QuickPayException(101, $"订单金额不正确,系统存储的金额为:{payment.Amount},回调金额为:{_alipayPayDataHelper.GetTotalAmount(payData)}");
                 }
                 if (action != null)
                 {
@@ -93,7 +96,7 @@ namespace QuickPay.Alipay.Services.Impl
             }
             catch (Exception ex)
             {
-                Logger.Error(AlipayUtil.ParseLog($"支付回调操作出现异常:{ex.Message}"), ex);
+                Logger.LogError(AlipayUtil.ParseLog($"支付回调操作出现异常:{ex.Message}"), ex);
                 throw;
             }
         }

@@ -1,4 +1,5 @@
-﻿using QuickPay.Alipay.Apps;
+﻿using Microsoft.Extensions.Logging;
+using QuickPay.Alipay.Apps;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.WechatPay.Apps;
@@ -13,9 +14,10 @@ namespace QuickPay.Middleware
     {
         private readonly QuickPayExecuteDelegate _next;
 
-        public SetNecessaryMiddleware(QuickPayExecuteDelegate next)
+        public SetNecessaryMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger)
         {
             _next = next;
+            Logger = logger;
         }
         public async Task Invoke(ExecuteContext context)
         {
@@ -36,11 +38,11 @@ namespace QuickPay.Middleware
                     setNecessaryMethod((WechatPayConfig)context.Config, (WechatPayApp)context.App);
                 }
 
-                Logger.Debug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
+                Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
             }
             catch (Exception ex)
             {
-                Logger.Error(context.Request.GetLogFormat($"设置Necessary发生错误,{ex.Message}"));
+                Logger.LogError(context.Request.GetLogFormat($"设置Necessary发生错误,{ex.Message}"));
                 SetPipelineError(context, new PayDataTransformError("设置Necessary发生错误"));
                 return;
             }

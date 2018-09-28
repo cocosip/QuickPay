@@ -1,4 +1,5 @@
 ﻿using DotCommon.Extensions;
+using Microsoft.Extensions.Logging;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Middleware;
@@ -13,9 +14,10 @@ namespace QuickPay.WechatPay.Middleware
     public class WechatPaySignMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
-        public WechatPaySignMiddleware(QuickPayExecuteDelegate next)
+        public WechatPaySignMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger)
         {
             _next = next;
+            Logger = logger;
         }
 
         public async Task Invoke(ExecuteContext context)
@@ -48,13 +50,13 @@ namespace QuickPay.WechatPay.Middleware
                         context.RequestPayData.SetValue(context.SignFieldName, sign);
                     }
 
-                    Logger.Info(context.Request.GetLogFormat($"签名字段:{context.SignFieldName},签名:{sign},签名后数据:[{ context.RequestPayData.ToXml()}]"));
-                    Logger.Debug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
+                    Logger.LogInformation(context.Request.GetLogFormat($"签名字段:{context.SignFieldName},签名:{sign},签名后数据:[{ context.RequestPayData.ToXml()}]"));
+                    Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
                 }
             }
             catch (Exception ex)
             {
-                Logger.Error(context.Request.GetLogFormat($"微信签名发生错误,{ex.Message}"));
+                Logger.LogError(context.Request.GetLogFormat($"微信签名发生错误,{ex.Message}"));
                 SetPipelineError(context, new SignError("微信签名发生错误"));
                 return;
             }

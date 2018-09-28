@@ -1,4 +1,5 @@
-﻿using DotCommon.Serializing;
+﻿using DotCommon.Json4Net;
+using DotCommon.Serializing;
 using Xunit;
 
 namespace QuickPay.UnitTest

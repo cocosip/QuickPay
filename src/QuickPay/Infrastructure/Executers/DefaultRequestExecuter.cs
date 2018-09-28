@@ -1,5 +1,4 @@
-﻿using DotCommon.Dependency;
-using DotCommon.Logging;
+﻿using Microsoft.Extensions.Logging;
 using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Infrastructure.Responses;
@@ -18,13 +17,12 @@ namespace QuickPay.Infrastructure.Executers
         private readonly IExecuteContextFactory _executeContextFactory;
         private readonly IQuickPayConfigManager _quickPayConfigManager;
         private readonly ILogger _logger;
-        public DefaultRequestExecuter(IQuickPayPipelineBuilder quickPayPipelineBuilder, IExecuteContextFactory executeContextFactory, IQuickPayConfigManager quickPayConfigManager)
+        public DefaultRequestExecuter(ILogger<QuickPayLoggerName> logger, IQuickPayPipelineBuilder quickPayPipelineBuilder, IExecuteContextFactory executeContextFactory, IQuickPayConfigManager quickPayConfigManager)
         {
+            _logger = logger;
             _quickPayPipelineBuilder = quickPayPipelineBuilder;
             _executeContextFactory = executeContextFactory;
             _quickPayConfigManager = quickPayConfigManager;
-
-            _logger = IocManager.GetContainer().Resolve<ILoggerFactory>().Create(QuickPaySettings.LoggerName);
         }
 
         public async Task<T> ExecuteAsync<T>(IPayRequest<T> request, QuickPayApp app) where T : PayResponse

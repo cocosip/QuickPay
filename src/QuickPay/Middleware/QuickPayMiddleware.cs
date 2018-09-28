@@ -1,6 +1,5 @@
-﻿using DotCommon.Dependency;
-using DotCommon.Logging;
-using DotCommon.Serializing;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using QuickPay.Errors;
 using System.Collections.Generic;
 
@@ -9,12 +8,10 @@ namespace QuickPay.Middleware
     public abstract class QuickPayMiddleware
     {
         public string MiddlewareName => this.GetType().Name;
-        protected ILogger Logger { get; }
-        protected IJsonSerializer JsonSerializer { get; }
+        protected ILogger Logger { get; set; }
         public QuickPayMiddleware()
         {
-            Logger = IocManager.GetContainer().Resolve<ILoggerFactory>().Create(QuickPaySettings.LoggerName);
-            JsonSerializer = IocManager.GetContainer().Resolve<IJsonSerializer>();
+            Logger = NullLogger.Instance;
         }
 
         public void SetPipelineError(ExecuteContext context, List<Error> errors)
@@ -27,7 +24,7 @@ namespace QuickPay.Middleware
 
         public void SetPipelineError(ExecuteContext context, Error error)
         {
-            Logger.Error($"Provider:{context.Request?.Provider},{error.Message}");
+            Logger.LogError($"Provider:{context.Request?.Provider},{error.Message}");
             context.Errors.Add(error);
         }
 

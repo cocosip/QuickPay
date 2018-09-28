@@ -1,20 +1,26 @@
-﻿using DotCommon.Dependency;
+﻿using Microsoft.Extensions.DependencyInjection;
 using QuickPay.Alipay.Apps;
 using QuickPay.WechatPay.Apps;
-
+using System;
 namespace QuickPay.Infrastructure.Apps
 {
     public class QuickPayConfigManager : IQuickPayConfigManager
     {
-        public QuickPayConfig GetCurrentConfig(string provider)
+        private readonly IServiceProvider _provider;
+        public QuickPayConfigManager(IServiceProvider provider)
         {
-            if (provider == QuickPaySettings.Provider.Alipay)
+            _provider = provider;
+        }
+
+        public QuickPayConfig GetCurrentConfig(string providerName)
+        {
+            if (providerName == QuickPaySettings.Provider.Alipay)
             {
-                return IocManager.GetContainer().Resolve<AlipayConfig>();
+                return _provider.GetService<AlipayConfig>();
             }
             else
             {
-                return IocManager.GetContainer().Resolve<WechatPayConfig>();
+                return _provider.GetService<WechatPayConfig>();
             }
         }
     }

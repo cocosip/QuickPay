@@ -2,15 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>QuickPay</AssemblyName>
+    <PackageId>QuickPay</PackageId>
+    <Authors>virtual</Authors>
+    <Version>0.5.0</Version>
+    <Description>QuickPay快速支付</Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotCommon" Version="2.9.5.1" />
-    <PackageReference Include="DotCommon.Autofac" Version="2.9.5.1" />
-    <PackageReference Include="DotCommon.AutoMapper" Version="2.9.5.1" />
-    <PackageReference Include="DotCommon.Caching" Version="2.9.5.1" />
-    <PackageReference Include="DotCommon.Json4Net" Version="2.9.5.1" />
-    <PackageReference Include="DotCommon.Log4Net" Version="2.9.5.1" />
+    <PackageReference Include="DotCommon" Version="2.9.6" />
+    <PackageReference Include="DotCommon.AutoMapper" Version="2.9.6" />
+    <PackageReference Include="DotCommon.Caching" Version="2.9.6" />
+    <PackageReference Include="DotCommon.Json4Net" Version="2.9.6" />
+    <PackageReference Include="DotCommon.Log4Net" Version="2.9.6" />
   </ItemGroup>
 
 </Project>

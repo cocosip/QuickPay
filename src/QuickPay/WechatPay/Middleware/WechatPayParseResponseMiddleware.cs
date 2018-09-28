@@ -1,4 +1,5 @@
-﻿using QuickPay.Errors;
+﻿using Microsoft.Extensions.Logging;
+using QuickPay.Errors;
 using QuickPay.Infrastructure.RequestData;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Infrastructure.Responses;
@@ -14,9 +15,11 @@ namespace QuickPay.WechatPay.Middleware
     public class WechatPayParseResponseMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
-        public WechatPayParseResponseMiddleware(QuickPayExecuteDelegate next)
+
+        public WechatPayParseResponseMiddleware(QuickPayExecuteDelegate next,ILogger<QuickPayLoggerName> logger)
         {
             _next = next;
+            Logger = logger;
         }
         public async Task Invoke(ExecuteContext context)
         {
@@ -51,7 +54,7 @@ namespace QuickPay.WechatPay.Middleware
             }
             catch (Exception ex)
             {
-                Logger.Error(context.Request.GetLogFormat($"转化执行结果发生错误,{ex.Message}"));
+                Logger.LogError(context.Request.GetLogFormat($"转化执行结果发生错误,{ex.Message}"));
                 SetPipelineError(context, new ParseResponseError("转化执行结果发生错误"));
                 return;
             }

@@ -1,14 +1,13 @@
-﻿using DotCommon.Dependency;
-using DotCommon.Serializing;
+﻿using DotCommon.Serializing;
 using System.Collections.Generic;
 
 namespace QuickPay.Infrastructure.Extensions
 {
     public static class DictionaryExtensions
     {
-        public static string ToJson(this Dictionary<string, object> dictionary)
+        public static string ToJson(this Dictionary<string, object> dictionary,IJsonSerializer jsonSerializer )
         {
-            return IocManager.GetContainer().Resolve<IJsonSerializer>().Serialize(dictionary);
+            return jsonSerializer.Serialize(dictionary);
         }
     }
 }

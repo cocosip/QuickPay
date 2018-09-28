@@ -1,4 +1,5 @@
-﻿using DotCommon.Runtime;
+﻿using DotCommon.Threading;
+using Microsoft.Extensions.Logging;
 using QuickPay.Exceptions;
 using QuickPay.Infrastructure.RequestData;
 using QuickPay.PayAux;
@@ -15,7 +16,7 @@ namespace QuickPay.WechatPay.Services.Impl
     public class WechatPayAssistService : BaseWechatPayService, IWechatPayAssistService
     {
         private readonly IPaymentStore _paymentStore;
-        public WechatPayAssistService(IAmbientScopeProvider<WechatPayAppOverride> wechatPayAppOverrideScopeProvider, IPaymentStore paymentStore) : base(wechatPayAppOverrideScopeProvider)
+        public WechatPayAssistService(IServiceProvider provider, IAmbientScopeProvider<WechatPayAppOverride> wechatPayAppOverrideScopeProvider, IPaymentStore paymentStore) : base(provider, wechatPayAppOverrideScopeProvider)
         {
             _paymentStore = paymentStore;
         }
@@ -30,7 +31,7 @@ namespace QuickPay.WechatPay.Services.Impl
             }
             catch (Exception ex)
             {
-                Logger.Error(WechatPayUtil.ParseLog($"微信支付回调签名验证出现异常:{ex.Message}"));
+                Logger.LogError(WechatPayUtil.ParseLog($"微信支付回调签名验证出现异常:{ex.Message}"));
                 return false;
             }
         }
@@ -84,7 +85,7 @@ namespace QuickPay.WechatPay.Services.Impl
             }
             catch (Exception ex)
             {
-                Logger.Error(WechatPayUtil.ParseLog($"微信支付回调操作出现异常:{ex.Message}"));
+                Logger.LogError(WechatPayUtil.ParseLog($"微信支付回调操作出现异常:{ex.Message}"));
                 throw;
             }
         }

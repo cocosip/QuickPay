@@ -1,5 +1,4 @@
-﻿using DotCommon.Dependency;
-using DotCommon.Logging;
+﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +10,14 @@ namespace QuickPay.Middleware.Pipeline
     {
         private readonly IList<Func<QuickPayExecuteDelegate, QuickPayExecuteDelegate>> _middlewares;
         private readonly ILogger _logger;
-        public QuickPayPipelineBuilder()
+
+        public IServiceProvider Provider { get; }
+
+        public QuickPayPipelineBuilder(ILogger<QuickPayLoggerName> logger, IServiceProvider provider)
         {
+            _logger = logger;
+            Provider = provider;
             _middlewares = new List<Func<QuickPayExecuteDelegate, QuickPayExecuteDelegate>>();
-            _logger = IocManager.GetContainer().Resolve<ILoggerFactory>().Create(QuickPaySettings.LoggerName);
         }
 
 

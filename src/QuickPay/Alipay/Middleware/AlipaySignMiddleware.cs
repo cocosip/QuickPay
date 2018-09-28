@@ -1,4 +1,5 @@
-﻿using QuickPay.Alipay.Apps;
+﻿using Microsoft.Extensions.Logging;
+using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Util;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
@@ -13,9 +14,12 @@ namespace QuickPay.Alipay.Middleware
     public class AlipaySignMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
-        public AlipaySignMiddleware(QuickPayExecuteDelegate next)
+        private readonly AlipayPayDataHelper _alipayPayDataHelper;
+        public AlipaySignMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, AlipayPayDataHelper alipayPayDataHelper)
         {
             _next = next;
+            Logger = logger;
+            _alipayPayDataHelper = alipayPayDataHelper;
         }
 
         public async Task Invoke(ExecuteContext context)
@@ -46,15 +50,16 @@ namespace QuickPay.Alipay.Middleware
                     var sign = AlipaySignature.RSASign(signContent, app.PrivateKey, app.Charset, app.SignType);
                     //将签名添加到数据
                     context.RequestPayData.SetValue(context.SignFieldName, sign);
-                    Logger.Info(context.Request.GetLogFormat($"等待签名字符串:[{signContent}],签名:[{sign}],签名后完整数据:{context.RequestPayData.ToJson()}"));
+                    //签名后json
+                    Logger.LogInformation(context.Request.GetLogFormat($"等待签名字符串:[{signContent}],签名:[{sign}],签名后完整数据:{_alipayPayDataHelper.ToJson(context.RequestPayData)}"));
 
                     //模块
-                    Logger.Debug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
+                    Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
                 }
             }
             catch (Exception ex)
             {
-                Logger.Error(context.Request.GetLogFormat($"支付宝签名发生错误,{ex.Message}"));
+                Logger.LogError(context.Request.GetLogFormat($"支付宝签名发生错误,{ex.Message}"));
                 SetPipelineError(context, new SignError("支付宝签名发生错误"));
                 return;
             }

@@ -1,4 +1,4 @@
-﻿using DotCommon.Dependency;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -52,8 +52,7 @@ namespace QuickPay.Middleware.Pipeline
                 ctorArgs[0] = next;
                 Array.Copy(args, 0, ctorArgs, 1, args.Length);
 
-                //??
-                var instance = IocManager.GetContainer().Resolve(middleware, ctorArgs);
+                var instance = ActivatorUtilities.CreateInstance(app.Provider, middleware, ctorArgs);
                 var quickPayExecuteDelegate = (QuickPayExecuteDelegate)methodinfo.CreateDelegate(typeof(QuickPayExecuteDelegate), instance);
 
                 return context =>
@@ -76,7 +75,7 @@ namespace QuickPay.Middleware.Pipeline
             });
         }
 
-       
+
         private static object GetService(IServiceProvider sp, Type type)
         {
             var service = sp.GetService(type);

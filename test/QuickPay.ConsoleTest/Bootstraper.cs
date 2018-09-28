@@ -1,17 +1,17 @@
-﻿using Autofac;
-using AutoMapper;
-using Castle.Windsor;
-using DotCommon.Configurations;
+﻿using AutoMapper;
+using DotCommon.DependencyInjection;
+using DotCommon.Log4Net;
+using Microsoft.Extensions.DependencyInjection;
 using QuickPay.Alipay.Apps;
 using QuickPay.WechatPay.Apps;
+using System;
 using System.Collections.Generic;
 
 namespace QuickPay.ConsoleTest
 {
-    using DotCommonConfiguration = DotCommon.Configurations.Configuration;
     public class Bootstraper
     {
-        public static void Initialize()
+        public static IServiceProvider Initialize()
         {
             var alipayConfig = new AlipayConfig()
             {
@@ -41,22 +41,22 @@ namespace QuickPay.ConsoleTest
                 }
             };
 
-            var builder = new ContainerBuilder();
-            var configuration = DotCommonConfiguration.Create()
-                 .UseAutofac(builder)
-                 .RegisterCommonComponent()
-                 .UseJson4Net()
-                 .UseLog4Net()
-                 .UseMemoryCache()
-                 .AddQuickPay("QuickPayConfig.xml")
-                 //.AddQuickPay(() => alipayConfig, () => wechatPayConfig)
-                 .AutofacBuild()
-                 .UseQuickPay();
-            //AutoMapper映射
+            IServiceCollection services = new ServiceCollection();
+            services.AddLogging(c =>
+            {
+                c.AddLog4Net();
+            }).AddMemoryCache()
+            .AddCommonComponents()
+            .AddQuickPay("QuickPayConfig.xml");
+
             Mapper.Initialize(config =>
             {
                 config.CreateQuickPayMaps();
             });
+            var provider = services.BuildServiceProvider();
+            //配置
+            provider.QuickPayConfigure();
+            return provider;
         }
     }
 }

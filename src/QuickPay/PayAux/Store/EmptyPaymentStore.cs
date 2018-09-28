@@ -1,36 +1,30 @@
-﻿using DotCommon.Dependency;
-using DotCommon.Logging;
+﻿using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace QuickPay.PayAux.Store
 {
     public class EmptyPaymentStore : IPaymentStore
     {
-        private ILogger Logger { get; }
-
-        public static EmptyPaymentStore Instance()
+        private readonly ILogger _logger;
+        public EmptyPaymentStore(ILogger<QuickPayLoggerName> logger)
         {
-            return new EmptyPaymentStore();
-        }
-        public EmptyPaymentStore()
-        {
-            Logger = IocManager.GetContainer().Resolve<ILoggerFactory>().Create(QuickPaySettings.LoggerName);
+            _logger = logger;
         }
         public Task CreateOrUpdateAsync(Payment payment)
         {
-            Logger.Warn($"未实现方法:EmptyPaymentStore.CreateOrUpdateAsync");
+            _logger.LogWarning($"未实现方法:EmptyPaymentStore.CreateOrUpdateAsync");
             return Task.FromResult(0);
         }
 
         public Task<Payment> GetAsync(int payPlatId, string appId, string outTradeNo)
         {
-            Logger.Warn($"未实现方法:EmptyPaymentStore.GetAsync");
+            _logger.LogWarning($"未实现方法:EmptyPaymentStore.GetAsync");
             return Task.FromResult<Payment>(null);
         }
 
         public Task<Payment> GetByUniqueIdAsync(string uniqueId)
         {
-            Logger.Warn($"未实现方法:EmptyPaymentStore.GetByUniqueIdAsync");
+            _logger.LogWarning($"未实现方法:EmptyPaymentStore.GetByUniqueIdAsync");
             return Task.FromResult<Payment>(null);
         }
 

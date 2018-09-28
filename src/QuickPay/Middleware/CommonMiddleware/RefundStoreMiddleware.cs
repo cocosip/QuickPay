@@ -1,4 +1,5 @@
 ﻿using DotCommon.Utility;
+using Microsoft.Extensions.Logging;
 using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Requests;
 using QuickPay.Errors;
@@ -19,9 +20,10 @@ namespace QuickPay.Middleware
         private readonly QuickPayExecuteDelegate _next;
         private readonly IRefundStore _refundStore;
         private readonly IRequestTypeFinder _requestTypeFinder;
-        public RefundStoreMiddleware(QuickPayExecuteDelegate next, IRefundStore refundStore, IRequestTypeFinder requestTypeFinder)
+        public RefundStoreMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, IRefundStore refundStore, IRequestTypeFinder requestTypeFinder)
         {
             _next = next;
+            Logger = logger;
             _refundStore = refundStore;
             _requestTypeFinder = requestTypeFinder;
         }
@@ -39,12 +41,12 @@ namespace QuickPay.Middleware
             }
             catch (Exception ex)
             {
-                Logger.Error(context.Request.GetLogFormat($"退款信息存储发生错误,{ex.Message}"));
+                Logger.LogError(context.Request.GetLogFormat($"退款信息存储发生错误,{ex.Message}"));
                 SetPipelineError(context, new RefundStoreError("退款信息存储发生错误"));
                 return;
             }
 
-            Logger.Debug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
+            Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
             await _next.Invoke(context);
         }
 

@@ -1,4 +1,6 @@
-﻿using QuickPay.Alipay.Apps;
+﻿using DotCommon.Serializing;
+using Microsoft.Extensions.Logging;
+using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Responses;
 using QuickPay.Alipay.Util;
 using QuickPay.Errors;
@@ -16,9 +18,14 @@ namespace QuickPay.Alipay.Middleware
     public class AlipayParseResponseMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
-        public AlipayParseResponseMiddleware(QuickPayExecuteDelegate next)
+        private readonly IJsonSerializer _jsonSerializer;
+        private readonly AlipayPayDataHelper _alipayPayDataHelper;
+        public AlipayParseResponseMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, IJsonSerializer jsonSerializer, AlipayPayDataHelper alipayPayDataHelper)
         {
             _next = next;
+            Logger = logger;
+            _jsonSerializer = jsonSerializer;
+            _alipayPayDataHelper = alipayPayDataHelper;
         }
 
         public async Task Invoke(ExecuteContext context)
@@ -31,7 +38,7 @@ namespace QuickPay.Alipay.Middleware
                     if (context.RequestHandler == QuickPaySettings.RequestHandler.Execute)
                     {
                         var payData = new PayData();
-                        payData = payData.FromJson(context.HttpResponseString);
+                        payData = _alipayPayDataHelper.FromJson(payData, context.HttpResponseString);
                         //获取签名Sign
                         var signKv = payData.GetValue(context.SignFieldName);
                         //数据
@@ -46,9 +53,9 @@ namespace QuickPay.Alipay.Middleware
                         else
                         {
                             //未使用加密
-                            sourceJson = JsonSerializer.Serialize(responseWapper);
+                            sourceJson = _jsonSerializer.Serialize(responseWapper);
                         }
-                        payData = payData.FromJson(sourceJson);
+                        payData = _alipayPayDataHelper.FromJson(payData, sourceJson);
                         payData.SetValue(context.SignFieldName, signKv);
                         //将PayData转换为对象
                         context.Response = (PayResponse)RequestReflectUtil.ToResponse(payData, responseType);
@@ -69,13 +76,13 @@ namespace QuickPay.Alipay.Middleware
                         }
                     }
 
-                    Logger.Debug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
+                    Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
 
                 }
             }
             catch (Exception ex)
             {
-                Logger.Error(context.Request.GetLogFormat($"转换返回结果PayData错误,{ex.Message}"));
+                Logger.LogError(context.Request.GetLogFormat($"转换返回结果PayData错误,{ex.Message}"));
                 SetPipelineError(context, new ParseResponseError("转换返回结果PayData错误"));
                 return;
             }

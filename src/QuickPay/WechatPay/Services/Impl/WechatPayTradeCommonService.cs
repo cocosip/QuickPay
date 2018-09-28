@@ -1,9 +1,10 @@
 ﻿using DotCommon.AutoMapper;
-using DotCommon.Runtime;
+using DotCommon.Threading;
 using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Requests;
 using QuickPay.WechatPay.Responses;
 using QuickPay.WechatPay.Services.DTOs;
+using System;
 using System.Threading.Tasks;
 
 namespace QuickPay.WechatPay.Services.Impl
@@ -12,7 +13,7 @@ namespace QuickPay.WechatPay.Services.Impl
     /// </summary>
     public class WechatPayTradeCommonService : BaseWechatPayService, IWechatPayTradeCommonService
     {
-        public WechatPayTradeCommonService(IAmbientScopeProvider<WechatPayAppOverride> wechatPayAppOverrideScopeProvider) : base(wechatPayAppOverrideScopeProvider)
+        public WechatPayTradeCommonService(IServiceProvider provider, IAmbientScopeProvider<WechatPayAppOverride> wechatPayAppOverrideScopeProvider) : base(provider, wechatPayAppOverrideScopeProvider)
         {
         }
 

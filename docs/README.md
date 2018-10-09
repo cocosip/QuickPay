@@ -19,8 +19,8 @@
 public static IServiceProvider Initialize()
 {
     IServiceCollection services = new ServiceCollection();
-	services.AddLogging(c =>
-	{
+    services.AddLogging(c =>
+    {
         c.AddLog4Net();
     }).AddMemoryCache()
     .AddCommonComponents()
@@ -74,8 +74,8 @@ public static IServiceProvider Initialize()
     };
 
     IServiceCollection services = new ServiceCollection();
-	services.AddLogging(c =>
-	{
+    services.AddLogging(c =>
+    {
         c.AddLog4Net();
     }).AddMemoryCache()
     .AddCommonComponents()

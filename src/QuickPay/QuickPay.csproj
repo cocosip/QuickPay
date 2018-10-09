@@ -10,11 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotCommon" Version="2.9.6" />
-    <PackageReference Include="DotCommon.AutoMapper" Version="2.9.6" />
-    <PackageReference Include="DotCommon.Caching" Version="2.9.6" />
-    <PackageReference Include="DotCommon.Json4Net" Version="2.9.6" />
-    <PackageReference Include="DotCommon.Log4Net" Version="2.9.6" />
+    <PackageReference Include="DotCommon" Version="2.9.7" />
+    <PackageReference Include="DotCommon.AutoMapper" Version="2.9.7" />
+    <PackageReference Include="DotCommon.Caching" Version="2.9.7" />
+    <PackageReference Include="DotCommon.Json4Net" Version="2.9.7" />
+    <PackageReference Include="DotCommon.Log4Net" Version="2.9.7" />
   </ItemGroup>
 
 </Project>

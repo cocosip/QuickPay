@@ -1,4 +1,5 @@
-﻿using DotCommon.Utility;
+﻿using DotCommon.Threading;
+using DotCommon.Utility;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using QuickPay.Alipay.Apps;

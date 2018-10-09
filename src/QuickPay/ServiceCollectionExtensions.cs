@@ -78,6 +78,7 @@ namespace QuickPay
 
 
             //微信Service
+
             services.AddTransient<IWechatAppPayService, WechatAppPayService>();
             services.AddTransient<IWechatH5PayService, WechatH5PayService>();
             services.AddTransient<IWechatJsApiPayService, WechatJsApiPayService>();

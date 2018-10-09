@@ -42,6 +42,7 @@ namespace QuickPay.WechatPay.Middleware
                     if (context.SignType == WechatPaySettings.SignType.Md5)
                     {
                         sign = WechatPayUtil.MakeSign(context.RequestPayData, (WechatPayApp)context.App);
+                        //sign = WechatPayUtil.MakeSign(context.RequestPayData, (WechatPayApp)context.App);
                         context.RequestPayData.SetValue(context.SignFieldName, sign);
                     }
                     else if (context.SignType == WechatPaySettings.SignType.Md5)

@@ -9,7 +9,6 @@ namespace QuickPay.WechatPay.Util
 {
     public static class PayDataExtensions
     {
-
         public static string ToUrl(this PayData payData)
         {
             var sb = new StringBuilder();
@@ -90,33 +89,6 @@ namespace QuickPay.WechatPay.Util
             return newPayData;
         }
 
-        /// <summary>微信AppId
-        /// </summary>
-        public static string GetWechatAppId(this PayData payData)
-        {
-            return payData.GetValue(x => x.Key.ToLower() == "appid").ToString();
-        }
-
-        /// <summary>微信交易号
-        /// </summary>
-        public static string GetWechatOutTradeNo(this PayData payData)
-        {
-            return payData.GetValue(x => x.Key.ToLower() == "out_trade_no").ToString();
-        }
-
-        /// <summary>获取微信支付订单号(微信系统中的)
-        /// </summary>
-        public static string GetTransactionId(this PayData payData)
-        {
-            return payData.GetValue(x => x.Key.ToLower() == "transaction_id").ToString();
-        }
-
-        /// <summary>微信支付总金额
-        /// </summary>
-        public static decimal GetTotalFeeYuan(this PayData payData)
-        {
-            return Convert.ToInt32(payData.GetValue(x => x.Key.ToLower() == "total_fee")) / 100M;
-        }
     }
 
 }

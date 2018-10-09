@@ -13,7 +13,7 @@ namespace QuickPay.WechatPay.Middleware
     public class WechatPayRequestBuilderMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
-        public WechatPayRequestBuilderMiddleware(QuickPayExecuteDelegate next,ILogger<QuickPayLoggerName> logger)
+        public WechatPayRequestBuilderMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger)
         {
             _next = next;
             Logger = logger;

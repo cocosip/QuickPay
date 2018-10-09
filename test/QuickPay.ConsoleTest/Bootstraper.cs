@@ -47,6 +47,7 @@ namespace QuickPay.ConsoleTest
                 c.AddLog4Net();
             }).AddMemoryCache()
             .AddCommonComponents()
+            .AddQuickPay(() => alipayConfig, () => wechatPayConfig)
             .AddQuickPay("QuickPayConfig.xml");
 
             Mapper.Initialize(config =>

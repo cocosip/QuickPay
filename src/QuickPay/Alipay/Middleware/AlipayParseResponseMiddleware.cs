@@ -38,7 +38,7 @@ namespace QuickPay.Alipay.Middleware
                     if (context.RequestHandler == QuickPaySettings.RequestHandler.Execute)
                     {
                         var payData = new PayData();
-                        payData = _alipayPayDataHelper.FromJson(payData, context.HttpResponseString);
+                        payData = _alipayPayDataHelper.FromJson(context.HttpResponseString);
                         //获取签名Sign
                         var signKv = payData.GetValue(context.SignFieldName);
                         //数据
@@ -55,7 +55,7 @@ namespace QuickPay.Alipay.Middleware
                             //未使用加密
                             sourceJson = _jsonSerializer.Serialize(responseWapper);
                         }
-                        payData = _alipayPayDataHelper.FromJson(payData, sourceJson);
+                        payData = _alipayPayDataHelper.FromJson(sourceJson);
                         payData.SetValue(context.SignFieldName, signKv);
                         //将PayData转换为对象
                         context.Response = (PayResponse)RequestReflectUtil.ToResponse(payData, responseType);

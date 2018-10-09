@@ -23,13 +23,15 @@ namespace QuickPay.Middleware
         private readonly IPaymentStore _paymentStore;
         private readonly IRequestTypeFinder _requestTypeFinder;
         private readonly AlipayPayDataHelper _alipayPayDataHelper;
-        public PaymentStoreMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, IPaymentStore paymentStore, IRequestTypeFinder requestTypeFinder, AlipayPayDataHelper alipayPayDataHelper)
+        private readonly WechatPayDataHelper _wechatPayDataHelper;
+        public PaymentStoreMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, IPaymentStore paymentStore, IRequestTypeFinder requestTypeFinder, AlipayPayDataHelper alipayPayDataHelper, WechatPayDataHelper wechatPayDataHelper)
         {
             _next = next;
             Logger = logger;
             _paymentStore = paymentStore;
             _requestTypeFinder = requestTypeFinder;
             _alipayPayDataHelper = alipayPayDataHelper;
+            _wechatPayDataHelper = wechatPayDataHelper;
         }
 
         public async Task Invoke(ExecuteContext context)
@@ -86,11 +88,13 @@ namespace QuickPay.Middleware
                 payment.AppId = ((WechatPayApp)context.App).AppId;
 
                 //交易号,本系统唯一
-                payment.OutTradeNo = context.RequestPayData.GetWechatOutTradeNo();
+                payment.OutTradeNo = _wechatPayDataHelper.GetWechatOutTradeNo(context.RequestPayData);
+                //context.RequestPayData.GetWechatOutTradeNo();
 
 
                 //支付金额,以元为单位,微信是以分为单位,需要进行转换
-                payment.Amount = context.RequestPayData.GetTotalFeeYuan();
+                payment.Amount = _wechatPayDataHelper.GetTotalFeeYuan(context.RequestPayData);
+                //context.RequestPayData.GetTotalFeeYuan();
             }
             return payment;
         }

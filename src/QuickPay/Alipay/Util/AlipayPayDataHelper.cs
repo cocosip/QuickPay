@@ -14,7 +14,7 @@ namespace QuickPay.Alipay.Util
             _jsonSerializer = jsonSerializer;
         }
 
-        public PayData FromJson(PayData payData, string json)
+        public PayData FromJson(string json)
         {
             var sortedDict = _jsonSerializer.Deserialize<SortedDictionary<string, object>>(json);
             var newPayData = new PayData(sortedDict);

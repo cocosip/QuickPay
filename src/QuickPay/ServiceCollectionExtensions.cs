@@ -13,6 +13,7 @@ using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Authentication;
 using QuickPay.WechatPay.Services;
 using QuickPay.WechatPay.Services.Impl;
+using QuickPay.WechatPay.Util;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -83,12 +84,15 @@ namespace QuickPay
             services.AddTransient<IWechatMicroPayService, WechatMicroPayService>();
             services.AddTransient<IWechatNativePayService, WechatNativePayService>();
             services.AddTransient<IWechatPayTradeCommonService, WechatPayTradeCommonService>();
+            services.AddTransient<WechatPayDataHelper>();
         }
 
         //注册Pipeline
         private static void RegisterPipeline(IServiceCollection services)
         {
-            var assemply = Assembly.Load(AssemblyName.GetAssemblyName(QuickPaySettings.AssemblyName));
+
+            var assemply = typeof(QuickPaySettings).Assembly;
+            //var assemply = Assembly.Load(AssemblyName.GetAssemblyName(QuickPaySettings.AssemblyName));
             var middlewareTypies = assemply.GetTypes().Where(x => typeof(QuickPayMiddleware).IsAssignableFrom(x) && x != typeof(QuickPayMiddleware));
             foreach (var middlewareType in middlewareTypies)
             {

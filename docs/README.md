@@ -16,23 +16,24 @@
 > 初始化代码:
 
 ```c#
-public static void Initialize()
+public static IServiceProvider Initialize()
 {
-    var builder = new ContainerBuilder();
-    var configuration = DotCommonConfiguration.Create()
-            .UseAutofac(builder)
-            .RegisterCommonComponent()
-            .UseJson4Net()
-            .UseLog4Net()
-            .UseMemoryCache()
-            .AddQuickPay("QuickPayConfig.xml")
-            .AutofacBuild()
-            .UseQuickPay();
-    //AutoMapper映射
+    IServiceCollection services = new ServiceCollection();
+	services.AddLogging(c =>
+	{
+        c.AddLog4Net();
+    }).AddMemoryCache()
+    .AddCommonComponents()
+    .AddQuickPay("QuickPayConfig.xml");
+
     Mapper.Initialize(config =>
     {
         config.CreateQuickPayMaps();
     });
+    var provider = services.BuildServiceProvider();
+    //配置
+    provider.QuickPayConfigure();
+    return provider;
 }
 ```
 
@@ -40,7 +41,7 @@ public static void Initialize()
 - `QuickPay`支持两种方式的配置初始化,1.通过配置的`Xml`([参考](../src/QuickPay/ConfigDemo.xml))或`Josn`([参考](../src/QuickPay/ConfigDemo.json)) 2.通过初始化配置对象
 
 ```c#
-public static void Initialize()
+public static IServiceProvider Initialize()
 {
     var alipayConfig = new AlipayConfig()
     {
@@ -72,21 +73,22 @@ public static void Initialize()
         }
     };
 
-    var builder = new ContainerBuilder();
-    var configuration = DotCommonConfiguration.Create()
-        .UseAutofac(builder)
-        .RegisterCommonComponent()
-        .UseJson4Net()
-        .UseLog4Net()
-        .UseMemoryCache()
-        .AddQuickPay(() => alipayConfig, () => wechatPayConfig)
-        .AutofacBuild()
-        .UseQuickPay();
-    //AutoMapper映射
+    IServiceCollection services = new ServiceCollection();
+	services.AddLogging(c =>
+	{
+        c.AddLog4Net();
+    }).AddMemoryCache()
+    .AddCommonComponents()
+    .AddQuickPay(() => alipayConfig, () => wechatPayConfig);
+
     Mapper.Initialize(config =>
     {
         config.CreateQuickPayMaps();
     });
+    var provider = services.BuildServiceProvider();
+    //配置
+    provider.QuickPayConfigure();
+    return provider;
 }
 
 ```

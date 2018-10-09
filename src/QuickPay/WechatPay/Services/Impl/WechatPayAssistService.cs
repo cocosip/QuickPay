@@ -16,9 +16,11 @@ namespace QuickPay.WechatPay.Services.Impl
     public class WechatPayAssistService : BaseWechatPayService, IWechatPayAssistService
     {
         private readonly IPaymentStore _paymentStore;
-        public WechatPayAssistService(IServiceProvider provider, IAmbientScopeProvider<WechatPayAppOverride> wechatPayAppOverrideScopeProvider, IPaymentStore paymentStore) : base(provider, wechatPayAppOverrideScopeProvider)
+        private readonly WechatPayDataHelper _wechatPayDataHelper;
+        public WechatPayAssistService(IServiceProvider provider, IAmbientScopeProvider<WechatPayAppOverride> wechatPayAppOverrideScopeProvider, IPaymentStore paymentStore, WechatPayDataHelper wechatPayDataHelper) : base(provider, wechatPayAppOverrideScopeProvider)
         {
             _paymentStore = paymentStore;
+            _wechatPayDataHelper = wechatPayDataHelper;
         }
 
         /// <summary>通知签名验证
@@ -45,13 +47,14 @@ namespace QuickPay.WechatPay.Services.Impl
             {
                 throw new QuickPayException($"签名不正确");
             }
-            var payment = await _paymentStore.GetAsync((int)PayPlat.WechatPay, App.AppId, payData.GetWechatOutTradeNo());
+            var payment = await _paymentStore.GetAsync((int)PayPlat.WechatPay, App.AppId, _wechatPayDataHelper.GetWechatOutTradeNo(payData));
             if (payment == null)
             {
                 throw new QuickPayException($"支付不存在");
             }
             //微信支付订单号
-            string transactionId = payData.GetTransactionId();
+            string transactionId = _wechatPayDataHelper.GetTransactionId(payData);
+            //payData.GetTransactionId();
             try
             {
                 //支付状态验证
@@ -60,9 +63,9 @@ namespace QuickPay.WechatPay.Services.Impl
                     throw new QuickPayException($"该笔订单已在本系统中操作过");
                 }
                 //金额
-                if (payment.Amount != payData.GetTotalFeeYuan())
+                if (payment.Amount != _wechatPayDataHelper.GetTotalFeeYuan(payData))
                 {
-                    throw new QuickPayException(101, $"订单金额不正确,系统存储的金额为:{payment.Amount},回调金额为:{payData.GetTotalFeeYuan()}");
+                    throw new QuickPayException(101, $"订单金额不正确,系统存储的金额为:{payment.Amount},回调金额为:{_wechatPayDataHelper.GetTotalFeeYuan(payData)}");
                 }
                 //业务执行
                 if (action != null)

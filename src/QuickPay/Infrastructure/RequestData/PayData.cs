@@ -65,7 +65,7 @@ namespace QuickPay.Infrastructure.RequestData
         /// </summary>
         public string GetAppId()
         {
-            return _values.FirstOrDefault(x => x.Key.ToLower() == "appid").ToString();
+            return _values.FirstOrDefault(x => x.Key.ToLower() == "appid").Value?.ToString() ?? "";
         }
 
     }

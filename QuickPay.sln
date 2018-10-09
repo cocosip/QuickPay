@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay", "src\QuickPay\Qu
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B82345B4-9C62-4D80-8664-0F2297F9595E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.UnitTest", "test\QuickPay.UnitTest\QuickPay.UnitTest.csproj", "{F96B15F1-B344-4E74-9E82-5FFA28B23F69}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.ConsoleTest", "test\QuickPay.ConsoleTest\QuickPay.ConsoleTest.csproj", "{2B6ACF79-C779-451C-981A-393B786ED2FA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{085E40CE-EFA2-4038-BC29-41326EC963CB}"
@@ -16,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{085E40CE-E
 		docs\README.md = docs\README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickPay.Tests", "test\QuickPay.Tests\QuickPay.Tests.csproj", "{17DC94A1-64F2-4AD2-85F7-6C8D265436A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.Tests", "test\QuickPay.Tests\QuickPay.Tests.csproj", "{17DC94A1-64F2-4AD2-85F7-6C8D265436A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,10 +26,6 @@ Global
 		{8854BAB7-96B4-4E01-96E0-EFFD3FB3C755}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8854BAB7-96B4-4E01-96E0-EFFD3FB3C755}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8854BAB7-96B4-4E01-96E0-EFFD3FB3C755}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F96B15F1-B344-4E74-9E82-5FFA28B23F69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F96B15F1-B344-4E74-9E82-5FFA28B23F69}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F96B15F1-B344-4E74-9E82-5FFA28B23F69}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F96B15F1-B344-4E74-9E82-5FFA28B23F69}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2B6ACF79-C779-451C-981A-393B786ED2FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2B6ACF79-C779-451C-981A-393B786ED2FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B6ACF79-C779-451C-981A-393B786ED2FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,7 +39,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{F96B15F1-B344-4E74-9E82-5FFA28B23F69} = {B82345B4-9C62-4D80-8664-0F2297F9595E}
 		{2B6ACF79-C779-451C-981A-393B786ED2FA} = {B82345B4-9C62-4D80-8664-0F2297F9595E}
 		{17DC94A1-64F2-4AD2-85F7-6C8D265436A9} = {B82345B4-9C62-4D80-8664-0F2297F9595E}
 	EndGlobalSection

@@ -25,20 +25,17 @@ namespace QuickPay.WechatPay.Middleware
             {
                 if (context.Request == null)
                 {
-                    SetPipelineError(context, new PayDataTransformError("PayRequest请求为null"));
+                    SetPipelineError(context, new PayDataTransformError("PayRequest请求为NULL"));
                     return;
                 }
                 try
                 {
                     context.RequestPayData = RequestReflectUtil.ToPayData(context.Request);
-
-        
                     Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogError(context.Request.GetLogFormat($"转换PayData发生错误,{ex.Message}"));
-                    SetPipelineError(context, new PayDataTransformError("转换PayData发生错误"));
+                    SetPipelineError(context, new PayDataTransformError($"转换PayData发生错误,{ex.Message}"));
                     return;
                 }
             }

@@ -39,6 +39,13 @@ namespace QuickPay.Alipay.Middleware
                     {
                         var payData = new PayData();
                         payData = _alipayPayDataHelper.FromJson(context.HttpResponseString);
+                        //没有数据
+                        if (!payData.GetValues().Any())
+                        {
+                            SetPipelineError(context, new ParseResponseError("换结果出现问题,数据为空"));
+                            return;
+                        }
+
                         //获取签名Sign
                         var signKv = payData.GetValue(context.SignFieldName);
                         //数据
@@ -82,8 +89,7 @@ namespace QuickPay.Alipay.Middleware
             }
             catch (Exception ex)
             {
-                Logger.LogError(context.Request.GetLogFormat($"转换返回结果PayData错误,{ex.Message}"));
-                SetPipelineError(context, new ParseResponseError("转换返回结果PayData错误"));
+                SetPipelineError(context, new ParseResponseError($"转换返回结果PayData错误,{ex.Message}"));
                 return;
             }
             await _next.Invoke(context);

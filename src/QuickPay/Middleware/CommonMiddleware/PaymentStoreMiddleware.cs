@@ -47,8 +47,7 @@ namespace QuickPay.Middleware
             }
             catch (Exception ex)
             {
-                Logger.LogError(context.Request.GetLogFormat($"存储支付信息发生错误,{ex.Message}"));
-                SetPipelineError(context, new PaymentStoreError("存储支付信息发生错误"));
+                SetPipelineError(context, new PaymentStoreError($"存储支付信息发生错误,{ex.Message}"));
                 return;
             }
 

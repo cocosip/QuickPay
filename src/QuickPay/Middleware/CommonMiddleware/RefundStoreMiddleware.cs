@@ -41,8 +41,7 @@ namespace QuickPay.Middleware
             }
             catch (Exception ex)
             {
-                Logger.LogError(context.Request.GetLogFormat($"退款信息存储发生错误,{ex.Message}"));
-                SetPipelineError(context, new RefundStoreError("退款信息存储发生错误"));
+                SetPipelineError(context, new RefundStoreError($"退款信息存储发生错误,{ex.Message}"));
                 return;
             }
 

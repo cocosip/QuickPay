@@ -1,6 +1,7 @@
 ﻿using DotCommon.AutoMapper;
 using DotCommon.Extensions;
 using DotCommon.Threading;
+using Microsoft.Extensions.Logging;
 using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Requests;
 using QuickPay.WechatPay.Responses;
@@ -56,7 +57,8 @@ namespace QuickPay.WechatPay.Services.Impl
                     return outputResponse;
                 }
             }
-            return default(NativeMode1UnifiedOrderOutputResponse);
+            Logger.LogError($"微信扫码支付,提交预订单出错,ReturnMsg:{response.ReturnMsg},ErrorCodeMsg:{response.ErrCodeDes}");
+            throw new Exception(response.ReturnMsg);
         }
 
     }

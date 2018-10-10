@@ -31,7 +31,7 @@ namespace QuickPay.Alipay.Middleware
 
                 if (context.Request == null)
                 {
-                    SetPipelineError(context, new PayDataTransformError("PayRequest请求为null"));
+                    SetPipelineError(context, new PayDataTransformError("PayRequest请求为NULL"));
                     return;
                 }
                 try
@@ -41,7 +41,7 @@ namespace QuickPay.Alipay.Middleware
                     var bizContentRequest = property.GetValue(context.Request);
                     if (bizContentRequest == null)
                     {
-                        SetPipelineError(context, new PayDataTransformError("BizContentRequest为null"));
+                        SetPipelineError(context, new PayDataTransformError("BizContentRequest为NULL"));
                         return;
                     }
                     //bizContent内容(string)
@@ -56,8 +56,7 @@ namespace QuickPay.Alipay.Middleware
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogError(context.Request.GetLogFormat($"转换PayData发生错误,{ex.Message}"));
-                    SetPipelineError(context, new PayDataTransformError("转换PayData发生错误"));
+                    SetPipelineError(context, new PayDataTransformError($"转换PayData发生错误,{ex.Message}"));
                     return;
                 }
             }

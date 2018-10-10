@@ -33,7 +33,7 @@ namespace QuickPay.WechatPay.Middleware
                     }
                     if (context.SignFieldName.IsNullOrEmpty())
                     {
-                        SetPipelineError(context, new SignError("SignField字段为空."));
+                        SetPipelineError(context, new SignError("微信SignField字段为空."));
                         return;
                     }
 
@@ -57,8 +57,7 @@ namespace QuickPay.WechatPay.Middleware
             }
             catch (Exception ex)
             {
-                Logger.LogError(context.Request.GetLogFormat($"微信签名发生错误,{ex.Message}"));
-                SetPipelineError(context, new SignError("微信签名发生错误"));
+                SetPipelineError(context, new SignError($"微信签名发生错误,{ex.Message}"));
                 return;
             }
             await _next.Invoke(context);

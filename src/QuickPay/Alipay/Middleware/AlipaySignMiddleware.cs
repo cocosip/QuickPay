@@ -59,8 +59,7 @@ namespace QuickPay.Alipay.Middleware
             }
             catch (Exception ex)
             {
-                Logger.LogError(context.Request.GetLogFormat($"支付宝签名发生错误,{ex.Message}"));
-                SetPipelineError(context, new SignError("支付宝签名发生错误"));
+                SetPipelineError(context, new SignError($"支付宝签名发生错误,{ex.Message}"));
                 return;
             }
             await _next.Invoke(context);

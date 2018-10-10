@@ -43,8 +43,7 @@ namespace QuickPay.Alipay.Middleware
             }
             catch (Exception ex)
             {
-                Logger.LogError(context.Request.GetLogFormat($"构建RequestBuilder错误,{ex.Message}"));
-                SetPipelineError(context, new ExecuteError("支付宝构建RequestBuilder错误"));
+                SetPipelineError(context, new ExecuteError($"构建RequestBuilder错误,{ex.Message}"));
                 return;
             }
             await _next.Invoke(context);

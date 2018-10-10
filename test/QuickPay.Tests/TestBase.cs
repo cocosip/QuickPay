@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DotCommon.Caching;
 using DotCommon.DependencyInjection;
+using DotCommon.Json4Net;
 using DotCommon.Log4Net;
 using Microsoft.Extensions.DependencyInjection;
 using QuickPay.Alipay.Apps;
@@ -23,6 +24,7 @@ namespace QuickPay.Tests
             })
             .AddCommonComponents()
             .AddGenericsMemoryCache()
+            .AddJson4Net()
             .AddQuickPay("QuickPayConfig.xml");
 
             Mapper.Initialize(config =>

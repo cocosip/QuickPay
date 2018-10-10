@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using QuickPay.Errors;
+using QuickPay.Infrastructure.Requests;
 using System.Collections.Generic;
-
 namespace QuickPay.Middleware
 {
     public abstract class QuickPayMiddleware
@@ -24,8 +24,15 @@ namespace QuickPay.Middleware
 
         public void SetPipelineError(ExecuteContext context, Error error)
         {
-            Logger.LogError($"Provider:{context.Request?.Provider},{error.Message}");
-            context.Errors.Add(error);
+            if (context.Request == null)
+            {
+                Logger.LogError($"支付执行出错,并且Context.Request为NULL.,{error.Message}");
+            }
+            else
+            {
+                Logger.LogError(context.Request?.GetLogFormat(error.Message));
+            }
+            context?.Errors.Add(error);
         }
 
     }

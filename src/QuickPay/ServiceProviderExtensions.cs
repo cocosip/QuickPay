@@ -56,7 +56,8 @@ namespace QuickPay
             pipelineBuilder.UseMiddleware<PaymentStoreMiddleware>();
             //退款存储
             pipelineBuilder.UseMiddleware<RefundStoreMiddleware>();
-
+            //异常
+            pipelineBuilder.UseMiddleware<ErrorHandlerMiddleware>();
             //结束
             pipelineBuilder.UseMiddleware<EndMiddleware>();
         }

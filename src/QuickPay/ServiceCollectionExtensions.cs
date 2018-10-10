@@ -16,7 +16,6 @@ using QuickPay.WechatPay.Services.Impl;
 using QuickPay.WechatPay.Util;
 using System;
 using System.Linq;
-using System.Reflection;
 
 namespace QuickPay
 {
@@ -98,7 +97,7 @@ namespace QuickPay
             foreach (var middlewareType in middlewareTypies)
             {
                 services.AddTransient(middlewareType);
-                Console.WriteLine(middlewareType.Name);
+                //Console.WriteLine(middlewareType.Name);
             }
 
         }

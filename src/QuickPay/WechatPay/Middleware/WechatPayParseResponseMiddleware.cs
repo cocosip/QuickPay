@@ -8,6 +8,7 @@ using QuickPay.Middleware;
 using QuickPay.WechatPay.Responses;
 using QuickPay.WechatPay.Util;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace QuickPay.WechatPay.Middleware
@@ -16,7 +17,7 @@ namespace QuickPay.WechatPay.Middleware
     {
         private readonly QuickPayExecuteDelegate _next;
 
-        public WechatPayParseResponseMiddleware(QuickPayExecuteDelegate next,ILogger<QuickPayLoggerName> logger)
+        public WechatPayParseResponseMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger)
         {
             _next = next;
             Logger = logger;
@@ -32,6 +33,20 @@ namespace QuickPay.WechatPay.Middleware
                     if (context.RequestHandler == QuickPaySettings.RequestHandler.Execute)
                     {
                         var payData = context.RequestPayData.FromXml(context.HttpResponseString);
+                        //有可能返回的不是期望的
+                        if (!payData.GetValues().Any())
+                        {
+                            SetPipelineError(context, new ParseResponseError("微信支付返回结果转化结果为空"));
+                            return;
+                        }
+                        var failMsg = payData.GetMsgIfReturnFail();
+                        if (failMsg != "")
+                        {
+                            SetPipelineError(context, new ParseResponseError($"微信支付出错,{failMsg}"));
+                            return;
+                        }
+
+
                         context.ResponsePayData = new PayData(payData.GetValues());
 
                         context.Response = (PayResponse)(RequestReflectUtil.ToResponse(payData, responseType));
@@ -50,13 +65,13 @@ namespace QuickPay.WechatPay.Middleware
                             ((WechatPayTradeSourceResponse)context.Response).PayData = new PayData(context.RequestPayData.GetValues());
                         }
                     }
+
+
                 }
             }
             catch (Exception ex)
             {
-                Logger.LogError(context.Request.GetLogFormat($"转化执行结果发生错误,{ex.Message}"));
-                SetPipelineError(context, new ParseResponseError("转化执行结果发生错误"));
-                return;
+                SetPipelineError(context, new ParseResponseError($"转化执行结果发生错误,{ex.Message}"));
             }
             await _next.Invoke(context);
         }

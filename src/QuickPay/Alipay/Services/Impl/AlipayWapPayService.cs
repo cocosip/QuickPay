@@ -25,7 +25,7 @@ namespace QuickPay.Alipay.Services.Impl
         {
             var bizContentRequest = input.MapTo<WapTradeBizContentPayRequest>();
             var request = new WapTradePayRequest(bizContentRequest, input.ReturnUrl, input.NotifyUrl);
-            var response = await Executer.ExecuteAsync<WapTradePayResponse>(request, App);
+            var response = await Executer.SignRequest<WapTradePayResponse>(request, App);
             return response;
         }
 

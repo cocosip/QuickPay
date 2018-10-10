@@ -38,7 +38,8 @@ namespace QuickPay.WechatPay.Services.Impl
                 var jsApiUnifiedOrderCallResonse = await Executer.SignRequest<JsApiUnifiedOrderCallResponse>(jsApiUnifiedOrderCallRequest, App);
                 return jsApiUnifiedOrderCallResonse;
             }
-            throw new Exception(response.ErrCodeDes);
+            Logger.LogError($"微信JsApi下单请求出错,ReturnMsg:{response.ReturnMsg},ErrorCodeMsg:{response.ErrCodeDes}");
+            throw new Exception(response.ReturnMsg);
         }
 
         /// <summary>获取JsSdk config配置

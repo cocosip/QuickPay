@@ -19,7 +19,6 @@ namespace QuickPay.Middleware
             if (context.IsError)
             {
                 Logger.LogError(context.Request.GetLogFormat(context.Errors.FirstOrDefault()?.Message));
-
                 Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
             }
             await _next.Invoke(context);

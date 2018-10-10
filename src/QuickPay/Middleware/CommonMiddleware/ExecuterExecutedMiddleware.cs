@@ -32,8 +32,7 @@ namespace QuickPay.Middleware
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogError(context.Request.GetLogFormat($"调用Execute出错,{ex.Message}"), ex);
-                    SetPipelineError(context, new ExecuteError("调用远程服务出错"));
+                    SetPipelineError(context, new ExecuteError($"调用Execute出错,{ex.Message}"));
                     return;
                 }
             }

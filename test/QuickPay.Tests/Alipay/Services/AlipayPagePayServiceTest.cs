@@ -7,6 +7,8 @@ using Xunit;
 
 namespace QuickPay.Tests.Alipay.Services
 {
+    /// <summary>支付宝PC网站支付
+    /// </summary>
     public class AlipayPagePayServiceTest : TestBase
     {
         [Fact]

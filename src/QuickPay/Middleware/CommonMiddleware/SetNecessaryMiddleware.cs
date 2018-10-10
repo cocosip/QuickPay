@@ -42,8 +42,7 @@ namespace QuickPay.Middleware
             }
             catch (Exception ex)
             {
-                Logger.LogError(context.Request.GetLogFormat($"设置Necessary发生错误,{ex.Message}"));
-                SetPipelineError(context, new PayDataTransformError("设置Necessary发生错误"));
+                SetPipelineError(context, new PayDataTransformError($"设置Necessary发生错误,{ex.Message}"));
                 return;
             }
             await _next.Invoke(context);

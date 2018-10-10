@@ -89,6 +89,22 @@ namespace QuickPay.WechatPay.Util
             return newPayData;
         }
 
+        /// <summary>微信如果返回失败,就获取MessageCode
+        /// </summary>
+        public static string GetMsgIfReturnFail(this PayData payData)
+        {
+            var returnCode = payData.GetValue("return_code");
+            if (returnCode != null && returnCode.ToString() == "FAIL")
+            {
+                if (payData.GetValue("return_msg") != null)
+                {
+                    return payData.GetValue("return_msg").ToString();
+                }
+            }
+            return "";
+        }
+
+
     }
 
 }

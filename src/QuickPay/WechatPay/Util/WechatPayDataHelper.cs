@@ -1,10 +1,18 @@
-﻿using QuickPay.Infrastructure.RequestData;
+﻿using DotCommon.Serializing;
+using QuickPay.Infrastructure.RequestData;
 using System;
+using System.Collections.Generic;
 
 namespace QuickPay.WechatPay.Util
 {
     public class WechatPayDataHelper
     {
+        private readonly IJsonSerializer _jsonSerializer;
+        public WechatPayDataHelper(IJsonSerializer jsonSerializer)
+        {
+            _jsonSerializer = jsonSerializer;
+        }
+
         /// <summary>微信AppId
         /// </summary>
         public string GetWechatAppId(PayData payData)
@@ -31,6 +39,11 @@ namespace QuickPay.WechatPay.Util
         public decimal GetTotalFeeYuan(PayData payData)
         {
             return Convert.ToInt32(payData.GetValue(x => x.Key.ToLower() == "total_fee")) / 100M;
+        }
+
+        public string DictToJson(Dictionary<string, object> dict)
+        {
+            return _jsonSerializer.Serialize(dict);
         }
     }
 }

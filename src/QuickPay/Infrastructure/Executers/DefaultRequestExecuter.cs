@@ -5,6 +5,7 @@ using QuickPay.Infrastructure.Responses;
 using QuickPay.Middleware;
 using QuickPay.Middleware.Pipeline;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace QuickPay.Infrastructure.Executers
@@ -35,6 +36,11 @@ namespace QuickPay.Infrastructure.Executers
 
                 var context = _executeContextFactory.CreateContext<T>(request, config, app, QuickPaySettings.RequestHandler.Execute);
                 await firstDelegate(context);
+                if (context.IsError)
+                {
+                    var error = context.Errors.FirstOrDefault();
+                    throw new Exception(error.Message);
+                }
 
                 if (context.Response != null)
                 {
@@ -44,6 +50,7 @@ namespace QuickPay.Infrastructure.Executers
             }
             catch (Exception ex)
             {
+                _logger.LogError($"支付ExecuteAsync出错,{ex.Message}");
                 throw ex;
             }
         }
@@ -59,6 +66,12 @@ namespace QuickPay.Infrastructure.Executers
 
                 var context = _executeContextFactory.CreateContext<T>(request, config, app, QuickPaySettings.RequestHandler.Sign);
                 await firstDelegate(context);
+                if (context.IsError)
+                {
+                    var error = context.Errors.FirstOrDefault();
+                    throw new Exception(error.Message);
+                }
+
                 if (context.Response != null)
                 {
                     return context.Response as T;
@@ -67,6 +80,7 @@ namespace QuickPay.Infrastructure.Executers
             }
             catch (Exception ex)
             {
+                _logger.LogError($"支付SignRequest出错,{ex.Message}");
                 throw ex;
             }
         }

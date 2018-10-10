@@ -24,7 +24,7 @@ namespace QuickPay.Middleware
         {
             if (context.Request == null)
             {
-                SetPipelineError(context, new SetUniqueIdError("设置UniqueId发生错误"));
+                SetPipelineError(context, new SetUniqueIdError("设置UniqueId发生错误,Context.Request为NULL"));
                 return;
             }
             try
@@ -54,13 +54,11 @@ namespace QuickPay.Middleware
                         context.Request.BusinessCode = ((BaseBizContentRequest)bizContentRequest).BusinessCode;
                     }
                 }
-
                 Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
             }
             catch (Exception ex)
             {
-                Logger.LogError(context.Request.GetLogFormat($"设置AutoUniqueId发生错误,{ex.Message}"));
-                SetPipelineError(context, new SetUniqueIdError("设置UniqueId发生错误"));
+                SetPipelineError(context, new SetUniqueIdError($"设置AutoUniqueId发生错误,{ex.Message}"));
                 return;
             }
             await _next.Invoke(context);

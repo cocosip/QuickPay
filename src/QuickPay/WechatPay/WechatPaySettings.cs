@@ -64,6 +64,8 @@
             public const string H5 = "MWEB";
 
             public const string Micropay = "MICROPAY";
+
+            public const string MiniProgram = "MINIPROGRAM";
         }
 
         public class Scope

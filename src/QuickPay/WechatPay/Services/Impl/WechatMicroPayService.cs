@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace QuickPay.WechatPay.Services.Impl
 {
-    /// <summary>扫码支付
+    /// <summary>刷卡支付
     /// </summary>
     public class WechatMicroPayService : BaseWechatPayService, IWechatMicroPayService
     {
@@ -17,7 +17,7 @@ namespace QuickPay.WechatPay.Services.Impl
         {
         }
 
-        /// <summary>扫码支付提交订单
+        /// <summary>刷卡支付提交订单
         /// </summary>
         public async Task<MicropayUnifiedOrderResponse> UnifiedOrder(MicropayUnifiedOrderInput input)
         {

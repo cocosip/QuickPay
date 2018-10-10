@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.ConsoleTest", "tes
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{085E40CE-EFA2-4038-BC29-41326EC963CB}"
 	ProjectSection(SolutionItems) = preProject
+		docs\Alipay.md = docs\Alipay.md
 		docs\README.md = docs\README.md
+		docs\WechatPay.md = docs\WechatPay.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.Tests", "test\QuickPay.Tests\QuickPay.Tests.csproj", "{17DC94A1-64F2-4AD2-85F7-6C8D265436A9}"

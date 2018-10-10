@@ -22,8 +22,10 @@ public static IServiceProvider Initialize()
     services.AddLogging(c =>
     {
         c.AddLog4Net();
-    }).AddMemoryCache()
+    })
     .AddCommonComponents()
+    .AddGenericsMemoryCache()
+    .AddJson4Net()
     .AddQuickPay("QuickPayConfig.xml");
 
     Mapper.Initialize(config =>
@@ -77,8 +79,9 @@ public static IServiceProvider Initialize()
     services.AddLogging(c =>
     {
         c.AddLog4Net();
-    }).AddMemoryCache()
-    .AddCommonComponents()
+    })
+    .AddGenericsMemoryCache()
+    .AddJson4Net()
     .AddQuickPay(() => alipayConfig, () => wechatPayConfig);
 
     Mapper.Initialize(config =>
@@ -92,3 +95,6 @@ public static IServiceProvider Initialize()
 }
 
 ```
+## 示例代码
+- [微信](/WechatPay.md)
+- [支付宝](/Alipay.md)

@@ -191,7 +191,7 @@ namespace QuickPay.WechatPay.Authentication
             //如果返回的不是有效的accessToken的json格式,代表出错了
             if (getAccessTokenResponse.AccessToken.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("获取公众号AccessToken失败");
+                throw new Exception("获取公众号AccessToken失败");
             }
             return getAccessTokenResponse;
         }
@@ -210,7 +210,7 @@ namespace QuickPay.WechatPay.Authentication
             var getJsApiTicketResponse = _jsonSerializer.Deserialize<JsApiTicketResponse>(response.Content);
             if (getJsApiTicketResponse.Ticket.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("获取JsApiTicket失败");
+                throw new Exception("获取JsApiTicket失败");
             }
             return getJsApiTicketResponse;
         }

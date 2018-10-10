@@ -1,8 +1,10 @@
 ﻿using DotCommon.Caching;
+using System;
 
 namespace QuickPay.WechatPay.Authentication.Model
 {
     [CacheName(WechatPaySettings.AuthenticationState)]
+    [Serializable]
     public class WechatPayAuthenticationStateCacheItem
     {
         public WechatPayAuthenticationStateCacheItem()

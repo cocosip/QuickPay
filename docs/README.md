@@ -96,5 +96,5 @@ public static IServiceProvider Initialize()
 
 ```
 ## 示例代码
-- [微信](/WechatPay.md)
-- [支付宝](/Alipay.md)
+- [微信](/docs/WechatPay.md)
+- [支付宝](/docs/Alipay.md)

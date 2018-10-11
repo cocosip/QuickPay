@@ -18,8 +18,8 @@ namespace QuickPay.Tests.Alipay.Services
             using (appPayService.Use(AlipayConfig.GetByName("App1")))
             {
                 var input = new AppTradePayInput("测试1", "支付宝测试支付", ObjectId.GenerateNewStringId(), "0.1");
-                var responseString = AsyncHelper.RunSync(() => appPayService.TradePay(input));
-                Assert.Equal(appPayService.App.AppId, responseString.AppId);
+                var response = AsyncHelper.RunSync(() => appPayService.TradePay(input));
+                Assert.Equal(appPayService.App.AppId, response.AppId);
             }
         }
 

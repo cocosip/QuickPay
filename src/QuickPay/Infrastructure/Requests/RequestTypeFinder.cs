@@ -27,7 +27,8 @@ namespace QuickPay.Infrastructure.Requests
                 typeof(JsApiUnifiedOrderRequest),
                 typeof(MicropayUnifiedOrderRequest),
                 typeof(NativeMode1UnifiedOrderRequest),
-                typeof(NativeMode2UnifiedOrderRequest)
+                typeof(NativeMode2UnifiedOrderRequest),
+                typeof(MiniProgramUnifiedOrderRequest)
             };
             return typies;
         }

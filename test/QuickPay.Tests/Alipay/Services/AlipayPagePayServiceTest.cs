@@ -21,8 +21,8 @@ namespace QuickPay.Tests.Alipay.Services
                 {
                     ReturnUrl = "http://127.0.0.1/Alipay/ReturnUrl"
                 };
-                var responseString = AsyncHelper.RunSync(() => pagePayService.TradePay(input));
-                Assert.Equal(pagePayService.App.AppId, responseString.AppId);
+                var response = AsyncHelper.RunSync(() => pagePayService.TradePay(input));
+                Assert.Equal(pagePayService.App.AppId, response.AppId);
             }
         }
 

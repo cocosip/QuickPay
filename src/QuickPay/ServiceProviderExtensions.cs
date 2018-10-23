@@ -11,7 +11,7 @@ namespace QuickPay
 {
     public static class ServiceProviderExtensions
     {
-        public static void QuickPayConfigure(this IServiceProvider provider)
+        public static IServiceProvider QuickPayConfigure(this IServiceProvider provider)
         {
             var configFile = provider.GetService<QuickPayConfigFile>();
             if (!configFile.FileName.IsNullOrWhiteSpace() && !configFile.Format.IsNullOrWhiteSpace())
@@ -58,6 +58,8 @@ namespace QuickPay
             pipelineBuilder.UseMiddleware<RefundStoreMiddleware>();
             //结束
             pipelineBuilder.UseMiddleware<EndMiddleware>();
+
+            return provider;
         }
     }
 }

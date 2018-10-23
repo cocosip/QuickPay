@@ -39,14 +39,14 @@ namespace QuickPay
             {
                 FileName = "",
                 Format = ""
-            });
-            RegisterQuickPay(services, new AlipayConfig(), new WechatPayConfig());
-            RegisterPipeline(services);
+            })
+            .RegisterQuickPay(new AlipayConfig(), new WechatPayConfig())
+            .RegisterPipeline();
             return services;
         }
 
 
-        private static void RegisterQuickPay(IServiceCollection services, AlipayConfig alipayConfig, WechatPayConfig wechatPayConfig)
+        private static IServiceCollection RegisterQuickPay(this IServiceCollection services, AlipayConfig alipayConfig, WechatPayConfig wechatPayConfig)
         {
             services.AddSingleton<AlipayConfig>(alipayConfig);
             services.AddSingleton<WechatPayConfig>(wechatPayConfig);
@@ -86,10 +86,12 @@ namespace QuickPay
             services.AddTransient<IWechatMiniProgramPayService, WechatMiniProgramPayService>();
             services.AddTransient<IWechatPayTradeCommonService, WechatPayTradeCommonService>();
             services.AddTransient<WechatPayDataHelper>();
+
+            return services;
         }
 
         //注册Pipeline
-        private static void RegisterPipeline(IServiceCollection services)
+        private static IServiceCollection RegisterPipeline(this IServiceCollection services)
         {
 
             var assemply = typeof(QuickPaySettings).Assembly;
@@ -100,7 +102,7 @@ namespace QuickPay
                 services.AddTransient(middlewareType);
                 //Console.WriteLine(middlewareType.Name);
             }
-
+            return services;
         }
     }
 }

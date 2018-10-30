@@ -33,7 +33,7 @@ namespace QuickPay.Tests
             });
             Provider = services.BuildServiceProvider();
             //配置
-            Provider.QuickPayConfigure();
+            Provider.UseQuickPay();
 
             WechatPayConfig = Provider.GetService<WechatPayConfig>();
             AlipayConfig = Provider.GetService<AlipayConfig>();

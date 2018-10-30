@@ -11,7 +11,7 @@ namespace QuickPay
 {
     public static class ServiceProviderExtensions
     {
-        public static IServiceProvider QuickPayConfigure(this IServiceProvider provider)
+        public static IServiceProvider UseQuickPay(this IServiceProvider provider)
         {
             var configFile = provider.GetService<QuickPayConfigFile>();
             if (!configFile.FileName.IsNullOrWhiteSpace() && !configFile.Format.IsNullOrWhiteSpace())

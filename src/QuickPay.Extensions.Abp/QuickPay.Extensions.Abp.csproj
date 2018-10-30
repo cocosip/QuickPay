@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\QuickPay.AspNetCore\QuickPay.AspNetCore.csproj" />
     <ProjectReference Include="..\QuickPay\QuickPay.csproj" />
   </ItemGroup>
 

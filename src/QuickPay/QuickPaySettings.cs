@@ -6,10 +6,6 @@
         /// </summary>
         public const string LoggerName = "QuickPay";
 
-        /// <summary>当前程序集名称
-        /// </summary>
-        public const string AssemblyName = "QuickPay";
-
         /// <summary>默认业务代码
         /// </summary>
         public const string DefaultBusinessCode = "Default";

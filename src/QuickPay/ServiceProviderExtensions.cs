@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Middleware;
+using QuickPay.Exceptions;
 using QuickPay.Middleware;
 using QuickPay.Middleware.Pipeline;
 using QuickPay.WechatPay.Apps;
@@ -11,11 +12,22 @@ namespace QuickPay
 {
     public static class ServiceProviderExtensions
     {
+        /// <summary>配置QuickPay的相关信息
+        /// </summary>
         public static IServiceProvider UseQuickPay(this IServiceProvider provider)
         {
             var configFile = provider.GetService<QuickPayConfigFile>();
-            if (!configFile.FileName.IsNullOrWhiteSpace() && !configFile.Format.IsNullOrWhiteSpace())
+            //从文件中读取配置
+            if (configFile.IsFromFile)
             {
+                if (configFile.FileName.IsNullOrWhiteSpace())
+                {
+                    throw new QuickPayException($"QuickPay配置文件名为空");
+                }
+                if (configFile.Format.IsNullOrWhiteSpace())
+                {
+                    throw new QuickPayException($"QuickPay配置文件格式不能为空");
+                }
                 var configLoader = provider.GetService<QuickPayConfigLoader>();
                 var alipayConfig = provider.GetService<AlipayConfig>();
                 var wechatPayConfig = provider.GetService<WechatPayConfig>();
@@ -27,6 +39,7 @@ namespace QuickPay
                     wechatPayConfig.SelfCopy(configWapper.WechatPayConfig);
                 }
             }
+
             //Pipeline
             var pipelineBuilder = provider.GetService<IQuickPayPipelineBuilder>();
             //设置必要参数

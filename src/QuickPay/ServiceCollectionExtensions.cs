@@ -26,7 +26,8 @@ namespace QuickPay
             services.AddSingleton<QuickPayConfigFile>(new QuickPayConfigFile()
             {
                 FileName = file,
-                Format = format
+                Format = format,
+                IsFromFile = true
             });
             RegisterQuickPay(services, new AlipayConfig(), new WechatPayConfig());
             RegisterPipeline(services);
@@ -38,7 +39,8 @@ namespace QuickPay
             services.AddSingleton<QuickPayConfigFile>(new QuickPayConfigFile()
             {
                 FileName = "",
-                Format = ""
+                Format = "",
+                IsFromFile = false
             })
             .RegisterQuickPay(new AlipayConfig(), new WechatPayConfig())
             .RegisterPipeline();
@@ -93,14 +95,11 @@ namespace QuickPay
         //注册Pipeline
         private static IServiceCollection RegisterPipeline(this IServiceCollection services)
         {
-
-            var assemply = typeof(QuickPaySettings).Assembly;
-            //var assemply = Assembly.Load(AssemblyName.GetAssemblyName(QuickPaySettings.AssemblyName));
-            var middlewareTypies = assemply.GetTypes().Where(x => typeof(QuickPayMiddleware).IsAssignableFrom(x) && x != typeof(QuickPayMiddleware));
+            //查询出全部的中间件
+            var middlewareTypies = typeof(QuickPaySettings).Assembly.GetTypes().Where(x => typeof(QuickPayMiddleware).IsAssignableFrom(x) && x != typeof(QuickPayMiddleware));
             foreach (var middlewareType in middlewareTypies)
             {
                 services.AddTransient(middlewareType);
-                //Console.WriteLine(middlewareType.Name);
             }
             return services;
         }

@@ -29,7 +29,7 @@ namespace QuickPay.Tests
             .AddQuickPay(option =>
             {
                 option.ConfigSourceType = ConfigSourceType.FromConfigFile;
-                option.ConfigFileName = "QuickPay.xml";
+                option.ConfigFileName = "QuickPayConfig.xml";
             });
 
             Mapper.Initialize(config =>

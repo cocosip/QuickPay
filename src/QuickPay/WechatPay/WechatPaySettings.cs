@@ -19,7 +19,7 @@
 
         /// <summary>状态
         /// </summary>
-        public const string AuthenticationState = "QuickPay.Wxpay.AuthenticationState";
+        public const string AuthenticationState = "QuickPay.WechatPay.AuthenticationState";
 
         public class H5SceneInfoType
         {

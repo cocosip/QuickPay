@@ -4,12 +4,12 @@ using QuickPay.WechatPay.Apps;
 using System.IO;
 using System.Xml;
 
-namespace QuickPay
+namespace QuickPay.Configurations
 {
-    public class QuickPayConfigLoader
+    public class QuickPayConfigurationFileLoader : IQuickPayConfigurationFileLoader
     {
         private readonly IJsonSerializer _jsonSerializer;
-        public QuickPayConfigLoader(IJsonSerializer jsonSerializer)
+        public QuickPayConfigurationFileLoader(IJsonSerializer jsonSerializer)
         {
             _jsonSerializer = jsonSerializer;
         }
@@ -76,32 +76,32 @@ namespace QuickPay
                 configWapper.AlipayConfig.Apps.Add(alipayApp);
             }
 
-            var wxpayNode = root.SelectSingleNode("WechatPay");
+            var wechatPayNode = root.SelectSingleNode("WechatPay");
             configWapper.WechatPayConfig = new WechatPayConfig()
             {
-                DefaultAppName = wxpayNode.SelectSingleNode("DefaultAppName").InnerText,
-                NotifyGateway = wxpayNode.SelectSingleNode("NotifyGateway").InnerText,
-                LocalAddress = wxpayNode.SelectSingleNode("LocalAddress").InnerText,
-                WebGateway = wxpayNode.SelectSingleNode("WebGateway").InnerText,
-                NotifyRealateUrl = wxpayNode.SelectSingleNode("NotifyRealateUrl").InnerText,
-                SignType = wxpayNode.SelectSingleNode("SignType").InnerText,
-                SslPassword = wxpayNode.SelectSingleNode("SslPassword").InnerText,
+                DefaultAppName = wechatPayNode.SelectSingleNode("DefaultAppName").InnerText,
+                NotifyGateway = wechatPayNode.SelectSingleNode("NotifyGateway").InnerText,
+                LocalAddress = wechatPayNode.SelectSingleNode("LocalAddress").InnerText,
+                WebGateway = wechatPayNode.SelectSingleNode("WebGateway").InnerText,
+                NotifyRealateUrl = wechatPayNode.SelectSingleNode("NotifyRealateUrl").InnerText,
+                SignType = wechatPayNode.SelectSingleNode("SignType").InnerText,
+                SslPassword = wechatPayNode.SelectSingleNode("SslPassword").InnerText,
             };
 
-            //WxpayConfig Apps节点
-            var wxpayAppNodes = wxpayNode.SelectSingleNode("Apps");
-            foreach (XmlNode wxpayAppNode in wxpayAppNodes)
+            //wechatPayConfig Apps节点
+            var wechatPayAppNodes = wechatPayNode.SelectSingleNode("Apps");
+            foreach (XmlNode wechatPayAppNode in wechatPayAppNodes)
             {
                 var wechatPayApp = new WechatPayApp()
                 {
-                    AppId = wxpayAppNode.SelectSingleNode("AppId").InnerText,
-                    AppTypeId = int.Parse(wxpayAppNode.SelectSingleNode("AppTypeId").InnerText),
-                    Name = wxpayAppNode.SelectSingleNode("Name").InnerText,
-                    MchId = wxpayAppNode.SelectSingleNode("MchId").InnerText,
-                    Key = wxpayAppNode.SelectSingleNode("Key").InnerText,
-                    Appsecret = wxpayAppNode.SelectSingleNode("Appsecret").InnerText,
+                    AppId = wechatPayAppNode.SelectSingleNode("AppId").InnerText,
+                    AppTypeId = int.Parse(wechatPayAppNode.SelectSingleNode("AppTypeId").InnerText),
+                    Name = wechatPayAppNode.SelectSingleNode("Name").InnerText,
+                    MchId = wechatPayAppNode.SelectSingleNode("MchId").InnerText,
+                    Key = wechatPayAppNode.SelectSingleNode("Key").InnerText,
+                    Appsecret = wechatPayAppNode.SelectSingleNode("Appsecret").InnerText,
                 };
-                var nativeMobileInfoNode = wxpayAppNode.SelectSingleNode("NativeMobileInfo");
+                var nativeMobileInfoNode = wechatPayAppNode.SelectSingleNode("NativeMobileInfo");
                 wechatPayApp.NativeMobileInfo = new NativeMobileInfo()
                 {
                     IosName = nativeMobileInfoNode.SelectSingleNode("IosName").InnerText,
@@ -115,7 +115,5 @@ namespace QuickPay
             }
             return configWapper;
         }
-
-
     }
 }

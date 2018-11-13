@@ -1,8 +1,7 @@
-﻿using DotCommon.Extensions;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Middleware;
-using QuickPay.Exceptions;
+using QuickPay.Configurations;
 using QuickPay.Middleware;
 using QuickPay.Middleware.Pipeline;
 using QuickPay.WechatPay.Apps;
@@ -16,23 +15,15 @@ namespace QuickPay
         /// </summary>
         public static IServiceProvider UseQuickPay(this IServiceProvider provider)
         {
-            var configFile = provider.GetService<QuickPayConfigFile>();
+            var option = provider.GetService<QuickPayConfigurationOption>();
             //从文件中读取配置
-            if (configFile.IsFromFile)
+            if (option.ConfigSourceType == ConfigSourceType.FromConfigFile)
             {
-                if (configFile.FileName.IsNullOrWhiteSpace())
-                {
-                    throw new QuickPayException($"QuickPay配置文件名为空");
-                }
-                if (configFile.Format.IsNullOrWhiteSpace())
-                {
-                    throw new QuickPayException($"QuickPay配置文件格式不能为空");
-                }
-                var configLoader = provider.GetService<QuickPayConfigLoader>();
+                var configLoader = provider.GetService<IQuickPayConfigurationFileLoader>();
                 var alipayConfig = provider.GetService<AlipayConfig>();
                 var wechatPayConfig = provider.GetService<WechatPayConfig>();
 
-                var configWapper = configLoader.LoadConfigWapper(configFile.FileName, configFile.Format);
+                var configWapper = configLoader.LoadConfigWapper(option.ConfigFileName, option.ConfigFileFormat);
                 if (configWapper != null && configWapper.AlipayConfig != null && configWapper.WechatPayConfig != null)
                 {
                     alipayConfig.SelfCopy(configWapper.AlipayConfig);

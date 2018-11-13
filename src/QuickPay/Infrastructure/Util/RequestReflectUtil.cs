@@ -60,16 +60,16 @@ namespace QuickPay.Infrastructure.Util
             //code:var payData=new PayData();
             var payDataExpr = Expression.Variable(targetType, "payData");
             var newPayDataExpr = Expression.New(targetType);
-            var assignWxPayDataExpr = Expression.Assign(payDataExpr, newPayDataExpr);
-            bodyExprs.Add(assignWxPayDataExpr);
+            var assignWechatPayDataExpr = Expression.Assign(payDataExpr, newPayDataExpr);
+            bodyExprs.Add(assignWechatPayDataExpr);
 
-            //code:var wxPay=(Request)o;
+            //code:var wechatPay=(Request)o;
             var payExpr = Expression.Variable(sourceType, "pay");
-            var castWxPayExpr = Expression.Convert(parameterExpr, sourceType);
-            var assignWxPayExpr = Expression.Assign(payExpr, castWxPayExpr);
-            bodyExprs.Add(assignWxPayExpr);
+            var castWechatPayExpr = Expression.Convert(parameterExpr, sourceType);
+            var assignWechatPayExpr = Expression.Assign(payExpr, castWechatPayExpr);
+            bodyExprs.Add(assignWechatPayExpr);
 
-            //获取IWxPay中所有的属性
+            //获取IWechatPay中所有的属性
             var properties = PropertyInfoUtil.GetProperties(sourceType);
             foreach (var property in properties)
             {
@@ -78,12 +78,12 @@ namespace QuickPay.Infrastructure.Util
                 if (attribute != null)
                 {
                     //code:var id=(object)request.Id;
-                    //某属性的WxPayData中的Name值
+                    //某属性的WechatPayData中的Name值
                     var nameExpr = Expression.Constant(attribute.Name);
                     //(object)request.Id 默认转换为object
                     var valueExpr = Expression.Property(payExpr, property);
                     var castValueExpr = Expression.Convert(valueExpr, typeof(object));
-                    //code:wxPayData.SetValue("xxx",(object)request.Id)
+                    //code:wechatPayData.SetValue("xxx",(object)request.Id)
                     var setValueExpr = Expression.Call(payDataExpr,
                         targetType.GetTypeInfo().GetMethod("SetValue", new Type[] { typeof(string), typeof(object) }),
                         nameExpr, castValueExpr);
@@ -118,8 +118,8 @@ namespace QuickPay.Infrastructure.Util
             //code:var response=new Response();
             var responseExpr = Expression.Variable(targetType, "response");
             var newResponseExpr = Expression.New(targetType);
-            var assignWxPayExpr = Expression.Assign(responseExpr, newResponseExpr);
-            bodyExprs.Add(assignWxPayExpr);
+            var assignWechatPayExpr = Expression.Assign(responseExpr, newResponseExpr);
+            bodyExprs.Add(assignWechatPayExpr);
             //获取Response的全部属性
             var properties = PropertyInfoUtil.GetProperties(targetType);
             foreach (var property in properties)
@@ -131,13 +131,13 @@ namespace QuickPay.Infrastructure.Util
                     //code : payData.GetValue("name");
                     var getValueExpr = Expression.Call(parameterExpr,
                         sourceType.GetTypeInfo().GetMethod("GetValue", new[] { typeof(string) }), nameExpr);
-                    //code: response.Name=wxPayData.GetValue("name");
+                    //code: response.Name=wechatPayData.GetValue("name");
                     var fieldExpr = Expression.Property(responseExpr, property);
                     var convertValueExpr = Expression.Call(null,
                         typeof(Convert).GetTypeInfo()
                             .GetMethod(GetConvertMethod(property.PropertyType), new[] { typeof(object) }), getValueExpr);
                     var assignFieldExpr = Expression.Assign(fieldExpr, convertValueExpr);
-                    //code: if(wxPayData.GetValue("") != null){ ... }
+                    //code: if(wechatPayData.GetValue("") != null){ ... }
                     var ifNotNullExpr = Expression.IfThen(
                         Expression.NotEqual(getValueExpr, Expression.Constant(null)),
                         assignFieldExpr);

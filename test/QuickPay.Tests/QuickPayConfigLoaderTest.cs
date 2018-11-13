@@ -1,5 +1,7 @@
-﻿using Xunit;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using QuickPay.Configurations;
+using Xunit;
+
 namespace QuickPay.Tests
 {
     public class QuickPayConfigLoaderTest : TestBase
@@ -8,7 +10,7 @@ namespace QuickPay.Tests
         public void LoadQuickPayConfigTest()
         {
 
-            var configLoader = Provider.GetService<QuickPayConfigLoader>();
+            var configLoader = Provider.GetService<IQuickPayConfigurationFileLoader>();
             var configWapper = configLoader.LoadConfigWapper("QuickPayConfig.xml", QuickPaySettings.ConfigFormat.Xml);
 
             var alipayConfig = configWapper.AlipayConfig;

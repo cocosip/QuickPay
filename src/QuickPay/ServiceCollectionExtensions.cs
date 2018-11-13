@@ -3,6 +3,8 @@ using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Services;
 using QuickPay.Alipay.Services.Impl;
 using QuickPay.Alipay.Util;
+using QuickPay.Configurations;
+using QuickPay.Exceptions;
 using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.Executers;
 using QuickPay.Infrastructure.Requests;
@@ -21,40 +23,45 @@ namespace QuickPay
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddQuickPay(this IServiceCollection services, string file, string format = QuickPaySettings.ConfigFormat.Xml)
+        /// <summary>添加配置
+        /// </summary>
+        public static IServiceCollection AddQuickPay(this IServiceCollection services, Action<QuickPayConfigurationOption> option, Action<AlipayConfig> alipayOption = null, Action<WechatPayConfig> wechatPayOption = null)
         {
-            services.AddSingleton<QuickPayConfigFile>(new QuickPayConfigFile()
+
+            var quickPayConfigurationOption = new QuickPayConfigurationOption();
+            option(quickPayConfigurationOption);
+            var alipayConfig = new AlipayConfig();
+            var wechatPayConfig = new WechatPayConfig();
+
+            //从代码中读取
+            if (quickPayConfigurationOption.ConfigSourceType == ConfigSourceType.FromClass)
             {
-                FileName = file,
-                Format = format,
-                IsFromFile = true
-            });
-            RegisterQuickPay(services, new AlipayConfig(), new WechatPayConfig());
-            RegisterPipeline(services);
+                if (alipayOption == null || wechatPayOption == null)
+                {
+                    throw new QuickPayException($"从代码中加载支付配置时,AlipayConfig与WechatPayConfig不能为空.");
+                }
+                alipayOption(alipayConfig);
+                wechatPayOption(wechatPayConfig);
+            }
+
+            services.AddSingleton<QuickPayConfigurationOption>(quickPayConfigurationOption)
+                 .RegisterQuickPay(alipayConfig, wechatPayConfig)
+                 .RegisterPipeline();
             return services;
         }
 
-        public static IServiceCollection AddQuickPay(this IServiceCollection services, Func<AlipayConfig> alipayConfig, Func<WechatPayConfig> wechatPayConfig)
-        {
-            services.AddSingleton<QuickPayConfigFile>(new QuickPayConfigFile()
-            {
-                FileName = "",
-                Format = "",
-                IsFromFile = false
-            })
-            .RegisterQuickPay(new AlipayConfig(), new WechatPayConfig())
-            .RegisterPipeline();
-            return services;
-        }
 
 
+        /// <summary>注册QuickPay需要的配置
+        /// </summary>
         private static IServiceCollection RegisterQuickPay(this IServiceCollection services, AlipayConfig alipayConfig, WechatPayConfig wechatPayConfig)
         {
             services.AddSingleton<AlipayConfig>(alipayConfig);
             services.AddSingleton<WechatPayConfig>(wechatPayConfig);
+            //
+            services.AddSingleton<IQuickPayConfigurationFileLoader, QuickPayConfigurationFileLoader>();
             //RequestType Finder
             services.AddSingleton<IRequestTypeFinder, RequestTypeFinder>();
-            services.AddSingleton<QuickPayConfigLoader>();
             services.AddSingleton<IQuickPayPipelineBuilder, QuickPayPipelineBuilder>();
 
             services.AddTransient<IExecuteContextFactory, ExecuteContextFactory>();

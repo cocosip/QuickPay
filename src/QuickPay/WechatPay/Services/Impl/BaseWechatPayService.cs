@@ -42,7 +42,7 @@ namespace QuickPay.WechatPay.Services.Impl
                 {
                     return app;
                 }
-                throw new ArgumentException($"WxpayApp为空!");
+                throw new ArgumentException($"WechatPayApp为空!");
             }
         }
 

@@ -94,7 +94,7 @@
         </NativeMobileInfo>
       </WechatPayApp>
 
-      <WxpayApp>
+      <WechatPayApp>
         <![CDATA[应用名称]]>
         <Name>App2</Name>
         <![CDATA[应用AppId]]>
@@ -121,7 +121,7 @@
           <![CDATA[移动端Url地址]]>
           <WapUrl>http://wap.b1.com</WapUrl>
         </NativeMobileInfo>
-      </WxpayApp>
+      </WechatPayApp>
     </Apps>
   </WechatPay>
 </QuickPayConfig>

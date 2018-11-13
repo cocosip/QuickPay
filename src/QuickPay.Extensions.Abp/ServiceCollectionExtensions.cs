@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using QuickPay.Alipay.Apps;
+using QuickPay.Configurations;
 using QuickPay.PayAux.Store;
 using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Authentication;
@@ -9,17 +10,12 @@ namespace QuickPay
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddQuickPayWithAbp(this IServiceCollection services, string file, string format = QuickPaySettings.ConfigFormat.Xml)
+        public static IServiceCollection AddQuickPayWithAbp(this IServiceCollection services, Action<QuickPayConfigurationOption> option, Action<AlipayConfig> alipayOption = null, Action<WechatPayConfig> wechatPayOption = null)
         {
-            return services.AddQuickPay(file, format)
+            return services.AddQuickPay(option, alipayOption, wechatPayOption)
                   .AddQuickPayAbpExtension();
         }
 
-        public static IServiceCollection AddQuickPayWithAbp(this IServiceCollection services, Func<AlipayConfig> alipayConfig, Func<WechatPayConfig> wechatPayConfig)
-        {
-            return services.AddQuickPay(alipayConfig, wechatPayConfig)
-                .AddQuickPayAbpExtension();
-        }
 
         public static IServiceCollection AddQuickPayAbpExtension(this IServiceCollection services)
         {

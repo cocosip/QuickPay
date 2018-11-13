@@ -3,6 +3,7 @@ using DotCommon.DependencyInjection;
 using DotCommon.Log4Net;
 using Microsoft.Extensions.DependencyInjection;
 using QuickPay.Alipay.Apps;
+using QuickPay.Configurations;
 using QuickPay.WechatPay.Apps;
 using System;
 using System.Collections.Generic;
@@ -47,8 +48,12 @@ namespace QuickPay.ConsoleTest
                 c.AddLog4Net();
             }).AddMemoryCache()
             .AddCommonComponents()
-            .AddQuickPay(() => alipayConfig, () => wechatPayConfig)
-            .AddQuickPay("QuickPayConfig.xml");
+            .AddQuickPay(option =>
+            {
+                option.ConfigSourceType = ConfigSourceType.FromConfigFile;
+                option.ConfigFileName = "QuickPayConfig.xml";
+            });
+
 
             Mapper.Initialize(config =>
             {

@@ -65,17 +65,17 @@ namespace QuickPay.WechatPay.Apps
             return $"{NotifyGateway.TrimEnd('/')}/{NotifyRealateUrl.TrimStart('/')}";
         }
 
-        public WechatPayConfig SelfCopy(WechatPayConfig wxpayConfig)
+        public WechatPayConfig SelfCopy(WechatPayConfig wechatPayConfig)
         {
-            DefaultAppName = wxpayConfig.DefaultAppName;
-            NotifyGateway = wxpayConfig.NotifyGateway;
-            NotifyRealateUrl = wxpayConfig.NotifyRealateUrl;
-            LocalAddress = wxpayConfig.LocalAddress;
-            WebGateway = wxpayConfig.WebGateway;
-            SignType = wxpayConfig.SignType;
-            SslPassword = wxpayConfig.SslPassword;
+            DefaultAppName = wechatPayConfig.DefaultAppName;
+            NotifyGateway = wechatPayConfig.NotifyGateway;
+            NotifyRealateUrl = wechatPayConfig.NotifyRealateUrl;
+            LocalAddress = wechatPayConfig.LocalAddress;
+            WebGateway = wechatPayConfig.WebGateway;
+            SignType = wechatPayConfig.SignType;
+            SslPassword = wechatPayConfig.SslPassword;
             Apps.Clear();
-            foreach (var app in wxpayConfig.Apps)
+            foreach (var app in wechatPayConfig.Apps)
             {
                 Apps.Add(new WechatPayApp()
                 {

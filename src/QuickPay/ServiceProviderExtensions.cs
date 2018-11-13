@@ -19,11 +19,11 @@ namespace QuickPay
             //从文件中读取配置
             if (option.ConfigSourceType == ConfigSourceType.FromConfigFile)
             {
-                var configLoader = provider.GetService<IQuickPayConfigurationFileLoader>();
+                var configLoader = provider.GetService<IConfigurationFileTranslator>();
                 var alipayConfig = provider.GetService<AlipayConfig>();
                 var wechatPayConfig = provider.GetService<WechatPayConfig>();
 
-                var configWapper = configLoader.LoadConfigWapper(option.ConfigFileName, option.ConfigFileFormat);
+                var configWapper = configLoader.TranslateToConfigWapper(option.ConfigFileName, option.ConfigFileFormat);
                 if (configWapper != null && configWapper.AlipayConfig != null && configWapper.WechatPayConfig != null)
                 {
                     alipayConfig.SelfCopy(configWapper.AlipayConfig);

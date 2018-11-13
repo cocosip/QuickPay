@@ -6,17 +6,17 @@ using System.Xml;
 
 namespace QuickPay.Configurations
 {
-    public class QuickPayConfigurationFileLoader : IQuickPayConfigurationFileLoader
+    public class ConfigurationFileTranslator : IConfigurationFileTranslator
     {
         private readonly IJsonSerializer _jsonSerializer;
-        public QuickPayConfigurationFileLoader(IJsonSerializer jsonSerializer)
+        public ConfigurationFileTranslator(IJsonSerializer jsonSerializer)
         {
             _jsonSerializer = jsonSerializer;
         }
 
         /// <summary>读取支付宝和微信配置
         /// </summary>
-        public ConfigWapper LoadConfigWapper(string file, string format = QuickPaySettings.ConfigFormat.Json)
+        public ConfigWapper TranslateToConfigWapper(string file, string format = QuickPaySettings.ConfigFormat.Json)
         {
             //检测配置文件是否存在
             if (!File.Exists(file))

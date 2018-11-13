@@ -20,7 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.Tests", "test\Quic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.Extensions.Abp", "src\QuickPay.Extensions.Abp\QuickPay.Extensions.Abp.csproj", "{39596F90-4736-4A4F-A134-8F0A57C63C07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickPay.AspNetCore", "src\QuickPay.AspNetCore\QuickPay.AspNetCore.csproj", "{E20557A4-41F0-4713-AA6F-A7B4DC6B4E33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.AspNetCore", "src\QuickPay.AspNetCore\QuickPay.AspNetCore.csproj", "{E20557A4-41F0-4713-AA6F-A7B4DC6B4E33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -59,7 +59,7 @@ namespace QuickPay
             services.AddSingleton<AlipayConfig>(alipayConfig);
             services.AddSingleton<WechatPayConfig>(wechatPayConfig);
             //
-            services.AddSingleton<IQuickPayConfigurationFileLoader, QuickPayConfigurationFileLoader>();
+            services.AddSingleton<IConfigurationFileTranslator, ConfigurationFileTranslator>();
             //RequestType Finder
             services.AddSingleton<IRequestTypeFinder, RequestTypeFinder>();
             services.AddSingleton<IQuickPayPipelineBuilder, QuickPayPipelineBuilder>();

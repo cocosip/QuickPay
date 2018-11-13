@@ -10,8 +10,8 @@ namespace QuickPay.Tests
         public void LoadQuickPayConfigTest()
         {
 
-            var configLoader = Provider.GetService<IQuickPayConfigurationFileLoader>();
-            var configWapper = configLoader.LoadConfigWapper("QuickPayConfig.xml", QuickPaySettings.ConfigFormat.Xml);
+            var configLoader = Provider.GetService<IConfigurationFileTranslator>();
+            var configWapper = configLoader.TranslateToConfigWapper("QuickPayConfig.xml", QuickPaySettings.ConfigFormat.Xml);
 
             var alipayConfig = configWapper.AlipayConfig;
             Assert.Equal("http://127.0.0.1", alipayConfig.NotifyGateway);

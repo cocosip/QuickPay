@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace QuickPay.PayAux
+namespace QuickPay.Assist
 {
     /// <summary>支付平台,支付宝和微信
     /// </summary>

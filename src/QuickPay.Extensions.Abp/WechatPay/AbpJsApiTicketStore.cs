@@ -1,6 +1,6 @@
 ﻿using Abp.Domain.Repositories;
 using DotCommon.AutoMapper;
-using QuickPay.PayAux;
+using QuickPay.Assist;
 using System.Threading.Tasks;
 
 namespace QuickPay.WechatPay.Authentication

@@ -20,5 +20,10 @@ namespace QuickPay.WechatPay.Authentication
             }
             return false;
         }
+
+        public override string ToString()
+        {
+            return $"[AppId:{AppId},Token:{Token},ExpiredIn:{ExpiredIn},LastModifiedTime:{LastModifiedTime.ToString("yyyy-MM-dd HH:mm:ss")}]";
+        }
     }
 }

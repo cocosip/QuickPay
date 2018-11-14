@@ -2,7 +2,7 @@
 using DotCommon.AutoMapper;
 using System.Threading.Tasks;
 
-namespace QuickPay.PayAux.Store
+namespace QuickPay.Assist.Store
 {
     public class AbpPaymentStore : IPaymentStore
     {

@@ -5,7 +5,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace QuickPay.PayAux
+namespace QuickPay.Assist
 {
     [AutoMap(typeof(AccessToken))]
     [Table("AbpAccessTokens")]

@@ -18,7 +18,7 @@
 
         /// <summary>数据库连接字符串
         /// </summary>
-        public string DbConnectionStrings { get; set; }
+        public string DbConnectionString { get; set; }
 
         /// <summary>是否使用数据库连接去连接数据库
         /// </summary>

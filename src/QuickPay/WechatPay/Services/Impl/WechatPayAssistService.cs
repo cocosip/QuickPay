@@ -2,8 +2,8 @@
 using Microsoft.Extensions.Logging;
 using QuickPay.Exceptions;
 using QuickPay.Infrastructure.RequestData;
-using QuickPay.PayAux;
-using QuickPay.PayAux.Store;
+using QuickPay.Assist;
+using QuickPay.Assist.Store;
 using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Util;
 using System;

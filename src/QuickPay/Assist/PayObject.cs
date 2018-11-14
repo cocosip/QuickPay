@@ -1,4 +1,4 @@
-﻿namespace QuickPay.PayAux
+﻿namespace QuickPay.Assist
 {
     /// <summary>支付/退款等参数基类
     /// </summary>

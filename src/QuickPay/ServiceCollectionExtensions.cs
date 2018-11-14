@@ -10,7 +10,7 @@ using QuickPay.Infrastructure.Executers;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Middleware;
 using QuickPay.Middleware.Pipeline;
-using QuickPay.PayAux.Store;
+using QuickPay.Assist.Store;
 using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Authentication;
 using QuickPay.WechatPay.Services;

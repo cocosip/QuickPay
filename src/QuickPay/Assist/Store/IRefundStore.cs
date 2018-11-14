@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace QuickPay.PayAux.Store
+namespace QuickPay.Assist.Store
 {
     public interface IRefundStore
     {

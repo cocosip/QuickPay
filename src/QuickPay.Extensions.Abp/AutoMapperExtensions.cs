@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using DotCommon.AutoMapper;
-using QuickPay.PayAux;
+using QuickPay.Assist;
 using System.Collections.Generic;
 using System.Reflection;
 

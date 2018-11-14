@@ -1,5 +1,5 @@
 ﻿using QuickPay.Infrastructure.RequestData;
-using QuickPay.PayAux;
+using QuickPay.Assist;
 using System;
 using System.Threading.Tasks;
 

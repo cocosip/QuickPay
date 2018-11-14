@@ -10,6 +10,6 @@ namespace QuickPay.WechatPay.Authentication
 
         /// <summary>修改AccessToken
         /// </summary>
-        Task CreateOrUpdateAccessTokenAsync(AccessToken info);
+        Task CreateOrUpdateAccessTokenAsync(AccessToken accessToken);
     }
 }

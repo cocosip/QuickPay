@@ -5,8 +5,8 @@ using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Util;
 using QuickPay.Exceptions;
 using QuickPay.Infrastructure.RequestData;
-using QuickPay.PayAux;
-using QuickPay.PayAux.Store;
+using QuickPay.Assist;
+using QuickPay.Assist.Store;
 using System;
 using System.Threading.Tasks;
 namespace QuickPay.Alipay.Services.Impl

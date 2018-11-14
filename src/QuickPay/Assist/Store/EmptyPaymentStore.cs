@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
-namespace QuickPay.PayAux.Store
+namespace QuickPay.Assist.Store
 {
     public class EmptyPaymentStore : IPaymentStore
     {

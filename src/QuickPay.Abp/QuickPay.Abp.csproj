@@ -6,11 +6,15 @@
     <Version>0.6.0</Version>
     <Authors>virtual</Authors>
     <Company>virtual</Company>
-    <Description>QuickPay快速支付SqlServer扩展</Description>
+    <Description>QuickPay快速支付Abp扩展</Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="1.50.5" />
+    <Folder Include="WechatPay\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Abp" Version="4.0.1" />
   </ItemGroup>
 
   <ItemGroup>

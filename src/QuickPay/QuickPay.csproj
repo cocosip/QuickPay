@@ -5,7 +5,7 @@
     <AssemblyName>QuickPay</AssemblyName>
     <PackageId>QuickPay</PackageId>
     <Authors>virtual</Authors>
-    <Version>0.5.0</Version>
+    <Version>0.6.0</Version>
     <Description>QuickPay快速支付</Description>
   </PropertyGroup>
 

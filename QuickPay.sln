@@ -18,11 +18,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{085E40CE-E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.Tests", "test\QuickPay.Tests\QuickPay.Tests.csproj", "{17DC94A1-64F2-4AD2-85F7-6C8D265436A9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.Extensions.Abp", "src\QuickPay.Extensions.Abp\QuickPay.Extensions.Abp.csproj", "{39596F90-4736-4A4F-A134-8F0A57C63C07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.SqlServer", "src\QuickPay.SqlServer\QuickPay.SqlServer.csproj", "{3299EC3F-A66B-4D10-A4F8-E222B6253E41}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.AspNetCore", "src\QuickPay.AspNetCore\QuickPay.AspNetCore.csproj", "{E20557A4-41F0-4713-AA6F-A7B4DC6B4E33}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickPay.SqlServer", "src\QuickPay.SqlServer\QuickPay.SqlServer.csproj", "{3299EC3F-A66B-4D10-A4F8-E222B6253E41}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickPay.Abp", "src\QuickPay.Abp\QuickPay.Abp.csproj", "{2E933B89-4660-42AD-B214-33655F6814B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,18 +40,14 @@ Global
 		{17DC94A1-64F2-4AD2-85F7-6C8D265436A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17DC94A1-64F2-4AD2-85F7-6C8D265436A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17DC94A1-64F2-4AD2-85F7-6C8D265436A9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{39596F90-4736-4A4F-A134-8F0A57C63C07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{39596F90-4736-4A4F-A134-8F0A57C63C07}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{39596F90-4736-4A4F-A134-8F0A57C63C07}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{39596F90-4736-4A4F-A134-8F0A57C63C07}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E20557A4-41F0-4713-AA6F-A7B4DC6B4E33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E20557A4-41F0-4713-AA6F-A7B4DC6B4E33}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E20557A4-41F0-4713-AA6F-A7B4DC6B4E33}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E20557A4-41F0-4713-AA6F-A7B4DC6B4E33}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3299EC3F-A66B-4D10-A4F8-E222B6253E41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3299EC3F-A66B-4D10-A4F8-E222B6253E41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3299EC3F-A66B-4D10-A4F8-E222B6253E41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3299EC3F-A66B-4D10-A4F8-E222B6253E41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E933B89-4660-42AD-B214-33655F6814B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E933B89-4660-42AD-B214-33655F6814B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E933B89-4660-42AD-B214-33655F6814B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E933B89-4660-42AD-B214-33655F6814B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

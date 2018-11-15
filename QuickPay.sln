@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.SqlServer", "src\Q
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickPay.Abp", "src\QuickPay.Abp\QuickPay.Abp.csproj", "{2E933B89-4660-42AD-B214-33655F6814B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickPay.AspNetCore", "src\QuickPay.AspNetCore\QuickPay.AspNetCore.csproj", "{2B1799A7-BC64-4D2C-886A-39C69971E3E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{2E933B89-4660-42AD-B214-33655F6814B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E933B89-4660-42AD-B214-33655F6814B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E933B89-4660-42AD-B214-33655F6814B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B1799A7-BC64-4D2C-886A-39C69971E3E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B1799A7-BC64-4D2C-886A-39C69971E3E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B1799A7-BC64-4D2C-886A-39C69971E3E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B1799A7-BC64-4D2C-886A-39C69971E3E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -46,13 +46,19 @@ namespace QuickPay.ConsoleTest
             services.AddLogging(c =>
             {
                 c.AddLog4Net();
-            }).AddMemoryCache()
+            })
+            .AddDistributedMemoryCache()
             .AddCommonComponents()
             .AddQuickPay(option =>
             {
                 option.ConfigSourceType = ConfigSourceType.FromConfigFile;
                 option.ConfigFileName = "QuickPayConfig.xml";
-            });
+            })
+            //.AddQuickPaySqlServer(o =>
+            //{
+            //    o.DbConnectionString = "";
+            //})
+            ;
 
 
             Mapper.Initialize(config =>

@@ -10,13 +10,6 @@ namespace QuickPay
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddQuickPayWithAbp(this IServiceCollection services, Action<QuickPayConfigurationOption> option, Action<AlipayConfig> alipayOption = null, Action<WechatPayConfig> wechatPayOption = null)
-        {
-            return services.AddQuickPay(option, alipayOption, wechatPayOption)
-                  .AddQuickPayAbp();
-        }
-
-
         public static IServiceCollection AddQuickPayAbp(this IServiceCollection services)
         {
             services.AddTransient<IPaymentStore, AbpPaymentStore>();

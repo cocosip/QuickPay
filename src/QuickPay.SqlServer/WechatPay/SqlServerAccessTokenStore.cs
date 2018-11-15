@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using DotCommon.Extensions;
 using Microsoft.Extensions.Logging;
-using QuickPay.Configurations;
 using QuickPay.WechatPay.Authentication;
 using QuickPay.WechatPay.Util;
 using System.Data.SqlClient;
@@ -12,7 +11,7 @@ namespace QuickPay.WechatPay
     public class SqlServerAccessTokenStore : BaseSqlServerStore, IAccessTokenStore
     {
         private string TableName = "QP_AccessTokens";
-        public SqlServerAccessTokenStore(QuickPayConfigurationOption option, ILogger<QuickPayLoggerName> logger) : base(option, logger)
+        public SqlServerAccessTokenStore(QuickPaySqlServerOption option, ILogger<QuickPayLoggerName> logger) : base(option, logger)
         {
         }
 

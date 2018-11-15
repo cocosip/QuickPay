@@ -7,6 +7,8 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\QuickPay.Abp\QuickPay.Abp.csproj" />
+    <ProjectReference Include="..\..\src\QuickPay.SqlServer\QuickPay.SqlServer.csproj" />
     <ProjectReference Include="..\..\src\QuickPay\QuickPay.csproj" />
   </ItemGroup>
 

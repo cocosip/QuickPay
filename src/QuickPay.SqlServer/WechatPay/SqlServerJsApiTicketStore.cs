@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using DotCommon.Extensions;
 using Microsoft.Extensions.Logging;
-using QuickPay.Configurations;
 using QuickPay.WechatPay.Authentication;
 using QuickPay.WechatPay.Util;
 using System.Data.SqlClient;
@@ -13,7 +12,7 @@ namespace QuickPay.WechatPay
     {
         private string TableName = "QP_JsApiTickets";
 
-        public SqlServerJsApiTicketStore(QuickPayConfigurationOption option, ILogger<QuickPayLoggerName> logger) : base(option, logger)
+        public SqlServerJsApiTicketStore(QuickPaySqlServerOption option, ILogger<QuickPayLoggerName> logger) : base(option, logger)
         {
         }
 

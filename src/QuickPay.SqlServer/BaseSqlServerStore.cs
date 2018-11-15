@@ -6,9 +6,9 @@ namespace QuickPay
 {
     public abstract class BaseSqlServerStore
     {
-        protected readonly QuickPayConfigurationOption _option;
+        protected readonly QuickPaySqlServerOption _option;
         protected readonly ILogger _logger;
-        public BaseSqlServerStore(QuickPayConfigurationOption option, ILogger<QuickPayLoggerName> logger)
+        public BaseSqlServerStore(QuickPaySqlServerOption option, ILogger<QuickPayLoggerName> logger)
         {
             _option = option;
             _logger = logger;

@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using DotCommon.Extensions;
 using Microsoft.Extensions.Logging;
-using QuickPay.Configurations;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -14,7 +13,7 @@ namespace QuickPay.Assist.Store
     public class SqlServerRefundStore : BaseSqlServerStore, IRefundStore
     {
         private string TableName = "QP_Refunds";
-        public SqlServerRefundStore(QuickPayConfigurationOption option, ILogger<QuickPayLoggerName> logger) : base(option, logger)
+        public SqlServerRefundStore(QuickPaySqlServerOption option, ILogger<QuickPayLoggerName> logger) : base(option, logger)
         {
         }
 

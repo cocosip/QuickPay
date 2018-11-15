@@ -16,16 +16,5 @@
         /// </summary>
         public string ConfigFileFormat { get; set; } = QuickPaySettings.ConfigFormat.Xml;
 
-        /// <summary>数据库连接字符串
-        /// </summary>
-        public string DbConnectionString { get; set; }
-
-        /// <summary>是否使用数据库连接去连接数据库
-        /// </summary>
-        public bool UseConnection { get; set; }
-
-        /// <summary>从数据库中重新读取的时间间隔(以ms为单位)
-        /// </summary>
-        public int ReloadInterval { get; set; } = 60 * 1000;
     }
 }

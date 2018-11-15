@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using DotCommon.Extensions;
 using Microsoft.Extensions.Logging;
-using QuickPay.Configurations;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
@@ -11,7 +10,7 @@ namespace QuickPay.Assist.Store
     {
         private string TableName = "QP_Payments";
 
-        public SqlServerPaymentStore(QuickPayConfigurationOption option, ILogger<QuickPayLoggerName> logger) : base(option, logger)
+        public SqlServerPaymentStore(QuickPaySqlServerOption option, ILogger<QuickPayLoggerName> logger) : base(option, logger)
         {
         }
 

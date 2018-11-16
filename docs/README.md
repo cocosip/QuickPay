@@ -24,9 +24,20 @@ public static IServiceProvider Initialize()
         c.AddLog4Net();
     })
     .AddCommonComponents()
-    .AddGenericsMemoryCache()
+    .AddDistributedMemoryCache()
     .AddJson4Net()
-    .AddQuickPay("QuickPayConfig.xml");
+    .AddQuickPay(option =>
+    {
+        option.ConfigSourceType = ConfigSourceType.FromConfigFile;
+        option.ConfigFileName = "QuickPayConfig.xml";
+        option.ConfigFileFormat=QuickPaySettings.ConfigFormat.Xml;
+        option.EnabledAlipaySandbox=false; //是否启用支付宝沙盒
+        option.EnabledWechatPaySandbox=false; //是否启用微信沙盒
+    })
+    .AddQuickPaySqlServer(o =>
+    {
+        o.DbConnectionString = "...数据库连接字符串...";
+    });
 
     Mapper.Initialize(config =>
     {
@@ -34,7 +45,7 @@ public static IServiceProvider Initialize()
     });
     var provider = services.BuildServiceProvider();
     //配置
-    provider.QuickPayConfigure();
+    provider.UseQuickPay();
     return provider;
 }
 ```
@@ -42,59 +53,7 @@ public static IServiceProvider Initialize()
 > 配置文件初始化:
 - `QuickPay`支持两种方式的配置初始化,1.通过配置的`Xml`([参考](../src/QuickPay/ConfigDemo.xml))或`Josn`([参考](../src/QuickPay/ConfigDemo.json)) 2.通过初始化配置对象
 
-```c#
-public static IServiceProvider Initialize()
-{
-    var alipayConfig = new AlipayConfig()
-    {
-        Gateway = "https://openapi.alipay.com/gateway.do",
-        NotifyGateway = "http://127.0.0.1",
-        NotifyRealateUrl = "/Notify/Alipay",
-        BarcodeNotifyRelateUrl = "/Notify/AlipayBarcode",
-        QrcodeNotifyRelateUrl = "/Notify/AlipayQrcode",
-        LocalAddress = "8.8.8.8",
-        WebGateway = "127.0.0.1",
-        DefaultAppName = "App1",
-        Format = "JSON",
-        Version = "1.0",
-        Apps = new List<AlipayApp>()
-        {
-            new AlipayApp("AppName","AppId","utf-8","RSA","公钥","私钥",1,false,"","")
-        }
-    };
-    var wechatPayConfig = new WechatPayConfig()
-    {
-        NotifyGateway = "http://127.0.0.1",
-        NotifyRealateUrl = "/Notify/Wxpay",
-        LocalAddress = "8.8.8.8",
-        WebGateway = "127.0.0.1",
-        DefaultAppName = "App1",
-        Apps = new List<WechatPayApp>()
-        {
-            new WechatPayApp("AppName","AppId","商户号","加密的Key","appsecret",1,new NativeMobileInfo())
-        }
-    };
-
-    IServiceCollection services = new ServiceCollection();
-    services.AddLogging(c =>
-    {
-        c.AddLog4Net();
-    })
-    .AddGenericsMemoryCache()
-    .AddJson4Net()
-    .AddQuickPay(() => alipayConfig, () => wechatPayConfig);
-
-    Mapper.Initialize(config =>
-    {
-        config.CreateQuickPayMaps();
-    });
-    var provider = services.BuildServiceProvider();
-    //配置
-    provider.QuickPayConfigure();
-    return provider;
-}
-
-```
 ## 示例代码
+
 - [微信](/docs/WechatPay.md)
 - [支付宝](/docs/Alipay.md)

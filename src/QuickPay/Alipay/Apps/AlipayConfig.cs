@@ -40,6 +40,10 @@ namespace QuickPay.Alipay.Apps
         /// </summary>
         public string Gateway { get; set; } = "https://openapi.alipay.com/gateway.do";
 
+        /// <summary>沙箱网关
+        /// </summary>
+        public string SandboxGateway { get; set; } = "https://openapi.alipaydev.com/gateway.do";
+
         /// <summary>格式--JSON
         /// </summary>
         public string Format { get; set; } = "JSON";

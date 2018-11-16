@@ -1,4 +1,5 @@
 ﻿using DotCommon.Extensions;
+using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.RequestData;
 using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Responses;
@@ -9,7 +10,7 @@ namespace QuickPay.WechatPay.Requests
     /// </summary>
     public class AppUnifiedOrderRequest : BaseWechatPayRequest<AppUnifiedOrderResponse>
     {
-        public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/unifiedorder";
+        //public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/unifiedorder";
 
         public override string TradeTypeName => WechatPaySettings.TradeType.App;
 
@@ -63,13 +64,14 @@ namespace QuickPay.WechatPay.Requests
         }
 
 
-        public override void SetNecessary(WechatPayConfig config, WechatPayApp app)
+        public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);
-            SpbillCreateIp = config.LocalAddress;
+            var vConfig = (WechatPayConfig)config;
+            SpbillCreateIp = vConfig.LocalAddress;
             if (NotifyUrl.IsNullOrWhiteSpace())
             {
-                NotifyUrl = config.GetDefaultNotifyUrl();
+                NotifyUrl = vConfig.GetDefaultNotifyUrl();
             }
         }
 

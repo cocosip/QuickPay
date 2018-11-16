@@ -1,4 +1,5 @@
-﻿using QuickPay.Infrastructure.Responses;
+﻿using QuickPay.Infrastructure.Apps;
+using QuickPay.Infrastructure.Responses;
 
 namespace QuickPay.Infrastructure.Requests
 {
@@ -12,5 +13,9 @@ namespace QuickPay.Infrastructure.Requests
         public abstract string TradeTypeName { get; }
         public abstract string SignFieldName { get; }
         public abstract string SignTypeName { get; }
+
+        public virtual void SetNecessary(QuickPayConfig config, QuickPayApp app)
+        {
+        }
     }
 }

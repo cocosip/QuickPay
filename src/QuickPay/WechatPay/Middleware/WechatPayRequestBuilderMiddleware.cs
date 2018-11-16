@@ -1,11 +1,12 @@
 ﻿using DotCommon.Http;
 using Microsoft.Extensions.Logging;
+using QuickPay.Configurations;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Middleware;
+using QuickPay.WechatPay.Url;
 using QuickPay.WechatPay.Util;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace QuickPay.WechatPay.Middleware
@@ -13,10 +14,14 @@ namespace QuickPay.WechatPay.Middleware
     public class WechatPayRequestBuilderMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
-        public WechatPayRequestBuilderMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger)
+        private readonly QuickPayConfigurationOption _option;
+        private readonly IWechatPayUrl _wechatPayUrl;
+        public WechatPayRequestBuilderMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, QuickPayConfigurationOption option, IWechatPayUrl wechatPayUrl)
         {
             _next = next;
             Logger = logger;
+            _option = option;
+            _wechatPayUrl = wechatPayUrl;
         }
 
         public async Task Invoke(ExecuteContext context)
@@ -28,14 +33,21 @@ namespace QuickPay.WechatPay.Middleware
                     if (context.RequestHandler == QuickPaySettings.RequestHandler.Execute)
                     {
                         var requestXml = context.RequestPayData.ToXml();
-                        var urlProperty = context.Request.GetType().GetProperties().FirstOrDefault(x => x.Name == "RequestUrl");
-                        if (urlProperty == null)
+                        var requestUrl = _wechatPayUrl.GetRequestUrl(context.Request.GetType());
+                        if (requestUrl == null)
                         {
                             SetPipelineError(context, new ExecuteError($"{QuickPaySettings.RequestHandler.Execute},必须要有请求url"));
                             return;
                         }
+                        //var urlProperty = context.Request.GetType().GetProperties().FirstOrDefault(x => x.Name == "RequestUrl");
+                        //if (urlProperty == null)
+                        //{
+                        //    SetPipelineError(context, new ExecuteError($"{QuickPaySettings.RequestHandler.Execute},必须要有请求url"));
+                        //    return;
+                        //}
                         //准备Http请求
-                        IHttpRequest httpRequest = new HttpRequest(urlProperty.GetValue(context.Request).ToString(), Method.POST);
+                        //IHttpRequest httpRequest = new HttpRequest(urlProperty.GetValue(context.Request).ToString(), Method.POST);
+                        IHttpRequest httpRequest = new HttpRequest(requestUrl, Method.POST);
                         httpRequest.AddXmlBody(requestXml);
                         context.HttpRequest = httpRequest;
                     }

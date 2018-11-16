@@ -1,4 +1,5 @@
-﻿using QuickPay.Infrastructure.RequestData;
+﻿using QuickPay.Infrastructure.Apps;
+using QuickPay.Infrastructure.RequestData;
 using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Responses;
 using QuickPay.WechatPay.Util;
@@ -9,7 +10,6 @@ namespace QuickPay.WechatPay.Requests
     /// </summary>
     public class NativeMode1CreateCodeRequest : BaseWechatPayRequest<NativeMode1CreateCodeResponse>
     {
-        public override string RequestUrl => "";
 
         public override string TradeTypeName => WechatPaySettings.TradeType.Native;
 
@@ -33,7 +33,7 @@ namespace QuickPay.WechatPay.Requests
             ProductId = productId;
         }
 
-        public override void SetNecessary(WechatPayConfig config, WechatPayApp app)
+        public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);
             Timestamp = WechatPayUtil.GenerateTimeStamp();

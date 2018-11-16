@@ -7,7 +7,7 @@ namespace QuickPay.WechatPay.Requests
     /// </summary>
     public class MiniProgramUnifiedOrderRequest : BaseWechatPayRequest<MiniProgramUnifiedOrderResponse>
     {
-        public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/unifiedorder";
+        //public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/unifiedorder";
         public override string TradeTypeName => WechatPaySettings.TradeType.MiniProgram;
 
         /// <summary>交易类型,取值如下：JSAPI，NATIVE，APP等,是否跟JSAPI使用相同的交易类型

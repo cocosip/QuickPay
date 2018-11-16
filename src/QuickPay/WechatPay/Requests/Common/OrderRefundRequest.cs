@@ -1,4 +1,5 @@
-﻿using QuickPay.Infrastructure.RequestData;
+﻿using QuickPay.Infrastructure.Apps;
+using QuickPay.Infrastructure.RequestData;
 using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Responses;
 
@@ -8,7 +9,7 @@ namespace QuickPay.WechatPay.Requests
     /// </summary>
     public class OrderRefundRequest : BaseWechatPayRequest<OrderRefundResponse>
     {
-        public override string RequestUrl => "https://api.mch.weixin.qq.com/secapi/pay/refund";
+        //public override string RequestUrl => "https://api.mch.weixin.qq.com/secapi/pay/refund";
 
         /// <summary>签名类型
         /// </summary>
@@ -53,10 +54,10 @@ namespace QuickPay.WechatPay.Requests
         [PayElement("refund_fee")]
         public int RefundFee { get; set; }
 
-        public override void SetNecessary(WechatPayConfig config, WechatPayApp app)
+        public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);
-            SignType = config.SignType;
+            SignType = ((WechatPayConfig)config).SignType;
         }
 
         public OrderRefundRequest()

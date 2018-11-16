@@ -1,4 +1,5 @@
-﻿using QuickPay.Infrastructure.RequestData;
+﻿using QuickPay.Infrastructure.Apps;
+using QuickPay.Infrastructure.RequestData;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Responses;
@@ -45,10 +46,13 @@ namespace QuickPay.WechatPay.Requests
         public string SignType { get; set; }
 
 
-        public virtual void SetNecessary(WechatPayConfig config, WechatPayApp app)
+        public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
-            AppId = app.AppId;
-            SignType = config.SignType;
+            var oConfig = (WechatPayConfig)config;
+            var oApp = (WechatPayApp)app;
+
+            AppId = oApp.AppId;
+            SignType = oConfig.SignType;
             NonceStr = WechatPayUtil.GenerateNonceStr();
             Timestamp = WechatPayUtil.GenerateTimeStamp();
         }

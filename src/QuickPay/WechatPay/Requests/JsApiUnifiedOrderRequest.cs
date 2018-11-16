@@ -5,7 +5,7 @@ namespace QuickPay.WechatPay.Requests
 {
     public class JsApiUnifiedOrderRequest : BaseWechatPayRequest<JsApiUnifiedOrderResponse>
     {
-        public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/unifiedorder";
+        //public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/unifiedorder";
 
         public override string TradeTypeName => WechatPaySettings.TradeType.JsApi;
 

@@ -1,4 +1,5 @@
-﻿using QuickPay.Infrastructure.RequestData;
+﻿using QuickPay.Infrastructure.Apps;
+using QuickPay.Infrastructure.RequestData;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Infrastructure.Responses;
 using QuickPay.WechatPay.Apps;
@@ -17,7 +18,7 @@ namespace QuickPay.WechatPay.Requests
         //微信默认用MD5
         public override string SignTypeName => WechatPaySettings.SignType.Md5;
 
-        public abstract string RequestUrl { get; }
+        //public virtual string RequestUrl { get; }
 
         [PayElement("appid")]
         public string AppId { get; set; }
@@ -32,10 +33,12 @@ namespace QuickPay.WechatPay.Requests
         [PayElement("nonce_str")]
         public string NonceStr { get; set; }
 
-        public virtual void SetNecessary(WechatPayConfig config, WechatPayApp app)
+        public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
-            AppId = app.AppId;
-            MchId = app.MchId;
+            var wConfig = (WechatPayConfig)config;
+            var wApp = (WechatPayApp)app;
+            AppId = wApp.AppId;
+            MchId = wApp.MchId;
             NonceStr = WechatPayUtil.GenerateNonceStr();
         }
     }

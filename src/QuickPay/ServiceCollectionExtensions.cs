@@ -3,6 +3,7 @@ using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Services;
 using QuickPay.Alipay.Services.Impl;
 using QuickPay.Alipay.Util;
+using QuickPay.Assist.Store;
 using QuickPay.Configurations;
 using QuickPay.Exceptions;
 using QuickPay.Infrastructure.Apps;
@@ -10,11 +11,11 @@ using QuickPay.Infrastructure.Executers;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Middleware;
 using QuickPay.Middleware.Pipeline;
-using QuickPay.Assist.Store;
 using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Authentication;
 using QuickPay.WechatPay.Services;
 using QuickPay.WechatPay.Services.Impl;
+using QuickPay.WechatPay.Url;
 using QuickPay.WechatPay.Util;
 using System;
 using System.Linq;
@@ -45,12 +46,26 @@ namespace QuickPay
             }
 
             services.AddSingleton<QuickPayConfigurationOption>(quickPayConfigurationOption)
+                 .UseWechatPaySandbox(quickPayConfigurationOption)
                  .RegisterQuickPay(alipayConfig, wechatPayConfig)
                  .RegisterPipeline();
             return services;
         }
 
-
+        /// <summary>微信沙盒
+        /// </summary>
+        private static IServiceCollection UseWechatPaySandbox(this IServiceCollection services, QuickPayConfigurationOption option)
+        {
+            if (option.EnabledWechatPaySandbox)
+            {
+                services.AddSingleton<IWechatPayUrl, SandboxWechatPayUrl>();
+            }
+            else
+            {
+                services.AddSingleton<IWechatPayUrl, RealWechatPayUrl>();
+            }
+            return services;
+        }
 
         /// <summary>注册QuickPay需要的配置
         /// </summary>

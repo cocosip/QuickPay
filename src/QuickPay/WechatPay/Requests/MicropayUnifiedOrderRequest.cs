@@ -1,4 +1,5 @@
-﻿using QuickPay.Infrastructure.RequestData;
+﻿using QuickPay.Infrastructure.Apps;
+using QuickPay.Infrastructure.RequestData;
 using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Responses;
 
@@ -8,7 +9,7 @@ namespace QuickPay.WechatPay.Requests
     /// </summary>
     public class MicropayUnifiedOrderRequest : BaseWechatPayRequest<MicropayUnifiedOrderResponse>
     {
-        public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/micropay";
+        //public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/micropay";
 
         public override string TradeTypeName => WechatPaySettings.TradeType.Micropay;
 
@@ -56,10 +57,10 @@ namespace QuickPay.WechatPay.Requests
             TotalFee = totalFee;
 
         }
-        public override void SetNecessary(WechatPayConfig config, WechatPayApp app)
+        public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);
-            SpbillCreateIp = config.LocalAddress;
+            SpbillCreateIp = ((WechatPayConfig)config).LocalAddress;
         }
 
         /********************非必须参数********************/

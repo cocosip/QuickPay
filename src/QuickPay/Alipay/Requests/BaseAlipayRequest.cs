@@ -1,6 +1,7 @@
 ﻿using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Responses;
 using QuickPay.Alipay.Util;
+using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.RequestData;
 using QuickPay.Infrastructure.Requests;
 
@@ -59,13 +60,16 @@ namespace QuickPay.Alipay.Requests
         /// </summary>
         public BaseBizContentRequest BizContentRequest { get; set; }
 
-        public virtual void SetNecessary(AlipayConfig config, AlipayApp app)
+        public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
-            Format = config.Format;
-            Version = config.Version;
-            AppId = app.AppId;
-            Charset = app.Charset;
-            SignType = app.SignType;
+            var oConfig = (AlipayConfig)config;
+            var oApp = (AlipayApp)app;
+
+            Format = oConfig.Format;
+            Version = oConfig.Version;
+            AppId = oApp.AppId;
+            Charset = oApp.Charset;
+            SignType = oApp.SignType;
             Timestamp = AlipayUtil.GenerateTimeStamp();
         }
     }

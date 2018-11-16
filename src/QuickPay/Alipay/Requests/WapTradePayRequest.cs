@@ -1,6 +1,7 @@
 ﻿using DotCommon.Extensions;
 using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Responses;
+using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.RequestData;
 
 namespace QuickPay.Alipay.Requests
@@ -35,12 +36,12 @@ namespace QuickPay.Alipay.Requests
             NotifyUrl = notifyUrl;
         }
 
-        public override void SetNecessary(AlipayConfig config, AlipayApp app)
+        public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);
             if (NotifyUrl.IsNullOrWhiteSpace())
             {
-                NotifyUrl = config.GetDefaultNotifyUrl();
+                NotifyUrl = ((AlipayConfig)config).GetDefaultNotifyUrl();
             }
         }
     }

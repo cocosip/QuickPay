@@ -1,4 +1,5 @@
-﻿using QuickPay.Infrastructure.RequestData;
+﻿using QuickPay.Infrastructure.Apps;
+using QuickPay.Infrastructure.RequestData;
 using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Responses;
 
@@ -8,8 +9,6 @@ namespace QuickPay.WechatPay.Requests
     /// </summary>
     public class NativeMode1UnifiedOrderOutputRequest : BaseWechatPayRequest<NativeMode1UnifiedOrderOutputResponse>
     {
-        public override string RequestUrl => "";
-
         public override string TradeTypeName => WechatPaySettings.TradeType.Native;
 
         /// <summary>SUCCESS/FAIL,此字段是通信标识
@@ -38,7 +37,7 @@ namespace QuickPay.WechatPay.Requests
         public string PrepayId { get; set; }
 
 
-        public override void SetNecessary(WechatPayConfig config, WechatPayApp app)
+        public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);
         }

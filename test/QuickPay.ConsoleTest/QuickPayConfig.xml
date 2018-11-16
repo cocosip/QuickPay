@@ -2,6 +2,8 @@
   <Alipay>
     <![CDATA[支付宝网关]]>
     <Gateway>https://openapi.alipay.com/gateway.do</Gateway>
+    <![CDATA[支付宝沙盒网关]]>
+    <SandboxGateway>https://openapi.alipaydev.com/gateway.do</SandboxGateway>
     <![CDATA[本地IP地址]]>
     <LocalAddress>127.0.0.1</LocalAddress>
     <![CDATA[网址(如果前后端分离,为前端的网址)]]>

@@ -7,6 +7,7 @@
     "QrcodeNotifyRelateUrl ": "二维码扫码支付异步通知关联Url",
     "BarcodeNotifyRelateUrl ": "条码支付异步通知关联Url",
     "Gateway": "支付宝网关",
+    "SandboxGateway": "沙盒支付宝网关",
     "Format": "JSON",
     "Version": "1.0",
     "DefaultAppName ": "App1",

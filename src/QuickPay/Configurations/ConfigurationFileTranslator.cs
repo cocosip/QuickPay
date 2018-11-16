@@ -50,6 +50,7 @@ namespace QuickPay.Configurations
                 LocalAddress = alipayNode.SelectSingleNode("LocalAddress").InnerText,
                 WebGateway = alipayNode.SelectSingleNode("WebGateway").InnerText,
                 Gateway = alipayNode.SelectSingleNode("Gateway").InnerText,
+                SandboxGateway = alipayNode.SelectSingleNode("SandboxGateway").InnerText,
                 Format = alipayNode.SelectSingleNode("Format").InnerText,
                 Version = alipayNode.SelectSingleNode("Version").InnerText,
                 NotifyRealateUrl = alipayNode.SelectSingleNode("NotifyRealateUrl").InnerText,

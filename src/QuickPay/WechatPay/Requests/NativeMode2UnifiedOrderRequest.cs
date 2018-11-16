@@ -1,4 +1,5 @@
-﻿using QuickPay.Infrastructure.RequestData;
+﻿using QuickPay.Infrastructure.Apps;
+using QuickPay.Infrastructure.RequestData;
 using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Responses;
 
@@ -8,7 +9,7 @@ namespace QuickPay.WechatPay.Requests
     /// </summary>
     public class NativeMode2UnifiedOrderRequest : BaseWechatPayRequest<NativeMode2UnifiedOrderResponse>
     {
-        public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/unifiedorder";
+        //public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/unifiedorder";
 
         public override string TradeTypeName => WechatPaySettings.TradeType.Native;
 
@@ -47,10 +48,10 @@ namespace QuickPay.WechatPay.Requests
         [PayElement("sign_type")]
         public string SignType { get; set; }
 
-        public override void SetNecessary(WechatPayConfig config, WechatPayApp app)
+        public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);
-            SignType = config.SignType;
+            SignType = ((WechatPayConfig)config).SignType;
         }
 
         public NativeMode2UnifiedOrderRequest()

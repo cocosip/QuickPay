@@ -7,7 +7,7 @@ namespace QuickPay.WechatPay.Requests
     /// </summary>
     public class RefundQueryRequest : BaseWechatPayRequest<RefundQueryResponse>
     {
-        public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/refundquery";
+        //public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/refundquery";
 
         /// <summary>微信订单号
         /// </summary>

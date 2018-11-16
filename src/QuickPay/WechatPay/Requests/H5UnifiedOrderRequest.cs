@@ -7,7 +7,7 @@ namespace QuickPay.WechatPay.Requests
     /// </summary>
     public class H5UnifiedOrderRequest : BaseWechatPayRequest<H5UnifiedOrderResponse>
     {
-        public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/unifiedorder";
+        //public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/unifiedorder";
 
         public override string TradeTypeName => WechatPaySettings.TradeType.H5;
 

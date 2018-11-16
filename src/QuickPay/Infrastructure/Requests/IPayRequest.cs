@@ -1,4 +1,5 @@
-﻿using QuickPay.Infrastructure.Responses;
+﻿using QuickPay.Infrastructure.Apps;
+using QuickPay.Infrastructure.Responses;
 
 namespace QuickPay.Infrastructure.Requests
 {
@@ -11,6 +12,7 @@ namespace QuickPay.Infrastructure.Requests
         string TradeTypeName { get; }
         string SignFieldName { get; }
         string SignTypeName { get; }
+        void SetNecessary(QuickPayConfig config, QuickPayApp app);
     }
 
     public interface IPayRequest<in T> : IPayRequest where T : PayResponse

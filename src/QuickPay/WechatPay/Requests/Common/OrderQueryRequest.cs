@@ -7,7 +7,7 @@ namespace QuickPay.WechatPay.Requests
     /// </summary>
     public class OrderQueryRequest : BaseWechatPayRequest<OrderQueryResponse>
     {
-        public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/orderquery";
+        //public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/orderquery";
         /// <summary>微信的订单号，优先使用
         /// </summary>
         [PayElement("transaction_id")]

@@ -1,6 +1,7 @@
 ﻿using DotCommon.Http;
 using Microsoft.Extensions.Logging;
 using QuickPay.Alipay.Apps;
+using QuickPay.Configurations;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Middleware;
@@ -12,10 +13,12 @@ namespace QuickPay.Alipay.Middleware
     public class AlipayRequestBuilderMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
-        public AlipayRequestBuilderMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger)
+        private readonly QuickPayConfigurationOption _option;
+        public AlipayRequestBuilderMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, QuickPayConfigurationOption option)
         {
             _next = next;
             Logger = logger;
+            _option = option;
         }
 
         public async Task Invoke(ExecuteContext context)
@@ -28,8 +31,10 @@ namespace QuickPay.Alipay.Middleware
                     {
                         var app = (AlipayApp)context.App;
                         var config = (AlipayConfig)context.Config;
-                        //发送http请求
-                        IHttpRequest httpRequest = new HttpRequest(config.Gateway, Method.POST);
+                        var gateway = _option.EnabledAlipaySandbox ? config.SandboxGateway : config.Gateway;
+
+                        //构建Http
+                        IHttpRequest httpRequest = new HttpRequest(gateway, Method.POST);
                         foreach (var pValue in context.RequestPayData.GetValues())
                         {
                             httpRequest.AddParameter(pValue.Key, pValue.Value);

@@ -1,4 +1,5 @@
-﻿using QuickPay.Infrastructure.RequestData;
+﻿using QuickPay.Infrastructure.Apps;
+using QuickPay.Infrastructure.RequestData;
 using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Responses;
 
@@ -8,7 +9,7 @@ namespace QuickPay.WechatPay.Requests
     /// </summary>
     public class DownloadBillRequest : BaseWechatPayRequest<DownloadBillResponse>
     {
-        public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/downloadbill";
+        //public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/downloadbill";
 
         /// <summary>设备号
         /// </summary>
@@ -36,10 +37,10 @@ namespace QuickPay.WechatPay.Requests
         [PayElement("bill_type")]
         public string BillType { get; set; }
 
-        public override void SetNecessary(WechatPayConfig config, WechatPayApp app)
+        public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);
-            SignType = config.SignType;
+            SignType = ((WechatPayConfig)config).SignType;
         }
 
         public DownloadBillRequest()

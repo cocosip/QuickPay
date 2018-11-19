@@ -5,6 +5,7 @@
 ### 微信App支付
 
 - `微信App支付生成预订单`(提交给微信,返回预订单PrepayId等信息)
+
 ```c#
 public async Task AppUnifiedOrder()
 {
@@ -38,6 +39,7 @@ public async Task H5UnifiedOrder()
 >由于公众号支付在支付的时候,必须要有一个OpenId,因此服务端需要先获取用户的OpenId,需要先配置JsSdkConfig给前端使用
 
 - 获取前端所需的JsSdkConfig
+
 ```c# 
 public async Task GetJsSdkConfig()
 {
@@ -48,7 +50,9 @@ public async Task GetJsSdkConfig()
     }
 }
 ```
+
 - 从后端获取获取用户Code的微信Url地址
+
 ```c#
 public  string GetAuthorizationCodeUrl()
 {
@@ -57,7 +61,9 @@ public  string GetAuthorizationCodeUrl()
     return url;
 }
 ```
+
 - 获取用户OpenId
+
 ```c#
 public  string GetUserOpenId()
 {
@@ -66,7 +72,9 @@ public  string GetUserOpenId()
     return openId;
 }
 ```
+
 - 公众号提交订单
+
 ```c#
 public async Task JsApiUnifiedOrder()
 {

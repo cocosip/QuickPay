@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay", "src\QuickPay\Qu
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{B82345B4-9C62-4D80-8664-0F2297F9595E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.ConsoleTest", "test\QuickPay.ConsoleTest\QuickPay.ConsoleTest.csproj", "{2B6ACF79-C779-451C-981A-393B786ED2FA}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{085E40CE-EFA2-4038-BC29-41326EC963CB}"
 	ProjectSection(SolutionItems) = preProject
 		docs\Alipay.md = docs\Alipay.md
@@ -20,9 +18,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.Tests", "test\Quic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.SqlServer", "src\QuickPay.SqlServer\QuickPay.SqlServer.csproj", "{3299EC3F-A66B-4D10-A4F8-E222B6253E41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickPay.Abp", "src\QuickPay.Abp\QuickPay.Abp.csproj", "{2E933B89-4660-42AD-B214-33655F6814B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.Abp", "src\QuickPay.Abp\QuickPay.Abp.csproj", "{2E933B89-4660-42AD-B214-33655F6814B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickPay.AspNetCore", "src\QuickPay.AspNetCore\QuickPay.AspNetCore.csproj", "{2B1799A7-BC64-4D2C-886A-39C69971E3E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.AspNetCore", "src\QuickPay.AspNetCore\QuickPay.AspNetCore.csproj", "{2B1799A7-BC64-4D2C-886A-39C69971E3E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,10 +32,6 @@ Global
 		{8854BAB7-96B4-4E01-96E0-EFFD3FB3C755}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8854BAB7-96B4-4E01-96E0-EFFD3FB3C755}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8854BAB7-96B4-4E01-96E0-EFFD3FB3C755}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2B6ACF79-C779-451C-981A-393B786ED2FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2B6ACF79-C779-451C-981A-393B786ED2FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2B6ACF79-C779-451C-981A-393B786ED2FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2B6ACF79-C779-451C-981A-393B786ED2FA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{17DC94A1-64F2-4AD2-85F7-6C8D265436A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{17DC94A1-64F2-4AD2-85F7-6C8D265436A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17DC94A1-64F2-4AD2-85F7-6C8D265436A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,7 +53,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{2B6ACF79-C779-451C-981A-393B786ED2FA} = {B82345B4-9C62-4D80-8664-0F2297F9595E}
 		{17DC94A1-64F2-4AD2-85F7-6C8D265436A9} = {B82345B4-9C62-4D80-8664-0F2297F9595E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

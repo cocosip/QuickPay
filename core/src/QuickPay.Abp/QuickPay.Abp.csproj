@@ -1,16 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+<Import Project="..\..\..\build\common.props" />
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>DotCommon.Abp</PackageId>
     <RootNamespace>QuickPay</RootNamespace>
-    <Version>0.6.0</Version>
-    <Authors>virtual</Authors>
-    <Company>virtual</Company>
-    <Description>QuickPay快捷支付AspNetCore扩展</Description>
+    <Description>QuickPay快速支付Abp扩展</Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.6" />
+    <Folder Include="WechatPay\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Abp" Version="4.0.1" />
   </ItemGroup>
 
   <ItemGroup>

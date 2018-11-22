@@ -1,5 +1,12 @@
 # QuickPay 组件
- [![Build Status](https://travis-ci.com/cocosip/QuickPay.svg?branch=master)](https://travis-ci.com/cocosip/QuickPay)
+[![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/cocosip/QuickPay/blob/master/LICENSE) [![Build Status](https://travis-ci.com/cocosip/QuickPay.svg?branch=master)](https://travis-ci.com/cocosip/QuickPay) ![GitHub last commit](https://img.shields.io/github/last-commit/cocosip/QuickPay.svg) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/cocosip/QuickPay.svg)
+
+| Package  | Version | Downloads|
+| -------- | ------- | -------- |
+| `QuickPay` | [![NuGet](https://img.shields.io/nuget/v/QuickPay.svg)](https://www.nuget.org/packages/QuickPay) |![NuGet](https://img.shields.io/nuget/dt/QuickPay.svg)|
+| `QuickPay.Abp` | [![NuGet](https://img.shields.io/nuget/v/QuickPay.Abp.svg)](https://www.nuget.org/packages/QuickPay.Abp) |![NuGet](https://img.shields.io/nuget/dt/QuickPay.Abp.svg)|
+| `QuickPay.AspNetCore ` | [![NuGet](https://img.shields.io/nuget/v/QuickPay.AspNetCore.svg)](https://www.nuget.org/packages/QuickPay.AspNetCore) |![NuGet](https://img.shields.io/nuget/dt/QuickPay.AspNetCore.svg)|
+| `QuickPay.SqlServer ` | [![NuGet](https://img.shields.io/nuget/v/QuickPay.SqlServer.svg)](https://www.nuget.org/packages/QuickPay.SqlServer) |![NuGet](https://img.shields.io/nuget/dt/QuickPay.SqlServer.svg)|
 
 ## 简介
 

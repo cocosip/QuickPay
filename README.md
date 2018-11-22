@@ -1,4 +1,5 @@
 # QuickPay 组件
+ [![Build Status](https://travis-ci.com/cocosip/QuickPay.svg?branch=master)](https://travis-ci.com/cocosip/QuickPay)
 
 ## 简介
 

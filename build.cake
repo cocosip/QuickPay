@@ -1,6 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 ///////////////////////////////////////////////////////////////////////////////
+
+#addin "nuget:https://www.nuget.org/api/v2?package=Newtonsoft.Json&version=9.0.1"
+
 #load "./build/util.cake"
 #load "./build/version.cake"
 
@@ -112,12 +115,25 @@ Task("Pack")
 
 
 Task("Default")
+   .IsDependentOn("Print")
    .IsDependentOn("Build")
    .IsDependentOn("Test")
    .IsDependentOn("Pack")
    .Does(() =>
    {
       Information("QuickPay build complete!");
+   });
+Task("Version")
+   .Does(() =>
+   {
+      Information($"{build.FullVersion()}");
+   });
+
+Task("Print")
+   .Does(() =>
+   {
+      util.PrintInfo();
+      Information($"{build}");
    });
 
 RunTarget(target);

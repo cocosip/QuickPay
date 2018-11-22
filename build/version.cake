@@ -52,6 +52,13 @@ public class BuildParameters
                 IsTagged = true;
             }
         }
+        else
+        {
+            if (StringComparer.OrdinalIgnoreCase.Equals("master", BuildSystem.AppVeyor.Environment.Repository.Branch) && buildSystem.AppVeyor.Environment.Repository.Tag.IsTag)
+            {
+                IsTagged = true;
+            }
+        }
 
         Configuration = Context.Argument("Configuration", "Debug");
         if (IsCI)

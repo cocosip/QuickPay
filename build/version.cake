@@ -54,7 +54,8 @@ public class BuildParameters
         }
         else
         {
-            if (StringComparer.OrdinalIgnoreCase.Equals("master", BuildSystem.AppVeyor.Environment.Repository.Branch) && buildSystem.AppVeyor.Environment.Repository.Tag.IsTag)
+            var pack = Context.Argument("pack", "publish");
+            if (pack == "publish")
             {
                 IsTagged = true;
             }

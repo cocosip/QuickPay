@@ -115,7 +115,8 @@ Task("Pack")
 
 
 Task("Default")
-   .IsDependentOn("Print")
+   .IsDependentOn("Version")
+   //.IsDependentOn("Print")
    .IsDependentOn("Build")
    .IsDependentOn("Test")
    .IsDependentOn("Pack")
@@ -133,7 +134,6 @@ Task("Print")
    .Does(() =>
    {
       util.PrintInfo();
-      Information($"{build}");
    });
 
 RunTarget(target);

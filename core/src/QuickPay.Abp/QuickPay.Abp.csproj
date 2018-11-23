@@ -2,7 +2,7 @@
 <Import Project="..\..\..\build\common.props" />
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>DotCommon.Abp</PackageId>
+    <PackageId>QuikcPay.Abp</PackageId>
     <RootNamespace>QuickPay</RootNamespace>
     <Description>QuickPay快速支付Abp扩展</Description>
   </PropertyGroup>

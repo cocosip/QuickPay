@@ -16,9 +16,9 @@ namespace QuickPay.Alipay.Services.Impl
         protected AlipayConfig Config;
         protected IRequestExecuter Executer { get; }
         protected ILogger Logger { get; }
-        public BaseAlipayService(IServiceProvider provider, IAmbientScopeProvider<AlipayAppOverride> alipayAppOverrideScopeProvider)
+        public BaseAlipayService(IServiceProvider provider)
         {
-            AlipayAppOverrideScopeProvider = alipayAppOverrideScopeProvider;
+            AlipayAppOverrideScopeProvider = provider.GetService<IAmbientScopeProvider<AlipayAppOverride>>();
             Config = provider.GetService<AlipayConfig>();
             Executer = provider.GetService<IRequestExecuter>();
             Logger = provider.GetService<ILogger<QuickPayLoggerName>>();

@@ -13,8 +13,9 @@ namespace QuickPay.WechatPay.Services.Impl
     /// </summary>
     public class WechatPayTradeCommonService : BaseWechatPayService, IWechatPayTradeCommonService
     {
-        public WechatPayTradeCommonService(IServiceProvider provider, IAmbientScopeProvider<WechatPayAppOverride> wechatPayAppOverrideScopeProvider) : base(provider, wechatPayAppOverrideScopeProvider)
+        public WechatPayTradeCommonService(IServiceProvider provider) : base(provider)
         {
+
         }
 
         /// <summary>根据订单交易号查询订单

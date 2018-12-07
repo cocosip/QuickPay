@@ -17,7 +17,7 @@ namespace QuickPay.WechatPay.Services.Impl
     public class WechatJsApiPayService : BaseWechatPayService, IWechatJsApiPayService
     {
         private readonly IAuthenticationService _authenticationService;
-        public WechatJsApiPayService(IServiceProvider provider, IAmbientScopeProvider<WechatPayAppOverride> wechatPayAppOverrideScopeProvider, IAuthenticationService authenticationService) : base(provider, wechatPayAppOverrideScopeProvider)
+        public WechatJsApiPayService(IServiceProvider provider, IAuthenticationService authenticationService) : base(provider)
         {
             _authenticationService = authenticationService;
         }

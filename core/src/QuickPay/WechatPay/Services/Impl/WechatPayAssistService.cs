@@ -1,9 +1,9 @@
 ﻿using DotCommon.Threading;
 using Microsoft.Extensions.Logging;
-using QuickPay.Exceptions;
-using QuickPay.Infrastructure.RequestData;
 using QuickPay.Assist;
 using QuickPay.Assist.Store;
+using QuickPay.Exceptions;
+using QuickPay.Infrastructure.RequestData;
 using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Util;
 using System;
@@ -17,7 +17,7 @@ namespace QuickPay.WechatPay.Services.Impl
     {
         private readonly IPaymentStore _paymentStore;
         private readonly WechatPayDataHelper _wechatPayDataHelper;
-        public WechatPayAssistService(IServiceProvider provider, IAmbientScopeProvider<WechatPayAppOverride> wechatPayAppOverrideScopeProvider, IPaymentStore paymentStore, WechatPayDataHelper wechatPayDataHelper) : base(provider, wechatPayAppOverrideScopeProvider)
+        public WechatPayAssistService(IServiceProvider provider, IPaymentStore paymentStore, WechatPayDataHelper wechatPayDataHelper) : base(provider)
         {
             _paymentStore = paymentStore;
             _wechatPayDataHelper = wechatPayDataHelper;

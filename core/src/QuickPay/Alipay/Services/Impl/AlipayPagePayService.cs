@@ -14,8 +14,9 @@ namespace QuickPay.Alipay.Services.Impl
     /// </summary>
     public class AlipayPagePayService : BaseAlipayService, IAlipayPagePayService
     {
-        public AlipayPagePayService(IServiceProvider provider, IAmbientScopeProvider<AlipayAppOverride> alipayAppOverrideScopeProvider) : base(provider, alipayAppOverrideScopeProvider)
+        public AlipayPagePayService(IServiceProvider provider) : base(provider)
         {
+
         }
 
 

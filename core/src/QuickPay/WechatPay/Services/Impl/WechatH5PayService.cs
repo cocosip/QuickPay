@@ -14,7 +14,7 @@ namespace QuickPay.WechatPay.Services.Impl
     public class WechatH5PayService : BaseWechatPayService, IWechatH5PayService
     {
         private readonly WechatPayDataHelper _wechatPayDataHelper;
-        public WechatH5PayService(IServiceProvider provider, IAmbientScopeProvider<WechatPayAppOverride> wechatPayAppOverrideScopeProvider, WechatPayDataHelper wechatPayDataHelper) : base(provider, wechatPayAppOverrideScopeProvider)
+        public WechatH5PayService(IServiceProvider provider, WechatPayDataHelper wechatPayDataHelper) : base(provider)
         {
             _wechatPayDataHelper = wechatPayDataHelper;
         }

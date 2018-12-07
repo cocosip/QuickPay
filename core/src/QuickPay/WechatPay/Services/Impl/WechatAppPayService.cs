@@ -13,8 +13,9 @@ namespace QuickPay.WechatPay.Services.Impl
     /// </summary>
     public class WechatAppPayService : BaseWechatPayService, IWechatAppPayService
     {
-        public WechatAppPayService(IServiceProvider provider, IAmbientScopeProvider<WechatPayAppOverride> wechatPayAppOverrideScopeProvider) : base(provider, wechatPayAppOverrideScopeProvider)
+        public WechatAppPayService(IServiceProvider provider) : base(provider)
         {
+
         }
 
         /// <summary>App支付统一下单

@@ -3,10 +3,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Util;
-using QuickPay.Exceptions;
-using QuickPay.Infrastructure.RequestData;
 using QuickPay.Assist;
 using QuickPay.Assist.Store;
+using QuickPay.Exceptions;
+using QuickPay.Infrastructure.RequestData;
 using System;
 using System.Threading.Tasks;
 namespace QuickPay.Alipay.Services.Impl
@@ -17,7 +17,7 @@ namespace QuickPay.Alipay.Services.Impl
     {
         private readonly IPaymentStore _paymentStore;
         private readonly AlipayPayDataHelper _alipayPayDataHelper;
-        public AlipayAssistService(IServiceProvider provider, IAmbientScopeProvider<AlipayAppOverride> alipayAppOverrideScopeProvider, IPaymentStore paymentStore) : base(provider, alipayAppOverrideScopeProvider)
+        public AlipayAssistService(IServiceProvider provider, IPaymentStore paymentStore) : base(provider)
         {
             _paymentStore = paymentStore;
             _alipayPayDataHelper = provider.GetService<AlipayPayDataHelper>();

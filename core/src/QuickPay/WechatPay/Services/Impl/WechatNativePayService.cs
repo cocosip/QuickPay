@@ -15,8 +15,9 @@ namespace QuickPay.WechatPay.Services.Impl
     /// </summary>
     public class WechatNativePayService : BaseWechatPayService, IWechatNativePayService
     {
-        public WechatNativePayService(IServiceProvider provider, IAmbientScopeProvider<WechatPayAppOverride> wechatPayAppOverrideScopeProvider) : base(provider, wechatPayAppOverrideScopeProvider)
+        public WechatNativePayService(IServiceProvider provider) : base(provider)
         {
+
         }
 
         /// <summary>当使用扫码支付模式2时,统一下单,返回二维码地址

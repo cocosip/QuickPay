@@ -13,8 +13,9 @@ namespace QuickPay.Alipay.Services.Impl
     /// </summary>
     public class AlipayQrcodePayService : BaseAlipayService, IAlipayQrcodePayService
     {
-        public AlipayQrcodePayService(IServiceProvider provider, IAmbientScopeProvider<AlipayAppOverride> alipayAppOverrideScopeProvider) : base(provider, alipayAppOverrideScopeProvider)
+        public AlipayQrcodePayService(IServiceProvider provider) : base(provider)
         {
+
         }
 
         /// <summary>统一收单线下交易预创建

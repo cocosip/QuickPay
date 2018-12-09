@@ -1,18 +1,18 @@
 <Project>
-    <Import Project="version.props" />
-    <PropertyGroup>
-        <LangVersion>latest</LangVersion>
-        <Authors>virtual</Authors>
-        <Product>QuickPay</Product>
-        <PackageIconUrl>https://github.com/cocosip/QuickPay</PackageIconUrl>
-        <PackageProjectUrl>https://github.com/cocosip/QuickPay</PackageProjectUrl>
-        <PackageLicense>https://github.com/cocosip/QuickPay/blob/master/LICENSE</PackageLicense>
-        <RepositoryType>git</RepositoryType>
-        <RepositoryUrl>https://github.com/cocosip/QuickPay</RepositoryUrl>
-    </PropertyGroup>
+  <Import Project="version.props" />
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Authors>virtual</Authors>
+    <Product>QuickPay</Product>
+    <PackageIconUrl>https://github.com/cocosip/QuickPay</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/cocosip/QuickPay</PackageProjectUrl>
+    <PackageLicense>https://github.com/cocosip/QuickPay/blob/master/LICENSE</PackageLicense>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/cocosip/QuickPay</RepositoryUrl>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" PrivateAssets="All" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" PrivateAssets="All" />
+  </ItemGroup>
 
 </Project>

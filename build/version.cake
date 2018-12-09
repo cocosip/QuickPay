@@ -54,7 +54,8 @@ public class BuildParameters
         }
         else
         {
-            var pack = Context.Argument("pack", "publish");
+            //-ScriptArgs '-pack="publish"'
+            var pack = Context.Argument("pack", "default");
             if (pack == "publish")
             {
                 IsTagged = true;

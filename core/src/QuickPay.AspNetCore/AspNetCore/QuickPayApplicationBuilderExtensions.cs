@@ -4,9 +4,9 @@ namespace QuickPay.AspNetCore
 {
     public static class QuickPayApplicationBuilderExtensions
     {
-        public static IApplicationBuilder UseQuickPay(this IApplicationBuilder app)
+        public static IApplicationBuilder ConfigureQuickPay(this IApplicationBuilder app)
         {
-            app.ApplicationServices.UseQuickPay();
+            app.ApplicationServices.ConfigureQuickPay();
             return app;
         }
     }

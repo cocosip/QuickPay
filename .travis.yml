@@ -1,4 +1,6 @@
 theme: jekyll-theme-cayman
 language: csharp
 sudo: required
-script: chmod +x ./build.sh --target Publish --configuration Release
+script: 
+  - chmod +x 
+  - ./build.sh --target Publish --configuration Release

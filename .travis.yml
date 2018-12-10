@@ -1,8 +1,4 @@
 theme: jekyll-theme-cayman
 language: csharp
-os:
-  - osx
-  - linux
 sudo: required
-script: 
-  - ./build.sh --target Publish
+script: chmod +x ./build.sh --target Publish --configuration Release

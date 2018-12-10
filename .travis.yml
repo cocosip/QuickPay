@@ -1,7 +1,5 @@
 theme: jekyll-theme-cayman
 language: csharp
-os: linux
-# Ubuntu 14.04
 sudo: required
 dist: trusty
 before_install:
@@ -11,7 +9,7 @@ before_install:
   - chmod +x ./build.sh
 
 script:
-  - ./build.sh --target Publish --verbosity diagnostic
+  - ./build.sh --target Travis --verbosity diagnostic --configuration Release
 
 cache:
   directories:

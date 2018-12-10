@@ -1,5 +1,5 @@
 theme: jekyll-theme-cayman
 language: csharp
-sudo: required
-script: 
-  - chmod +x ./build.sh --target Publish --configuration Release
+before_install: 
+  - chmod +x gradlew
+script: ./build.sh --target Publish --configuration Release

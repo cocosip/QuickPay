@@ -1,4 +1,4 @@
 theme: jekyll-theme-cayman
 language: csharp
 script: 
-  - chmod +x ./build.sh -- --target Publish -- --configuration Release
+  - chmod +x ./build.sh -t Publish -c Release

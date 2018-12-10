@@ -29,7 +29,10 @@ fi
 # Define default arguments.
 SCRIPT="build.cake"
 CAKE_ARGUMENTS=()
-
+TARGET="Travis"
+CONFIGURATION="Release"
+VERBOSITY="verbose"
+DRYRUN=CAKE_ARGUMENTS()
 # Parse arguments.
 for i in "$@"; do
     case $1 in
@@ -118,4 +121,5 @@ if [ ! -f "$CAKE_EXE" ]; then
 fi
 
 # Start Cake
-exec mono "$CAKE_EXE" $SCRIPT "${CAKE_ARGUMENTS[@]}"
+#exec mono "$CAKE_EXE" $SCRIPT "${CAKE_ARGUMENTS[@]}"
+exec mono "$CAKE_EXE" build.cake --verbosity=$VERBOSITY --configuration=$CONFIGURATION --target=$TARGET $DRYRUN "${CAKE_ARGUMENTS[@]}"

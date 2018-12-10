@@ -1,4 +1,21 @@
 theme: jekyll-theme-cayman
 language: csharp
-script: 
-  - chmod +x ./build.sh -t Publish -c Release
+os: linux
+# Ubuntu 14.04
+sudo: required
+dist: trusty
+before_install:
+  - git fetch --unshallow # Travis always does a shallow clone, but GitVersion needs the full history including branches and tags
+  - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+  - git fetch origin
+  - chmod +x ./build.sh
+
+script:
+  - ./build.sh --target Publish --verbosity diagnostic
+
+cache:
+  directories:
+    - .packages
+    - tools/Addins
+    - tools/gitreleasemanager
+    - tools/GitVersion.CommandLine

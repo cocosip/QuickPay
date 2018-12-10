@@ -9,7 +9,7 @@ before_install:
   - chmod +x ./build.sh
 
 script:
-  - ./build.sh --target Travis --verbosity diagnostic --configuration Release
+  - ./build.sh --target Travis --configuration Release
 
 cache:
   directories:

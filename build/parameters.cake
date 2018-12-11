@@ -1,9 +1,8 @@
-#
-load "./util.cake"#
-load "./paths.cake"#
-load "./packages.cake"#
-load "./version.cake"#
-load "./credentials.cake"
+#load "./util.cake"
+#load "./paths.cake"
+#load "./packages.cake"
+#load "./version.cake"
+#load "./credentials.cake"
 
 public class BuildParameters
 {

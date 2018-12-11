@@ -1,4 +1,5 @@
-﻿using QuickPay.Infrastructure.Apps;
+﻿using DotCommon.Extensions;
+using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.RequestData;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Infrastructure.Responses;
@@ -13,10 +14,7 @@ namespace QuickPay.WechatPay.Requests
 
         public override string SignFieldName => WechatPaySettings.DefaultSignFieldName;
         public override string TradeTypeName => "";
-
-
-        //微信默认用MD5
-        public override string SignTypeName => WechatPaySettings.SignType.Md5;
+        public override string SignTypeName { get; set; } = "";
 
         //public virtual string RequestUrl { get; }
 
@@ -35,11 +33,17 @@ namespace QuickPay.WechatPay.Requests
 
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
-            var wConfig = (WechatPayConfig)config;
-            var wApp = (WechatPayApp)app;
-            AppId = wApp.AppId;
-            MchId = wApp.MchId;
+            var wechatPayConfig = (WechatPayConfig)config;
+            var wechatPayApp = (WechatPayApp)app;
+            AppId = wechatPayApp.AppId;
+            MchId = wechatPayApp.MchId;
             NonceStr = WechatPayUtil.GenerateNonceStr();
+
+            if (SignTypeName.IsNullOrWhiteSpace())
+            {
+                //签名类型
+                SignTypeName = wechatPayConfig.SignType;
+            }
         }
     }
 }

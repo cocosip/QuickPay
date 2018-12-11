@@ -8,6 +8,9 @@
         /// <summary>微信内H5唤起支付签名字段名称
         /// </summary>
         public const string JsApiPaySignFieldName = "paySign";
+        /// <summary>微信小程序唤起支付签名字段名
+        /// </summary>
+        public const string MiniProgramPaySignFieldName = "paySign";
 
         /// <summary>微信JsApi支付 JsSdk config签名字段名
         /// </summary>
@@ -65,6 +68,8 @@
 
             public const string Micropay = "MICROPAY";
 
+            /// <summary>小程序传参的时候必须用JSAPI,但是本地记录需要用MINIPROGRAM
+            /// </summary>
             public const string MiniProgram = "MINIPROGRAM";
         }
 
@@ -90,6 +95,7 @@
         public class SignType
         {
             public const string Md5 = "MD5";
+            public const string HmacSha256 = "HMAC-SHA256";
             public const string Sha1 = "SHA1";
         }
 

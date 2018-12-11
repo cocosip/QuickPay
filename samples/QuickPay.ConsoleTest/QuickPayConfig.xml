@@ -124,6 +124,35 @@
           <WapUrl>http://wap.b1.com</WapUrl>
         </NativeMobileInfo>
       </WxpayApp>
+
+      <WxpayApp>
+        <![CDATA[应用名称,小程序]]>
+        <Name>App3</Name>
+        <![CDATA[应用AppId]]>
+        <AppId>wx4239531fdf3896e6</AppId>
+        <![CDATA[商户号]]>
+        <MchId>1519466311</MchId>
+        <![CDATA[应用类型,1-公众号,2-应用]]>
+        <AppTypeId>1</AppTypeId>
+        <![CDATA[加密AppSecret]]>
+        <Appsecret>db87e04f733f746fa15d4091d8ba9479</Appsecret>
+        <![CDATA[密钥Key]]>
+        <Key>qbekdmtn2nvr3ico1y2m8jme9ee991un</Key>
+        <NativeMobileInfo>
+          <![CDATA[Ios的BundleId]]>
+          <BundleId>1111111</BundleId >
+          <![CDATA[Ios应用名]]>
+          <IosName>Ios应用名</IosName>
+          <![CDATA[安卓名称]]>
+          <AndroidName>Android01</AndroidName>
+          <![CDATA[安卓包名]]>
+          <PackageName>cn.android.0001p</PackageName>
+          <![CDATA[移动端名称]]>
+          <WapName>Wap001</WapName>
+          <![CDATA[移动端Url地址]]>
+          <WapUrl>http://wap.b1.com</WapUrl>
+        </NativeMobileInfo>
+      </WxpayApp>
     </Apps>
   </WechatPay>
 </QuickPayConfig>

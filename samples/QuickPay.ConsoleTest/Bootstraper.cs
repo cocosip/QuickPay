@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using DotCommon.Caching;
 using DotCommon.DependencyInjection;
+using DotCommon.Json4Net;
 using DotCommon.Log4Net;
 using Microsoft.Extensions.DependencyInjection;
 using QuickPay.Alipay.Apps;
@@ -47,15 +49,16 @@ namespace QuickPay.ConsoleTest
             {
                 c.AddLog4Net();
             })
-            .AddDistributedMemoryCache()
+            .AddGenericsMemoryCache()
             .AddCommonComponents()
+            .AddJson4Net()
             .AddQuickPay(option =>
             {
                 option.ConfigSourceType = ConfigSourceType.FromConfigFile;
                 option.ConfigFileName = "QuickPayConfig.xml";
-                option.ConfigFileFormat=QuickPay.QuickPaySettings.ConfigFormat.Xml;
-                option.EnabledAlipaySandbox=false; //是否启用支付宝沙盒
-                option.EnabledWechatPaySandbox=false; //是否启用微信沙盒
+                option.ConfigFileFormat = QuickPay.QuickPaySettings.ConfigFormat.Xml;
+                option.EnabledAlipaySandbox = false; //是否启用支付宝沙盒
+                option.EnabledWechatPaySandbox = false; //是否启用微信沙盒
             })
             //.AddQuickPaySqlServer(o =>
             //{
@@ -70,7 +73,7 @@ namespace QuickPay.ConsoleTest
             });
             var provider = services.BuildServiceProvider();
             //配置
-            provider.UseQuickPay();
+            provider.ConfigureQuickPay();
             return provider;
         }
     }

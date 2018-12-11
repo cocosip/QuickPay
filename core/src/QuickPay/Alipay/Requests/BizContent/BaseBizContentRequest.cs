@@ -12,6 +12,6 @@ namespace QuickPay.Alipay.Requests
         public override string SignFieldName => AlipaySettings.DefaultSignFieldName;
         public override string TradeTypeName => "";
 
-        public override string SignTypeName => "";
+        public override string SignTypeName { get; set; } = "";
     }
 }

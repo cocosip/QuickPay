@@ -12,6 +12,8 @@ namespace QuickPay.WechatPay.Requests
 
         public override string SignFieldName { get; } = WechatPaySettings.JsSdkConfigSignFieldName;
 
+        public override string TradeTypeName => WechatPaySettings.TradeType.JsApi;
+
         public override string SignTypeName => WechatPaySettings.SignType.Sha1;
 
         /// <summary>应用Id

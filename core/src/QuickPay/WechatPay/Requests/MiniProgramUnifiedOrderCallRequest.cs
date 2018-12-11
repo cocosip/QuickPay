@@ -1,4 +1,4 @@
-﻿using QuickPay.Infrastructure.Apps;
+using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.RequestData;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.WechatPay.Apps;
@@ -7,15 +7,13 @@ using QuickPay.WechatPay.Util;
 
 namespace QuickPay.WechatPay.Requests
 {
-    /// <summary>JsApi下单唤起支付
+    /// <summary>微信小程序下单唤起支付
     /// </summary>
-    public class JsApiUnifiedOrderCallRequest : BasePayRequest<JsApiUnifiedOrderCallResponse>
+    public class MiniProgramUnifiedOrderCallRequest : BasePayRequest<MiniProgramUnifiedOrderCallResponse>
     {
         public override string Provider => QuickPaySettings.Provider.WechatPay;
-
-        public override string SignFieldName => WechatPaySettings.JsApiPaySignFieldName;
-
-        public override string TradeTypeName => WechatPaySettings.TradeType.JsApi;
+        public override string TradeTypeName => WechatPaySettings.TradeType.MiniProgram;
+        public override string SignFieldName => WechatPaySettings.MiniProgramPaySignFieldName;
         public override string SignTypeName { get; set; }
 
         /// <summary>微信开放平台审核通过的应用APPID
@@ -46,7 +44,6 @@ namespace QuickPay.WechatPay.Requests
 
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
-            base.SetNecessary(config, app);
             var wechatPayConfig = (WechatPayConfig)config;
             var wechatPayApp = (WechatPayApp)app;
 
@@ -56,12 +53,12 @@ namespace QuickPay.WechatPay.Requests
             Timestamp = WechatPayUtil.GenerateTimeStamp();
         }
 
-        public JsApiUnifiedOrderCallRequest()
+        public MiniProgramUnifiedOrderCallRequest()
         {
 
         }
 
-        public JsApiUnifiedOrderCallRequest(string prepayId)
+        public MiniProgramUnifiedOrderCallRequest(string prepayId)
         {
             //Package为预订单信息
             Package = $"prepay_id={prepayId}";

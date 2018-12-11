@@ -2,6 +2,8 @@
 
 namespace QuickPay.WechatPay.Authentication
 {
+    /// <summary>微信公众号AccessToken返回
+    /// </summary>
     public class AccessTokenResponse
     {
         [JsonProperty("access_token")]

@@ -31,6 +31,27 @@ namespace QuickPay.WechatPay.Authentication
             _stateCache = stateCache;
         }
 
+        /// <summary>根据JsCode获取用户OpenId和UnionId
+        /// </summary>
+        /// <param name="appId">应用AppId</param>
+        /// <param name="appSecret">应用AppSecret</param>
+        /// <param name="jsCode">应用的JsCode</param>
+        /// <returns></returns>
+        public virtual async Task<MiniProgramOpenIdResponse> GetMiniProgramOpenId(string appId, string appSecret, string jsCode)
+        {
+            var url = $"https://api.weixin.qq.com/sns/jscode2session";
+            IHttpRequest httpRequest = new HttpRequest(url, Method.GET)
+                .AddQueryParameter("appid", appId)
+                .AddQueryParameter("secret", appSecret)
+                .AddQueryParameter("js_code", jsCode)
+                .AddQueryParameter("grant_type", "authorization_code");
+            var response = await _httpClient.ExecuteAsync(httpRequest);
+            //记录日志
+            _logger.LogInformation(WechatPayUtil.ParseLog($"获取小程序用户OpenId返回结果,{response.Content}"));
+            var miniProgramOpenIdResponse = _jsonSerializer.Deserialize<MiniProgramOpenIdResponse>(response.Content);
+            return miniProgramOpenIdResponse;
+        }
+
         /// <summary>获取用户Code的Url地址
         /// </summary>
         /// <param name="appId">应用Id</param>
@@ -103,8 +124,8 @@ namespace QuickPay.WechatPay.Authentication
         /// <returns></returns>
         public virtual async Task<AccessTokenResponse> GetRemoteAccessTokenAsync(string appId, string appSecret)
         {
-            var getAccessTokenResponse = await GetAccessTokenInternal(appId, appSecret);
-            return getAccessTokenResponse;
+            var accessTokenResponse = await GetAccessTokenInternal(appId, appSecret);
+            return accessTokenResponse;
         }
 
         /// <summary>获取可用的AccessToken(先从本地存储中获取,如果不存在,就从微信接口获取)
@@ -119,17 +140,17 @@ namespace QuickPay.WechatPay.Authentication
             if (accessTokenInfo == null || (accessTokenInfo != null && accessTokenInfo.IsExpired(DateTime.Now)))
             {
                 //从微信获取AccessToken
-                var getAccessTokenResponse = await GetRemoteAccessTokenAsync(appId, appSecret);
+                var accessTokenResponse = await GetRemoteAccessTokenAsync(appId, appSecret);
                 accessTokenInfo = new AccessToken()
                 {
                     AppId = appId,
-                    Token = getAccessTokenResponse.AccessToken,
-                    ExpiredIn = getAccessTokenResponse.ExpiresIn,
+                    Token = accessTokenResponse.AccessToken,
+                    ExpiredIn = accessTokenResponse.ExpiresIn,
                     LastModifiedTime = DateTime.Now
                 };
                 //更新存储中的AccessToken
                 await _accessTokenStore.CreateOrUpdateAccessTokenAsync(accessTokenInfo);
-                return getAccessTokenResponse.AccessToken;
+                return accessTokenResponse.AccessToken;
             }
             return accessTokenInfo.Token;
         }
@@ -175,7 +196,7 @@ namespace QuickPay.WechatPay.Authentication
 
 
         #region Utilities
-        /// <summary>获取AccessToken
+        /// <summary>获取公众号AccessToken
         /// </summary>
         protected virtual async Task<AccessTokenResponse> GetAccessTokenInternal(string appId, string appSecret)
         {
@@ -207,12 +228,12 @@ namespace QuickPay.WechatPay.Authentication
             var response = await _httpClient.ExecuteAsync(httpRequest);
             //记录日志
             _logger.LogInformation(WechatPayUtil.ParseLog($"获取公众号JsApi_Ticket返回结果,{response.Content}"));
-            var getJsApiTicketResponse = _jsonSerializer.Deserialize<JsApiTicketResponse>(response.Content);
-            if (getJsApiTicketResponse.Ticket.IsNullOrWhiteSpace())
+            var jsApiTicketResponse = _jsonSerializer.Deserialize<JsApiTicketResponse>(response.Content);
+            if (jsApiTicketResponse.Ticket.IsNullOrWhiteSpace())
             {
                 throw new Exception("获取JsApiTicket失败");
             }
-            return getJsApiTicketResponse;
+            return jsApiTicketResponse;
         }
 
         #endregion

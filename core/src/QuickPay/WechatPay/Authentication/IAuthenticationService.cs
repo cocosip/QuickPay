@@ -4,6 +4,14 @@ namespace QuickPay.WechatPay.Authentication
 {
     public interface IAuthenticationService
     {
+        /// <summary>根据JsCode获取用户OpenId和UnionId
+        /// </summary>
+        /// <param name="appId">应用AppId</param>
+        /// <param name="appSecret">应用AppSecret</param>
+        /// <param name="jsCode">应用的JsCode</param>
+        /// <returns></returns>
+        Task<MiniProgramOpenIdResponse> GetMiniProgramOpenId(string appId, string appSecret, string jsCode);
+
         /// <summary>获取用户Code的Url地址
         /// </summary>
         /// <param name="appId">应用Id</param>

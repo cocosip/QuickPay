@@ -6,10 +6,10 @@ namespace QuickPay.WechatPay.Services
 {
     /// <summary>微信小程序支付
     /// </summary>
-    public interface IWechatMiniProgramPayService
+    public interface IWechatMiniProgramPayService : IWechatPayService
     {
         /// <summary>小程序支付统一下单
         /// </summary>
-        Task<MiniProgramUnifiedOrderResponse> UnifiedOrder(MiniProgramUnifiedOrderInput input);
+        Task<MiniProgramUnifiedOrderCallResponse> UnifiedOrder(MiniProgramUnifiedOrderInput input);
     }
 }

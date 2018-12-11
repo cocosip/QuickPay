@@ -11,7 +11,7 @@ namespace QuickPay.Infrastructure.Requests
         string BusinessCode { get; set; }
         string TradeTypeName { get; }
         string SignFieldName { get; }
-        string SignTypeName { get; }
+        string SignTypeName { get; set; }
         void SetNecessary(QuickPayConfig config, QuickPayApp app);
     }
 

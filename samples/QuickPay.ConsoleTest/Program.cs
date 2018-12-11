@@ -7,6 +7,7 @@ using QuickPay.Alipay.Responses;
 using QuickPay.Alipay.Services;
 using QuickPay.Alipay.Services.DTOs;
 using QuickPay.WechatPay.Apps;
+using QuickPay.WechatPay.Authentication;
 using QuickPay.WechatPay.Services;
 using QuickPay.WechatPay.Services.DTOs;
 using System;
@@ -35,22 +36,22 @@ namespace QuickPay.ConsoleTest
             _stopwatch.Start();
 
             //微信
-            AsyncHelper.RunSync(() =>
-            {
-                //微信App下单
-                return WechatAppUnifiedOrder();
-                //微信JsApi下单
-                // return WechatJsApiUnifiedOrder();
-            });
-
-            //支付宝
             //AsyncHelper.RunSync(() =>
             //{
-            //    //支付宝App下单
-            //    return AlipayAppTradePay();
-            //    //支付宝PC下单
-            //    //return AlipayPageTradePay();
+            //    //微信App下单
+            //    //return WechatMiniProgramUnifiedOrder();
+            //    //微信JsApi下单
+            //    // return WechatJsApiUnifiedOrder();
             //});
+
+            //支付宝
+            AsyncHelper.RunSync(() =>
+            {
+                //支付宝App下单
+                return AlipayAppTradePay();
+                //支付宝PC下单
+                //return AlipayPageTradePay();
+            });
 
 
             _stopwatch.Stop();
@@ -84,6 +85,23 @@ namespace QuickPay.ConsoleTest
                 await jsApiService.UnifiedOrder(input);
             }
         }
+
+        /// <summary>微信小程序下单
+        /// </summary>
+        static async Task WechatMiniProgramUnifiedOrder()
+        {
+            var miniProgramService = _provider.GetService<IWechatMiniProgramPayService>();
+            var authenticationService = _provider.GetService<IAuthenticationService>();
+            using (miniProgramService.Use(_wechatPayConfig.GetByName("App3")))
+            {
+                //var openId = await authenticationService.GetMiniProgramOpenId(miniProgramService.App.AppId, miniProgramService.App.Appsecret, "071FCmZX1ixU011SMv0Y1KAvZX1FCmZo");
+
+                // ofKnT5CCHaMNzinIfiLpPIb3S014
+                var input = new MiniProgramUnifiedOrderInput("小程序支付测试", ObjectId.GenerateNewStringId(), 1, "8.8.8.8", "http://114.55.101.33", "ofKnT5CCHaMNzinIfiLpPIb3S014");
+                await miniProgramService.UnifiedOrder(input);
+            }
+        }
+
 
         /// <summary>支付宝App支付
         /// </summary>

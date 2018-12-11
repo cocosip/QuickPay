@@ -1,8 +1,6 @@
 ﻿using DotCommon.AutoMapper;
 using DotCommon.Extensions;
-using DotCommon.Threading;
 using Microsoft.Extensions.Logging;
-using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Requests;
 using QuickPay.WechatPay.Responses;
 using QuickPay.WechatPay.Services.DTOs;

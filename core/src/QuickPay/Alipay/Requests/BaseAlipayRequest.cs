@@ -14,7 +14,7 @@ namespace QuickPay.Alipay.Requests
         public override string SignFieldName => AlipaySettings.DefaultSignFieldName;
         public override string TradeTypeName => "";
 
-        public override string SignTypeName => "";
+        public override string SignTypeName { get; set; }
 
         /// <summary>AppId
         /// </summary>
@@ -62,14 +62,14 @@ namespace QuickPay.Alipay.Requests
 
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
-            var oConfig = (AlipayConfig)config;
-            var oApp = (AlipayApp)app;
+            var alipayConfig = (AlipayConfig)config;
+            var alipayApp = (AlipayApp)app;
 
-            Format = oConfig.Format;
-            Version = oConfig.Version;
-            AppId = oApp.AppId;
-            Charset = oApp.Charset;
-            SignType = oApp.SignType;
+            Format = alipayConfig.Format;
+            Version = alipayConfig.Version;
+            AppId = alipayApp.AppId;
+            Charset = alipayApp.Charset;
+            SignType = alipayApp.SignType;
             Timestamp = AlipayUtil.GenerateTimeStamp();
         }
     }

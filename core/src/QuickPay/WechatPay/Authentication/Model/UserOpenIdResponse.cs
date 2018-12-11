@@ -2,6 +2,8 @@
 
 namespace QuickPay.WechatPay.Authentication
 {
+    /// <summary>公众号等用户OpenId返回信息
+    /// </summary>
     public class UserOpenIdResponse
     {
         /// <summary>AccessToken

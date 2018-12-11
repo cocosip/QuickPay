@@ -3,6 +3,7 @@ using DotCommon.Encrypt;
 using QuickPay.Infrastructure.RequestData;
 using QuickPay.WechatPay.Apps;
 using System;
+using System.Security.Cryptography;
 
 namespace QuickPay.WechatPay.Util
 {
@@ -28,7 +29,6 @@ namespace QuickPay.WechatPay.Util
         /// </summary>
         public static string Sha1Sign(PayData payData)
         {
-
             //转url格式
             string str = $"{payData.ToUrl()}";
             //var encrypted = BitConverter.ToString(SHA1.Create().ComputeHash(Encoding.GetEncoding("UTF-8").GetBytes(str))).Replace("-", "");
@@ -37,9 +37,9 @@ namespace QuickPay.WechatPay.Util
         }
 
 
-        /// <summary>生成签名
+        /// <summary>生成MD5签名
         /// </summary>
-        public static string MakeSign(PayData payData, WechatPayApp app)
+        public static string Md5Sign(PayData payData, WechatPayApp app)
         {
             //转url格式
             string str = $"{payData.ToUrl()}&key={app.Key}";
@@ -61,7 +61,7 @@ namespace QuickPay.WechatPay.Util
             }
             //返回的签名
             var returnSign = payData.GetValue("sign").ToString();
-            var localSign = MakeSign(payData, app);
+            var localSign = Md5Sign(payData, app);
             return returnSign == localSign;
         }
 

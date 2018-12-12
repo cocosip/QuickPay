@@ -11,6 +11,8 @@ namespace QuickPay.WechatPay.Requests
     {
         //public override string RequestUrl => "https://api.mch.weixin.qq.com/secapi/pay/refund";
 
+        public override string TradeTypeName => WechatPaySettings.ExtTradeType.OrderRefund;
+
         /// <summary>签名类型
         /// </summary>
         [PayElement("sign_type", false)]

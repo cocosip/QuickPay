@@ -11,6 +11,8 @@ namespace QuickPay.WechatPay.Requests
     {
         //public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/downloadbill";
 
+        public override string TradeTypeName => WechatPaySettings.ExtTradeType.DownloadBill;
+
         /// <summary>设备号
         /// </summary>
         [PayElement("device_info", false)]

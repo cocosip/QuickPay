@@ -1,4 +1,5 @@
-﻿using QuickPay.Infrastructure.RequestData;
+﻿using QuickPay.Infrastructure.Apps;
+using QuickPay.Infrastructure.RequestData;
 using QuickPay.WechatPay.Responses;
 
 namespace QuickPay.WechatPay.Requests
@@ -8,6 +9,8 @@ namespace QuickPay.WechatPay.Requests
     public class OrderCloseRequest : BaseWechatPayRequest<OrderCloseResponse>
     {
         //public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/closeorder";
+
+        public override string TradeTypeName => WechatPaySettings.ExtTradeType.OrderClose;
 
         /// <summary>商户系统内部订单号，要求32个字符内，只能是数字、大小写字母_-|*@ ，且在同一个商户号下唯一
         /// </summary>
@@ -22,6 +25,11 @@ namespace QuickPay.WechatPay.Requests
         public OrderCloseRequest(string outTradeNo)
         {
             OutTradeNo = outTradeNo;
+        }
+
+        public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
+        {
+            base.SetNecessary(config, app);
         }
 
     }

@@ -1,4 +1,5 @@
-﻿using QuickPay.Infrastructure.RequestData;
+﻿using QuickPay.Infrastructure.Apps;
+using QuickPay.Infrastructure.RequestData;
 using QuickPay.WechatPay.Responses;
 
 namespace QuickPay.WechatPay.Requests
@@ -8,6 +9,10 @@ namespace QuickPay.WechatPay.Requests
     public class OrderQueryRequest : BaseWechatPayRequest<OrderQueryResponse>
     {
         //public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/orderquery";
+
+        public override string TradeTypeName => WechatPaySettings.ExtTradeType.OrderQuery;
+
+
         /// <summary>微信的订单号，优先使用
         /// </summary>
         [PayElement("transaction_id")]

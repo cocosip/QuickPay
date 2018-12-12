@@ -3,6 +3,7 @@ using QuickPay.Alipay.Apps;
 using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Infrastructure.Responses;
+using QuickPay.WechatPay.Apps;
 
 namespace QuickPay.Middleware
 {
@@ -24,15 +25,6 @@ namespace QuickPay.Middleware
             {
                 context.SignType = request.SignTypeName;
             }
-            else
-            {
-                if (request.Provider == QuickPaySettings.Provider.Alipay)
-                {
-                    //支付宝
-                    context.SignType = ((AlipayApp)app).SignType;
-                }
-            }
-
             return context;
         }
     }

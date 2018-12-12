@@ -36,22 +36,23 @@ namespace QuickPay.ConsoleTest
             _stopwatch.Start();
 
             //微信
-            //AsyncHelper.RunSync(() =>
-            //{
-            //    //微信App下单
-            //    //return WechatMiniProgramUnifiedOrder();
-            //    //微信JsApi下单
-            //    // return WechatJsApiUnifiedOrder();
-            //});
-
-            //支付宝
             AsyncHelper.RunSync(() =>
             {
-                //支付宝App下单
-                return AlipayAppTradePay();
-                //支付宝PC下单
-                //return AlipayPageTradePay();
+                //微信App下单
+                //return WechatMiniProgramUnifiedOrder();
+                //微信JsApi下单
+                // return WechatJsApiUnifiedOrder();
+                return WechatOrderQuery();
             });
+
+            //支付宝
+            // AsyncHelper.RunSync(() =>
+            // {
+            //     //支付宝App下单
+            //     //return AlipayAppTradePay();
+            //     //支付宝PC下单
+            //     //return AlipayPageTradePay();
+            // });
 
 
             _stopwatch.Stop();
@@ -67,7 +68,7 @@ namespace QuickPay.ConsoleTest
         static async Task WechatAppUnifiedOrder()
         {
             var appService = _provider.GetService<IWechatAppPayService>();
-            using (appService.Use(_wechatPayConfig.GetByName("App1")))
+            using(appService.Use(_wechatPayConfig.GetByName("App1")))
             {
                 var input = new AppUnifiedOrderInput("测试支付1", ObjectId.GenerateNewStringId(), 10);
                 await appService.UnifiedOrder(input);
@@ -79,7 +80,7 @@ namespace QuickPay.ConsoleTest
         static async Task WechatJsApiUnifiedOrder()
         {
             var jsApiService = _provider.GetService<IWechatJsApiPayService>();
-            using (jsApiService.Use(_wechatPayConfig.GetByName("App2")))
+            using(jsApiService.Use(_wechatPayConfig.GetByName("App2")))
             {
                 var input = new JsApiUnifiedOrderInput("JsApi支付测试", ObjectId.GenerateNewStringId(), 1, "8.8.8.8", "http://114.55.101.33", "opaInxF28ub-ea5JVrZOosDHyXZY");
                 await jsApiService.UnifiedOrder(input);
@@ -92,7 +93,7 @@ namespace QuickPay.ConsoleTest
         {
             var miniProgramService = _provider.GetService<IWechatMiniProgramPayService>();
             var authenticationService = _provider.GetService<IAuthenticationService>();
-            using (miniProgramService.Use(_wechatPayConfig.GetByName("App3")))
+            using(miniProgramService.Use(_wechatPayConfig.GetByName("App3")))
             {
                 //var openId = await authenticationService.GetMiniProgramOpenId(miniProgramService.App.AppId, miniProgramService.App.Appsecret, "071FCmZX1ixU011SMv0Y1KAvZX1FCmZo");
 
@@ -102,13 +103,25 @@ namespace QuickPay.ConsoleTest
             }
         }
 
+        /// <summary>微信订单查询
+        /// </summary>
+        static async Task WechatOrderQuery()
+        {
+            var wechatPayTradeCommonService = _provider.GetService<IWechatPayTradeCommonService>();
+            using(wechatPayTradeCommonService.Use(_wechatPayConfig.GetByName("App3")))
+            {
+                var response = await wechatPayTradeCommonService.OrderQuery(new OrderQueryInput("123"));
+                Console.WriteLine("ReturnSuccess:{0},outTradeNo:{1}", response.ReturnSuccess, response.OutTradeNo);
+            }
+        }
+
 
         /// <summary>支付宝App支付
         /// </summary>
         static async Task<string> AlipayAppTradePay()
         {
             var appPayService = _provider.GetService<IAlipayAppPayService>();
-            using (appPayService.Use(_alipayConfig.GetByName("App1")))
+            using(appPayService.Use(_alipayConfig.GetByName("App1")))
             {
                 var input = new AppTradePayInput("测试1", "支付宝测试支付", ObjectId.GenerateNewStringId(), "0.1");
                 var responseString = await appPayService.TradePayStringResponse(input);
@@ -121,7 +134,7 @@ namespace QuickPay.ConsoleTest
         static async Task<PageTradePayResponse> AlipayPageTradePay()
         {
             var pagePayService = _provider.GetService<IAlipayPagePayService>();
-            using (pagePayService.Use(_alipayConfig.GetByName("App1")))
+            using(pagePayService.Use(_alipayConfig.GetByName("App1")))
             {
                 var input = new PageTradePayInput("测试1", "支付宝测试支付", ObjectId.GenerateNewStringId(), "0.1")
                 {

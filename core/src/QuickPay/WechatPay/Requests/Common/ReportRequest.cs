@@ -9,6 +9,8 @@ namespace QuickPay.WechatPay.Requests
     {
         //public override string RequestUrl => "https://api.mch.weixin.qq.com/payitil/report";
 
+        public override string TradeTypeName => WechatPaySettings.ExtTradeType.Report;
+
         /// <summary>自定义参数，可以为终端设备号(门店号或收银设备ID)，PC网页或公众号内支付可以传"WEB"
         /// </summary>
         [PayElement("device_info", false)]

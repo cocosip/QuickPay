@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using DotCommon.Extensions;
+using Microsoft.Extensions.Logging;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using System;
@@ -21,6 +22,12 @@ namespace QuickPay.Middleware
             {
                 //执行SetNecessary
                 context.Request.SetNecessary(context.Config, context.App);
+                //重新赋值
+                if (context.SignType.IsNullOrWhiteSpace())
+                {
+                    context.SignType = context.Request.SignTypeName;
+                }
+
 
                 //var methods = context.Request.GetType().GetMethods(BindingFlags.Instance | BindingFlags.Public);
                 //var invokeMethods = methods.Where(m => string.Equals(m.Name, "SetNecessary", StringComparison.Ordinal)).ToArray();

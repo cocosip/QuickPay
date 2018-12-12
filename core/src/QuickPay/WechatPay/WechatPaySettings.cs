@@ -73,6 +73,18 @@
             public const string MiniProgram = "MINIPROGRAM";
         }
 
+        /// <summary>扩展交易类型,用于辅助
+        /// </summary>
+        public class ExtTradeType
+        {
+            public const string DownloadBill = "DOWNLOAD_BILL";
+            public const string OrderClose = "ORDER_CLOSE";
+            public const string OrderQuery = "ORDER_QUERY";
+            public const string OrderRefund = "ORDER_REFUND";
+            public const string OrderRefundQuery = "ORDER_REFUND_QUERY";
+            public const string Report = "REPORT";
+        }
+
         public class Scope
         {
             public const string Base = "snsapi_base";

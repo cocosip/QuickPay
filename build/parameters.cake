@@ -65,10 +65,20 @@ public class BuildParameters
         var versionQuality = doc.DocumentElement.SelectSingleNode("/Project/PropertyGroup/VersionQuality").InnerText;
         versionQuality = string.IsNullOrWhiteSpace(versionQuality) ? null : versionQuality;
 
-        var suffix = versionQuality;
-        if (!IsTagged)
+           var suffix = "";
+
+        //如果本地发布,就加dev,如果是nuget发布,就加preview
+        if (IsLocalBuild)
         {
-            suffix += (IsRunningOnTravisCI ? "preview-" : "dev-") + Util.CreateStamp();
+            suffix += "dev-" + Util.CreateStamp();
+        }
+        else
+        {
+            //需要发布到Nuget
+            if (ShouldPublishToNuGet && !string.IsNullOrWhiteSpace(versionQuality))
+            {
+                suffix += "preview";
+            }
         }
         suffix = string.IsNullOrWhiteSpace(suffix) ? null : suffix;
 

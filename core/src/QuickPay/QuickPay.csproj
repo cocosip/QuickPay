@@ -1,18 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="..\..\..\build\common.props" />
+  <Import Project="..\..\..\build\common.props"/>
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>QuickPay</AssemblyName>
     <PackageId>QuickPay</PackageId>
     <Description>QuickPay快速支付</Description>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="DotCommon" Version="2.9.9" />
-    <PackageReference Include="DotCommon.AutoMapper" Version="2.9.9" />
-    <PackageReference Include="DotCommon.Caching" Version="2.9.9" />
-    <PackageReference Include="DotCommon.Json4Net" Version="2.9.9" />
-    <PackageReference Include="DotCommon.Log4Net" Version="2.9.9" />
+    <PackageReference Include="DotCommon" Version="2.9.9.5-preview"/>
+    <PackageReference Include="DotCommon.AutoMapper" Version="2.9.9.5-preview"/>
+    <PackageReference Include="DotCommon.Caching" Version="2.9.9.5-preview"/>
+    <PackageReference Include="DotCommon.Json4Net" Version="2.9.9.5-preview"/>
+    <PackageReference Include="DotCommon.Log4Net" Version="2.9.9.5-preview"/>
   </ItemGroup>
-
 </Project>

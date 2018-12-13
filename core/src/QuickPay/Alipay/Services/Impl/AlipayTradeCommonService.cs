@@ -40,6 +40,16 @@ namespace QuickPay.Alipay.Services.Impl
             return response;
         }
 
+        /// <summary>交易取消
+        /// </summary>
+        public async Task<TradeCancelResponse> Cancel(TradeCancelInput input)
+        {
+            var bizContentRequest = input.MapTo<TradeCancelBizContentRequest>();
+            var request = new TradeCancelRequest(bizContentRequest);
+            var response = await Executer.ExecuteAsync<TradeCancelResponse>(request, App);
+            return response;
+        }
+
         /// <summary>支付退款
         /// </summary>
         public async Task<TradeRefundResponse> Refund(TradeRefundInput input)
@@ -69,5 +79,8 @@ namespace QuickPay.Alipay.Services.Impl
             var response = await Executer.ExecuteAsync<TradeBillDownloadUrlResponse>(request, App);
             return response;
         }
+
+
+ 
     }
 }

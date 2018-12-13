@@ -16,6 +16,10 @@ namespace QuickPay.Alipay.Services
         /// </summary>
         Task<TradeCloseResponse> Close(TradeCloseInput input);
 
+        /// <summary>交易取消
+        /// </summary>
+        Task<TradeCancelResponse> Cancel(TradeCancelInput input);
+
         /// <summary>支付退款
         /// </summary>
         Task<TradeRefundResponse> Refund(TradeRefundInput input);

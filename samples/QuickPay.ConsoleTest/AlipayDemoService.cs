@@ -1,4 +1,6 @@
 ﻿using DotCommon.Utility;
+using Microsoft.Extensions.Logging;
+using QuickPay.Alipay;
 using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Services;
 using QuickPay.Alipay.Services.DTOs;
@@ -11,14 +13,18 @@ namespace QuickPay.ConsoleTest
 {
     public class AlipayDemoService
     {
+        private readonly ILogger _logger;
         private WechatPayDataHelper _wechatPayDataHelper;
         private readonly AlipayConfig _alipayConfig;
+        private readonly IAlipayTradeCommonService _alipayTradeCommonService;
         private readonly IAlipayAppPayService _alipayAppPayService;
         private readonly IAlipayPagePayService _alipayPagePayService;
-        public AlipayDemoService(WechatPayDataHelper wechatPayDataHelper, AlipayConfig alipayConfig, IAlipayAppPayService alipayAppPayService, IAlipayPagePayService alipayPagePayService)
+        public AlipayDemoService(ILogger<QuickPayLoggerName> logger, WechatPayDataHelper wechatPayDataHelper, AlipayConfig alipayConfig, IAlipayTradeCommonService alipayTradeCommonService, IAlipayAppPayService alipayAppPayService, IAlipayPagePayService alipayPagePayService)
         {
+            _logger = logger;
             _wechatPayDataHelper = wechatPayDataHelper;
             _alipayConfig = alipayConfig;
+            _alipayTradeCommonService = alipayTradeCommonService;
             _alipayAppPayService = alipayAppPayService;
             _alipayPagePayService = alipayPagePayService;
         }
@@ -47,11 +53,42 @@ namespace QuickPay.ConsoleTest
                 };
 
                 var response = await _alipayPagePayService.TradePay(input);
-                Console.WriteLine("AlipayPageTradePay,ReturnUrl:{0},NotifyUrl:{1}", response.ReturnUrl, response.NotifyUrl, _wechatPayDataHelper.DictToJson(new Dictionary<string, object>(response.PayData.GetValues())));
+                _logger.LogInformation("AlipayPageTradePay,ReturnUrl:{0},NotifyUrl:{1}", response.ReturnUrl, response.NotifyUrl, _wechatPayDataHelper.DictToJson(new Dictionary<string, object>(response.PayData.GetValues())));
             }
         }
 
+        /// <summary>支付宝订单查询
+        /// </summary>
+        public async Task Query()
+        {
+            using (_alipayTradeCommonService.Use(_alipayConfig.GetByName("App1")))
+            {
+                var response = await _alipayTradeCommonService.Query(new TradeQueryInput("123456"));
+                _logger.LogInformation("ReturnSuccess:{0},Code:{1}", response.ReturnSuccess, response.Code);
+            }
+        }
 
+        /// <summary>支付宝退款申请
+        /// </summary>
+        public async Task RefundQuery()
+        {
+            using (_alipayTradeCommonService.Use(_alipayConfig.GetByName("App1")))
+            {
+                var response = await _alipayTradeCommonService.RefundQuery(new TradeRefundQueryInput("123456", "1234567890"));
+                _logger.LogInformation("ReturnSuccess:{0},Code:{1}", response.ReturnSuccess, response.Code);
+            }
+        }
+
+        /// <summary>账单下载地址
+        /// </summary>
+        public async Task BillDownloadUrl()
+        {
+            using (_alipayTradeCommonService.Use(_alipayConfig.GetByName("App1")))
+            {
+                var response = await _alipayTradeCommonService.BillDownloadUrl(new TradeBillDownloadUrlInput(AlipaySettings.BillType.Trade, "2017-03"));
+                _logger.LogInformation("ReturnSuccess:{0},Code:{1},BillDownloadUrl:{2}", response.ReturnSuccess, response.Code, response.BillDownloadUrl);
+            }
+        }
 
     }
 }

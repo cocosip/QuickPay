@@ -110,6 +110,9 @@
             /// <summary>交易退款查询
             /// </summary>
             public const string TradeRefundQuery = "TRADE_REFUND_QUERY";
+            /// <summary>交易取消
+            /// </summary>
+            public const string TradeCancel = "TRADE_CANCEL";
 
         }
 

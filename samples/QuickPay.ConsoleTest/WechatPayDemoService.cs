@@ -1,4 +1,5 @@
 ﻿using DotCommon.Utility;
+using Microsoft.Extensions.Logging;
 using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Authentication;
 using QuickPay.WechatPay.Services;
@@ -10,6 +11,7 @@ namespace QuickPay.ConsoleTest
 {
     public class WechatPayDemoService
     {
+        private readonly ILogger _logger;
         private readonly WechatPayConfig _wechatPayConfig;
         private readonly IAuthenticationService _authenticationService;
         private readonly IWechatPayTradeCommonService _wechatPayTradeCommonService;
@@ -17,8 +19,9 @@ namespace QuickPay.ConsoleTest
         private readonly IWechatJsApiPayService _wechatJsApiPayService;
         private readonly IWechatMiniProgramPayService _wechatMiniProgramPayService;
 
-        public WechatPayDemoService(WechatPayConfig wechatPayConfig, IAuthenticationService authenticationService, IWechatPayTradeCommonService wechatPayTradeCommonService, IWechatAppPayService wechatAppPayService, IWechatJsApiPayService wechatJsApiPayService, IWechatMiniProgramPayService wechatMiniProgramPayService)
+        public WechatPayDemoService(ILogger<QuickPayLoggerName> logger, WechatPayConfig wechatPayConfig, IAuthenticationService authenticationService, IWechatPayTradeCommonService wechatPayTradeCommonService, IWechatAppPayService wechatAppPayService, IWechatJsApiPayService wechatJsApiPayService, IWechatMiniProgramPayService wechatMiniProgramPayService)
         {
+            _logger = logger;
             _wechatPayConfig = wechatPayConfig;
             _authenticationService = authenticationService;
             _wechatPayTradeCommonService = wechatPayTradeCommonService;
@@ -72,7 +75,7 @@ namespace QuickPay.ConsoleTest
             using (_wechatPayTradeCommonService.Use(_wechatPayConfig.GetByName("App3")))
             {
                 var response = await _wechatPayTradeCommonService.OrderQuery(new OrderQueryInput("123"));
-                Console.WriteLine("ReturnSuccess:{0},outTradeNo:{1}", response.ReturnSuccess, response.OutTradeNo);
+                _logger.LogInformation("ReturnSuccess:{0},outTradeNo:{1}", response.ReturnSuccess, response.OutTradeNo);
             }
         }
 

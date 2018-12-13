@@ -60,6 +60,8 @@ namespace QuickPay.ConsoleTest
                 option.EnabledAlipaySandbox = false; //是否启用支付宝沙盒
                 option.EnabledWechatPaySandbox = false; //是否启用微信沙盒
             })
+            .AddTransient<WechatPayDemoService>()
+            .AddTransient<AlipayDemoService>()
             //.AddQuickPaySqlServer(o =>
             //{
             //    o.DbConnectionString = "";

@@ -5,15 +5,20 @@ using System.Collections.Generic;
 
 namespace QuickPay.Alipay.Util
 {
+    /// <summary>支付宝PayData帮助类
+    /// </summary>
     public class AlipayPayDataHelper
     {
         private IJsonSerializer _jsonSerializer;
-
+        /// <summary>Ctor
+        /// </summary>
         public AlipayPayDataHelper(IJsonSerializer jsonSerializer)
         {
             _jsonSerializer = jsonSerializer;
         }
 
+        /// <summary>从Json转化成PayData
+        /// </summary>
         public PayData FromJson(string json)
         {
             var sortedDict = _jsonSerializer.Deserialize<SortedDictionary<string, object>>(json);

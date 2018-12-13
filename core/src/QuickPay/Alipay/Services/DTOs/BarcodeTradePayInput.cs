@@ -7,33 +7,8 @@ namespace QuickPay.Alipay.Services.DTOs
     /// <summary>条码支付
     /// </summary>
     [AutoMapTo(typeof(BarcodeTradeBizContentPayRequest))]
-    public class BarcodeTradePayInput: UniqueIdDto
+    public class BarcodeTradePayInput : UniqueIdDto
     {
-        public BarcodeTradePayInput()
-        {
-
-        }
-
-        public BarcodeTradePayInput(string outTradeNo, string scene, string authCode, string subject, string body, decimal totalAmount)
-        {
-            OutTradeNo = outTradeNo;
-            Scene = scene;
-            AuthCode = authCode;
-            Subject = subject;
-            Body = body;
-            TotalAmount = totalAmount;
-        }
-
-        public BarcodeTradePayInput(string outTradeNo, string scene, string authCode, string subject, string body, decimal totalAmount, string notifyUrl)
-        {
-            OutTradeNo = outTradeNo;
-            Scene = scene;
-            AuthCode = authCode;
-            Subject = subject;
-            Body = body;
-            TotalAmount = totalAmount;
-            NotifyUrl = notifyUrl;
-        }
 
         /// <summary>商户网站唯一订单号
         /// </summary>
@@ -107,5 +82,50 @@ namespace QuickPay.Alipay.Services.DTOs
         /// <summary>该笔订单允许的最晚付款时间，逾期将关闭交易
         /// </summary>
         public string TimeoutExpress { get; set; }
+
+        /// <summary>Ctor
+        /// </summary>
+        public BarcodeTradePayInput()
+        {
+
+        }
+
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="outTradeNo">商户网站唯一订单号</param>
+        /// <param name="scene">支付场景</param>
+        /// <param name="authCode">支付授权码</param>
+        /// <param name="subject">订单标题</param>
+        /// <param name="body">订单描述</param>
+        /// <param name="totalAmount">订单总金额,单位为元,精确到小数点后两位</param>
+        public BarcodeTradePayInput(string outTradeNo, string scene, string authCode, string subject, string body, decimal totalAmount)
+        {
+            OutTradeNo = outTradeNo;
+            Scene = scene;
+            AuthCode = authCode;
+            Subject = subject;
+            Body = body;
+            TotalAmount = totalAmount;
+        }
+
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="outTradeNo">商户网站唯一订单号</param>
+        /// <param name="scene">支付场景</param>
+        /// <param name="authCode">支付授权码</param>
+        /// <param name="subject">订单标题</param>
+        /// <param name="body">订单描述</param>
+        /// <param name="totalAmount">订单总金额,单位为元,精确到小数点后两位</param>
+        /// <param name="notifyUrl">异步通知地址</param>
+        public BarcodeTradePayInput(string outTradeNo, string scene, string authCode, string subject, string body, decimal totalAmount, string notifyUrl)
+        {
+            OutTradeNo = outTradeNo;
+            Scene = scene;
+            AuthCode = authCode;
+            Subject = subject;
+            Body = body;
+            TotalAmount = totalAmount;
+            NotifyUrl = notifyUrl;
+        }
     }
 }

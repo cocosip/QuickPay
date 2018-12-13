@@ -2,6 +2,8 @@
 
 namespace QuickPay.WechatPay.Responses
 {
+    /// <summary>微信支付App下单返回
+    /// </summary>
     public class AppUnifiedOrderResponse : WechatPayCommonResponse
     {
         /********************以下字段在return_code为SUCCESS的时候有返回********************/

@@ -5,9 +5,14 @@ using System.Collections.Generic;
 
 namespace QuickPay.WechatPay.Util
 {
+    /// <summary>微信支付PayData操作帮主类
+    /// </summary>
     public class WechatPayDataHelper
     {
         private readonly IJsonSerializer _jsonSerializer;
+
+        /// <summary>Ctor
+        /// </summary>
         public WechatPayDataHelper(IJsonSerializer jsonSerializer)
         {
             _jsonSerializer = jsonSerializer;
@@ -41,6 +46,8 @@ namespace QuickPay.WechatPay.Util
             return Convert.ToInt32(payData.GetValue(x => x.Key.ToLower() == "total_fee")) / 100M;
         }
 
+        /// <summary>字典转换成Json
+        /// </summary>
         public string DictToJson(Dictionary<string, object> dict)
         {
             return _jsonSerializer.Serialize(dict);

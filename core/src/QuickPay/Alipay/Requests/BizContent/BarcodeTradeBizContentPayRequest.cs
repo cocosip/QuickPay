@@ -91,6 +91,8 @@ namespace QuickPay.Alipay.Requests
         [PayElement("timeout_express", false)]
         public string TimeoutExpress { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public BarcodeTradeBizContentPayRequest()
         {
 

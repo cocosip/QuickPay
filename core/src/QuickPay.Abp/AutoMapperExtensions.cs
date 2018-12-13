@@ -6,6 +6,8 @@ using System.Reflection;
 
 namespace QuickPay
 {
+    /// <summary>Abp扩展存储时,AutoMapper映射
+    /// </summary>
     public static class AutoMapperExtensions
     {
         /// <summary>创建快捷支付Abp扩展自动映射

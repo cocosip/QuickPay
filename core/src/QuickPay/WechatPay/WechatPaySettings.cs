@@ -1,5 +1,7 @@
 ﻿namespace QuickPay.WechatPay
 {
+    /// <summary>微信支付常量配置
+    /// </summary>
     public class WechatPaySettings
     {
         /// <summary>默认签名字段的名称
@@ -24,10 +26,20 @@
         /// </summary>
         public const string AuthenticationState = "QuickPay.WechatPay.AuthenticationState";
 
+        /// <summary>H5场景
+        /// </summary>
         public class H5SceneInfoType
         {
+            /// <summary>IOS
+            /// </summary>
             public const string IOS = "IOS";
+
+            /// <summary>Android
+            /// </summary>
             public const string Android = "Android";
+
+            /// <summary>Wap
+            /// </summary>
             public const string Wap = "Wap";
         }
 
@@ -35,9 +47,13 @@
         /// </summary>
         public class TarType
         {
+            /// <summary>GZIP
+            /// </summary>
             public const string Gzip = "GZIP";
         }
 
+        /// <summary>订单类型
+        /// </summary>
         public class BillType
         {
             /// <summary>返回当日所有订单信息，默认值
@@ -56,16 +72,28 @@
             public const string RechargeRefund = "RECHARGE_REFUND";
         }
 
+        /// <summary>交易类型
+        /// </summary>
         public class TradeType
         {
+            /// <summary>Native支付
+            /// </summary>
             public const string Native = "NATIVE";
 
+            /// <summary>JsApi公众号支付
+            /// </summary>
             public const string JsApi = "JSAPI";
 
+            /// <summary>App支付
+            /// </summary>
             public const string App = "APP";
 
+            /// <summary>H5支付
+            /// </summary>
             public const string H5 = "MWEB";
 
+            /// <summary>扫码支付
+            /// </summary>
             public const string Micropay = "MICROPAY";
 
             /// <summary>小程序传参的时候必须用JSAPI,但是本地记录需要用MINIPROGRAM
@@ -77,37 +105,75 @@
         /// </summary>
         public class ExtTradeType
         {
+            /// <summary>下载订单
+            /// </summary>
             public const string DownloadBill = "DOWNLOAD_BILL";
+            /// <summary>订单关闭
+            /// </summary>
             public const string OrderClose = "ORDER_CLOSE";
+            /// <summary>订单查询
+            /// </summary>
             public const string OrderQuery = "ORDER_QUERY";
+            /// <summary>订单退款
+            /// </summary>
             public const string OrderRefund = "ORDER_REFUND";
+            /// <summary>订单退款查询
+            /// </summary>
             public const string OrderRefundQuery = "ORDER_REFUND_QUERY";
+            /// <summary>上报
+            /// </summary>
             public const string Report = "REPORT";
         }
 
+        /// <summary>授权认证Scope
+        /// </summary>
         public class Scope
         {
+            /// <summary>snsapi_base
+            /// </summary>
             public const string Base = "snsapi_base";
 
+            /// <summary>snsapi_userinfo
+            /// </summary>
             public const string UserInfo = "snsapi_userinfo";
         }
 
+        /// <summary>返回结果
+        /// </summary>
         public class ReturnCode
         {
+            /// <summary>SUCCESS
+            /// </summary>
             public const string Success = "SUCCESS";
+            /// <summary>FAIL
+            /// </summary>
             public const string Fail = "FAIL";
         }
 
+        /// <summary>执行结果(业务结果)
+        /// </summary>
         public class ResultCode
         {
+            /// <summary>SUCCESS
+            /// </summary>
             public const string Success = "SUCCESS";
+            /// <summary>FAIL
+            /// </summary>
             public const string Fail = "FAIL";
         }
 
+        /// <summary>Sign签名类型
+        /// </summary>
         public class SignType
         {
+            /// <summary>MD5
+            /// </summary>
             public const string Md5 = "MD5";
+            /// <summary>HMAC-SHA256
+            /// </summary>
             public const string HmacSha256 = "HMAC-SHA256";
+            /// <summary>SHA1
+            /// </summary>
             public const string Sha1 = "SHA1";
         }
 

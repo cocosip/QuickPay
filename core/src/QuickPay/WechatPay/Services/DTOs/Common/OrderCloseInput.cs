@@ -9,15 +9,20 @@ namespace QuickPay.WechatPay.Services.DTOs
     [AutoMapTo(typeof(OrderCloseRequest))]
     public class OrderCloseInput : UniqueIdDto
     {
-        /// <summary>交易号
+        /// <summary>>商户系统内部订单号
         /// </summary>
         public string OutTradeNo { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public OrderCloseInput()
         {
 
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="outTradeNo">>商户系统内部订单号</param>
         public OrderCloseInput(string outTradeNo)
         {
             OutTradeNo = outTradeNo;

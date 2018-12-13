@@ -17,7 +17,7 @@ namespace QuickPay.WechatPay.Services.DTOs
         /// </summary>
         public string OutTradeNo { get; set; }
 
-        /// <summary>订单总金额，单位为分
+        /// <summary>订单总金额,单位为分
         /// </summary>
         public int TotalFee { get; set; }
 
@@ -25,17 +25,32 @@ namespace QuickPay.WechatPay.Services.DTOs
         /// </summary>
         public string NotifyUrl { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public AppUnifiedOrderInput()
         {
 
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="body">商品简单描述</param>
+        /// <param name="outTradeNo">商户系统内部订单号</param>
+        /// <param name="totalFee">订单总金额,单位为分</param>
         public AppUnifiedOrderInput(string body, string outTradeNo, int totalFee)
         {
             Body = body;
             OutTradeNo = outTradeNo;
             TotalFee = totalFee;
         }
+
+
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="body">商品简单描述</param>
+        /// <param name="outTradeNo">商户系统内部订单号</param>
+        /// <param name="totalFee">订单总金额,单位为分</param>
+        /// <param name="notifyUrl">异步通知地址</param>
         public AppUnifiedOrderInput(string body, string outTradeNo, int totalFee, string notifyUrl)
         {
             Body = body;

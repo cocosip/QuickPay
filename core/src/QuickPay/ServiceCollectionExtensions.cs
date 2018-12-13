@@ -22,6 +22,8 @@ using System.Linq;
 
 namespace QuickPay
 {
+    /// <summary>依赖注入扩展
+    /// </summary>
     public static class ServiceCollectionExtensions
     {
         /// <summary>添加配置

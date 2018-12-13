@@ -7,6 +7,8 @@ using System.Security.Cryptography;
 
 namespace QuickPay.WechatPay.Util
 {
+    /// <summary>微信支付工具类
+    /// </summary>
     public class WechatPayUtil
     {
         /// <summary>生成时间戳，标准北京时间，时区为东八区，自1970年1月1日 0点0分0秒以来的秒数

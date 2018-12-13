@@ -7,13 +7,24 @@ using QuickPay.Infrastructure.Requests;
 
 namespace QuickPay.Alipay.Requests
 {
+    /// <summary>支付宝基础泛型请求
+    /// </summary>
     public abstract class BaseAlipayRequest<T> : BasePayRequest<T> where T : BaseAlipayResponse
     {
+        /// <summary>支付宝管道名
+        /// </summary>
         public override string Provider => QuickPaySettings.Provider.Alipay;
 
+        /// <summary>签名字段名称
+        /// </summary>
         public override string SignFieldName => AlipaySettings.DefaultSignFieldName;
+
+        /// <summary>交易类型名称
+        /// </summary>
         public override string TradeTypeName => "";
 
+        /// <summary>签名类型名称
+        /// </summary>
         public override string SignTypeName { get; set; }
 
         /// <summary>AppId
@@ -60,6 +71,8 @@ namespace QuickPay.Alipay.Requests
         /// </summary>
         public BaseBizContentRequest BizContentRequest { get; set; }
 
+        /// <summary>设置必要参数
+        /// </summary>
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             var alipayConfig = (AlipayConfig)config;

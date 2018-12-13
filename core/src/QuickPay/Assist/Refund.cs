@@ -1,5 +1,7 @@
 ﻿namespace QuickPay.Assist
 {
+    /// <summary>退款
+    /// </summary>
     public class Refund
     {
         /// <summary>唯一Id

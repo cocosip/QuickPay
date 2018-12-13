@@ -10,6 +10,8 @@ using System.Reflection;
 
 namespace QuickPay.Infrastructure.Util
 {
+    /// <summary>Emit反射工具类
+    /// </summary>
     public class RequestReflectUtil
     {
         private static readonly ConcurrentDictionary<Type, Delegate> RequestToDataDict =

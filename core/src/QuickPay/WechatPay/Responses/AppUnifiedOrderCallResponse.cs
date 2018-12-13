@@ -37,6 +37,8 @@ namespace QuickPay.WechatPay.Responses
         [PayElement("timestamp")]
         public string Timestamp { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public AppUnifiedOrderCallResponse()
         {
 

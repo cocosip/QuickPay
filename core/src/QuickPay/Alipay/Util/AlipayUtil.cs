@@ -7,6 +7,8 @@ using System.Text;
 
 namespace QuickPay.Alipay.Util
 {
+    /// <summary>支付宝工具类
+    /// </summary>
     public class AlipayUtil
     {
         /// <summary>生成时间戳，发送请求的时间，格式"yyyy-MM-dd HH:mm:ss"
@@ -16,10 +18,10 @@ namespace QuickPay.Alipay.Util
             return DateTime.Now.ToString($"yyyy-MM-dd HH:mm:ss");
         }
 
-        /// <summary>
-        /// 组装普通文本请求参数。
+        /// <summary>组装普通文本请求参数
         /// </summary>
         /// <param name="parameters">Key-Value形式请求参数字典</param>
+        /// <param name="charset">编码</param>
         /// <returns>URL编码后的请求数据</returns>
         public static string BuildQuery(IDictionary<string, object> parameters, string charset)
         {

@@ -11,15 +11,22 @@ using System.Threading.Tasks;
 
 namespace QuickPay.WechatPay.Middleware
 {
+    /// <summary>微信支付签名中间件
+    /// </summary>
     public class WechatPaySignMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
+
+        /// <summary>Ctor
+        /// </summary>
         public WechatPaySignMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger)
         {
             _next = next;
             Logger = logger;
         }
 
+        /// <summary>Invoke
+        /// </summary>
         public async Task Invoke(ExecuteContext context)
         {
             try

@@ -71,11 +71,19 @@ namespace QuickPay.Alipay.Services.DTOs
         /// </summary>
         public string ReturnUrl { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public PageTradePayInput()
         {
 
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="subject">商品的标题/交易标题/订单标题/订单关键字等</param>
+        /// <param name="body">对一笔交易的具体描述信息</param>
+        /// <param name="outTradeNo">商户网站唯一订单号</param>
+        /// <param name="totalAmount">订单总金额,单位为元,精确到小数点后两位(如:1.00)</param>
         public PageTradePayInput(string subject, string body, string outTradeNo, string totalAmount)
         {
             Subject = subject;

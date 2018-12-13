@@ -29,11 +29,20 @@ namespace QuickPay.WechatPay.Services.DTOs
         /// </summary>
         public string NotifyUrl { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public NativeMode2UnifiedOrderInput()
         {
 
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="body">商品简单描述</param>
+        /// <param name="outTradeNo">商户系统内部订单号</param>
+        /// <param name="totalFee">订单总金额,单位为分</param>
+        /// <param name="spbillCreateIp">APP和网页支付提交用户端ip</param>
+        /// <param name="notifyUrl">异步通知地址</param>
         public NativeMode2UnifiedOrderInput(string body, string outTradeNo, int totalFee, string spbillCreateIp, string notifyUrl)
         {
             Body = body;

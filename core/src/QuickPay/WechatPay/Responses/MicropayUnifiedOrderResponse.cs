@@ -35,6 +35,8 @@ namespace QuickPay.WechatPay.Responses
 
         /*************************当return_code 和result_code都为SUCCESS的时*************************/
 
+        /// <summary>用户OpenId
+        /// </summary>
         [PayElement("openid")]
         public string OpenId { get; set; }
 

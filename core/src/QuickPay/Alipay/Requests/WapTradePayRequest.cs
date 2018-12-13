@@ -10,8 +10,12 @@ namespace QuickPay.Alipay.Requests
     /// </summary>
     public class WapTradePayRequest : BaseAlipayRequest<WapTradePayResponse>
     {
+        /// <summary>Method
+        /// </summary>
         public override string Method => "alipay.trade.wap.pay";
 
+        /// <summary>交易类型名称
+        /// </summary>
         public override string TradeTypeName => AlipaySettings.TradeType.Wap;
 
         /// <summary>HTTP/HTTPS开头字符串,同步结果通知
@@ -24,11 +28,18 @@ namespace QuickPay.Alipay.Requests
         [PayElement("notify_url")]
         public string NotifyUrl { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public WapTradePayRequest()
         {
 
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="bizContentRequest">bizContentRequest</param>
+        /// <param name="returnUrl">同步结果通知</param>
+        /// <param name="notifyUrl">异步通知地址</param>
         public WapTradePayRequest(WapTradeBizContentPayRequest bizContentRequest, string returnUrl, string notifyUrl)
         {
             BizContentRequest = bizContentRequest;
@@ -36,6 +47,8 @@ namespace QuickPay.Alipay.Requests
             NotifyUrl = notifyUrl;
         }
 
+        /// <summary>设置必要参数
+        /// </summary>
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);

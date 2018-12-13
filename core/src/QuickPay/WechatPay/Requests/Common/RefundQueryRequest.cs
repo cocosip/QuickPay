@@ -7,8 +7,8 @@ namespace QuickPay.WechatPay.Requests
     /// </summary>
     public class RefundQueryRequest : BaseWechatPayRequest<RefundQueryResponse>
     {
-        //public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/refundquery";
-
+        /// <summary>交易类型名称
+        /// </summary>
         public override string TradeTypeName => WechatPaySettings.ExtTradeType.OrderRefundQuery;
 
         /// <summary>微信订单号
@@ -31,11 +31,16 @@ namespace QuickPay.WechatPay.Requests
         [PayElement("refund_id", false)]
         public string RefundId { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public RefundQueryRequest()
         {
 
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="outRefundNo">商户系统内部订单号</param>
         public RefundQueryRequest(string outRefundNo)
         {
             OutRefundNo = outRefundNo;

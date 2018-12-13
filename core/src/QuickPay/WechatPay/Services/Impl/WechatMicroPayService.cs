@@ -13,6 +13,8 @@ namespace QuickPay.WechatPay.Services.Impl
     /// </summary>
     public class WechatMicroPayService : BaseWechatPayService, IWechatMicroPayService
     {
+        /// <summary>Ctor
+        /// </summary>
         public WechatMicroPayService(IServiceProvider provider) : base(provider)
         {
 

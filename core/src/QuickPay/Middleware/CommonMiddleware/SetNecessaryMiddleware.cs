@@ -7,15 +7,21 @@ using System.Threading.Tasks;
 
 namespace QuickPay.Middleware
 {
+    /// <summary>设置必要参数中间件
+    /// </summary>
     public class SetNecessaryMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
-
+        /// <summary>Ctor
+        /// </summary>
         public SetNecessaryMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger)
         {
             _next = next;
             Logger = logger;
         }
+
+        /// <summary>Invoke
+        /// </summary>
         public async Task Invoke(ExecuteContext context)
         {
             try

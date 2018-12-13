@@ -11,11 +11,20 @@ namespace QuickPay.WechatPay.Requests
     /// </summary>
     public class JsApiUnifiedOrderCallRequest : BasePayRequest<JsApiUnifiedOrderCallResponse>
     {
+        /// <summary>微信支付管道名
+        /// </summary>
         public override string Provider => QuickPaySettings.Provider.WechatPay;
 
+        /// <summary>签名字段名称
+        /// </summary>
         public override string SignFieldName => WechatPaySettings.JsApiPaySignFieldName;
 
+        /// <summary>交易类型名称
+        /// </summary>
         public override string TradeTypeName => WechatPaySettings.TradeType.JsApi;
+
+        /// <summary>签名类型名称
+        /// </summary>
         public override string SignTypeName { get; set; }
 
         /// <summary>微信开放平台审核通过的应用APPID
@@ -43,7 +52,8 @@ namespace QuickPay.WechatPay.Requests
         [PayElement("signType")]
         public string SignType { get; set; }
 
-
+        /// <summary>设置必要参数
+        /// </summary>
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);
@@ -56,11 +66,16 @@ namespace QuickPay.WechatPay.Requests
             Timestamp = WechatPayUtil.GenerateTimeStamp();
         }
 
+        /// <summary>Ctor
+        /// </summary>
         public JsApiUnifiedOrderCallRequest()
         {
 
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="prepayId">预订单Id</param>
         public JsApiUnifiedOrderCallRequest(string prepayId)
         {
             //Package为预订单信息

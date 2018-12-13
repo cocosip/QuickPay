@@ -1,5 +1,7 @@
 ﻿namespace QuickPay.Assist
 {
+    /// <summary>支付信息
+    /// </summary>
     public class Payment
     {
         /// <summary>唯一Id

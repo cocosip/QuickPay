@@ -9,6 +9,8 @@ using QuickPay.WechatPay.Middleware;
 using System;
 namespace QuickPay
 {
+    /// <summary>依赖注入扩展
+    /// </summary>
     public static class ServiceProviderExtensions
     {
         /// <summary>配置QuickPay的相关信息
@@ -37,6 +39,8 @@ namespace QuickPay
             pipelineBuilder.UseMiddleware<SetNecessaryMiddleware>();
             //自动UniqueId
             pipelineBuilder.UseMiddleware<AutoUniqueIdMiddleware>();
+
+            //支付宝
             //Request转PayData
             pipelineBuilder.UseMiddleware<AlipayPayDataTransformMiddleware>();
             //签名
@@ -44,6 +48,7 @@ namespace QuickPay
             //构建RequestBuilder
             pipelineBuilder.UseMiddleware<AlipayRequestBuilderMiddleware>();
 
+            //微信
             //Request转PayData
             pipelineBuilder.UseMiddleware<WechatPayDataTransformMiddleware>();
             //签名
@@ -53,6 +58,7 @@ namespace QuickPay
 
             //执行Execute
             pipelineBuilder.UseMiddleware<ExecuterExecutedMiddleware>();
+
             //数据返回格式化
             pipelineBuilder.UseMiddleware<AlipayParseResponseMiddleware>();
             pipelineBuilder.UseMiddleware<WechatPayParseResponseMiddleware>();

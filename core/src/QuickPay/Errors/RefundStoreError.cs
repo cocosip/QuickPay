@@ -4,6 +4,8 @@
     /// </summary>
     public class RefundStoreError : Error
     {
+        /// <summary>
+        /// </summary>
         public RefundStoreError(string message) : base(message, (int)QuickPayErrorCodes.RefundStoreError)
         {
         }

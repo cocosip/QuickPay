@@ -6,6 +6,8 @@ using System.Linq;
 
 namespace QuickPay.WechatPay.Apps
 {
+    /// <summary>微信支付配置
+    /// </summary>
     public class WechatPayConfig : QuickPayConfig
     {
         /// <summary>默认的应用名
@@ -40,16 +42,22 @@ namespace QuickPay.WechatPay.Apps
         /// </summary>
         public List<WechatPayApp> Apps = new List<WechatPayApp>();
 
+        /// <summary>根据名称获取应用
+        /// </summary>
         public WechatPayApp GetByName(string name)
         {
             return Apps.FirstOrDefault(x => x.Name == name);
         }
 
+        /// <summary>根据AppId获取应用
+        /// </summary>
         public WechatPayApp GetByAppId(string appId)
         {
             return Apps.FirstOrDefault(x => x.AppId == appId);
         }
 
+        /// <summary>获取默认应用
+        /// </summary>
         public WechatPayApp GetDefaultApp()
         {
             if (!DefaultAppName.IsNullOrWhiteSpace())
@@ -59,12 +67,15 @@ namespace QuickPay.WechatPay.Apps
             throw new ArgumentException($"DefaultAppName 未配置!");
         }
 
-
+        /// <summary>获取默认异步通知地址
+        /// </summary>
         public string GetDefaultNotifyUrl()
         {
             return $"{NotifyGateway.TrimEnd('/')}/{NotifyRealateUrl.TrimStart('/')}";
         }
 
+        /// <summary>Copy
+        /// </summary>
         public WechatPayConfig SelfCopy(WechatPayConfig wechatPayConfig)
         {
             DefaultAppName = wechatPayConfig.DefaultAppName;

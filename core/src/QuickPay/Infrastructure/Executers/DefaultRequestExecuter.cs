@@ -18,6 +18,8 @@ namespace QuickPay.Infrastructure.Executers
         private readonly IExecuteContextFactory _executeContextFactory;
         private readonly IQuickPayConfigManager _quickPayConfigManager;
         private readonly ILogger _logger;
+        /// <summary>
+        /// </summary>
         public DefaultRequestExecuter(ILogger<QuickPayLoggerName> logger, IQuickPayPipelineBuilder quickPayPipelineBuilder, IExecuteContextFactory executeContextFactory, IQuickPayConfigManager quickPayConfigManager)
         {
             _logger = logger;
@@ -26,6 +28,8 @@ namespace QuickPay.Infrastructure.Executers
             _quickPayConfigManager = quickPayConfigManager;
         }
 
+        /// <summary>执行器执行
+        /// </summary>
         public async Task<T> ExecuteAsync<T>(IPayRequest<T> request, QuickPayApp app) where T : PayResponse
         {
             try
@@ -55,7 +59,8 @@ namespace QuickPay.Infrastructure.Executers
             }
         }
 
-
+        /// <summary>请求签名
+        /// </summary>
         public async Task<T> SignRequest<T>(IPayRequest<T> request, QuickPayApp app) where T : PayResponse
         {
             try

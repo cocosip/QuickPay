@@ -13,12 +13,16 @@ namespace QuickPay.WechatPay.Middleware
     public class WechatPayDataTransformMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
+        /// <summary>Ctor
+        /// </summary>
         public WechatPayDataTransformMiddleware(QuickPayExecuteDelegate next,ILogger<QuickPayLoggerName> logger)
         {
             Logger = logger;
             _next = next;
         }
 
+        /// <summary>Invoke
+        /// </summary>
         public async Task Invoke(ExecuteContext context)
         {
             if (context.Request.Provider == QuickPaySettings.Provider.WechatPay)

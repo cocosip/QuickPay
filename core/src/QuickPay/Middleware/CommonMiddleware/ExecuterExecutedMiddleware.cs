@@ -7,10 +7,14 @@ using System.Threading.Tasks;
 
 namespace QuickPay.Middleware
 {
+    /// <summary>执行器执行中间件
+    /// </summary>
     public class ExecuterExecutedMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
         private readonly IHttpClient _httpClient;
+        /// <summary>Ctor
+        /// </summary>
         public ExecuterExecutedMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, IHttpClient httpClient)
         {
             _next = next;
@@ -18,6 +22,8 @@ namespace QuickPay.Middleware
             _httpClient = httpClient;
         }
 
+        /// <summary>Invoke
+        /// </summary>
         public async Task Invoke(ExecuteContext context)
         {
             //执行器

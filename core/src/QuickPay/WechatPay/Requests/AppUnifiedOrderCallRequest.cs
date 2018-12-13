@@ -5,8 +5,12 @@ using QuickPay.WechatPay.Util;
 
 namespace QuickPay.WechatPay.Requests
 {
+    /// <summary>微信支付App下单唤起支付
+    /// </summary>
     public class AppUnifiedOrderCallRequest : BaseWechatPayRequest<AppUnifiedOrderCallResponse>
     {
+        /// <summary>交易类型名称
+        /// </summary>
         public override string TradeTypeName => WechatPaySettings.TradeType.App;
 
         /// <summary>微信支付分配的商户号
@@ -34,16 +38,23 @@ namespace QuickPay.WechatPay.Requests
         [PayElement("timestamp")]
         public string Timestamp { get; set; }
 
+        /// <summary>设置必要参数
+        /// </summary>
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);
             Timestamp = WechatPayUtil.GenerateTimeStamp();
         }
+
+        /// <summary>Ctor
+        /// </summary>
         public AppUnifiedOrderCallRequest()
         {
 
         }
 
+        /// <summary>
+        /// </summary>
         public AppUnifiedOrderCallRequest(string prepayId)
         {
             PrepayId = prepayId;

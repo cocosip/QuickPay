@@ -1,15 +1,19 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using QuickPay.Alipay.Apps;
-using QuickPay.Configurations;
 using QuickPay.Assist.Store;
+using QuickPay.Configurations;
 using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Authentication;
 using System;
 
 namespace QuickPay
 {
+    /// <summary>依赖注入扩展
+    /// </summary>
     public static class ServiceCollectionExtensions
     {
+        /// <summary>添加QuickPay Abp扩展
+        /// </summary>
         public static IServiceCollection AddQuickPayAbp(this IServiceCollection services)
         {
             services.AddTransient<IPaymentStore, AbpPaymentStore>();

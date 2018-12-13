@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 
 namespace QuickPay.Middleware.Pipeline
 {
+    /// <summary>QuickPay管道创建
+    /// </summary>
     public class QuickPayPipelineBuilder : IQuickPayPipelineBuilder
     {
         private readonly IList<Func<QuickPayExecuteDelegate, QuickPayExecuteDelegate>> _middlewares;
         private readonly ILogger _logger;
 
+        /// <summary>Provider
+        /// </summary>
         public IServiceProvider Provider { get; }
-
+        /// <summary>Ctor
+        /// </summary>
         public QuickPayPipelineBuilder(ILogger<QuickPayLoggerName> logger, IServiceProvider provider)
         {
             _logger = logger;
@@ -20,13 +25,16 @@ namespace QuickPay.Middleware.Pipeline
             _middlewares = new List<Func<QuickPayExecuteDelegate, QuickPayExecuteDelegate>>();
         }
 
-
+        /// <summary>Use
+        /// </summary>
         public QuickPayPipelineBuilder Use(Func<QuickPayExecuteDelegate, QuickPayExecuteDelegate> middleware)
         {
             _middlewares.Add(middleware);
             return this;
         }
 
+        /// <summary>Build
+        /// </summary>
         public QuickPayExecuteDelegate Build()
         {
             QuickPayExecuteDelegate app = context =>

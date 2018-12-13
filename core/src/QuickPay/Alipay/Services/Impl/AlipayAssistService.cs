@@ -17,6 +17,8 @@ namespace QuickPay.Alipay.Services.Impl
     {
         private readonly IPaymentStore _paymentStore;
         private readonly AlipayPayDataHelper _alipayPayDataHelper;
+        /// <summary>Ctor
+        /// </summary>
         public AlipayAssistService(IServiceProvider provider, IPaymentStore paymentStore) : base(provider)
         {
             _paymentStore = paymentStore;

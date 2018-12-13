@@ -32,6 +32,8 @@ namespace QuickPay.Alipay.Responses
         //[PayElement("sign")]
         //public string Sign { get; set; }
 
+        /// <summary>是否返回成功
+        /// </summary>
         public virtual bool ReturnSuccess
         {
             get

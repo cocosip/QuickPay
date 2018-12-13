@@ -32,7 +32,7 @@ namespace QuickPay.WechatPay.Services.DTOs
         /// </summary>
         public string OutRefundNo { get; set; }
 
-        /// <summary>订单总金额，单位为分，只能为整数
+        /// <summary>订单总金额,单位为分,只能为整数
         /// </summary>
         public int TotalFee { get; set; }
 
@@ -40,7 +40,12 @@ namespace QuickPay.WechatPay.Services.DTOs
         /// </summary>
         public int RefundFee { get; set; }
 
-
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="outTradeNo">商户中的订单号</param>
+        /// <param name="outRefundNo">商户系统内部的退款单号</param>
+        /// <param name="totalFee">订单总金额,单位为分,只能为整数</param>
+        /// <param name="refundFee">退款总金额</param>
         public OrderRefundInput(string outTradeNo, string outRefundNo, int totalFee, int refundFee)
         {
             OutTradeNo = outTradeNo;

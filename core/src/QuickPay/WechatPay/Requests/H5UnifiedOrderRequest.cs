@@ -7,8 +7,8 @@ namespace QuickPay.WechatPay.Requests
     /// </summary>
     public class H5UnifiedOrderRequest : BaseWechatPayRequest<H5UnifiedOrderResponse>
     {
-        //public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/unifiedorder";
-
+        /// <summary>交易类型名称
+        /// </summary>
         public override string TradeTypeName => WechatPaySettings.TradeType.H5;
 
         /// <summary>商品简单描述，该字段请按照规范传递
@@ -21,7 +21,7 @@ namespace QuickPay.WechatPay.Requests
         [PayElement("out_trade_no")]
         public string OutTradeNo { get; set; }
 
-        /// <summary>订单总金额，单位为分
+        /// <summary>订单总金额,单位为分
         /// </summary>
         [PayElement("total_fee")]
         public int TotalFee { get; set; }
@@ -46,11 +46,21 @@ namespace QuickPay.WechatPay.Requests
         [PayElement("scene_info")]
         public string SceneInfo { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public H5UnifiedOrderRequest()
         {
 
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="body">商品简单描述</param>
+        /// <param name="outTradeNo">商户系统内部订单号</param>
+        /// <param name="totalFee">订单总金额,单位为分</param>
+        /// <param name="spbillCreateIp">APP和网页支付提交用户端ip</param>
+        /// <param name="sceneInfo">场景信息</param>
+        /// <param name="notifyUrl">异步通知地址</param>
         public H5UnifiedOrderRequest(string body, string outTradeNo, int totalFee, string spbillCreateIp, string sceneInfo, string notifyUrl)
         {
             Body = body;

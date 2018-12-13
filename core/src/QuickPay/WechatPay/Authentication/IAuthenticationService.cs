@@ -2,6 +2,8 @@
 
 namespace QuickPay.WechatPay.Authentication
 {
+    /// <summary>认证服务
+    /// </summary>
     public interface IAuthenticationService
     {
         /// <summary>根据JsCode获取用户OpenId和UnionId

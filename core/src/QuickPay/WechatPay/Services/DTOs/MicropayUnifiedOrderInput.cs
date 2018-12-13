@@ -31,11 +31,20 @@ namespace QuickPay.WechatPay.Services.DTOs
         /// </summary>
         public string AuthCode { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public MicropayUnifiedOrderInput()
         {
 
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="body">商品简单描述</param>
+        /// <param name="outTradeNo">商户系统内部订单号</param>
+        /// <param name="totalFee">订单总金额,单位为分</param>
+        /// <param name="spbillCreateIp">APP和网页支付提交用户端ip</param>
+        /// <param name="authCode">码支付授权码</param>
         public MicropayUnifiedOrderInput(string body, string outTradeNo, int totalFee, string spbillCreateIp, string authCode)
         {
             Body = body;

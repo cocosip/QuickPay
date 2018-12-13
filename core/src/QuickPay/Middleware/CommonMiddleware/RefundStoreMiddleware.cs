@@ -20,6 +20,8 @@ namespace QuickPay.Middleware
         private readonly QuickPayExecuteDelegate _next;
         private readonly IRefundStore _refundStore;
         private readonly IRequestTypeFinder _requestTypeFinder;
+        /// <summary>Ctor
+        /// </summary>
         public RefundStoreMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, IRefundStore refundStore, IRequestTypeFinder requestTypeFinder)
         {
             _next = next;
@@ -28,6 +30,8 @@ namespace QuickPay.Middleware
             _requestTypeFinder = requestTypeFinder;
         }
 
+        /// <summary>Invoke
+        /// </summary>
         public async Task Invoke(ExecuteContext context)
         {
             try

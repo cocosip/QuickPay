@@ -13,6 +13,9 @@ namespace QuickPay.Alipay.Requests
         /// <summary>
         /// </summary>
         public override string Method => "alipay.trade.page.pay";
+
+        /// <summary>交易类型名称
+        /// </summary>
         public override string TradeTypeName => AlipaySettings.TradeType.Page;
 
         /// <summary>HTTP/HTTPS开头字符串,同步结果通知
@@ -25,11 +28,18 @@ namespace QuickPay.Alipay.Requests
         [PayElement("notify_url")]
         public string NotifyUrl { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public PageTradePayRequest()
         {
 
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="bizContentRequest">bizContentRequest</param>
+        /// <param name="returnUrl">同步返回地址</param>
+        /// <param name="notifyUrl">异步通知地址</param>
         public PageTradePayRequest(PageTradeBizContentPayRequest bizContentRequest, string returnUrl, string notifyUrl)
         {
             BizContentRequest = bizContentRequest;
@@ -37,6 +47,8 @@ namespace QuickPay.Alipay.Requests
             NotifyUrl = notifyUrl;
         }
 
+        /// <summary>设置必要参数
+        /// </summary>
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);

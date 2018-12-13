@@ -4,6 +4,8 @@ using QuickPay.Infrastructure.Services.DTOs;
 
 namespace QuickPay.Alipay.Services.DTOs
 {
+    /// <summary>交易关闭
+    /// </summary>
     [AutoMapTo(typeof(TradeCloseBizContentRequest))]
     public class TradeCloseInput: UniqueIdDto
     {
@@ -15,10 +17,16 @@ namespace QuickPay.Alipay.Services.DTOs
         /// </summary>
         public string TradeNo { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public TradeCloseInput()
         {
 
         }
+
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="outTradeNo">订单支付时传入的商户订单号</param>
         public TradeCloseInput(string outTradeNo)
         {
             OutTradeNo = outTradeNo;

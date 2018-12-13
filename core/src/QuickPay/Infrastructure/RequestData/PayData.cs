@@ -4,13 +4,20 @@ using System.Linq;
 
 namespace QuickPay.Infrastructure.RequestData
 {
+    /// <summary>PayData
+    /// </summary>
     public class PayData
     {
         private readonly SortedDictionary<string, object> _values = new SortedDictionary<string, object>();
+        /// <summary>Ctor
+        /// </summary>
         public PayData()
         {
+
         }
 
+        /// <summary>Ctor
+        /// </summary>
         public PayData(SortedDictionary<string, object> values)
         {
 
@@ -39,6 +46,8 @@ namespace QuickPay.Infrastructure.RequestData
             return o;
         }
 
+        /// <summary>根据Selector获取值
+        /// </summary>
         public object GetValue(Func<KeyValuePair<string, object>, bool> selector)
         {
             return _values.Where(selector).FirstOrDefault().Value;

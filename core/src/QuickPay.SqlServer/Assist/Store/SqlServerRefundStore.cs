@@ -8,11 +8,14 @@ using System.Threading.Tasks;
 
 namespace QuickPay.Assist.Store
 {
-    /// <summary>退款
+      /// <summary>退款存储
     /// </summary>
     public class SqlServerRefundStore : BaseSqlServerStore, IRefundStore
     {
         private string TableName = "QP_Refunds";
+
+        /// <summary>Ctor
+        /// </summary>
         public SqlServerRefundStore(QuickPaySqlServerOption option, ILogger<QuickPayLoggerName> logger) : base(option, logger)
         {
         }
@@ -45,7 +48,7 @@ namespace QuickPay.Assist.Store
             }
             catch (SqlException ex)
             {
-                _logger.LogError($"创建或者修改Refund出错,UniqueId:{refund.UniqueId} {ex.Message}");
+                Logger.LogError($"创建或者修改Refund出错,UniqueId:{refund.UniqueId} {ex.Message}");
                 throw;
             }
         }
@@ -64,7 +67,7 @@ namespace QuickPay.Assist.Store
             }
             catch (SqlException ex)
             {
-                _logger.LogError($"获取退款信息Refund出错,PayPlatId:{payPlatId},AppId:{appId},OutRefundNo:{outRefundNo}.{ex.Message}");
+                Logger.LogError($"获取退款信息Refund出错,PayPlatId:{payPlatId},AppId:{appId},OutRefundNo:{outRefundNo}.{ex.Message}");
                 throw;
             }
         }
@@ -83,7 +86,7 @@ namespace QuickPay.Assist.Store
             }
             catch (SqlException ex)
             {
-                _logger.LogError($"根据UniqueId获取退款信息Refund出错,UniqueId:{uniqueId}.{ex.Message}");
+                Logger.LogError($"根据UniqueId获取退款信息Refund出错,UniqueId:{uniqueId}.{ex.Message}");
                 throw;
             }
         }
@@ -102,7 +105,7 @@ namespace QuickPay.Assist.Store
             }
             catch (SqlException ex)
             {
-                _logger.LogError($"根据交易号获取全部的退款订单出错,PayPlatId:{payPlatId},AppId:{appId},OutTradeNo:{outTradeNo}.{ex.Message}");
+                Logger.LogError($"根据交易号获取全部的退款订单出错,PayPlatId:{payPlatId},AppId:{appId},OutTradeNo:{outTradeNo}.{ex.Message}");
                 throw;
             }
         }

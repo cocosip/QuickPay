@@ -10,15 +10,16 @@ namespace QuickPay.WechatPay.Requests
     public class NativeMode2UnifiedOrderRequest : BaseWechatPayRequest<NativeMode2UnifiedOrderResponse>
     {
         //public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/unifiedorder";
-
+        /// <summary>交易类型名称
+        /// </summary>
         public override string TradeTypeName => WechatPaySettings.TradeType.Native;
 
-        /// <summary>商品简单描述，该字段请按照规范传递
+        /// <summary>商品简单描述,该字段请按照规范传递
         /// </summary>
         [PayElement("body")]
         public string Body { get; set; }
 
-        /// <summary>商户系统内部订单号，要求32个字符内、且在同一个商户号下唯一
+        /// <summary>商户系统内部订单号,要求32个字符内、且在同一个商户号下唯一
         /// </summary>
         [PayElement("out_trade_no")]
         public string OutTradeNo { get; set; }
@@ -48,16 +49,28 @@ namespace QuickPay.WechatPay.Requests
         [PayElement("sign_type")]
         public string SignType { get; set; }
 
+        /// <summary>设置必要参数
+        /// </summary>
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);
             SignType = ((WechatPayConfig)config).SignType;
         }
 
+        /// <summary>Ctor
+        /// </summary>
         public NativeMode2UnifiedOrderRequest()
         {
 
         }
+
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="body">商品简单描述</param>
+        /// <param name="outTradeNo">商户系统内部订单号</param>
+        /// <param name="totalFee">订单总金额,单位为分</param>
+        /// <param name="spbillCreateIp">APP和网页支付提交用户端ip</param>
+        /// <param name="notifyUrl">异步通知地址</param>
         public NativeMode2UnifiedOrderRequest(string body, string outTradeNo, int totalFee, string spbillCreateIp, string notifyUrl)
         {
             Body = body;

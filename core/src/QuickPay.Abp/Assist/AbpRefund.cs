@@ -5,6 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuickPay.Assist
 {
+    /// <summary>AbpRefund
+    /// </summary>
     [AutoMap(typeof(Refund))]
     [Table("AbpRefunds")]
     public class AbpRefund : CreationAuditedEntity

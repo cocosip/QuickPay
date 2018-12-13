@@ -5,6 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuickPay.Assist
 {
+    /// <summary>AbpPayment
+    /// </summary>
     [AutoMap(typeof(Payment))]
     [Table("AbpPayments")]
     public class AbpPayment : CreationAuditedEntity

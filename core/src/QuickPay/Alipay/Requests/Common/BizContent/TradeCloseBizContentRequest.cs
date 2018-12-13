@@ -21,11 +21,16 @@ namespace QuickPay.Alipay.Requests
         [PayElement("operator_id", false)]
         public string OperatorId { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public TradeCloseBizContentRequest()
         {
 
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="outTradeNo">订单支付时传入的商户订单号</param>
         public TradeCloseBizContentRequest(string outTradeNo)
         {
             OutTradeNo = outTradeNo;

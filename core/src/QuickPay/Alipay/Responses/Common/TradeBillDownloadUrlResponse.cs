@@ -10,6 +10,9 @@ namespace QuickPay.Alipay.Responses
         /// </summary>
         [PayElement("bill_download_url")]
         public string BillDownloadUrl { get; set; }
+
+        /// <summary>Ctor
+        /// </summary>
         public TradeBillDownloadUrlResponse()
         {
 

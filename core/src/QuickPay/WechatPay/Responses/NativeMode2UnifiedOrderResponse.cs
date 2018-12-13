@@ -43,6 +43,8 @@ namespace QuickPay.WechatPay.Responses
         [PayElement("code_url")]
         public string CodeUrl { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public NativeMode2UnifiedOrderResponse()
         {
 

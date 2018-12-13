@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 
 namespace QuickPay.Alipay.Services
 {
+    /// <summary>支付宝辅助服务
+    /// </summary>
     public interface IAlipayAssistService
     {
         /// <summary>签名验证

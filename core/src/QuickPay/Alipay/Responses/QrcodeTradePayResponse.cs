@@ -16,6 +16,8 @@ namespace QuickPay.Alipay.Responses
         [PayElement("qr_code")]
         public string QrCode { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public QrcodeTradePayResponse()
         {
 

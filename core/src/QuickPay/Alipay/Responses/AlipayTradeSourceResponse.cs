@@ -54,6 +54,8 @@ namespace QuickPay.Alipay.Responses
         /// </summary>
         public PayData PayData { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public AlipayTradeSourceResponse()
         {
 

@@ -66,7 +66,8 @@ namespace QuickPay.WechatPay.Responses
         [PayElement("refund_count")]
         public int RefundCount { get; set; }
 
-
+        /// <summary>Ctor
+        /// </summary>
         public RefundQueryResponse()
         {
 

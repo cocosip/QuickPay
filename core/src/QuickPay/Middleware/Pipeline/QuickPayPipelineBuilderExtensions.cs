@@ -6,16 +6,30 @@ using System.Threading.Tasks;
 
 namespace QuickPay.Middleware.Pipeline
 {
+    /// <summary>管道中间件创建扩展
+    /// </summary>
     public static class QuickPayPipelineBuilderExtensions
     {
         internal const string InvokeMethodName = "Invoke";
         internal const string InvokeAsyncMethodName = "InvokeAsync";
 
+        /// <summary>使用管道
+        /// </summary>
+        /// <typeparam name="TMiddleware">管道强类型</typeparam>
+        /// <param name="app">IQuickPayPipelineBuilder</param>
+        /// <param name="args">参数</param>
+        /// <returns></returns>
         public static IQuickPayPipelineBuilder UseMiddleware<TMiddleware>(this IQuickPayPipelineBuilder app, params object[] args)
         {
             return app.UseMiddleware(typeof(TMiddleware), args);
         }
 
+        /// <summary>使用管道
+        /// </summary>
+        /// <param name="app">IQuickPayPipelineBuilder</param>
+        /// <param name="middleware">管道类型</param>
+        /// <param name="args">参数</param>
+        /// <returns></returns>
         public static IQuickPayPipelineBuilder UseMiddleware(this IQuickPayPipelineBuilder app, Type middleware, params object[] args)
         {
             return app.Use(next =>
@@ -62,7 +76,8 @@ namespace QuickPay.Middleware.Pipeline
             });
         }
 
-
+        /// <summary>使用
+        /// </summary>
         public static IQuickPayPipelineBuilder Use(this IQuickPayPipelineBuilder app, Func<ExecuteContext, Func<Task>, Task> middleware)
         {
             return app.Use(next =>

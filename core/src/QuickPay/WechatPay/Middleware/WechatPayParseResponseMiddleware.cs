@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.RequestData;
-using QuickPay.Infrastructure.Requests;
 using QuickPay.Infrastructure.Responses;
 using QuickPay.Infrastructure.Util;
 using QuickPay.Middleware;
@@ -13,15 +12,20 @@ using System.Threading.Tasks;
 
 namespace QuickPay.WechatPay.Middleware
 {
+    /// <summary>微信支付结果转化中间件
+    /// </summary>
     public class WechatPayParseResponseMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
-
+        /// <summary>Ctor
+        /// </summary>
         public WechatPayParseResponseMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger)
         {
             _next = next;
             Logger = logger;
         }
+        /// <summary>Invoke
+        /// </summary>
         public async Task Invoke(ExecuteContext context)
         {
             try

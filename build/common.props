@@ -9,6 +9,9 @@
     <PackageLicense>https://github.com/cocosip/QuickPay/blob/master/LICENSE</PackageLicense>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/cocosip/QuickPay</RepositoryUrl>
+    <Description>Easy to use alipay and wechatpay!</Description>
+    <PackageTags>Payment,Alipay,WechatPay</PackageTags>
+    
   </PropertyGroup>
 
   <ItemGroup>

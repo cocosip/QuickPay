@@ -53,12 +53,20 @@ namespace QuickPay.WechatPay.Services.DTOs
         /// </summary>
         public string Time { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public ReportInput()
         {
 
         }
 
-
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="interfaceUrl">接口地址</param>
+        /// <param name="executeTime">执行时间</param>
+        /// <param name="returnCode">返回Code</param>
+        /// <param name="resultCode">返回结果Code</param>
+        /// <param name="userIp">用户IP地址</param>
         public ReportInput(string interfaceUrl, int executeTime, string returnCode, string resultCode, string userIp)
         {
             InterfaceUrl = interfaceUrl;

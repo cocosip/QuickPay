@@ -15,11 +15,15 @@ using System.Threading.Tasks;
 
 namespace QuickPay.Alipay.Middleware
 {
+    /// <summary>支付宝支付返回数据格式化中间件
+    /// </summary>
     public class AlipayParseResponseMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
         private readonly IJsonSerializer _jsonSerializer;
         private readonly AlipayPayDataHelper _alipayPayDataHelper;
+        /// <summary>Ctor
+        /// </summary>
         public AlipayParseResponseMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, IJsonSerializer jsonSerializer, AlipayPayDataHelper alipayPayDataHelper)
         {
             _next = next;
@@ -28,6 +32,8 @@ namespace QuickPay.Alipay.Middleware
             _alipayPayDataHelper = alipayPayDataHelper;
         }
 
+        /// <summary>Invoke
+        /// </summary>
         public async Task Invoke(ExecuteContext context)
         {
             try

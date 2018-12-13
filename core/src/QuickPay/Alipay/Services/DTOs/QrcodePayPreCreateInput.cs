@@ -9,32 +9,6 @@ namespace QuickPay.Alipay.Services.DTOs
     [AutoMapTo(typeof(QrcodeTradeBizContentPayRequest))]
     public class QrcodePayPreCreateInput: UniqueIdDto
     {
-        public QrcodePayPreCreateInput()
-        {
-
-        }
-
-        public QrcodePayPreCreateInput(string subject, string body, string outTradeNo, decimal totalAmount) : this(subject, body, outTradeNo, totalAmount, "")
-        {
-            Subject = subject;
-            Body = body;
-            OutTradeNo = outTradeNo;
-            TotalAmount = totalAmount;
-        }
-
-        public QrcodePayPreCreateInput(string subject, string body, string outTradeNo, decimal totalAmount, string notifyUrl)
-        {
-            Subject = subject;
-            Body = body;
-            OutTradeNo = outTradeNo;
-            TotalAmount = totalAmount;
-            NotifyUrl = notifyUrl;
-        }
-
-
-
-
-
         /// <summary>订单标题
         /// </summary>
         public string Subject { get; set; }
@@ -86,5 +60,44 @@ namespace QuickPay.Alipay.Services.DTOs
         /// <summary>该笔订单允许的最晚付款时间，逾期将关闭交易。
         /// </summary>
         public string TimeoutExpress { get; set; }
+
+        /// <summary>Ctor
+        /// </summary>
+        public QrcodePayPreCreateInput()
+        {
+
+        }
+
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="subject">商品的标题/交易标题/订单标题/订单关键字等</param>
+        /// <param name="body">对一笔交易的具体描述信息</param>
+        /// <param name="outTradeNo">商户网站唯一订单号</param>
+        /// <param name="totalAmount">订单总金额,单位为元,精确到小数点后两位(如:1.00)</param>
+        public QrcodePayPreCreateInput(string subject, string body, string outTradeNo, decimal totalAmount) : this(subject, body, outTradeNo, totalAmount, "")
+        {
+            Subject = subject;
+            Body = body;
+            OutTradeNo = outTradeNo;
+            TotalAmount = totalAmount;
+        }
+
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="subject">商品的标题/交易标题/订单标题/订单关键字等</param>
+        /// <param name="body">对一笔交易的具体描述信息</param>
+        /// <param name="outTradeNo">商户网站唯一订单号</param>
+        /// <param name="totalAmount">订单总金额,单位为元,精确到小数点后两位(如:1.00)</param>
+        /// <param name="notifyUrl">异步通知地址</param>
+        public QrcodePayPreCreateInput(string subject, string body, string outTradeNo, decimal totalAmount, string notifyUrl)
+        {
+            Subject = subject;
+            Body = body;
+            OutTradeNo = outTradeNo;
+            TotalAmount = totalAmount;
+            NotifyUrl = notifyUrl;
+        }
+
+
     }
 }

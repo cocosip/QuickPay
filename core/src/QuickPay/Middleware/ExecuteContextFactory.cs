@@ -1,14 +1,16 @@
 ﻿using DotCommon.Extensions;
-using QuickPay.Alipay.Apps;
 using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Infrastructure.Responses;
-using QuickPay.WechatPay.Apps;
 
 namespace QuickPay.Middleware
 {
+    /// <summary>执行上下文工厂
+    /// </summary>
     public class ExecuteContextFactory : IExecuteContextFactory
     {
+        /// <summary>创建执行上下文
+        /// </summary>
         public ExecuteContext CreateContext<T>(IPayRequest<T> request, QuickPayConfig config, QuickPayApp app, string requestHandler) where T : PayResponse
         {
             var context = new ExecuteContext()

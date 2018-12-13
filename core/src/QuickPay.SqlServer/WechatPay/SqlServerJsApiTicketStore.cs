@@ -8,12 +8,18 @@ using System.Threading.Tasks;
 
 namespace QuickPay.WechatPay
 {
+
+    /// <summary>JsApiTicket存储
+    /// </summary>
     public class SqlServerJsApiTicketStore : BaseSqlServerStore, IJsApiTicketStore
     {
         private string TableName = "QP_JsApiTickets";
 
+        /// <summary>Ctor
+        /// </summary>
         public SqlServerJsApiTicketStore(QuickPaySqlServerOption option, ILogger<QuickPayLoggerName> logger) : base(option, logger)
         {
+
         }
 
         /// <summary>获取JsApiTicket
@@ -22,7 +28,7 @@ namespace QuickPay.WechatPay
         {
             try
             {
-                using (var connection = GetConnection())
+                using(var connection = GetConnection())
                 {
                     var sql = $"SELECT TOP 1 * FROM [{TableName}] WHERE AppId=@AppId";
                     return await connection.QueryFirstOrDefaultAsync<JsApiTicket>(sql, new { AppId = appId });
@@ -30,7 +36,7 @@ namespace QuickPay.WechatPay
             }
             catch (SqlException ex)
             {
-                _logger.LogError(WechatPayUtil.ParseLog($"获取应用JsApiTicket出错,AppId:{appId}.{ex.Message}"));
+                Logger.LogError(WechatPayUtil.ParseLog($"获取应用JsApiTicket出错,AppId:{appId}.{ex.Message}"));
                 throw;
             }
         }
@@ -41,7 +47,7 @@ namespace QuickPay.WechatPay
         {
             try
             {
-                using (var connection = GetConnection())
+                using(var connection = GetConnection())
                 {
                     //先查询JsApiTicket,是否存在
                     var queryJsApiTicket = await GetJsApiTicketAsync(jsApiTicket.AppId);
@@ -63,7 +69,7 @@ namespace QuickPay.WechatPay
             }
             catch (SqlException ex)
             {
-                _logger.LogError(WechatPayUtil.ParseLog($"创建或者修改JsApiTicket出错,{jsApiTicket.ToString()}.{ex.Message}"));
+                Logger.LogError(WechatPayUtil.ParseLog($"创建或者修改JsApiTicket出错,{jsApiTicket.ToString()}.{ex.Message}"));
                 throw;
             }
         }

@@ -14,15 +14,20 @@ namespace QuickPay.WechatPay.Services.DTOs
         public string TransactionId { get; set; }
 
 
-        /// <summary>商户系统内部的订单号，当没提供transaction_id时需要传这个
+        /// <summary>商户系统内部的订单号,当没提供transaction_id时需要传这个
         /// </summary>
         public string OutTradeNo { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public OrderQueryInput()
         {
 
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="outTradeNo">商户系统内部的订单号,当没提供transaction_id时需要传这个</param>
         public OrderQueryInput(string outTradeNo)
         {
             OutTradeNo = outTradeNo;

@@ -11,7 +11,8 @@ namespace QuickPay.WechatPay.Requests
     public class AppUnifiedOrderRequest : BaseWechatPayRequest<AppUnifiedOrderResponse>
     {
         //public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/unifiedorder";
-
+        /// <summary>交易类型名称
+        /// </summary>
         public override string TradeTypeName => WechatPaySettings.TradeType.App;
 
         /// <summary>商品简单描述，该字段请按照规范传递
@@ -44,10 +45,19 @@ namespace QuickPay.WechatPay.Requests
         [PayElement("trade_type")]
         public string TradeType { get; set; } = WechatPaySettings.TradeType.App;
 
+        /// <summary>Ctor
+        /// </summary>
         public AppUnifiedOrderRequest()
         {
 
         }
+
+
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="body">商品简单描述</param>
+        /// <param name="outTradeNo">商户系统内部订单号</param>
+        /// <param name="totalFee">订单总金额,单位为分</param>
         public AppUnifiedOrderRequest(string body, string outTradeNo, int totalFee)
         {
             Body = body;
@@ -55,6 +65,12 @@ namespace QuickPay.WechatPay.Requests
             TotalFee = totalFee;
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="body">商品简单描述</param>
+        /// <param name="outTradeNo">商户系统内部订单号</param>
+        /// <param name="totalFee">订单总金额,单位为分</param>
+        /// <param name="notifyUrl">异步通知地址</param>
         public AppUnifiedOrderRequest(string body, string outTradeNo, int totalFee, string notifyUrl)
         {
             Body = body;
@@ -63,7 +79,8 @@ namespace QuickPay.WechatPay.Requests
             NotifyUrl = notifyUrl;
         }
 
-
+        /// <summary>设置必要参数
+        /// </summary>
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);

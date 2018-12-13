@@ -7,8 +7,8 @@ namespace QuickPay.WechatPay.Requests
     /// </summary>
     public class ReportRequest : BaseWechatPayRequest<ReportResponse>
     {
-        //public override string RequestUrl => "https://api.mch.weixin.qq.com/payitil/report";
-
+        /// <summary>交易类型名称
+        /// </summary>
         public override string TradeTypeName => WechatPaySettings.ExtTradeType.Report;
 
         /// <summary>自定义参数，可以为终端设备号(门店号或收银设备ID)，PC网页或公众号内支付可以传"WEB"
@@ -66,12 +66,20 @@ namespace QuickPay.WechatPay.Requests
         [PayElement("time")]
         public string Time { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public ReportRequest()
         {
 
         }
 
-
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="interfaceUrl">接口Url地址</param>
+        /// <param name="executeTime">执行时间</param>
+        /// <param name="returnCode">请求代码</param>
+        /// <param name="resultCode">结果代码</param>
+        /// <param name="userIp">用户IP地址</param>
         public ReportRequest(string interfaceUrl, int executeTime, string returnCode, string resultCode, string userIp)
         {
             InterfaceUrl = interfaceUrl;

@@ -9,8 +9,8 @@ namespace QuickPay.WechatPay.Requests
     /// </summary>
     public class DownloadBillRequest : BaseWechatPayRequest<DownloadBillResponse>
     {
-        //public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/downloadbill";
-
+        /// <summary>交易类型名称
+        /// </summary>
         public override string TradeTypeName => WechatPaySettings.ExtTradeType.DownloadBill;
 
         /// <summary>设备号
@@ -39,17 +39,25 @@ namespace QuickPay.WechatPay.Requests
         [PayElement("bill_type")]
         public string BillType { get; set; }
 
+        /// <summary>设置必要参数
+        /// </summary>
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);
             SignType = ((WechatPayConfig)config).SignType;
         }
 
+        /// <summary>Ctor
+        /// </summary>
         public DownloadBillRequest()
         {
 
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="tarType">压缩账单,固定为GZIP</param>
+        /// <param name="billDate">账单日期</param>
         public DownloadBillRequest(string tarType, string billDate)
         {
             TarType = tarType;

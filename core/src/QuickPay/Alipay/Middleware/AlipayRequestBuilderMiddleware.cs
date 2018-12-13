@@ -10,17 +10,22 @@ using System.Threading.Tasks;
 
 namespace QuickPay.Alipay.Middleware
 {
+    /// <summary>支付宝请求构建中间件
+    /// </summary>
     public class AlipayRequestBuilderMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
         private readonly QuickPayConfigurationOption _option;
+        /// <summary>Ctor
+        /// </summary>
         public AlipayRequestBuilderMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, QuickPayConfigurationOption option)
         {
             _next = next;
             Logger = logger;
             _option = option;
         }
-
+        /// <summary>Invoke
+        /// </summary>
         public async Task Invoke(ExecuteContext context)
         {
             try

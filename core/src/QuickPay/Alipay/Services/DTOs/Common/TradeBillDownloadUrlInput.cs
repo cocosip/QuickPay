@@ -17,11 +17,17 @@ namespace QuickPay.Alipay.Services.DTOs
         /// </summary>
         public string BillDate { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public TradeBillDownloadUrlInput()
         {
 
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="billType">账单类型</param>
+        /// <param name="billDate">账单日期</param>
         public TradeBillDownloadUrlInput(string billType, string billDate)
         {
             BillType = billType;

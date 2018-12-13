@@ -9,8 +9,8 @@ namespace QuickPay.WechatPay.Requests
     /// </summary>
     public class MicropayUnifiedOrderRequest : BaseWechatPayRequest<MicropayUnifiedOrderResponse>
     {
-        //public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/micropay";
-
+        /// <summary>交易类型名称
+        /// </summary>
         public override string TradeTypeName => WechatPaySettings.TradeType.Micropay;
 
         /// <summary>商品简单描述，该字段请按照规范传递
@@ -23,7 +23,7 @@ namespace QuickPay.WechatPay.Requests
         [PayElement("out_trade_no")]
         public string OutTradeNo { get; set; }
 
-        /// <summary>订单总金额，单位为分
+        /// <summary>订单总金额,单位为分
         /// </summary>
         [PayElement("total_fee")]
         public int TotalFee { get; set; }
@@ -45,11 +45,19 @@ namespace QuickPay.WechatPay.Requests
         //[PayElement("trade_type")]
         //public string TradeType { get; set; } = WxpayConsts.WxpayTradeType.App;
 
+        /// <summary>Ctor
+        /// </summary>
         public MicropayUnifiedOrderRequest()
         {
 
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="body">商品简单描述</param>
+        /// <param name="outTradeNo">商户系统内部订单号</param>
+        /// <param name="totalFee">商户系统内部订单号</param>
+        /// <param name="authCode">刷卡支付授权码,设备读取用户微信中的条码或者二维码信息</param>
         public MicropayUnifiedOrderRequest(string body, string outTradeNo, int totalFee, string authCode)
         {
             Body = body;
@@ -57,6 +65,9 @@ namespace QuickPay.WechatPay.Requests
             TotalFee = totalFee;
 
         }
+
+        /// <summary>设置必要参数
+        /// </summary>
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);

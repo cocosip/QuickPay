@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 
 namespace QuickPay.Assist.Store
 {
+    /// <summary>退款存储
+    /// </summary>
     public interface IRefundStore
     {
         /// <summary>创建或者修改退款信息

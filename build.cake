@@ -105,11 +105,12 @@ Task("Pack")
    {
       msBuildSettings = new DotNetCoreMSBuildSettings()
                             .WithProperty("Version", parameters.Version.VersionWithSuffix())
+                            .WithProperty("VersionSuffix", parameters.Version.Suffix)
                             .WithProperty("AssemblyVersion", parameters.Version.Version());
       var settings = new DotNetCorePackSettings
       {
           Configuration = parameters.Configuration,
-          VersionSuffix = parameters.Version.Suffix,
+          //VersionSuffix = parameters.Version.Suffix,
           IncludeSymbols = false,
           OutputDirectory = parameters.Paths.Directories.NugetRoot,
           MSBuildSettings = msBuildSettings

@@ -24,6 +24,8 @@ namespace QuickPay.Middleware
         private readonly IRequestTypeFinder _requestTypeFinder;
         private readonly AlipayPayDataHelper _alipayPayDataHelper;
         private readonly WechatPayDataHelper _wechatPayDataHelper;
+        /// <summary>Ctor
+        /// </summary>
         public PaymentStoreMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, IPaymentStore paymentStore, IRequestTypeFinder requestTypeFinder, AlipayPayDataHelper alipayPayDataHelper, WechatPayDataHelper wechatPayDataHelper)
         {
             _next = next;
@@ -34,6 +36,8 @@ namespace QuickPay.Middleware
             _wechatPayDataHelper = wechatPayDataHelper;
         }
 
+        /// <summary>Invoke
+        /// </summary>
         public async Task Invoke(ExecuteContext context)
         {
             try

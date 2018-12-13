@@ -17,6 +17,8 @@ namespace QuickPay.WechatPay.Services.Impl
     {
         private readonly IPaymentStore _paymentStore;
         private readonly WechatPayDataHelper _wechatPayDataHelper;
+        /// <summary>Ctor
+        /// </summary>
         public WechatPayAssistService(IServiceProvider provider, IPaymentStore paymentStore, WechatPayDataHelper wechatPayDataHelper) : base(provider)
         {
             _paymentStore = paymentStore;

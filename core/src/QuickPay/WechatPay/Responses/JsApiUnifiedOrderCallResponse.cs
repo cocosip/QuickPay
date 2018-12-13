@@ -31,7 +31,8 @@ namespace QuickPay.WechatPay.Responses
         [PayElement("signType")]
         public string SignType { get; set; }
 
-
+        /// <summary>Ctor
+        /// </summary>
         public JsApiUnifiedOrderCallResponse()
         {
 

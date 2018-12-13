@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 
 namespace QuickPay.Alipay.Middleware
 {
-    /// <summary>支付宝签名组件
+    /// <summary>支付宝签名中间件
     /// </summary>
     public class AlipaySignMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
         private readonly AlipayPayDataHelper _alipayPayDataHelper;
+        /// <summary>Ctor
+        /// </summary>
         public AlipaySignMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, AlipayPayDataHelper alipayPayDataHelper)
         {
             _next = next;
@@ -22,6 +24,8 @@ namespace QuickPay.Alipay.Middleware
             _alipayPayDataHelper = alipayPayDataHelper;
         }
 
+        /// <summary>Invoke
+        /// </summary>
         public async Task Invoke(ExecuteContext context)
         {
             try

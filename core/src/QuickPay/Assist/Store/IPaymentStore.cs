@@ -2,6 +2,8 @@
 
 namespace QuickPay.Assist.Store
 {
+    /// <summary>支付信息存储
+    /// </summary>
     public interface IPaymentStore
     {
         /// <summary>创建或者修改支付信息

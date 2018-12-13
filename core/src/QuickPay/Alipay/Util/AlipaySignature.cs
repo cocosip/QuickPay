@@ -4,6 +4,8 @@ using System.Text;
 
 namespace QuickPay.Alipay.Util
 {
+    /// <summary>支付宝签名工具类
+    /// </summary>
     public class AlipaySignature
     {
         /// <summary>获取签名的内容

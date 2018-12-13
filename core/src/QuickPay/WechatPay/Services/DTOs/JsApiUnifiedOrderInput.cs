@@ -33,11 +33,21 @@ namespace QuickPay.WechatPay.Services.DTOs
         /// </summary>
         public string OpenId { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public JsApiUnifiedOrderInput()
         {
 
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="body">商品简单描述</param>
+        /// <param name="outTradeNo">商户系统内部订单号</param>
+        /// <param name="totalFee">订单总金额,单位为分</param>
+        /// <param name="spbillCreateIp">APP和网页支付提交用户端ip</param>
+        /// <param name="notifyUrl">异步通知地址</param>
+        /// <param name="openId">用户OpenId</param>
         public JsApiUnifiedOrderInput(string body, string outTradeNo, int totalFee, string spbillCreateIp, string notifyUrl, string openId)
         {
             Body = body;

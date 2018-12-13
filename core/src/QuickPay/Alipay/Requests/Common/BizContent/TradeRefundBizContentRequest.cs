@@ -16,7 +16,7 @@ namespace QuickPay.Alipay.Requests
         [PayElement("trade_no", false)]
         public string TradeNo { get; set; }
 
-        /// <summary>需要退款的金额，该金额不能大于订单金额,单位为元，支持两位小数
+        /// <summary>需要退款的金额,该金额不能大于订单金额,单位为元,支持两位小数
         /// </summary>
         [PayElement("refund_amount")]
         public decimal RefundAmount { get; set; }
@@ -45,12 +45,18 @@ namespace QuickPay.Alipay.Requests
         /// </summary>
         [PayElement("terminal_id")]
         public string TerminalId { get; set; }
-
+        
+        /// <summary>Ctor
+        /// </summary>
         public TradeRefundBizContentRequest()
         {
 
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="outTradeNo">订单支付时传入的商户订单号</param>
+        /// <param name="refundAmount">需要退款的金额,该金额不能大于订单金额,单位为元,支持两位小数。如:1.00</param>
         public TradeRefundBizContentRequest(string outTradeNo, decimal refundAmount)
         {
             OutTradeNo = outTradeNo;

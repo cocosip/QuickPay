@@ -125,7 +125,8 @@ namespace QuickPay.WechatPay.Responses
         [PayElement("trade_state_desc")]
         public string TradeStateDesc { get; set; }
 
-
+        /// <summary>Ctor
+        /// </summary>
         public OrderQueryResponse()
         {
 

@@ -17,11 +17,17 @@ namespace QuickPay.WechatPay.Services.DTOs
         /// </summary>
         public string BillType { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public DownloadBillInput()
         {
 
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="billDate">账单日期</param>
+        /// <param name="billType">账单类型</param>
         public DownloadBillInput(string billDate, string billType)
         {
             BillDate = billDate;

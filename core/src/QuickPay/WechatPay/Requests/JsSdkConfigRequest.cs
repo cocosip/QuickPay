@@ -9,11 +9,16 @@ namespace QuickPay.WechatPay.Requests
     /// </summary>
     public class JsSdkConfigRequest : BaseWechatPayRequest<JsSdkConfigResponse>
     {
-
+        /// <summary>签名字段名称
+        /// </summary>
         public override string SignFieldName { get; } = WechatPaySettings.JsSdkConfigSignFieldName;
 
+        /// <summary>交易类型名称
+        /// </summary>
         public override string TradeTypeName => WechatPaySettings.TradeType.JsApi;
 
+        /// <summary>签名类型名称
+        /// </summary>
         public override string SignTypeName => WechatPaySettings.SignType.Sha1;
 
         /// <summary>应用Id
@@ -41,17 +46,25 @@ namespace QuickPay.WechatPay.Requests
         [PayElement("url")]
         public string CurrentUrl { get; set; }
 
+        /// <summary>设置必要参数
+        /// </summary>
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);
             Timestamp = WechatPayUtil.GenerateTimeStamp();
         }
 
+        /// <summary>Ctor
+        /// </summary>
         public JsSdkConfigRequest()
         {
 
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="jsApiTicket">JsApiTicket</param>
+        /// <param name="currentUrl">当前网址的Url</param>
         public JsSdkConfigRequest(string jsApiTicket, string currentUrl)
         {
             JsApiTicket = jsApiTicket;

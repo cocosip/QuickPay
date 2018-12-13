@@ -13,6 +13,8 @@ namespace QuickPay.Alipay.Services.Impl
     /// </summary>
     public class AlipayBarcodePayService : BaseAlipayService, IAlipayBarcodePayService
     {
+        /// <summary>Ctor
+        /// </summary>
         public AlipayBarcodePayService(IServiceProvider provider) : base(provider)
         {
 

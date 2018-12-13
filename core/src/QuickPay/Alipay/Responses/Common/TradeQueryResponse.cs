@@ -6,7 +6,7 @@ namespace QuickPay.Alipay.Responses
     /// </summary>
     public class TradeQueryResponse : AlipayCommonResponse
     {
-        // <summary>支付宝交易号
+        /// <summary>支付宝交易号
         /// </summary>
         [PayElement("trade_no")]
         public string TradeNo { get; set; }
@@ -106,6 +106,8 @@ namespace QuickPay.Alipay.Responses
         [PayElement("open_id", false)]
         public string OpenId { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public TradeQueryResponse()
         {
 

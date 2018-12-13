@@ -50,6 +50,8 @@ namespace QuickPay.Alipay.Responses
         /// </summary>
         public string SignField { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public AlipayTradeResponse()
         {
 

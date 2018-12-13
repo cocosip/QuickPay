@@ -8,20 +8,25 @@ using System.Threading.Tasks;
 
 namespace QuickPay.WechatPay
 {
+    /// <summary>AccessToken存储
+    /// </summary>
     public class SqlServerAccessTokenStore : BaseSqlServerStore, IAccessTokenStore
     {
         private string TableName = "QP_AccessTokens";
+        /// <summary>Ctor
+        /// </summary>
         public SqlServerAccessTokenStore(QuickPaySqlServerOption option, ILogger<QuickPayLoggerName> logger) : base(option, logger)
         {
+
         }
 
-        /// <summary>根据AppId获取AccessToken
+       /// <summary>根据应用Id获取当前token
         /// </summary>
         public async Task<AccessToken> GetAccessTokenAsync(string appId)
         {
             try
             {
-                using (var connection = GetConnection())
+                using(var connection = GetConnection())
                 {
                     var sql = $"SELECT TOP 1 * FROM [{TableName}] WHERE AppId=@AppId";
                     return await connection.QueryFirstOrDefaultAsync<AccessToken>(sql, new { AppId = appId });
@@ -29,7 +34,7 @@ namespace QuickPay.WechatPay
             }
             catch (SqlException ex)
             {
-                _logger.LogError(WechatPayUtil.ParseLog($"获取应用AccessToken出错,AppId:{appId}.{ex.Message}"));
+                Logger.LogError(WechatPayUtil.ParseLog($"获取应用AccessToken出错,AppId:{appId}.{ex.Message}"));
                 throw;
             }
         }
@@ -40,7 +45,7 @@ namespace QuickPay.WechatPay
         {
             try
             {
-                using (var connection = GetConnection())
+                using(var connection = GetConnection())
                 {
                     //先查询AccessToken,是否存在
                     var queryAccessToken = await GetAccessTokenAsync(accessToken.AppId);
@@ -62,7 +67,7 @@ namespace QuickPay.WechatPay
             }
             catch (SqlException ex)
             {
-                _logger.LogError(WechatPayUtil.ParseLog($"获取应用AccessToken出错,{accessToken.ToString()}.{ex.Message}"));
+                Logger.LogError(WechatPayUtil.ParseLog($"获取应用AccessToken出错,{accessToken.ToString()}.{ex.Message}"));
                 throw;
             }
         }

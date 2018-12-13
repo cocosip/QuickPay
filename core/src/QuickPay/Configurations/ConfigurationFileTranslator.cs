@@ -6,9 +6,13 @@ using System.Xml;
 
 namespace QuickPay.Configurations
 {
+    /// <summary>配置文件转化
+    /// </summary>
     public class ConfigurationFileTranslator : IConfigurationFileTranslator
     {
         private readonly IJsonSerializer _jsonSerializer;
+        /// <summary>Ctor
+        /// </summary>
         public ConfigurationFileTranslator(IJsonSerializer jsonSerializer)
         {
             _jsonSerializer = jsonSerializer;

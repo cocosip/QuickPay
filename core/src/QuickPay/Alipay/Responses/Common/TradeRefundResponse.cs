@@ -36,7 +36,8 @@ namespace QuickPay.Alipay.Responses
         [PayElement("refund_amount", false)]
         public decimal RefundAmount { get; set; }
 
-
+        /// <summary>Ctor
+        /// </summary>
         public TradeRefundResponse()
         {
 

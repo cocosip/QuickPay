@@ -2,6 +2,8 @@
 
 namespace QuickPay.WechatPay.Responses
 {
+    /// <summary>H5下单返回
+    /// </summary>
     public class H5UnifiedOrderResponse : WechatPayTradeResponse
     {
         /********************以下字段在return_code为SUCCESS的时候有返回********************/
@@ -41,6 +43,8 @@ namespace QuickPay.WechatPay.Responses
         [PayElement("mweb_url")]
         public string MWebUrl { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public H5UnifiedOrderResponse()
         {
 

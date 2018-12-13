@@ -85,6 +85,8 @@ namespace QuickPay.Alipay.Responses
         [PayElement("voucher_detail_list", false)]
         public string VoucherDetailList { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public BarcodeTradePayResponse()
         {
 

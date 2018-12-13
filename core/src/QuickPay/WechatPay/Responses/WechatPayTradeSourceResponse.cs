@@ -7,6 +7,8 @@ namespace QuickPay.WechatPay.Responses
     /// </summary>
     public class WechatPayTradeSourceResponse : PayResponse
     {
+        /// <summary>PayData
+        /// </summary>
         public PayData PayData { get; set; }
     }
 }

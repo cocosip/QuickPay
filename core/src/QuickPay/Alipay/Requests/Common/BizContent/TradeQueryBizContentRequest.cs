@@ -6,21 +6,27 @@ namespace QuickPay.Alipay.Requests
     /// </summary>
     public class TradeQueryBizContentRequest : BaseBizContentRequest
     {
-        /// <summary>	订单支付时传入的商户订单号,和支付宝交易号不能同时为空
+        /// <summary>订单支付时传入的商户订单号,和支付宝交易号不能同时为空
         /// </summary>
         [PayElement("out_trade_no")]
         public string OutTradeNo { get; set; }
 
-        /// <summary>支付宝交易号，和商户订单号不能同时为空(特殊可选)
+        /// <summary>支付宝交易号,和商户订单号不能同时为空(特殊可选)
         /// </summary>
         [PayElement("trade_no", false)]
         public string TradeNo { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public TradeQueryBizContentRequest()
         {
 
         }
 
+
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="outTradeNo">订单支付时传入的商户订单号</param>
         public TradeQueryBizContentRequest(string outTradeNo)
         {
             OutTradeNo = outTradeNo;

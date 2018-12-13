@@ -2,6 +2,8 @@ using QuickPay.Infrastructure.RequestData;
 
 namespace QuickPay.WechatPay.Responses
 {
+    /// <summary>小程序下单唤起支付
+    /// </summary>
     public class MiniProgramUnifiedOrderCallResponse : WechatPayTradeResponse
     {
         /// <summary>微信开放平台审核通过的应用APPID
@@ -29,6 +31,8 @@ namespace QuickPay.WechatPay.Responses
         [PayElement("signType")]
         public string SignType { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public MiniProgramUnifiedOrderCallResponse()
         {
 

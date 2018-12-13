@@ -1,7 +1,11 @@
 ﻿namespace QuickPay.Infrastructure.Requests
 {
+    /// <summary>请求扩展
+    /// </summary>
     public static class RequestExtensions
     {
+        /// <summary>日志格式化
+        /// </summary>
         public static string GetLogFormat(this IPayRequest request, string message)
         {
             var providerName = "微信";

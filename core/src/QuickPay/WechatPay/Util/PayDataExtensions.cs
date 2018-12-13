@@ -7,8 +7,12 @@ using System.Xml;
 
 namespace QuickPay.WechatPay.Util
 {
+    /// <summary>微信支付中PayData扩展
+    /// </summary>
     public static class PayDataExtensions
     {
+        /// <summary>PayData转化为Url地址
+        /// </summary>
         public static string ToUrl(this PayData payData)
         {
             var sb = new StringBuilder();
@@ -30,6 +34,8 @@ namespace QuickPay.WechatPay.Util
             return sb.ToString();
         }
 
+        /// <summary>PayData转化为Xml格式
+        /// </summary>
         public static string ToXml(this PayData payData)
         {
             var values = payData.GetValues();
@@ -72,6 +78,8 @@ namespace QuickPay.WechatPay.Util
             return sb.ToString();
         }
 
+        /// <summary>xml转换为PayData
+        /// </summary>
         public static PayData FromXml(this PayData payData, string xml)
         {
             var newPayData = new PayData();

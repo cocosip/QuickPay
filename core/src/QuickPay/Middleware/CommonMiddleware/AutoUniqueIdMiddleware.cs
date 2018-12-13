@@ -14,12 +14,16 @@ namespace QuickPay.Middleware
     public class AutoUniqueIdMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
+        /// <summary>Ctor
+        /// </summary>
         public AutoUniqueIdMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger)
         {
             _next = next;
             Logger = logger;
         }
 
+        /// <summary>Invoke
+        /// </summary>
         public async Task Invoke(ExecuteContext context)
         {
             if (context.Request == null)

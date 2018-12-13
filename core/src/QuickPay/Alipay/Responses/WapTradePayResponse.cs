@@ -16,6 +16,8 @@ namespace QuickPay.Alipay.Responses
         [PayElement("notify_url")]
         public string NotifyUrl { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public WapTradePayResponse()
         {
 

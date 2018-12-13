@@ -6,6 +6,8 @@ using System.Linq;
 
 namespace QuickPay.Alipay.Apps
 {
+    /// <summary>支付宝相关配置
+    /// </summary>
     public class AlipayConfig : QuickPayConfig
     {
         /// <summary>默认的应用名
@@ -52,17 +54,27 @@ namespace QuickPay.Alipay.Apps
         /// </summary>
         public string Version { get; set; } = "1.0";
 
+        /// <summary>支付宝应用
+        /// </summary>
+
         public List<AlipayApp> Apps = new List<AlipayApp>();
+
+        /// <summary>根据名称获取支付宝
+        /// </summary>
         public AlipayApp GetByName(string name)
         {
             return Apps.FirstOrDefault(x => x.Name == name);
         }
 
+        /// <summary>根据AppId获取支付宝
+        /// </summary>
         public AlipayApp GetByAppId(string appId)
         {
             return Apps.FirstOrDefault(x => x.AppId == appId);
         }
 
+        /// <summary>获取默认支付宝App
+        /// </summary>
         public AlipayApp GetDefaultApp()
         {
             if (!DefaultAppName.IsNullOrWhiteSpace())
@@ -72,21 +84,29 @@ namespace QuickPay.Alipay.Apps
             throw new ArgumentException($"DefaultAppName 未配置!");
         }
 
-
+        /// <summary>获取默认通知地址
+        /// </summary>
         public string GetDefaultNotifyUrl()
         {
             return $"{NotifyGateway.TrimEnd('/')}/{NotifyRealateUrl.TrimStart('/')}";
         }
 
+        /// <summary>获取默认扫码支付通知地址
+        /// </summary>
         public string GetDefaultQrcodeNotifyUrl()
         {
             return $"{NotifyGateway.TrimEnd('/')}/{QrcodeNotifyRelateUrl.TrimStart('/')}";
         }
+
+        /// <summary>获取默认条码支付通知地址
+        /// </summary>
         public string GetDefaultBarcodeNotifyUrl()
         {
             return $"{NotifyGateway.TrimEnd('/')}/{BarcodeNotifyRelateUrl.TrimStart('/')}";
         }
 
+        /// <summary>Copy
+        /// </summary>
         public AlipayConfig SelfCopy(AlipayConfig alipayConfig)
         {
             DefaultAppName = alipayConfig.DefaultAppName;

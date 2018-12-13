@@ -51,8 +51,7 @@ namespace QuickPay.WechatPay.Responses
         [PayElement("refund_fee")]
         public int RefundFee { get; set; }
 
-        /// <summary>应结退款金额
-        /// 去掉非充值代金券退款金额后的退款金额，退款金额=申请退款金额-非充值代金券退款金额，退款金额<= 申请退款金额
+        /// <summary>应结退款金额,去掉非充值代金券退款金额后的退款金额，退款金额=申请退款金额-非充值代金券退款金额，退款金额(小于等于)申请退款金额
         /// </summary>
         [PayElement("settlement_refund_fee", false)]
         public int SettlementRefundFee { get; set; }
@@ -96,7 +95,9 @@ namespace QuickPay.WechatPay.Responses
         /// </summary>
         [PayElement("coupon_refund_count", false)]
         public int CouponRefundCount { get; set; }
-
+        
+        /// <summary>Ctor
+        /// </summary>
         public OrderRefundResponse()
         {
 

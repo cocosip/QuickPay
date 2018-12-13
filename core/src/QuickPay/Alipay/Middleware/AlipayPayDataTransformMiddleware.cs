@@ -16,6 +16,8 @@ namespace QuickPay.Alipay.Middleware
     {
         private readonly QuickPayExecuteDelegate _next;
         private readonly AlipayPayDataHelper _alipayPayDataHelper;
+        /// <summary>Ctor
+        /// </summary>
         public AlipayPayDataTransformMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, AlipayPayDataHelper alipayPayDataHelper)
         {
             _next = next;
@@ -23,6 +25,8 @@ namespace QuickPay.Alipay.Middleware
             _alipayPayDataHelper = alipayPayDataHelper;
         }
 
+        /// <summary>Invoke
+        /// </summary>
         public async Task Invoke(ExecuteContext context)
         {
 

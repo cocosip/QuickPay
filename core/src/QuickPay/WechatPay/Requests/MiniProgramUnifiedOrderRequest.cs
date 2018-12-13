@@ -7,7 +7,8 @@ namespace QuickPay.WechatPay.Requests
     /// </summary>
     public class MiniProgramUnifiedOrderRequest : BaseWechatPayRequest<MiniProgramUnifiedOrderResponse>
     {
-        //public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/unifiedorder";
+        /// <summary>交易类型名称
+        /// </summary>
         public override string TradeTypeName => WechatPaySettings.TradeType.MiniProgram;
 
         /// <summary>交易类型,取值如下：JSAPI，NATIVE，APP等,是否跟JSAPI使用相同的交易类型
@@ -25,7 +26,7 @@ namespace QuickPay.WechatPay.Requests
         [PayElement("out_trade_no")]
         public string OutTradeNo { get; set; }
 
-        /// <summary>订单总金额，单位为分
+        /// <summary>订单总金额,单位为分
         /// </summary>
         [PayElement("total_fee")]
         public int TotalFee { get; set; }
@@ -45,11 +46,21 @@ namespace QuickPay.WechatPay.Requests
         [PayElement("openid")]
         public string OpenId { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public MiniProgramUnifiedOrderRequest()
         {
 
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="body">商品简单描述</param>
+        /// <param name="outTradeNo">商户订单号,商户系统内部订单号</param>
+        /// <param name="totalFee">订单总金额,单位为分</param>
+        /// <param name="spbillCreateIp">终端IP,APP和网页支付提交用户端ip</param>
+        /// <param name="notifyUrl">异步通知地址</param>
+        /// <param name="openId">用户OpenId</param>
         public MiniProgramUnifiedOrderRequest(string body, string outTradeNo, int totalFee, string spbillCreateIp, string notifyUrl, string openId)
         {
             Body = body;

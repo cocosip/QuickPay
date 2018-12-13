@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 
 namespace QuickPay.WechatPay.Authentication
 {
+    /// <summary>认证服务
+    /// </summary>
     public class AuthenticationService : IAuthenticationService
     {
         private readonly ILogger _logger;
@@ -21,6 +23,8 @@ namespace QuickPay.WechatPay.Authentication
         private readonly IJsApiTicketStore _jsApiTicketStore;
         private readonly IDistributedCache<WechatPayAuthenticationStateCacheItem> _stateCache;
 
+        /// <summary>Ctor
+        /// </summary>
         public AuthenticationService(ILogger<QuickPayLoggerName> logger, IHttpClient httpClient, IJsonSerializer jsonSerializer, IAccessTokenStore accessTokenStore, IJsApiTicketStore jsApiTicketStore, IDistributedCache<WechatPayAuthenticationStateCacheItem> stateCache)
         {
             _logger = logger;

@@ -6,6 +6,8 @@ using System.Linq;
 
 namespace QuickPay.Infrastructure.Requests
 {
+    /// <summary>请求类型查询器
+    /// </summary>
     public class RequestTypeFinder : IRequestTypeFinder
     {
         /// <summary>获取需要进行支付存储的类型

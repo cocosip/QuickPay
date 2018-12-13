@@ -29,17 +29,30 @@ namespace QuickPay.WechatPay.Services.DTOs
         /// </summary>
         public string SceneType { get; set; } = WechatPaySettings.H5SceneInfoType.Wap;
 
+        /// <summary>Ctor
+        /// </summary>
         public H5UnifiedOrderInput()
         {
 
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="body">商品简单描述</param>
+        /// <param name="outTradeNo">商户系统内部订单号</param>
+        /// <param name="totalFee">订单总金额,单位为分</param>
         public H5UnifiedOrderInput(string body, string outTradeNo, int totalFee)
         {
             Body = body;
             OutTradeNo = outTradeNo;
             TotalFee = totalFee;
         }
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="body">商品简单描述</param>
+        /// <param name="outTradeNo">商户系统内部订单号</param>
+        /// <param name="totalFee">订单总金额,单位为分</param>
+        /// <param name="notifyUrl">异步通知地址</param>
         public H5UnifiedOrderInput(string body, string outTradeNo, int totalFee, string notifyUrl)
         {
             Body = body;

@@ -1,5 +1,7 @@
 ﻿namespace QuickPay
 {
+    /// <summary>QuickPay常量配置信息
+    /// </summary>
     public class QuickPaySettings
     {
         /// <summary>日志名称
@@ -10,9 +12,16 @@
         /// </summary>
         public const string DefaultBusinessCode = "Default";
 
+        /// <summary>配置格式
+        /// </summary>
         public class ConfigFormat
         {
+            /// <summary>JSON
+            /// </summary>
             public const string Json = "JSON";
+
+            /// <summary>XML
+            /// </summary>
             public const string Xml = "XML";
         }
 
@@ -20,13 +29,25 @@
         /// </summary>
         public class Provider
         {
+            /// <summary>支付宝
+            /// </summary>
             public const string Alipay = "QuickPay.Alipay";
+
+            /// <summary>微信支付
+            /// </summary>
             public const string WechatPay = "QuickPay.WechatPay";
         }
 
+        /// <summary>请求操作
+        /// </summary>
         public class RequestHandler
         {
+            /// <summary>Execute执行
+            /// </summary>
             public const string Execute = "ExecuteRequest";
+
+            /// <summary>签名
+            /// </summary>
             public const string Sign = "SignRequest";
         }
 

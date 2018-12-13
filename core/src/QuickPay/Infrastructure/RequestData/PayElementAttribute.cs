@@ -2,6 +2,8 @@
 
 namespace QuickPay.Infrastructure.RequestData
 {
+    /// <summary>支付数据特性标签
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
     public class PayElementAttribute: Attribute
     {
@@ -13,6 +15,8 @@ namespace QuickPay.Infrastructure.RequestData
         /// </summary>
         public string Name { get; private set; }
 
+        /// <summary>
+        /// </summary>
         public PayElementAttribute(string name, bool isRequired = true)
         {
             Name = name;

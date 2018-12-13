@@ -36,6 +36,8 @@ namespace QuickPay.WechatPay.Responses
         [PayElement("sign")]
         public string Sign { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public NativeMode1CreateCodeResponse()
         {
 

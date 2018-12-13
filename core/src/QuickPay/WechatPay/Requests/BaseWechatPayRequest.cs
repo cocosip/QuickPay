@@ -8,17 +8,28 @@ using QuickPay.WechatPay.Util;
 
 namespace QuickPay.WechatPay.Requests
 {
+    /// <summary>微信支付泛型抽象基类
+    /// </summary>
     public abstract class BaseWechatPayRequest<T> : BasePayRequest<T> where T : PayResponse
     {
+        /// <summary>微信支付管道名
+        /// </summary>
         public override string Provider => QuickPaySettings.Provider.WechatPay;
 
+        /// <summary>签名字段名称
+        /// </summary>
         public override string SignFieldName => WechatPaySettings.DefaultSignFieldName;
+
+        /// <summary>交易类型名称
+        /// </summary>
         public override string TradeTypeName => "";
+
+        /// <summary>签名类型名称
+        /// </summary>
         public override string SignTypeName { get; set; } = "";
-        //= WechatPaySettings.SignType.Md5;
 
-        //public virtual string RequestUrl { get; }
-
+        /// <summary>AppId
+        /// </summary>
         [PayElement("appid")]
         public string AppId { get; set; }
 
@@ -32,6 +43,8 @@ namespace QuickPay.WechatPay.Requests
         [PayElement("nonce_str")]
         public string NonceStr { get; set; }
 
+        /// <summary>设置必要参数
+        /// </summary>
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             var wechatPayConfig = (WechatPayConfig)config;

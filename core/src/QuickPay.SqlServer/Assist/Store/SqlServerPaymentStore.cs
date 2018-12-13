@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace QuickPay.Assist.Store
 {
+    /// <summary>支付信息存储
+    /// </summary>
     public class SqlServerPaymentStore : BaseSqlServerStore, IPaymentStore
     {
         private string TableName = "QP_Payments";
 
+        /// <summary>Ctor
+        /// </summary>
         public SqlServerPaymentStore(QuickPaySqlServerOption option, ILogger<QuickPayLoggerName> logger) : base(option, logger)
         {
+
         }
 
         /// <summary>创建或者修改支付信息
@@ -20,7 +25,7 @@ namespace QuickPay.Assist.Store
         {
             try
             {
-                using (var connection = GetConnection())
+                using(var connection = GetConnection())
                 {
                     //根据UniqueId查询支付信息
                     var queryPayment = await GetByUniqueIdAsync(payment.UniqueId);
@@ -42,7 +47,7 @@ namespace QuickPay.Assist.Store
             }
             catch (SqlException ex)
             {
-                _logger.LogError($"创建或者修改Payment出错,UniqueId:{payment.UniqueId} {ex.Message}");
+                Logger.LogError($"创建或者修改Payment出错,UniqueId:{payment.UniqueId} {ex.Message}");
                 throw;
             }
         }
@@ -53,7 +58,7 @@ namespace QuickPay.Assist.Store
         {
             try
             {
-                using (var connection = GetConnection())
+                using(var connection = GetConnection())
                 {
                     var sql = $"SELECT TOP 1 * FROM [{TableName}] WHERE PayPlatId=@PayPlatId AND AppId=@AppId AND OutTradeNo=@OutTradeNo";
                     return await connection.QueryFirstOrDefaultAsync<Payment>(sql, new { PayPlatId = payPlatId, AppId = appId, OutTradeNo = outTradeNo });
@@ -61,7 +66,7 @@ namespace QuickPay.Assist.Store
             }
             catch (SqlException ex)
             {
-                _logger.LogError($"获取支付信息Payment出错,PayPlatId:{payPlatId},AppId:{appId},OutTradeNo:{outTradeNo}.{ex.Message}");
+                Logger.LogError($"获取支付信息Payment出错,PayPlatId:{payPlatId},AppId:{appId},OutTradeNo:{outTradeNo}.{ex.Message}");
                 throw;
             }
         }
@@ -72,7 +77,7 @@ namespace QuickPay.Assist.Store
         {
             try
             {
-                using (var connection = GetConnection())
+                using(var connection = GetConnection())
                 {
                     var sql = $"SELECT TOP 1 * FROM [{TableName}] WHERE UniqueId=@UniqueId";
                     return await connection.QueryFirstOrDefaultAsync<Payment>(sql, new { UniqueId = uniqueId });
@@ -80,7 +85,7 @@ namespace QuickPay.Assist.Store
             }
             catch (SqlException ex)
             {
-                _logger.LogError($"根据UniqueId获取支付信息Payment出错,UniqueId:{uniqueId}.{ex.Message}");
+                Logger.LogError($"根据UniqueId获取支付信息Payment出错,UniqueId:{uniqueId}.{ex.Message}");
                 throw;
             }
         }

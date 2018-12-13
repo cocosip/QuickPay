@@ -25,11 +25,16 @@ namespace QuickPay.WechatPay.Services.DTOs
         /// </summary>
         public string RefundId { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public RefundQueryInput()
         {
 
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="outRefundNo">商户系统内部订单号</param>
         public RefundQueryInput(string outRefundNo)
         {
             OutRefundNo = outRefundNo;

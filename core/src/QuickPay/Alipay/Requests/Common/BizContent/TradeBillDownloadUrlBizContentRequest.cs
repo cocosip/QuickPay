@@ -16,11 +16,17 @@ namespace QuickPay.Alipay.Requests
         [PayElement("bill_date")]
         public string BillDate { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public TradeBillDownloadUrlBizContentRequest()
         {
 
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="billType">订单类型</param>
+        /// <param name="billDate">订单日期</param>
         public TradeBillDownloadUrlBizContentRequest(string billType, string billDate)
         {
             BillType = billType;

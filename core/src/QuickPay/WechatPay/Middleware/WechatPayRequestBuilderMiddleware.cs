@@ -11,11 +11,15 @@ using System.Threading.Tasks;
 
 namespace QuickPay.WechatPay.Middleware
 {
+    /// <summary>微信支付请求创建中间件
+    /// </summary>
     public class WechatPayRequestBuilderMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
         private readonly QuickPayConfigurationOption _option;
         private readonly IWechatPayUrl _wechatPayUrl;
+        /// <summary>Ctor
+        /// </summary>
         public WechatPayRequestBuilderMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, QuickPayConfigurationOption option, IWechatPayUrl wechatPayUrl)
         {
             _next = next;
@@ -24,6 +28,8 @@ namespace QuickPay.WechatPay.Middleware
             _wechatPayUrl = wechatPayUrl;
         }
 
+        /// <summary>Invoke
+        /// </summary>
         public async Task Invoke(ExecuteContext context)
         {
             try

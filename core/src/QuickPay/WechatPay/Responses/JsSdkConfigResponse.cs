@@ -25,6 +25,8 @@ namespace QuickPay.WechatPay.Responses
         /// </summary>
         public string Sign { get; set; }
 
+        /// <summary>Ctor
+        /// </summary>
         public JsSdkConfigResponse()
         {
 

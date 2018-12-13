@@ -4,6 +4,8 @@
     /// </summary>
     public class ExecuteError : Error
     {
+        /// <summary>Ctor
+        /// </summary>
         public ExecuteError(string message) : base(message, (int)QuickPayErrorCodes.ExecuteError)
         {
         }

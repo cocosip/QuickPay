@@ -45,14 +45,6 @@ namespace QuickPay.WechatPay.Middleware
                             SetPipelineError(context, new ExecuteError($"{QuickPaySettings.RequestHandler.Execute},必须要有请求url"));
                             return;
                         }
-                        //var urlProperty = context.Request.GetType().GetProperties().FirstOrDefault(x => x.Name == "RequestUrl");
-                        //if (urlProperty == null)
-                        //{
-                        //    SetPipelineError(context, new ExecuteError($"{QuickPaySettings.RequestHandler.Execute},必须要有请求url"));
-                        //    return;
-                        //}
-                        //准备Http请求
-                        //IHttpRequest httpRequest = new HttpRequest(urlProperty.GetValue(context.Request).ToString(), Method.POST);
                         IHttpRequest httpRequest = new HttpRequest(requestUrl, Method.POST);
                         httpRequest.AddXmlBody(requestXml);
                         context.HttpRequest = httpRequest;

@@ -49,10 +49,7 @@ namespace QuickPay.WechatPay.Middleware
                             SetPipelineError(context, new ParseResponseError($"微信支付出错,{failMsg}"));
                             return;
                         }
-
-
                         context.ResponsePayData = new PayData(payData.GetValues());
-
                         context.Response = (PayResponse)(RequestReflectUtil.ToResponse(payData, responseType));
                     }
                     else

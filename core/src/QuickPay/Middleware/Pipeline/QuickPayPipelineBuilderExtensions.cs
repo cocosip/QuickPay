@@ -90,16 +90,5 @@ namespace QuickPay.Middleware.Pipeline
             });
         }
 
-
-        private static object GetService(IServiceProvider sp, Type type)
-        {
-            var service = sp.GetService(type);
-            if (service == null)
-            {
-                throw new InvalidOperationException();
-            }
-
-            return service;
-        }
     }
 }

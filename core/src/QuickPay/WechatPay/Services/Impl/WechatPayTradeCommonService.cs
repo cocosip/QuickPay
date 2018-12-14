@@ -74,5 +74,6 @@ namespace QuickPay.WechatPay.Services.Impl
             var response = await Executer.ExecuteAsync<ReportResponse>(request, App);
             return response;
         }
+        
     }
 }

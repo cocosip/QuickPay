@@ -159,7 +159,6 @@ Task("Publish")
             });
             Information($"publish nuget:{package.PackagePath}");
          }
-
       }
    });
 

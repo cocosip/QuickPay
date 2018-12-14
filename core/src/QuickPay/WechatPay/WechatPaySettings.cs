@@ -125,6 +125,40 @@
             public const string Report = "REPORT";
         }
 
+        /// <summary>订单查询的状态
+        /// </summary>
+        public class TradeStatus
+        {
+            /// <summary>支付成功
+            /// </summary>
+            public const string Success = "SUCCESS";
+
+            /// <summary>转入退款
+            /// </summary>
+            public const string Refund = "REFUND";
+
+            /// <summary>未支付
+            /// </summary>
+            public const string NotPay = "NOTPAY";
+
+            /// <summary>已关闭
+            /// </summary>
+            public const string Close = "CLOSED";
+
+            /// <summary>已撤销(刷卡支付)
+            /// </summary>
+            public const string Revoked = "REVOKED";
+
+            /// <summary>用户正在支付中
+            /// </summary>
+            public const string UserPaying = "USERPAYING";
+            
+            /// <summary>支付失败(其他原因,如银行返回失败)
+            /// </summary>
+            public const string PayError = "PAYERROR";
+
+        }
+
         /// <summary>授权认证Scope
         /// </summary>
         public class Scope

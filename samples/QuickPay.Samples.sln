@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay", "..\core\src\Qui
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.Abp", "..\core\src\QuickPay.Abp\QuickPay.Abp.csproj", "{17518CAE-B21D-4BC4-9043-D2F5975F0336}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.AspNetCore", "..\core\src\QuickPay.AspNetCore\QuickPay.AspNetCore.csproj", "{71550A28-77B6-403A-B3CA-D803935FCF6D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.SqlServer", "..\core\src\QuickPay.SqlServer\QuickPay.SqlServer.csproj", "{BC930E72-7B33-44BB-BDE8-3B0689A55663}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickPay.AspNetCore.Mvc", "..\core\src\QuickPay.AspNetCore.Mvc\QuickPay.AspNetCore.Mvc.csproj", "{13C16F9B-E30F-45FC-9A98-233682BB6AAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +31,14 @@ Global
 		{17518CAE-B21D-4BC4-9043-D2F5975F0336}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17518CAE-B21D-4BC4-9043-D2F5975F0336}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17518CAE-B21D-4BC4-9043-D2F5975F0336}.Release|Any CPU.Build.0 = Release|Any CPU
-		{71550A28-77B6-403A-B3CA-D803935FCF6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{71550A28-77B6-403A-B3CA-D803935FCF6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{71550A28-77B6-403A-B3CA-D803935FCF6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{71550A28-77B6-403A-B3CA-D803935FCF6D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BC930E72-7B33-44BB-BDE8-3B0689A55663}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BC930E72-7B33-44BB-BDE8-3B0689A55663}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC930E72-7B33-44BB-BDE8-3B0689A55663}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC930E72-7B33-44BB-BDE8-3B0689A55663}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13C16F9B-E30F-45FC-9A98-233682BB6AAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13C16F9B-E30F-45FC-9A98-233682BB6AAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13C16F9B-E30F-45FC-9A98-233682BB6AAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13C16F9B-E30F-45FC-9A98-233682BB6AAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

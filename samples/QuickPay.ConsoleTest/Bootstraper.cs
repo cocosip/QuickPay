@@ -49,9 +49,9 @@ namespace QuickPay.ConsoleTest
             {
                 c.AddLog4Net();
             })
-            .AddGenericsMemoryCache()
-            .AddCommonComponents()
+            .AddDotCommon()
             .AddJson4Net()
+            .AddGenericsMemoryCache()
             .AddQuickPay(option =>
             {
                 option.ConfigSourceType = ConfigSourceType.FromConfigFile;
@@ -75,7 +75,9 @@ namespace QuickPay.ConsoleTest
             });
             var provider = services.BuildServiceProvider();
             //配置
-            provider.ConfigureQuickPay();
+            provider
+                .ConfigureDotCommon()
+                .UseQuickPay();
             return provider;
         }
     }

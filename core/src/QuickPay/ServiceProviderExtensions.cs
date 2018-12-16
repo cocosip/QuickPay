@@ -15,7 +15,7 @@ namespace QuickPay
     {
         /// <summary>配置QuickPay的相关信息
         /// </summary>
-        public static IServiceProvider ConfigureQuickPay(this IServiceProvider provider)
+        public static IServiceProvider UseQuickPay(this IServiceProvider provider)
         {
             var option = provider.GetService<QuickPayConfigurationOption>();
             //从文件中读取配置

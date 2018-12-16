@@ -23,7 +23,7 @@ namespace QuickPay.Tests
             {
                 c.AddLog4Net();
             })
-            .AddCommonComponents()
+            .AddDotCommon()
             .AddGenericsMemoryCache()
             .AddJson4Net()
             .AddQuickPay(option =>
@@ -38,7 +38,9 @@ namespace QuickPay.Tests
             });
             Provider = services.BuildServiceProvider();
             //配置
-            Provider.ConfigureQuickPay();
+            Provider
+                .ConfigureDotCommon()
+                .UseQuickPay();
 
             WechatPayConfig = Provider.GetService<WechatPayConfig>();
             AlipayConfig = Provider.GetService<AlipayConfig>();

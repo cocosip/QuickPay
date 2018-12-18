@@ -15,7 +15,7 @@ namespace QuickPay.Tests.WechatPay.Services
         public void UnifiedOrder_Test()
         {
             var appService = Provider.GetService<IWechatAppPayService>();
-            using (appService.Use(WechatPayConfig.GetByName("App1")))
+            using(appService.Use(WechatPayConfig.GetByName("App1")))
             {
                 var input = new AppUnifiedOrderInput("测试支付1", ObjectId.GenerateNewStringId(), 10);
                 var response = AsyncHelper.RunSync(() => appService.UnifiedOrder(input));

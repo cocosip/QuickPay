@@ -17,13 +17,16 @@ namespace QuickPay.WechatPay.Middleware
     public class WechatPayParseResponseMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
+        private readonly WechatPayDataHelper _wechatPayDataHelper;
         /// <summary>Ctor
         /// </summary>
-        public WechatPayParseResponseMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger)
+        public WechatPayParseResponseMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, WechatPayDataHelper wechatPayDataHelper)
         {
             _next = next;
             Logger = logger;
+            _wechatPayDataHelper = wechatPayDataHelper;
         }
+
         /// <summary>Invoke
         /// </summary>
         public async Task Invoke(ExecuteContext context)
@@ -36,7 +39,7 @@ namespace QuickPay.WechatPay.Middleware
 
                     if (context.RequestHandler == QuickPaySettings.RequestHandler.Execute)
                     {
-                        var payData = context.RequestPayData.FromXml(context.HttpResponseString);
+                        var payData = _wechatPayDataHelper.FromXml(context.HttpResponseString);
                         //有可能返回的不是期望的
                         if (!payData.GetValues().Any())
                         {

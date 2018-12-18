@@ -41,7 +41,7 @@ namespace QuickPay.Configurations
             var doc = new XmlDocument();
             XmlReaderSettings settings = new XmlReaderSettings
             {
-                IgnoreComments = true//忽略文档里面的注释
+                IgnoreComments = true //忽略文档里面的注释
             };
             XmlReader reader = XmlReader.Create(file, settings);
             doc.Load(reader);
@@ -57,9 +57,9 @@ namespace QuickPay.Configurations
                 SandboxGateway = alipayNode.SelectSingleNode("SandboxGateway").InnerText,
                 Format = alipayNode.SelectSingleNode("Format").InnerText,
                 Version = alipayNode.SelectSingleNode("Version").InnerText,
-                NotifyRealateUrl = alipayNode.SelectSingleNode("NotifyRealateUrl").InnerText,
-                QrcodeNotifyRelateUrl = alipayNode.SelectSingleNode("QrcodeNotifyRelateUrl").InnerText,
-                BarcodeNotifyRelateUrl = alipayNode.SelectSingleNode("BarcodeNotifyRelateUrl").InnerText,
+                NotifyUrlFragments = alipayNode.SelectSingleNode("NotifyUrlFragments").InnerText,
+                QrcodeNotifyUrlFragments = alipayNode.SelectSingleNode("QrcodeNotifyUrlFragments").InnerText,
+                BarcodeNotifyUrlFragments = alipayNode.SelectSingleNode("BarcodeNotifyUrlFragments").InnerText,
             };
             //AlipayConfig Apps节点
             var alipayAppNodes = alipayNode.SelectSingleNode("Apps");
@@ -88,7 +88,7 @@ namespace QuickPay.Configurations
                 NotifyGateway = wechatPayNode.SelectSingleNode("NotifyGateway").InnerText,
                 LocalAddress = wechatPayNode.SelectSingleNode("LocalAddress").InnerText,
                 WebGateway = wechatPayNode.SelectSingleNode("WebGateway").InnerText,
-                NotifyRealateUrl = wechatPayNode.SelectSingleNode("NotifyRealateUrl").InnerText,
+                NotifyUrlFragments = wechatPayNode.SelectSingleNode("NotifyUrlFragments").InnerText,
                 SignType = wechatPayNode.SelectSingleNode("SignType").InnerText,
                 SslPassword = wechatPayNode.SelectSingleNode("SslPassword").InnerText,
             };

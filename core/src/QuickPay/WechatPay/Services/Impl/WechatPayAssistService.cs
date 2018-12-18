@@ -45,10 +45,10 @@ namespace QuickPay.WechatPay.Services.Impl
         public async Task PaySuccess(PayData payData, Action<PayData, Payment> action = null)
         {
             //签名验证
-            if (!(await VerifySign(payData)))
-            {
-                throw new QuickPayException($"签名不正确");
-            }
+            // if (!(await VerifySign(payData)))
+            // {
+            //     throw new QuickPayException($"签名不正确");
+            // }
             var payment = await _paymentStore.GetAsync((int)PayPlat.WechatPay, App.AppId, _wechatPayDataHelper.GetWechatOutTradeNo(payData));
             if (payment == null)
             {

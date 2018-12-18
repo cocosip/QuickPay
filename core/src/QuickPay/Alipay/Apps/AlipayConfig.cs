@@ -1,4 +1,5 @@
 ﻿using DotCommon.Extensions;
+using DotCommon.Utility;
 using QuickPay.Infrastructure.Apps;
 using System;
 using System.Collections.Generic;
@@ -28,15 +29,15 @@ namespace QuickPay.Alipay.Apps
 
         /// <summary>异步通知关联Url
         /// </summary>
-        public string NotifyRealateUrl { get; set; }
+        public string NotifyUrlFragments { get; set; }
 
         /// <summary>二维码扫码支付异步通知关联Url
         /// </summary>
-        public string QrcodeNotifyRelateUrl { get; set; }
+        public string QrcodeNotifyUrlFragments { get; set; }
 
         /// <summary>条码支付异步通知关联Url
         /// </summary>
-        public string BarcodeNotifyRelateUrl { get; set; }
+        public string BarcodeNotifyUrlFragments { get; set; }
 
         /// <summary>支付宝网关
         /// </summary>
@@ -88,21 +89,21 @@ namespace QuickPay.Alipay.Apps
         /// </summary>
         public string GetDefaultNotifyUrl()
         {
-            return $"{NotifyGateway.TrimEnd('/')}/{NotifyRealateUrl.TrimStart('/')}";
+            return UrlUtil.CombineUrl(NotifyGateway, NotifyUrlFragments);
         }
 
         /// <summary>获取默认扫码支付通知地址
         /// </summary>
         public string GetDefaultQrcodeNotifyUrl()
         {
-            return $"{NotifyGateway.TrimEnd('/')}/{QrcodeNotifyRelateUrl.TrimStart('/')}";
+            return UrlUtil.CombineUrl(NotifyGateway, QrcodeNotifyUrlFragments);
         }
 
         /// <summary>获取默认条码支付通知地址
         /// </summary>
         public string GetDefaultBarcodeNotifyUrl()
         {
-            return $"{NotifyGateway.TrimEnd('/')}/{BarcodeNotifyRelateUrl.TrimStart('/')}";
+            return UrlUtil.CombineUrl(NotifyGateway, BarcodeNotifyUrlFragments);
         }
 
         /// <summary>Copy
@@ -113,9 +114,9 @@ namespace QuickPay.Alipay.Apps
             NotifyGateway = alipayConfig.NotifyGateway;
             LocalAddress = alipayConfig.LocalAddress;
             WebGateway = alipayConfig.WebGateway;
-            NotifyRealateUrl = alipayConfig.NotifyRealateUrl;
-            QrcodeNotifyRelateUrl = alipayConfig.QrcodeNotifyRelateUrl;
-            BarcodeNotifyRelateUrl = alipayConfig.BarcodeNotifyRelateUrl;
+            NotifyUrlFragments = alipayConfig.NotifyUrlFragments;
+            QrcodeNotifyUrlFragments = alipayConfig.QrcodeNotifyUrlFragments;
+            BarcodeNotifyUrlFragments = alipayConfig.BarcodeNotifyUrlFragments;
             Gateway = alipayConfig.Gateway;
             Format = alipayConfig.Format;
             Version = alipayConfig.Version;
@@ -125,15 +126,15 @@ namespace QuickPay.Alipay.Apps
                 Apps.Add(new AlipayApp()
                 {
                     Name = app.Name,
-                    AppId = app.AppId,
-                    Charset = app.Charset,
-                    SignType = app.SignType,
-                    PublicKey = app.PublicKey,
-                    PrivateKey = app.PrivateKey,
-                    AppTypeId = app.AppTypeId,
-                    EnableEncrypt = app.EnableEncrypt,
-                    EncryptType = app.EncryptType,
-                    EncryptKey = app.EncryptKey
+                        AppId = app.AppId,
+                        Charset = app.Charset,
+                        SignType = app.SignType,
+                        PublicKey = app.PublicKey,
+                        PrivateKey = app.PrivateKey,
+                        AppTypeId = app.AppTypeId,
+                        EnableEncrypt = app.EnableEncrypt,
+                        EncryptType = app.EncryptType,
+                        EncryptKey = app.EncryptKey
                 });
             }
 

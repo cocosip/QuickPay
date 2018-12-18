@@ -1,4 +1,5 @@
 ﻿using DotCommon.Extensions;
+using DotCommon.Utility;
 using QuickPay.Infrastructure.Apps;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,8 @@ namespace QuickPay.WechatPay.Apps
 
         /// <summary>异步通知关联Url
         /// </summary>
-        public string NotifyRealateUrl { get; set; }
+        public string NotifyUrlFragments { get; set; }
+
 
         /// <summary>本地IP地址
         /// </summary>
@@ -71,8 +73,9 @@ namespace QuickPay.WechatPay.Apps
         /// </summary>
         public string GetDefaultNotifyUrl()
         {
-            return $"{NotifyGateway.TrimEnd('/')}/{NotifyRealateUrl.TrimStart('/')}";
+            return UrlUtil.CombineUrl(NotifyGateway, NotifyUrlFragments);
         }
+
 
         /// <summary>Copy
         /// </summary>
@@ -80,7 +83,7 @@ namespace QuickPay.WechatPay.Apps
         {
             DefaultAppName = wechatPayConfig.DefaultAppName;
             NotifyGateway = wechatPayConfig.NotifyGateway;
-            NotifyRealateUrl = wechatPayConfig.NotifyRealateUrl;
+            NotifyUrlFragments = wechatPayConfig.NotifyUrlFragments;
             LocalAddress = wechatPayConfig.LocalAddress;
             WebGateway = wechatPayConfig.WebGateway;
             SignType = wechatPayConfig.SignType;

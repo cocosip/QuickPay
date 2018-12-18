@@ -84,11 +84,11 @@ namespace QuickPay.WechatPay.Requests
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);
-            var vConfig = (WechatPayConfig)config;
-            SpbillCreateIp = vConfig.LocalAddress;
+            var wechatPayConfig = (WechatPayConfig)config;
+            SpbillCreateIp = wechatPayConfig.LocalAddress;
             if (NotifyUrl.IsNullOrWhiteSpace())
             {
-                NotifyUrl = vConfig.GetDefaultNotifyUrl();
+                NotifyUrl = wechatPayConfig.GetDefaultNotifyUrl();
             }
         }
 

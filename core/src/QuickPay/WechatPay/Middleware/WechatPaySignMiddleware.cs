@@ -16,13 +16,15 @@ namespace QuickPay.WechatPay.Middleware
     public class WechatPaySignMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
+        private readonly WechatPayDataHelper _wechatPayDataHelper;
 
         /// <summary>Ctor
         /// </summary>
-        public WechatPaySignMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger)
+        public WechatPaySignMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, WechatPayDataHelper wechatPayDataHelper)
         {
             _next = next;
             Logger = logger;
+            _wechatPayDataHelper = wechatPayDataHelper;
         }
 
         /// <summary>Invoke
@@ -58,7 +60,7 @@ namespace QuickPay.WechatPay.Middleware
                         context.RequestPayData.SetValue(context.SignFieldName, sign);
                     }
 
-                    Logger.LogInformation(context.Request.GetLogFormat($"签名字段:{context.SignFieldName},签名:{sign},签名后数据:[{ context.RequestPayData.ToXml()}]"));
+                    Logger.LogInformation(context.Request.GetLogFormat($"签名字段:{context.SignFieldName},签名:{sign},签名后数据:[{ _wechatPayDataHelper.ToXml(context.RequestPayData)}]"));
                     Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
                 }
             }

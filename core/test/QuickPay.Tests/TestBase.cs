@@ -20,17 +20,17 @@ namespace QuickPay.Tests
         {
             IServiceCollection services = new ServiceCollection();
             services.AddLogging(c =>
-            {
-                c.AddLog4Net();
-            })
-            .AddDotCommon()
-            .AddGenericsMemoryCache()
-            .AddJson4Net()
-            .AddQuickPay(option =>
-            {
-                option.ConfigSourceType = ConfigSourceType.FromConfigFile;
-                option.ConfigFileName = "QuickPayConfig.xml";
-            });
+                {
+                    c.AddLog4Net();
+                })
+                .AddDotCommon()
+                .AddGenericsMemoryCache()
+                .AddJson4Net()
+                .AddQuickPay(option =>
+                {
+                    option.ConfigSourceType = ConfigSourceType.FromConfigFile;
+                    option.ConfigFileName = "QuickPayConfig.xml";
+                });
 
             Mapper.Initialize(config =>
             {
@@ -38,9 +38,7 @@ namespace QuickPay.Tests
             });
             Provider = services.BuildServiceProvider();
             //配置
-            Provider
-                .ConfigureDotCommon()
-                .UseQuickPay();
+            Provider.ConfigureDotCommon().UseQuickPay();
 
             WechatPayConfig = Provider.GetService<WechatPayConfig>();
             AlipayConfig = Provider.GetService<AlipayConfig>();

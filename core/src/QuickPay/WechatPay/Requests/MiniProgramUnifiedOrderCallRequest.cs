@@ -1,3 +1,4 @@
+using DotCommon.Extensions;
 using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.RequestData;
 using QuickPay.Infrastructure.Requests;
@@ -63,6 +64,13 @@ namespace QuickPay.WechatPay.Requests
             SignType = wechatPayConfig.SignType;
             NonceStr = WechatPayUtil.GenerateNonceStr();
             Timestamp = WechatPayUtil.GenerateTimeStamp();
+
+            if (SignTypeName.IsNullOrWhiteSpace())
+            {
+                //签名类型
+                SignTypeName = wechatPayConfig.SignType;
+            }
+
         }
 
         /// <summary>Ctor

@@ -37,5 +37,12 @@ namespace QuickPay.WechatPay.Responses
         /// </summary>
         [PayElement("prepay_id")]
         public string PrepayId { get; set; }
+
+        /// <summary>Ctor
+        /// </summary>
+        public NativeMode1UnifiedOrderResponse()
+        {
+
+        }
     }
 }

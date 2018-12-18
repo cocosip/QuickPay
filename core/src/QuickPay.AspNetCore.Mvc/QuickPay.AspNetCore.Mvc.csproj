@@ -9,6 +9,11 @@
   <ItemGroup>
     <Folder Include="AspNetCore\Mvc\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QuickPay\QuickPay.csproj" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="DotCommon.AspNetCore.Mvc" Version="3.0.0" />
   </ItemGroup>

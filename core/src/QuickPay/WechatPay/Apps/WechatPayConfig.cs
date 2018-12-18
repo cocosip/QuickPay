@@ -91,20 +91,20 @@ namespace QuickPay.WechatPay.Apps
                 Apps.Add(new WechatPayApp()
                 {
                     Name = app.Name,
-                    AppId = app.AppId,
-                    MchId = app.MchId,
-                    Key = app.Key,
-                    Appsecret = app.Appsecret,
-                    AppTypeId = app.AppTypeId,
-                    NativeMobileInfo = new NativeMobileInfo()
-                    {
-                        AndroidName = app.NativeMobileInfo.AndroidName,
-                        PackageName = app.NativeMobileInfo.PackageName,
-                        BundleId = app.NativeMobileInfo.BundleId,
-                        IosName = app.NativeMobileInfo.IosName,
-                        WapName = app.NativeMobileInfo.WapName,
-                        WapUrl = app.NativeMobileInfo.WapUrl
-                    }
+                        AppId = app.AppId,
+                        MchId = app.MchId,
+                        Key = app.Key,
+                        Appsecret = app.Appsecret,
+                        AppTypeId = app.AppTypeId,
+                        NativeMobileInfo = new NativeMobileInfo()
+                        {
+                            AndroidName = app.NativeMobileInfo.AndroidName,
+                                PackageName = app.NativeMobileInfo.PackageName,
+                                BundleId = app.NativeMobileInfo.BundleId,
+                                IosName = app.NativeMobileInfo.IosName,
+                                WapName = app.NativeMobileInfo.WapName,
+                                WapUrl = app.NativeMobileInfo.WapUrl
+                        }
                 });
             }
             return this;

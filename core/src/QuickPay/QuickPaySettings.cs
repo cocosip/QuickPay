@@ -51,5 +51,25 @@
             public const string Sign = "SignRequest";
         }
 
+        /// <summary>微信支付异步通知UrlFragments
+        /// </summary>
+        public class WechatPayNotifyUrlFragments
+        {
+            /// <summary>微信支付的相关通知
+            /// </summary>
+            public const string PaymentUrlFragments = "/QuickPay/WechatPay/PaymentNotify";
+
+        }
+
+        /// <summary>支付宝异步通知UrlFragments
+        /// </summary>
+        public class AlipayNotifyUrlFragments
+        {
+            /// <summary>支付宝支付相关通知
+            /// </summary>
+            public const string PaymentUrlFragments = "/QuickPay/Alipay/PaymentNotify";
+
+        }
+
     }
 }

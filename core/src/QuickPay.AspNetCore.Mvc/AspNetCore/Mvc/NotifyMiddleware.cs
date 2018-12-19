@@ -23,6 +23,8 @@ namespace QuickPay.AspNetCore.Mvc
         /// </summary>
         public async Task Invoke(HttpContext context)
         {
+
+
             //判断是否为Notify地址
             // var notify = _notifyManager.GetNotifyByRelateUrl(context.Request.Path);
             // if (notify == null)

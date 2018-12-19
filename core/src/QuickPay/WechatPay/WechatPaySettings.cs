@@ -152,7 +152,7 @@
             /// <summary>用户正在支付中
             /// </summary>
             public const string UserPaying = "USERPAYING";
-            
+
             /// <summary>支付失败(其他原因,如银行返回失败)
             /// </summary>
             public const string PayError = "PAYERROR";
@@ -210,6 +210,6 @@
             /// </summary>
             public const string Sha1 = "SHA1";
         }
-
+        
     }
 }

@@ -4,6 +4,7 @@ using QuickPay.Alipay.Middleware;
 using QuickPay.Configurations;
 using QuickPay.Middleware;
 using QuickPay.Middleware.Pipeline;
+using QuickPay.Notify;
 using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Middleware;
 using System;
@@ -32,6 +33,10 @@ namespace QuickPay
                     wechatPayConfig.SelfCopy(configWapper.WechatPayConfig);
                 }
             }
+
+            //设置NotifyManager中的Notify
+            provider.RegisterNotifies(option);
+
 
             //Pipeline
             var pipelineBuilder = provider.GetService<IQuickPayPipelineBuilder>();
@@ -69,6 +74,19 @@ namespace QuickPay
             //结束
             pipelineBuilder.UseMiddleware<EndMiddleware>();
 
+            return provider;
+        }
+
+        /// <summary>注册通知
+        /// </summary>
+        private static IServiceProvider RegisterNotifies(this IServiceProvider provider, QuickPayConfigurationOption option)
+        {
+            var notifyManager = provider.GetService<INotifyManager>();
+            //查询有哪些定义的通知
+            foreach (var notifyDefination in option.NotifyDefinations)
+            {
+                notifyManager.RegisterNotifyFromDefination(notifyDefination);
+            }
             return provider;
         }
     }

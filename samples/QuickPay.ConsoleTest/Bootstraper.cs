@@ -20,9 +20,9 @@ namespace QuickPay.ConsoleTest
             {
                 Gateway = "https://openapi.alipay.com/gateway.do",
                 NotifyGateway = "http://127.0.0.1",
-                NotifyRealateUrl = "/Notify/Alipay",
-                BarcodeNotifyRelateUrl = "/Notify/AlipayBarcode",
-                QrcodeNotifyRelateUrl = "/Notify/AlipayQrcode",
+                NotifyUrlFragments = "/Notify/Alipay",
+                BarcodeNotifyUrlFragments = "/Notify/AlipayBarcode",
+                QrcodeNotifyUrlFragments = "/Notify/AlipayQrcode",
                 LocalAddress = "8.8.8.8",
                 WebGateway = "127.0.0.1",
                 DefaultAppName = "App1",
@@ -34,7 +34,7 @@ namespace QuickPay.ConsoleTest
             var wechatPayConfig = new WechatPayConfig()
             {
                 NotifyGateway = "http://127.0.0.1",
-                NotifyRealateUrl = "/Notify/Wxpay",
+                NotifyUrlFragments = "/Notify/Wxpay",
                 LocalAddress = "8.8.8.8",
                 WebGateway = "127.0.0.1",
                 DefaultAppName = "App1",

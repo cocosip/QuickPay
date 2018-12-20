@@ -80,9 +80,11 @@ namespace QuickPay
         /// </summary>
         private static IServiceCollection RegisterQuickPay(this IServiceCollection services, AlipayConfig alipayConfig, WechatPayConfig wechatPayConfig)
         {
+
+            //配置信息
             services.AddSingleton<AlipayConfig>(alipayConfig);
             services.AddSingleton<WechatPayConfig>(wechatPayConfig);
-            //
+            //配置文件读取器
             services.AddSingleton<IConfigurationFileTranslator, ConfigurationFileTranslator>();
             //RequestType Finder
             services.AddSingleton<IRequestTypeFinder, RequestTypeFinder>();
@@ -92,6 +94,9 @@ namespace QuickPay
             services.AddTransient<IQuickPayConfigManager, QuickPayConfigManager>();
             services.AddTransient<IRequestExecuter, DefaultRequestExecuter>();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
+
+            //异步通知管理
+            services.AddSingleton<INotifyManager, NotifyManager>();
 
             //支付数据存储
             services.AddTransient<IPaymentStore, EmptyPaymentStore>();
@@ -122,6 +127,7 @@ namespace QuickPay
 
             return services;
         }
+
 
         //注册Pipeline
         private static IServiceCollection RegisterPipeline(this IServiceCollection services)

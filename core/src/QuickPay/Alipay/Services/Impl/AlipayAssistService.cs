@@ -17,6 +17,7 @@ namespace QuickPay.Alipay.Services.Impl
     {
         private readonly IPaymentStore _paymentStore;
         private readonly AlipayPayDataHelper _alipayPayDataHelper;
+
         /// <summary>Ctor
         /// </summary>
         public AlipayAssistService(IServiceProvider provider, IPaymentStore paymentStore) : base(provider)
@@ -46,10 +47,10 @@ namespace QuickPay.Alipay.Services.Impl
         public async Task PaySuccess(PayData payData, Action<PayData, Payment> action = null)
         {
             //签名验证
-            if (!(await VerifySign(payData)))
-            {
-                throw new QuickPayException($"签名不正确");
-            }
+            // if (!(await VerifySign(payData)))
+            // {
+            //     throw new QuickPayException($"签名不正确");
+            // }
             var payment = await _paymentStore.GetAsync((int)PayPlat.Alipay, App.AppId, _alipayPayDataHelper.GetAlipayOutTradeNo(payData));
             if (payment == null)
             {
@@ -76,11 +77,10 @@ namespace QuickPay.Alipay.Services.Impl
                 {
                     throw new QuickPayException(101, $"订单金额不正确,系统存储的金额为:{payment.Amount},回调金额为:{_alipayPayDataHelper.GetTotalAmount(payData)}");
                 }
-                if (action != null)
-                {
-                    //业务执行
-                    action.Invoke(payData, payment);
-                }
+
+                //执行相关的业务
+                action?.Invoke(payData, payment);
+
                 //支付成功后支付状态改变
                 payment.PayStatusId = (int)PayStatus.Success;
                 //支付宝流水号

@@ -1,4 +1,8 @@
-﻿namespace QuickPay.Configurations
+﻿using QuickPay.Notify;
+using System;
+using System.Collections.Generic;
+
+namespace QuickPay.Configurations
 {
     /// <summary>支付配置信息
     /// </summary>
@@ -23,5 +27,9 @@
         /// <summary>是否开启支付宝沙盒
         /// </summary>
         public bool EnabledAlipaySandbox { get; set; }
+
+        /// <summary>通知定义
+        /// </summary>
+        public List<NotifyDefination> NotifyDefinations { get; set; } = new List<NotifyDefination>();
     }
 }

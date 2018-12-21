@@ -37,14 +37,14 @@ namespace QuickPay.Alipay.Util
         /// </summary>
         public string GetAlipayAppId(PayData payData)
         {
-            return payData.GetValue(x => x.Key.ToLower() == "appid").ToString();
+            return payData.GetValue(x => string.Equals(x.Key, "appid", StringComparison.OrdinalIgnoreCase)).ToString();
         }
 
         /// <summary>获取交易号
         /// </summary>
         public string GetAlipayOutTradeNo(PayData payData)
         {
-            return payData.GetValue(x => x.Key.ToLower() == "out_trade_no").ToString();
+            return payData.GetValue(x => string.Equals(x.Key, "out_trade_no", StringComparison.OrdinalIgnoreCase)).ToString();
         }
 
 
@@ -52,21 +52,21 @@ namespace QuickPay.Alipay.Util
         /// </summary>
         public string GetAlipayTradeNo(PayData payData)
         {
-            return payData.GetValue(x => x.Key.ToLower() == "trade_no").ToString();
+            return payData.GetValue(x => string.Equals(x.Key, "trade_no", StringComparison.OrdinalIgnoreCase)).ToString();
         }
 
         /// <summary>获取支付宝支付金额
         /// </summary>
         public decimal GetTotalAmount(PayData payData)
         {
-            return Convert.ToDecimal(payData.GetValue(x => x.Key.ToLower() == "total_amount"));
+            return Convert.ToDecimal(payData.GetValue(x => string.Equals(x.Key, "total_amount", StringComparison.OrdinalIgnoreCase)));
         }
 
         /// <summary>获取支付宝交易状态
         /// </summary>
         public string GetTradeStatus(PayData payData)
         {
-            return payData.GetValue(x => x.Key.ToLower() == "trade_status").ToString();
+            return payData.GetValue(x => string.Equals(x.Key, "trade_status", StringComparison.OrdinalIgnoreCase)).ToString();
         }
     }
 }

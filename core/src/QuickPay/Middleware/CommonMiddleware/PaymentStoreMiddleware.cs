@@ -93,7 +93,7 @@ namespace QuickPay.Middleware
                 payment.PayPlatId = (int)PayPlat.WechatPay;
                 payment.AppId = ((WechatPayApp)context.App).AppId;
                 //交易号,本系统唯一
-                payment.OutTradeNo = _wechatPayDataHelper.GetWechatOutTradeNo(context.RequestPayData);
+                payment.OutTradeNo = _wechatPayDataHelper.GetOutTradeNo(context.RequestPayData);
                 //支付金额,以元为单位,微信是以分为单位,需要进行转换
                 payment.Amount = _wechatPayDataHelper.GetTotalFeeYuan(context.RequestPayData);
             }

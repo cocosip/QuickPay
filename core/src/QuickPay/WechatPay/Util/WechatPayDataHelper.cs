@@ -90,28 +90,35 @@ namespace QuickPay.WechatPay.Util
         /// </summary>
         public string GetWechatAppId(PayData payData)
         {
-            return payData.GetValue(x => x.Key.ToLower() == "appid").ToString();
+            return payData.GetValue(x => string.Equals(x.Key, "appid", StringComparison.OrdinalIgnoreCase)).ToString();
         }
 
         /// <summary>微信交易号
         /// </summary>
-        public string GetWechatOutTradeNo(PayData payData)
+        public string GetOutTradeNo(PayData payData)
         {
-            return payData.GetValue(x => x.Key.ToLower() == "out_trade_no").ToString();
+            return payData.GetValue(x => string.Equals(x.Key, "out_trade_no", StringComparison.OrdinalIgnoreCase)).ToString();
         }
 
         /// <summary>获取微信支付订单号(微信系统中的)
         /// </summary>
         public string GetTransactionId(PayData payData)
         {
-            return payData.GetValue(x => x.Key.ToLower() == "transaction_id").ToString();
+            return payData.GetValue(x => string.Equals(x.Key, "transaction_id", StringComparison.OrdinalIgnoreCase)).ToString();
         }
 
         /// <summary>微信支付总金额
         /// </summary>
         public decimal GetTotalFeeYuan(PayData payData)
         {
-            return Convert.ToInt32(payData.GetValue(x => x.Key.ToLower() == "total_fee")) / 100M;
+            return Convert.ToInt32(payData.GetValue(x => string.Equals(x.Key, "total_fee", StringComparison.OrdinalIgnoreCase))) / 100M;
+        }
+
+        /// <summary>获取支付结果
+        /// </summary>
+        public string GetResultCode(PayData payData)
+        {
+            return payData.GetValue(x => string.Equals(x.Key, "transaction_id", StringComparison.OrdinalIgnoreCase)).ToString();
         }
 
         /// <summary>字典转换成Json

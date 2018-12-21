@@ -11,7 +11,6 @@ using QuickPay.Infrastructure.Executers;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Middleware;
 using QuickPay.Middleware.Pipeline;
-using QuickPay.Notify;
 using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Authentication;
 using QuickPay.WechatPay.Services;
@@ -34,9 +33,9 @@ namespace QuickPay
 
             var quickPayConfigurationOption = new QuickPayConfigurationOption();
             //添加默认支付宝和微信异步通知
-            quickPayConfigurationOption
-                .AddNotify<AlipayPaymentNotify>()
-                .AddNotify<WechatPaymentNotify>();
+            // quickPayConfigurationOption
+            //     .AddNotify<AlipayPaymentNotify>()
+            //     .AddNotify<WechatPaymentNotify>();
 
             //配置Option
             option(quickPayConfigurationOption);
@@ -96,7 +95,7 @@ namespace QuickPay
             services.AddTransient<IAuthenticationService, AuthenticationService>();
 
             //异步通知管理
-            services.AddSingleton<INotifyManager, NotifyManager>();
+            // services.AddSingleton<INotifyManager, NotifyManager>();
 
             //支付数据存储
             services.AddTransient<IPaymentStore, EmptyPaymentStore>();
@@ -111,6 +110,7 @@ namespace QuickPay
             services.AddTransient<IAlipayQrcodePayService, AlipayQrcodePayService>();
             services.AddTransient<IAlipayWapPayService, AlipayWapPayService>();
             services.AddTransient<IAlipayTradeCommonService, AlipayTradeCommonService>();
+            services.AddTransient<IAlipayAssistService, AlipayAssistService>();
             services.AddTransient<AlipayPayDataHelper>();
 
 
@@ -123,6 +123,7 @@ namespace QuickPay
             services.AddTransient<IWechatNativePayService, WechatNativePayService>();
             services.AddTransient<IWechatMiniProgramPayService, WechatMiniProgramPayService>();
             services.AddTransient<IWechatPayTradeCommonService, WechatPayTradeCommonService>();
+            services.AddTransient<IWechatPayAssistService, WechatPayAssistService>();
             services.AddTransient<WechatPayDataHelper>();
 
             return services;

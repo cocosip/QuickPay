@@ -44,17 +44,20 @@ namespace QuickPay.Alipay.Services.Impl
 
         /// <summary>支付成功
         /// </summary>
-        public async Task PaySuccess(PayData payData, Action<PayData, Payment> action = null)
+        public async Task PaySuccess(PayData payData, Action<Payment> action = null)
         {
-            //签名验证
-            // if (!(await VerifySign(payData)))
-            // {
-            //     throw new QuickPayException($"签名不正确");
-            // }
+            //没有值
+            if (!payData.HasValue())
+            {
+                Logger.LogError(AlipayUtil.ParseLog($"支付宝支付异步通知出现问题,返回的PayData数据为空."));
+                throw new QuickPayException("支付宝回调出现异常.");
+            }
+
             var payment = await _paymentStore.GetAsync((int)PayPlat.Alipay, App.AppId, _alipayPayDataHelper.GetAlipayOutTradeNo(payData));
             if (payment == null)
             {
-                throw new QuickPayException($"支付不存在");
+                Logger.LogError(AlipayUtil.ParseLog($"支付信息不存在,AppId:{App.AppId}"));
+                throw new QuickPayException($"支付信息不存在");
             }
             //支付宝流水号
             string tradeNo = _alipayPayDataHelper.GetAlipayTradeNo(payData);
@@ -79,7 +82,7 @@ namespace QuickPay.Alipay.Services.Impl
                 }
 
                 //执行相关的业务
-                action?.Invoke(payData, payment);
+                action?.Invoke(payment);
 
                 //支付成功后支付状态改变
                 payment.PayStatusId = (int)PayStatus.Success;

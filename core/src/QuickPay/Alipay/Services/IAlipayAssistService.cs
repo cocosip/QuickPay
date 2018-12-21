@@ -15,6 +15,6 @@ namespace QuickPay.Alipay.Services
 
         /// <summary>支付成功
         /// </summary>
-        Task PaySuccess(PayData payData, Action<PayData, Payment> action = null);
+        Task PaySuccess(PayData payData, Action<Payment> action = null);
     }
 }

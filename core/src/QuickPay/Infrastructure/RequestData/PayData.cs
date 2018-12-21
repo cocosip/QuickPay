@@ -63,6 +63,13 @@ namespace QuickPay.Infrastructure.RequestData
             return null != o;
         }
 
+        /// <summary>是否有值
+        /// </summary>
+        public bool HasValue()
+        {
+            return _values.Any();
+        }
+
         /// <summary>获取数据
         /// </summary>
         public SortedDictionary<string, object> GetValues()
@@ -74,8 +81,7 @@ namespace QuickPay.Infrastructure.RequestData
         /// </summary>
         public string GetAppId()
         {
-            return _values.FirstOrDefault(x => x.Key.ToLower() == "appid").Value?.ToString() ?? "";
+            return _values.FirstOrDefault(x => string.Equals(x.Key, "appid", StringComparison.OrdinalIgnoreCase)).Value?.ToString() ?? "";
         }
-
     }
 }

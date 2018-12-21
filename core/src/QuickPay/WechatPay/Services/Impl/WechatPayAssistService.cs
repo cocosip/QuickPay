@@ -42,17 +42,18 @@ namespace QuickPay.WechatPay.Services.Impl
 
         /// <summary>支付成功
         /// </summary>
-        public async Task PaySuccess(PayData payData, Action<PayData, Payment> action = null)
+        public async Task PaySuccess(PayData payData, Action<Payment> action = null)
         {
-            //签名验证
-            // if (!(await VerifySign(payData)))
-            // {
-            //     throw new QuickPayException($"签名不正确");
-            // }
-            var payment = await _paymentStore.GetAsync((int)PayPlat.WechatPay, App.AppId, _wechatPayDataHelper.GetWechatOutTradeNo(payData));
+            //没有值
+            if (!payData.HasValue())
+            {
+                throw new QuickPayException("微信支付回调出现异常.");
+            }
+            var payment = await _paymentStore.GetAsync((int)PayPlat.WechatPay, App.AppId, _wechatPayDataHelper.GetOutTradeNo(payData));
             if (payment == null)
             {
-                throw new QuickPayException($"支付不存在");
+                Logger.LogError(WechatPayUtil.ParseLog($"支付信息不存在,AppId:{App.AppId}"));
+                throw new QuickPayException($"支付信息不存在");
             }
             //微信支付订单号
             string transactionId = _wechatPayDataHelper.GetTransactionId(payData);
@@ -64,16 +65,21 @@ namespace QuickPay.WechatPay.Services.Impl
                 {
                     throw new QuickPayException($"该笔订单已在本系统中操作过");
                 }
+
+                //交易成功
+                if (_wechatPayDataHelper.GetResultCode(payData) != WechatPaySettings.ResultCode.Success)
+                {
+                    throw new QuickPayException(101, $"支付不成功:{_wechatPayDataHelper.GetResultCode(payData)}");
+                }
+
                 //金额
                 if (payment.Amount != _wechatPayDataHelper.GetTotalFeeYuan(payData))
                 {
                     throw new QuickPayException(101, $"订单金额不正确,系统存储的金额为:{payment.Amount},回调金额为:{_wechatPayDataHelper.GetTotalFeeYuan(payData)}");
                 }
                 //业务执行
-                if (action != null)
-                {
-                    action.Invoke(payData, payment);
-                }
+                action?.Invoke(payment);
+
                 //支付成功后支付状态改变
                 payment.PayStatusId = (int)PayStatus.Success;
                 payment.TransactionId = transactionId;

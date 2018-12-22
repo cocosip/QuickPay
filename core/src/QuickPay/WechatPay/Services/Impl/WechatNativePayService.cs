@@ -24,6 +24,11 @@ namespace QuickPay.WechatPay.Services.Impl
         /// </summary>
         public async Task<string> Mode2Unifiedorder(NativeMode2UnifiedOrderInput input)
         {
+            if (input.NotifyType != null && input.NotifyUrl.IsNullOrWhiteSpace())
+            {
+                input.NotifyUrl = NotifyTypeFinder.FindUrlFragments(input.NotifyType);
+            }
+
             var request = input.MapTo<NativeMode2UnifiedOrderRequest>();
             var response = await Executer.ExecuteAsync<NativeMode2UnifiedOrderResponse>(request, App);
             return response?.CodeUrl;
@@ -44,6 +49,11 @@ namespace QuickPay.WechatPay.Services.Impl
         /// </summary>
         public async Task<NativeMode1UnifiedOrderOutputResponse> Mode1UnifiedOrder(NativeMode1UnifiedOrderInput input)
         {
+            if (input.NotifyType != null && input.NotifyUrl.IsNullOrWhiteSpace())
+            {
+                input.NotifyUrl = NotifyTypeFinder.FindUrlFragments(input.NotifyType);
+            }
+            
             var request = input.MapTo<NativeMode1UnifiedOrderRequest>();
             var response = await Executer.ExecuteAsync<NativeMode1UnifiedOrderResponse>(request, App);
             //响应与执行都成功

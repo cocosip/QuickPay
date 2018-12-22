@@ -1,6 +1,7 @@
 ﻿using DotCommon.AutoMapper;
 using QuickPay.Infrastructure.Services.DTOs;
 using QuickPay.WechatPay.Requests;
+using System;
 
 namespace QuickPay.WechatPay.Services.DTOs
 {
@@ -24,6 +25,10 @@ namespace QuickPay.WechatPay.Services.DTOs
         /// <summary>异步接收微信支付结果通知的回调地址，通知url必须为外网可访问的url，不能携带参数
         /// </summary>
         public string NotifyUrl { get; set; }
+
+        /// <summary>通知类型
+        /// </summary>
+        public Type NotifyType { get; set; }
 
         /// <summary>Ctor
         /// </summary>
@@ -57,6 +62,20 @@ namespace QuickPay.WechatPay.Services.DTOs
             OutTradeNo = outTradeNo;
             TotalFee = totalFee;
             NotifyUrl = notifyUrl;
+        }
+
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="body">商品简单描述</param>
+        /// <param name="outTradeNo">商户系统内部订单号</param>
+        /// <param name="totalFee">订单总金额,单位为分</param>
+        /// <param name="notifyType">异步通知类型</param>
+        public AppUnifiedOrderInput(string body, string outTradeNo, int totalFee, Type notifyType)
+        {
+            Body = body;
+            OutTradeNo = outTradeNo;
+            TotalFee = totalFee;
+            NotifyType = notifyType;
         }
 
         /********************非必须参数********************/

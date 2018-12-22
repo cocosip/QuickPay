@@ -1,6 +1,7 @@
 ﻿using DotCommon.AutoMapper;
 using QuickPay.Infrastructure.Services.DTOs;
 using QuickPay.WechatPay.Requests;
+using System;
 
 namespace QuickPay.WechatPay.Services.DTOs
 {
@@ -29,6 +30,10 @@ namespace QuickPay.WechatPay.Services.DTOs
         /// </summary>
         public string SceneType { get; set; } = WechatPaySettings.H5SceneInfoType.Wap;
 
+        /// <summary>通知类型
+        /// </summary>
+        public Type NotifyType { get; set; }
+
         /// <summary>Ctor
         /// </summary>
         public H5UnifiedOrderInput()
@@ -47,6 +52,7 @@ namespace QuickPay.WechatPay.Services.DTOs
             OutTradeNo = outTradeNo;
             TotalFee = totalFee;
         }
+
         /// <summary>Ctor
         /// </summary>
         /// <param name="body">商品简单描述</param>
@@ -59,6 +65,20 @@ namespace QuickPay.WechatPay.Services.DTOs
             OutTradeNo = outTradeNo;
             TotalFee = totalFee;
             NotifyUrl = notifyUrl;
+        }
+
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="body">商品简单描述</param>
+        /// <param name="outTradeNo">商户系统内部订单号</param>
+        /// <param name="totalFee">订单总金额,单位为分</param>
+        /// <param name="notifyType">通知类型</param>
+        public H5UnifiedOrderInput(string body, string outTradeNo, int totalFee, Type notifyType)
+        {
+            Body = body;
+            OutTradeNo = outTradeNo;
+            TotalFee = totalFee;
+            NotifyType = notifyType;
         }
 
         /********************非必须参数********************/

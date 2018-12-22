@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using QuickPay.Alipay.Apps;
 using QuickPay.Infrastructure.Executers;
+using QuickPay.Notify;
 using System;
 namespace QuickPay.Alipay.Services.Impl
 {
@@ -30,6 +31,10 @@ namespace QuickPay.Alipay.Services.Impl
         /// </summary>
         protected IRequestExecuter Executer { get; }
 
+        /// <summary>NotifyTypeFinder
+        /// </summary>
+        protected INotifyTypeFinder NotifyTypeFinder { get; }
+
         /// <summary>Logger
         /// </summary>
         protected ILogger Logger { get; }
@@ -41,6 +46,7 @@ namespace QuickPay.Alipay.Services.Impl
             AlipayAppOverrideScopeProvider = provider.GetService<IAmbientScopeProvider<AlipayAppOverride>>();
             Config = provider.GetService<AlipayConfig>();
             Executer = provider.GetService<IRequestExecuter>();
+            NotifyTypeFinder = provider.GetService<INotifyTypeFinder>();
             Logger = provider.GetService<ILogger<QuickPayLoggerName>>();
 
         }

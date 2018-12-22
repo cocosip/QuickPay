@@ -1,4 +1,5 @@
 ﻿using DotCommon.AutoMapper;
+using DotCommon.Extensions;
 using DotCommon.Threading;
 using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Requests;
@@ -18,13 +19,17 @@ namespace QuickPay.Alipay.Services.Impl
         /// </summary>
         public AlipayAppPayService(IServiceProvider provider) : base(provider)
         {
-            
+
         }
 
         /// <summary>支付宝支付生成支付信息
         /// </summary>
         public async Task<AppTradePayResponse> TradePay(AppTradePayInput input)
         {
+            if (input.NotifyType != null && input.NotifyUrl.IsNullOrWhiteSpace())
+            {
+                input.NotifyUrl = NotifyTypeFinder.FindUrlFragments(input.NotifyType);
+            }
             var bizContentRequest = input.MapTo<AppTradeBizContentPayRequest>();
             var request = new AppTradePayRequest(bizContentRequest, input.NotifyUrl);
             var response = await Executer.SignRequest<AppTradePayResponse>(request, App);

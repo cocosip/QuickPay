@@ -1,4 +1,5 @@
 ﻿using DotCommon.AutoMapper;
+using DotCommon.Extensions;
 using DotCommon.Threading;
 using QuickPay.WechatPay.Apps;
 using QuickPay.WechatPay.Requests;
@@ -25,6 +26,11 @@ namespace QuickPay.WechatPay.Services.Impl
         /// </summary>
         public async Task<string> UnifiedOrder(H5UnifiedOrderInput input)
         {
+            if (input.NotifyType != null && input.NotifyUrl.IsNullOrWhiteSpace())
+            {
+                input.NotifyUrl = NotifyTypeFinder.FindUrlFragments(input.NotifyType);
+            }
+
             var request = input.MapTo<H5UnifiedOrderRequest>();
             var sceneInfoDict = SceneInfoCreator.CreateScene(input.SceneType, App);
             request.SceneInfo = _wechatPayDataHelper.DictToJson(sceneInfoDict);

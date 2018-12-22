@@ -1,6 +1,7 @@
 ﻿using DotCommon.AutoMapper;
 using QuickPay.Alipay.Requests;
 using QuickPay.Infrastructure.Services.DTOs;
+using System;
 
 namespace QuickPay.Alipay.Services.DTOs
 {
@@ -67,6 +68,10 @@ namespace QuickPay.Alipay.Services.DTOs
         /// </summary>
         public string NotifyUrl { get; set; }
 
+        /// <summary>通知地址
+        /// </summary>
+        public Type NotifyType { get; set; }
+
         /// <summary>Ctor
         /// </summary>
         public AppTradePayInput()
@@ -88,6 +93,37 @@ namespace QuickPay.Alipay.Services.DTOs
             TotalAmount = totalAmount;
         }
 
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="subject">商品的标题/交易标题/订单标题/订单关键字等</param>
+        /// <param name="body">对一笔交易的具体描述信息</param>
+        /// <param name="outTradeNo">商户网站唯一订单号</param>
+        /// <param name="totalAmount">订单总金额,单位为元,精确到小数点后两位</param>
+        /// <param name="notifyUrl">异步通知地址</param>
+        public AppTradePayInput(string subject, string body, string outTradeNo, string totalAmount, string notifyUrl)
+        {
+            Subject = subject;
+            Body = body;
+            OutTradeNo = outTradeNo;
+            TotalAmount = totalAmount;
+            NotifyUrl = notifyUrl;
+        }
+
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="subject">商品的标题/交易标题/订单标题/订单关键字等</param>
+        /// <param name="body">对一笔交易的具体描述信息</param>
+        /// <param name="outTradeNo">商户网站唯一订单号</param>
+        /// <param name="totalAmount">订单总金额,单位为元,精确到小数点后两位</param>
+        /// <param name="notifyType">异步通知类型</param>
+        public AppTradePayInput(string subject, string body, string outTradeNo, string totalAmount, Type notifyType)
+        {
+            Subject = subject;
+            Body = body;
+            OutTradeNo = outTradeNo;
+            TotalAmount = totalAmount;
+            NotifyType = notifyType;
+        }
 
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using QuickPay.Infrastructure.Executers;
+using QuickPay.Notify;
 using QuickPay.WechatPay.Apps;
 using System;
 
@@ -30,9 +31,14 @@ namespace QuickPay.WechatPay.Services.Impl
         /// </summary>
         protected IRequestExecuter Executer { get; }
 
+        /// <summary>NotifyTypeFinder
+        /// </summary>
+        protected INotifyTypeFinder NotifyTypeFinder { get; }
+
         /// <summary>Logger
         /// </summary>
         protected ILogger Logger { get; }
+
 
         /// <summary>Ctor
         /// </summary>
@@ -42,6 +48,7 @@ namespace QuickPay.WechatPay.Services.Impl
             Config = provider.GetService<WechatPayConfig>();
             Logger = provider.GetService<ILogger<QuickPayLoggerName>>();
             Executer = provider.GetService<IRequestExecuter>();
+            NotifyTypeFinder = provider.GetService<INotifyTypeFinder>();
         }
 
         /// <summary>Use

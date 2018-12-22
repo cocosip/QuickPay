@@ -11,12 +11,12 @@ namespace QuickPay.Notify
 
     /// <summary>支付宝通知策略
     /// </summary>
-    public abstract class AlipayNotifyPolicy : INotifyPolicy
+    public abstract class AlipayNotify : BaseNotify
     {
 
         /// <summary>支付宝管道名
         /// </summary>
-        public string Provider => QuickPaySettings.Provider.Alipay;
+        public override string Provider => QuickPaySettings.Provider.Alipay;
 
         /// <summary>ServiceProvider
         /// </summary>
@@ -36,7 +36,7 @@ namespace QuickPay.Notify
 
         /// <summary>Ctor
         /// </summary>
-        public AlipayNotifyPolicy(IServiceProvider serviceProvider)
+        public AlipayNotify(IServiceProvider serviceProvider)
         {
             ServiceProvider = serviceProvider;
             Config = ServiceProvider.GetService<AlipayConfig>();
@@ -57,8 +57,9 @@ namespace QuickPay.Notify
 
         /// <summary>是否为真实的通知(通知签名校验)
         /// </summary>
-        public Task<bool> IsRealNotify(PayData payData)
+        public override Task<bool> IsRealNotify(string notifyBody)
         {
+            var payData = PayDataHelper.FromJson(notifyBody);
             var alipayApp = GetApp(payData);
             using(AlipayAssistService.Use(alipayApp))
             {

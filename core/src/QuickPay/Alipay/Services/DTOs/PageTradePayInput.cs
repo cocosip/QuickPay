@@ -1,6 +1,7 @@
 ﻿using DotCommon.AutoMapper;
 using QuickPay.Alipay.Requests;
 using QuickPay.Infrastructure.Services.DTOs;
+using System;
 
 namespace QuickPay.Alipay.Services.DTOs
 {
@@ -71,6 +72,10 @@ namespace QuickPay.Alipay.Services.DTOs
         /// </summary>
         public string ReturnUrl { get; set; }
 
+        /// <summary>通知地址
+        /// </summary>
+        public Type NotifyType { get; set; }
+
         /// <summary>Ctor
         /// </summary>
         public PageTradePayInput()
@@ -91,5 +96,44 @@ namespace QuickPay.Alipay.Services.DTOs
             OutTradeNo = outTradeNo;
             TotalAmount = totalAmount;
         }
+
+
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="subject">商品的标题/交易标题/订单标题/订单关键字等</param>
+        /// <param name="body">对一笔交易的具体描述信息</param>
+        /// <param name="outTradeNo">商户网站唯一订单号</param>
+        /// <param name="totalAmount">订单总金额,单位为元,精确到小数点后两位(如:1.00)</param>
+        /// <param name="notifyUrl">异步通知地址</param>
+        /// <param name="returnUrl">同步返回地址</param>  
+        public PageTradePayInput(string subject, string body, string outTradeNo, string totalAmount, string notifyUrl, string returnUrl)
+        {
+            Subject = subject;
+            Body = body;
+            OutTradeNo = outTradeNo;
+            TotalAmount = totalAmount;
+            NotifyUrl = notifyUrl;
+            ReturnUrl = returnUrl;
+        }
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="subject">商品的标题/交易标题/订单标题/订单关键字等</param>
+        /// <param name="body">对一笔交易的具体描述信息</param>
+        /// <param name="outTradeNo">商户网站唯一订单号</param>
+        /// <param name="totalAmount">订单总金额,单位为元,精确到小数点后两位(如:1.00)</param>
+        /// <param name="notifyType">异步通知类型</param>
+        /// <param name="returnUrl">同步返回地址</param>  
+        public PageTradePayInput(string subject, string body, string outTradeNo, string totalAmount, Type notifyType, string returnUrl)
+        {
+            Subject = subject;
+            Body = body;
+            OutTradeNo = outTradeNo;
+            TotalAmount = totalAmount;
+            NotifyType = notifyType;
+            ReturnUrl = returnUrl;
+        }
+
+
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DotCommon.AutoMapper;
 using QuickPay.Alipay.Requests;
 using QuickPay.Infrastructure.Services.DTOs;
+using System;
 
 namespace QuickPay.Alipay.Services.DTOs
 {
@@ -39,6 +40,10 @@ namespace QuickPay.Alipay.Services.DTOs
         /// <summary>通知地址
         /// </summary>
         public string NotifyUrl { get; set; }
+
+        /// <summary>通知类型
+        /// </summary>
+        public Type NotifyType { get; set; }
 
 
 
@@ -126,6 +131,26 @@ namespace QuickPay.Alipay.Services.DTOs
             Body = body;
             TotalAmount = totalAmount;
             NotifyUrl = notifyUrl;
+        }
+
+        /// <summary>Ctor
+        /// </summary>
+        /// <param name="outTradeNo">商户网站唯一订单号</param>
+        /// <param name="scene">支付场景</param>
+        /// <param name="authCode">支付授权码</param>
+        /// <param name="subject">订单标题</param>
+        /// <param name="body">订单描述</param>
+        /// <param name="totalAmount">订单总金额,单位为元,精确到小数点后两位</param>
+        /// <param name="notifyType">异步通知类型</param>
+        public BarcodeTradePayInput(string outTradeNo, string scene, string authCode, string subject, string body, decimal totalAmount, Type notifyType)
+        {
+            OutTradeNo = outTradeNo;
+            Scene = scene;
+            AuthCode = authCode;
+            Subject = subject;
+            Body = body;
+            TotalAmount = totalAmount;
+            NotifyType = notifyType;
         }
     }
 }

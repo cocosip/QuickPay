@@ -10,11 +10,11 @@ namespace QuickPay.Notify
 {
     /// <summary>微信支付通知策略
     /// </summary>
-    public abstract class WechatPayNotifyPolicy : INotifyPolicy
+    public abstract class WechatPayNotify : BaseNotify
     {
         /// <summary>支付宝管道名
         /// </summary>
-        public string Provider => QuickPaySettings.Provider.WechatPay;
+        public override string Provider => QuickPaySettings.Provider.WechatPay;
 
         /// <summary>ServiceProvider
         /// </summary>
@@ -34,7 +34,7 @@ namespace QuickPay.Notify
 
         /// <summary>Ctor
         /// </summary>
-        public WechatPayNotifyPolicy(IServiceProvider serviceProvider)
+        public WechatPayNotify(IServiceProvider serviceProvider)
         {
             ServiceProvider = serviceProvider;
             Config = ServiceProvider.GetService<WechatPayConfig>();
@@ -54,8 +54,9 @@ namespace QuickPay.Notify
 
         /// <summary>是否为真实的通知(通知签名校验)
         /// </summary>
-        public Task<bool> IsRealNotify(PayData payData)
+        public override Task<bool> IsRealNotify(string notifyBody)
         {
+            var payData = PayDataHelper.FromXml(notifyBody);
             var wechatPayApp = GetApp(payData);
             using(WechatPayAssistService.Use(wechatPayApp))
             {

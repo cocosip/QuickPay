@@ -35,15 +35,16 @@ namespace QuickPay.AspNetCore.Mvc
             try
             {
                 //进行校验,是否来自微信或者支付宝服务器
-                if (await notify.IsRealNotify(notifyBody))
+                if (!await notify.IsRealNotify(notifyBody))
                 {
+                    _logger.LogInformation("接收服务器异步通知出错,签名验证失败!");
                     //业务处理
                     await notify.InvokeAsync(notifyBody);
                 }
-                else
-                {
-                    _logger.LogInformation("接收服务器异步通知出错,签名验证失败!");
-                }
+                //业务处理
+                var responseString = await notify.InvokeAsync(notifyBody);
+                //写返回
+                await context.Response.WriteAsync(responseString);
             }
             catch (Exception ex)
             {

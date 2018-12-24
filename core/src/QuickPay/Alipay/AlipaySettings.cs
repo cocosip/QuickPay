@@ -37,6 +37,24 @@
             /// </summary>
             public const string Success = "10000";
         }
+
+        /// <summary>通知
+        /// </summary>
+        public class NotifyReturn
+        {
+            /// <summary>成功
+            /// </summary>
+            public const string Success = "Success";
+
+            /// <summary>失败
+            /// </summary>
+            public const string Fail = "Fail";
+
+        }
+
+
+
+
         /// <summary>交易状态
         /// </summary>
         public class TradeStatus

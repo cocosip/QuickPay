@@ -184,9 +184,31 @@
             public const string Fail = "FAIL";
         }
 
+        /// <summary>返回消息
+        /// </summary>
+        public class ReturnMsg
+        {
+            /// <summary>OK
+            /// </summary>
+            public const string Ok = "OK";
+
+        }
+
         /// <summary>执行结果(业务结果)
         /// </summary>
         public class ResultCode
+        {
+            /// <summary>SUCCESS
+            /// </summary>
+            public const string Success = "SUCCESS";
+            /// <summary>FAIL
+            /// </summary>
+            public const string Fail = "FAIL";
+        }
+
+        /// <summary>通知
+        /// </summary>
+        public class NotifyReturn
         {
             /// <summary>SUCCESS
             /// </summary>
@@ -210,6 +232,6 @@
             /// </summary>
             public const string Sha1 = "SHA1";
         }
-        
+
     }
 }

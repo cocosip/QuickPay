@@ -22,6 +22,6 @@ namespace QuickPay.Notify
 
         /// <summary>执行业务
         /// </summary>
-        Task InvokeAsync(string notifyBody);
+        Task<string> InvokeAsync(string notifyBody);
     }
 }

@@ -1,3 +1,4 @@
+using QuickPay.Alipay;
 using QuickPay.Assist;
 using QuickPay.Infrastructure.RequestData;
 using System;
@@ -18,14 +19,30 @@ namespace QuickPay.Notify
 
         /// <summary>执行业务
         /// </summary>
-        public override async Task InvokeAsync(string notifyBody)
+        public override async Task<string> InvokeAsync(string notifyBody)
         {
             var payData = PayDataHelper.FromJson(notifyBody);
             var alipayApp = GetApp(payData);
             using(AlipayAssistService.Use(alipayApp))
             {
                 await AlipayAssistService.PaySuccess(payData, async payment => await PaySuccess(payment));
+                //支付成功
+                return PaySuccessResponse();
             }
+        }
+
+        /// <summary>支付成功返回
+        /// </summary>
+        protected virtual string PaySuccessResponse()
+        {
+            return AlipaySettings.NotifyReturn.Success;
+        }
+
+        /// <summary>支付失败返回
+        /// </summary>
+        protected virtual string PayFailResponse()
+        {
+            return AlipaySettings.NotifyReturn.Fail;
         }
 
         /// <summary>支付成功的相关业务

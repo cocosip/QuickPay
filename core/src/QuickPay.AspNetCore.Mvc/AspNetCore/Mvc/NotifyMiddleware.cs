@@ -45,10 +45,12 @@ namespace QuickPay.AspNetCore.Mvc
                 var responseString = await notify.InvokeAsync(notifyBody);
                 //写返回
                 await context.Response.WriteAsync(responseString);
+                return;
             }
             catch (Exception ex)
             {
                 _logger.LogError("接收异步通知发生错误,错误信息为:{0},接收到的消息:[通知服务器:{1},数据:【{2}】]", ex.Message, context.Request.GetRemoteIpAddress(), notifyBody);
+                await _next.Invoke(context);
             }
 
         }

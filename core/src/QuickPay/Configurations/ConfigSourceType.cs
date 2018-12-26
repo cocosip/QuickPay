@@ -6,19 +6,14 @@ namespace QuickPay.Configurations
     /// </summary>
     public enum ConfigSourceType
     {
-        ///// <summary>从数据库获取配置
-        ///// </summary>
-        //[Description("从数据库获取配置")]
-        //FromDb = 1,
-
         /// <summary>从配置文件中获取配置
         /// </summary>
         [Description("从配置文件中获取配置")]
-        FromConfigFile = 2,
+        FromConfigFile = 1,
 
         /// <summary>从代码中获取配置
         /// </summary>
         [Description("从代码中获取配置")]
-        FromClass = 4
+        FromClass = 2
     }
 }

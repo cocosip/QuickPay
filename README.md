@@ -5,8 +5,8 @@
 | -------- | ------- | -------- |
 | `QuickPay` | [![NuGet](https://img.shields.io/nuget/v/QuickPay.svg)](https://www.nuget.org/packages/QuickPay) |![NuGet](https://img.shields.io/nuget/dt/QuickPay.svg)|
 | `QuickPay.Abp` | [![NuGet](https://img.shields.io/nuget/v/QuickPay.Abp.svg)](https://www.nuget.org/packages/QuickPay.Abp) |![NuGet](https://img.shields.io/nuget/dt/QuickPay.Abp.svg)|
-| `QuickPay.AspNetCore ` | [![NuGet](https://img.shields.io/nuget/v/QuickPay.AspNetCore.svg)](https://www.nuget.org/packages/QuickPay.AspNetCore) |![NuGet](https://img.shields.io/nuget/dt/QuickPay.AspNetCore.svg)|
-| `QuickPay.SqlServer ` | [![NuGet](https://img.shields.io/nuget/v/QuickPay.SqlServer.svg)](https://www.nuget.org/packages/QuickPay.SqlServer) |![NuGet](https://img.shields.io/nuget/dt/QuickPay.SqlServer.svg)|
+| `QuickPay.AspNetCore.Mvc` | [![NuGet](https://img.shields.io/nuget/v/QuickPay.AspNetCore.Mvc.svg)](https://www.nuget.org/packages/QuickPay.AspNetCore.Mvc) |![NuGet](https://img.shields.io/nuget/dt/QuickPay.AspNetCore.Mvc.svg)|
+| `QuickPay.SqlServer` | [![NuGet](https://img.shields.io/nuget/v/QuickPay.SqlServer.svg)](https://www.nuget.org/packages/QuickPay.SqlServer) |![NuGet](https://img.shields.io/nuget/dt/QuickPay.SqlServer.svg)|
 
 ## 简介
 
@@ -59,7 +59,7 @@ public static IServiceProvider Initialize()
 ```
 
 > 配置文件初始化:
-- `QuickPay`支持两种方式的配置初始化,1.通过配置的`Xml`([参考](../src/QuickPay/ConfigDemo.xml))或`Josn`([参考](../src/QuickPay/ConfigDemo.json)) 2.通过初始化配置对象
+- `QuickPay`支持两种方式的配置初始化,1.通过配置的`Xml`([参考](../src/QuickPay/QuickPayConfig.xml))或`Josn`([参考](../src/QuickPay/QuickPayConfig.json)) 2.通过初始化配置对象
 
 ## 示例代码
 

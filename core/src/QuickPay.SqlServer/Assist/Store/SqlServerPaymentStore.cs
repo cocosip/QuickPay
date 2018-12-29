@@ -10,13 +10,13 @@ namespace QuickPay.Assist.Store
     /// </summary>
     public class SqlServerPaymentStore : BaseSqlServerStore, IPaymentStore
     {
-        private string TableName = "QP_Payments";
+        private string _tableName;
 
         /// <summary>Ctor
         /// </summary>
         public SqlServerPaymentStore(QuickPaySqlServerOption option, ILogger<QuickPayLoggerName> logger) : base(option, logger)
         {
-
+            _tableName = option.PaymentTableName;
         }
 
         /// <summary>创建或者修改支付信息
@@ -34,12 +34,12 @@ namespace QuickPay.Assist.Store
                     if (queryPayment == null || queryPayment.AppId.IsNullOrWhiteSpace())
                     {
                         //创建
-                        sql = $"INSERT INTO {TableName} (UniqueId,PayPlatId,AppId,OutTradeNo,TradeType,BusinessCode,TransactionId,Amount,PayStatusId,PayObject,Describe) VALUES (@UniqueId,@PayPlatId,@AppId,@OutTradeNo,@TradeType,@BusinessCode,@TransactionId,@Amount,@PayStatusId,@PayObject,@Describe)";
+                        sql = $"INSERT INTO {_tableName} (UniqueId,PayPlatId,AppId,OutTradeNo,TradeType,BusinessCode,TransactionId,Amount,PayStatusId,PayObject,Describe) VALUES (@UniqueId,@PayPlatId,@AppId,@OutTradeNo,@TradeType,@BusinessCode,@TransactionId,@Amount,@PayStatusId,@PayObject,@Describe)";
                     }
                     else
                     {
                         //修改
-                        sql = $"UPDATE {TableName} SET UniqueId=@UniqueId,PayPlatId=@PayPlatId,AppId=@AppId,OutTradeNo=@AppId,TradeType=@TradeType,BusinessCode=@BusinessCode,TransactionId=@TransactionId,Amount=@Amount,PayStatusId=@PayStatusId,PayObject=@PayObject,Describe=@Describe";
+                        sql = $"UPDATE {_tableName} SET UniqueId=@UniqueId,PayPlatId=@PayPlatId,AppId=@AppId,OutTradeNo=@AppId,TradeType=@TradeType,BusinessCode=@BusinessCode,TransactionId=@TransactionId,Amount=@Amount,PayStatusId=@PayStatusId,PayObject=@PayObject,Describe=@Describe";
                     }
                     await connection.ExecuteAsync(sql, payment);
 
@@ -60,7 +60,7 @@ namespace QuickPay.Assist.Store
             {
                 using(var connection = GetConnection())
                 {
-                    var sql = $"SELECT TOP 1 * FROM [{TableName}] WHERE PayPlatId=@PayPlatId AND AppId=@AppId AND OutTradeNo=@OutTradeNo";
+                    var sql = $"SELECT TOP 1 * FROM [{_tableName}] WHERE PayPlatId=@PayPlatId AND AppId=@AppId AND OutTradeNo=@OutTradeNo";
                     return await connection.QueryFirstOrDefaultAsync<Payment>(sql, new { PayPlatId = payPlatId, AppId = appId, OutTradeNo = outTradeNo });
                 }
             }
@@ -79,7 +79,7 @@ namespace QuickPay.Assist.Store
             {
                 using(var connection = GetConnection())
                 {
-                    var sql = $"SELECT TOP 1 * FROM [{TableName}] WHERE UniqueId=@UniqueId";
+                    var sql = $"SELECT TOP 1 * FROM [{_tableName}] WHERE UniqueId=@UniqueId";
                     return await connection.QueryFirstOrDefaultAsync<Payment>(sql, new { UniqueId = uniqueId });
                 }
             }

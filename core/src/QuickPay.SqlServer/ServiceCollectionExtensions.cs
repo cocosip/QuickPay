@@ -20,8 +20,6 @@ namespace QuickPay
 
             services.AddTransient<IPaymentStore, SqlServerPaymentStore>();
             services.AddTransient<IRefundStore, SqlServerRefundStore>();
-            services.AddTransient<IAccessTokenStore, SqlServerAccessTokenStore>();
-            services.AddTransient<IJsApiTicketStore, SqlServerJsApiTicketStore>();
             return services;
         }
     }

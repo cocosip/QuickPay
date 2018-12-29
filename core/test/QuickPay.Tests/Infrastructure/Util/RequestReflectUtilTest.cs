@@ -1,7 +1,7 @@
 ﻿using QuickPay.Infrastructure.RequestData;
 using QuickPay.Infrastructure.Util;
-using QuickPay.WechatPay.Requests;
-using QuickPay.WechatPay.Responses;
+using QuickPay.WeChatPay.Requests;
+using QuickPay.WeChatPay.Responses;
 using Xunit;
 
 namespace QuickPay.Tests.Infrastructure.Util

@@ -35,7 +35,7 @@
 
             /// <summary>微信支付
             /// </summary>
-            public const string WechatPay = "QuickPay.WechatPay";
+            public const string WeChatPay = "QuickPay.WeChatPay";
         }
 
         /// <summary>请求操作
@@ -53,7 +53,7 @@
 
         /// <summary>微信支付异步通知UrlFragments
         /// </summary>
-        public class WechatPayNotifyUrlFragments
+        public class WeChatPayNotifyUrlFragments
         {
             /// <summary>微信支付的相关通知
             /// </summary>

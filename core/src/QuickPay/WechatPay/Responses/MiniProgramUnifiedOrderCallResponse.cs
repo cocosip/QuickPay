@@ -1,10 +1,10 @@
 using QuickPay.Infrastructure.RequestData;
 
-namespace QuickPay.WechatPay.Responses
+namespace QuickPay.WeChatPay.Responses
 {
     /// <summary>小程序下单唤起支付
     /// </summary>
-    public class MiniProgramUnifiedOrderCallResponse : WechatPayTradeResponse
+    public class MiniProgramUnifiedOrderCallResponse : WeChatPayTradeResponse
     {
         /// <summary>微信开放平台审核通过的应用APPID
         /// </summary>

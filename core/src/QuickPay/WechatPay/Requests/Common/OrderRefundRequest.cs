@@ -1,9 +1,9 @@
 ﻿using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.RequestData;
-using QuickPay.WechatPay.Apps;
-using QuickPay.WechatPay.Responses;
+using QuickPay.WeChatPay.Apps;
+using QuickPay.WeChatPay.Responses;
 
-namespace QuickPay.WechatPay.Requests
+namespace QuickPay.WeChatPay.Requests
 {
     /// <summary>退款
     /// </summary>
@@ -12,7 +12,7 @@ namespace QuickPay.WechatPay.Requests
         //public override string RequestUrl => "https://api.mch.weixin.qq.com/secapi/pay/refund";
         /// <summary>交易类型名称
         /// </summary>
-        public override string TradeTypeName => WechatPaySettings.ExtTradeType.OrderRefund;
+        public override string TradeTypeName => WeChatPaySettings.ExtTradeType.OrderRefund;
 
         /// <summary>签名类型
         /// </summary>
@@ -62,7 +62,7 @@ namespace QuickPay.WechatPay.Requests
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);
-            SignType = ((WechatPayConfig)config).SignType;
+            SignType = ((WeChatPayConfig)config).SignType;
         }
 
         /// <summary>Ctor

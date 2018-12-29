@@ -1,22 +1,22 @@
 ﻿using DotCommon.AutoMapper;
 using DotCommon.Threading;
 using Microsoft.Extensions.Logging;
-using QuickPay.WechatPay.Apps;
-using QuickPay.WechatPay.Requests;
-using QuickPay.WechatPay.Responses;
-using QuickPay.WechatPay.Services.DTOs;
+using QuickPay.WeChatPay.Apps;
+using QuickPay.WeChatPay.Requests;
+using QuickPay.WeChatPay.Responses;
+using QuickPay.WeChatPay.Services.DTOs;
 using System;
 using System.Threading.Tasks;
 
-namespace QuickPay.WechatPay.Services.Impl
+namespace QuickPay.WeChatPay.Services.Impl
 {
     /// <summary>微信小程序支付
     /// </summary>
-    public class WechatMiniProgramPayService : BaseWechatPayService, IWechatMiniProgramPayService
+    public class WeChatMiniProgramPayService : BaseWeChatPayService, IWeChatMiniProgramPayService
     {
         /// <summary>Ctor
         /// </summary>
-        public WechatMiniProgramPayService(IServiceProvider provider) : base(provider)
+        public WeChatMiniProgramPayService(IServiceProvider provider) : base(provider)
         {
 
         }

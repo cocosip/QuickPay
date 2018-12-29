@@ -20,7 +20,7 @@ namespace QuickPay.ConsoleTest
             _logger.LogInformation($"初始化完成");
 
             var alipayDemoService = _provider.GetService<AlipayDemoService>();
-            var wechatPayDemoService = _provider.GetService<WechatPayDemoService>();
+            var weChatPayDemoService = _provider.GetService<WeChatPayDemoService>();
 
             _stopwatch.Start();
 
@@ -28,16 +28,16 @@ namespace QuickPay.ConsoleTest
             AsyncHelper.RunSync(() =>
             {
                 ////微信App下单
-                //return wechatPayDemoService.WechatAppUnifiedOrder();
+                //return weChatPayDemoService.WeChatAppUnifiedOrder();
 
                 ////微信JsApi下单
-                //return wechatPayDemoService.WechatJsApiUnifiedOrder();
+                //return weChatPayDemoService.WeChatJsApiUnifiedOrder();
 
                 //微信小程序下单
-                return wechatPayDemoService.WechatMiniProgramUnifiedOrder();
+                return weChatPayDemoService.WeChatMiniProgramUnifiedOrder();
 
                 //微信订单查询
-                //return wechatPayDemoService.WechatOrderQuery();
+                //return weChatPayDemoService.WeChatOrderQuery();
 
             });
 

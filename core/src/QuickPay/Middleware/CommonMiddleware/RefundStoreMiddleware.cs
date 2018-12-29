@@ -7,7 +7,7 @@ using QuickPay.Infrastructure.Requests;
 using QuickPay.Infrastructure.Util;
 using QuickPay.Assist;
 using QuickPay.Assist.Store;
-using QuickPay.WechatPay.Apps;
+using QuickPay.WeChatPay.Apps;
 using System;
 using System.Threading.Tasks;
 
@@ -82,7 +82,7 @@ namespace QuickPay.Middleware
             else
             {
                 refund.PayPlatId = (int)PayPlat.WechatPay;
-                refund.AppId = ((WechatPayApp)context.App).AppId;
+                refund.AppId = ((WeChatPayApp)context.App).AppId;
 
                 //交易号,本系统唯一
                 refund.OutTradeNo = context.RequestPayData.GetValue(x => x.Key.ToLower() == "out_trade_no").ToString();

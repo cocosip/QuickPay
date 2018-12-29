@@ -1,10 +1,10 @@
 ﻿using QuickPay.Infrastructure.RequestData;
 
-namespace QuickPay.WechatPay.Responses
+namespace QuickPay.WeChatPay.Responses
 {
     /// <summary>jsApi统一下单唤起支付
     /// </summary>
-    public class JsApiUnifiedOrderCallResponse : WechatPayTradeResponse
+    public class JsApiUnifiedOrderCallResponse : WeChatPayTradeResponse
     {
         /// <summary>微信开放平台审核通过的应用APPID
         /// </summary>

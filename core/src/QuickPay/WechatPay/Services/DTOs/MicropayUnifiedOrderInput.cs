@@ -1,9 +1,9 @@
 ﻿using DotCommon.AutoMapper;
 using QuickPay.Infrastructure.RequestData;
 using QuickPay.Infrastructure.Services.DTOs;
-using QuickPay.WechatPay.Requests;
+using QuickPay.WeChatPay.Requests;
 
-namespace QuickPay.WechatPay.Services.DTOs
+namespace QuickPay.WeChatPay.Services.DTOs
 {
     /// <summary>刷卡支付
     /// </summary>

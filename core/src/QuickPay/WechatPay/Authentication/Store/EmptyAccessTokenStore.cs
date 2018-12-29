@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
-namespace QuickPay.WechatPay.Authentication
+namespace QuickPay.WeChatPay.Authentication
 {
     /// <summary>
     /// </summary>

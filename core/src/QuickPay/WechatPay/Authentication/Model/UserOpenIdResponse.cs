@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace QuickPay.WechatPay.Authentication
+namespace QuickPay.WeChatPay.Authentication
 {
     /// <summary>公众号等用户OpenId返回信息
     /// </summary>

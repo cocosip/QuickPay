@@ -1,8 +1,8 @@
 ﻿using DotCommon.Threading;
 using DotCommon.Utility;
 using Microsoft.Extensions.DependencyInjection;
-using QuickPay.WechatPay.Services;
-using QuickPay.WechatPay.Services.DTOs;
+using QuickPay.WeChatPay.Services;
+using QuickPay.WeChatPay.Services.DTOs;
 using System;
 using Xunit;
 
@@ -15,7 +15,7 @@ namespace QuickPay.Tests.WechatPay.Services
         [Fact]
         public void UnifiedOrder_Test()
         {
-            var h5PayService = Provider.GetService<IWechatH5PayService>();
+            var h5PayService = Provider.GetService<IWeChatH5PayService>();
             using (h5PayService.Use(WechatPayConfig.GetByName("App1")))
             {
                 var input = new H5UnifiedOrderInput("微信H5支付", ObjectId.GenerateNewStringId(), 1);

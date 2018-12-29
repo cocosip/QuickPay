@@ -1,11 +1,11 @@
 ﻿using QuickPay.Infrastructure.RequestData;
 using QuickPay.Infrastructure.Responses;
 
-namespace QuickPay.WechatPay.Responses
+namespace QuickPay.WeChatPay.Responses
 {
     /// <summary>包含数据源的微信支付Response
     /// </summary>
-    public class WechatPayTradeSourceResponse : PayResponse
+    public class WeChatPayTradeSourceResponse : PayResponse
     {
         /// <summary>PayData
         /// </summary>

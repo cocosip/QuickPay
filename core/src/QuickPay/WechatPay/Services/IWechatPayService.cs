@@ -1,18 +1,18 @@
-﻿using QuickPay.WechatPay.Apps;
+﻿using QuickPay.WeChatPay.Apps;
 using System;
 
-namespace QuickPay.WechatPay.Services
+namespace QuickPay.WeChatPay.Services
 {
     /// <summary>微信支付接口
     /// </summary>
-    public interface IWechatPayService
+    public interface IWeChatPayService
     {
         /// <summary>Use
         /// </summary>
-        IDisposable Use(WechatPayApp app);
+        IDisposable Use(WeChatPayApp app);
 
         /// <summary>微信支付应用
         /// </summary>
-        WechatPayApp App { get; }
+        WeChatPayApp App { get; }
     }
 }

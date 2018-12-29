@@ -1,9 +1,9 @@
 ﻿using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.RequestData;
-using QuickPay.WechatPay.Apps;
-using QuickPay.WechatPay.Responses;
+using QuickPay.WeChatPay.Apps;
+using QuickPay.WeChatPay.Responses;
 
-namespace QuickPay.WechatPay.Requests
+namespace QuickPay.WeChatPay.Requests
 {
     /// <summary>刷卡支付
     /// </summary>
@@ -11,7 +11,7 @@ namespace QuickPay.WechatPay.Requests
     {
         /// <summary>交易类型名称
         /// </summary>
-        public override string TradeTypeName => WechatPaySettings.TradeType.Micropay;
+        public override string TradeTypeName => WeChatPaySettings.TradeType.Micropay;
 
         /// <summary>商品简单描述，该字段请按照规范传递
         /// </summary>
@@ -71,7 +71,7 @@ namespace QuickPay.WechatPay.Requests
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);
-            SpbillCreateIp = ((WechatPayConfig)config).LocalAddress;
+            SpbillCreateIp = ((WeChatPayConfig)config).LocalAddress;
         }
 
         /********************非必须参数********************/

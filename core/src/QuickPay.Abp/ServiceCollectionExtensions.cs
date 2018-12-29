@@ -2,8 +2,8 @@
 using QuickPay.Alipay.Apps;
 using QuickPay.Assist.Store;
 using QuickPay.Configurations;
-using QuickPay.WechatPay.Apps;
-using QuickPay.WechatPay.Authentication;
+using QuickPay.WeChatPay.Apps;
+using QuickPay.WeChatPay.Authentication;
 using System;
 
 namespace QuickPay

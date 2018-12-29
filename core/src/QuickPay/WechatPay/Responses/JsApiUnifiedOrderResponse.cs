@@ -1,10 +1,10 @@
 ﻿using QuickPay.Infrastructure.RequestData;
 
-namespace QuickPay.WechatPay.Responses
+namespace QuickPay.WeChatPay.Responses
 {
     /// <summary>JsApi提交订单返回
     /// </summary>
-    public class JsApiUnifiedOrderResponse : WechatPayCommonResponse
+    public class JsApiUnifiedOrderResponse : WeChatPayCommonResponse
     {
         /********************以下字段在return_code为SUCCESS的时候有返回********************/
 

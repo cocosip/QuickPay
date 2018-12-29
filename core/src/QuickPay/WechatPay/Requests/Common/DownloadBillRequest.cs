@@ -1,9 +1,9 @@
 ﻿using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.RequestData;
-using QuickPay.WechatPay.Apps;
-using QuickPay.WechatPay.Responses;
+using QuickPay.WeChatPay.Apps;
+using QuickPay.WeChatPay.Responses;
 
-namespace QuickPay.WechatPay.Requests
+namespace QuickPay.WeChatPay.Requests
 {
     /// <summary>下载对账单
     /// </summary>
@@ -11,7 +11,7 @@ namespace QuickPay.WechatPay.Requests
     {
         /// <summary>交易类型名称
         /// </summary>
-        public override string TradeTypeName => WechatPaySettings.ExtTradeType.DownloadBill;
+        public override string TradeTypeName => WeChatPaySettings.ExtTradeType.DownloadBill;
 
         /// <summary>设备号
         /// </summary>
@@ -27,7 +27,7 @@ namespace QuickPay.WechatPay.Requests
         /// </summary>
 
         [PayElement("tar_type", false)]
-        public string TarType { get; set; } = WechatPaySettings.TarType.Gzip;
+        public string TarType { get; set; } = WeChatPaySettings.TarType.Gzip;
 
         /// <summary>对账日期
         /// </summary>
@@ -44,7 +44,7 @@ namespace QuickPay.WechatPay.Requests
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);
-            SignType = ((WechatPayConfig)config).SignType;
+            SignType = ((WeChatPayConfig)config).SignType;
         }
 
         /// <summary>Ctor

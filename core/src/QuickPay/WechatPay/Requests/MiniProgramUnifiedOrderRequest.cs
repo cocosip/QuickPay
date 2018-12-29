@@ -1,7 +1,7 @@
 ﻿using QuickPay.Infrastructure.RequestData;
-using QuickPay.WechatPay.Responses;
+using QuickPay.WeChatPay.Responses;
 
-namespace QuickPay.WechatPay.Requests
+namespace QuickPay.WeChatPay.Requests
 {
     /// <summary>小程序下单请求
     /// </summary>
@@ -9,12 +9,12 @@ namespace QuickPay.WechatPay.Requests
     {
         /// <summary>交易类型名称
         /// </summary>
-        public override string TradeTypeName => WechatPaySettings.TradeType.MiniProgram;
+        public override string TradeTypeName => WeChatPaySettings.TradeType.MiniProgram;
 
         /// <summary>交易类型,取值如下：JSAPI，NATIVE，APP等,是否跟JSAPI使用相同的交易类型
         /// </summary>
         [PayElement("trade_type")]
-        public string TradeType { get; set; } = WechatPaySettings.TradeType.JsApi;
+        public string TradeType { get; set; } = WeChatPaySettings.TradeType.JsApi;
 
         /// <summary>商品简单描述
         /// </summary>

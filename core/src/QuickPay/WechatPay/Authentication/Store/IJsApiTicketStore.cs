@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace QuickPay.WechatPay.Authentication
+namespace QuickPay.WeChatPay.Authentication
 {
     /// <summary>JsApiTicket存储
     /// </summary>

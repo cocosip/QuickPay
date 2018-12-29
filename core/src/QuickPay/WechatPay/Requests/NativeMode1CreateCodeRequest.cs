@@ -1,9 +1,9 @@
 ﻿using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.RequestData;
-using QuickPay.WechatPay.Responses;
-using QuickPay.WechatPay.Util;
+using QuickPay.WeChatPay.Responses;
+using QuickPay.WeChatPay.Util;
 
-namespace QuickPay.WechatPay.Requests
+namespace QuickPay.WeChatPay.Requests
 {
     /// <summary>微信扫码支付(Native)模式1,生成二维码
     /// </summary>
@@ -11,7 +11,7 @@ namespace QuickPay.WechatPay.Requests
     {
         /// <summary>交易类型名称
         /// </summary>
-        public override string TradeTypeName => WechatPaySettings.TradeType.Native;
+        public override string TradeTypeName => WeChatPaySettings.TradeType.Native;
 
         /// <summary>系统当前时间
         /// </summary>
@@ -43,7 +43,7 @@ namespace QuickPay.WechatPay.Requests
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);
-            Timestamp = WechatPayUtil.GenerateTimeStamp();
+            Timestamp = WeChatPayUtil.GenerateTimeStamp();
         }
     }
 }

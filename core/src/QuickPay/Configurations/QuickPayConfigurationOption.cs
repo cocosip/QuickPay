@@ -22,7 +22,7 @@ namespace QuickPay.Configurations
 
         /// <summary>是否开启微信沙盒
         /// </summary>
-        public bool EnabledWechatPaySandbox { get; set; }
+        public bool EnabledWeChatPaySandbox { get; set; }
 
         /// <summary>是否开启支付宝沙盒
         /// </summary>

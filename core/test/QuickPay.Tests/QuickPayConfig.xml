@@ -51,7 +51,7 @@
       </AlipayApp>
     </Apps>
   </Alipay>
-  <WechatPay>
+  <WeChatPay>
     <![CDATA[本地IP地址]]>
     <LocalAddress>8.8.8.8</LocalAddress>
     <![CDATA[本地网关地址]]>
@@ -67,7 +67,7 @@
     <![CDATA[SSL证书]]>
     <SslPassword></SslPassword>
     <Apps>
-      <WechatPayApp>
+      <WeChatPayApp>
         <![CDATA[应用名称]]>
         <Name>App1</Name>
         <![CDATA[应用AppId]]>
@@ -94,9 +94,9 @@
           <![CDATA[移动端Url地址]]>
           <WapUrl>http://wap.b1.com</WapUrl>
         </NativeMobileInfo>
-      </WechatPayApp>
+      </WeChatPayApp>
 
-      <WxpayApp>
+      <WeChatPayApp>
         <![CDATA[应用名称]]>
         <Name>App2</Name>
         <![CDATA[应用AppId]]>
@@ -123,7 +123,9 @@
           <![CDATA[移动端Url地址]]>
           <WapUrl>http://wap.b1.com</WapUrl>
         </NativeMobileInfo>
-      </WxpayApp>
-    </Apps>
-  </WechatPay>
+      </WeChatPayApp>
+    
+  
+  </Apps>
+  </WeChatPay>
 </QuickPayConfig>

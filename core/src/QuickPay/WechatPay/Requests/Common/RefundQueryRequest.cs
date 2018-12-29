@@ -1,7 +1,7 @@
 ﻿using QuickPay.Infrastructure.RequestData;
-using QuickPay.WechatPay.Responses;
+using QuickPay.WeChatPay.Responses;
 
-namespace QuickPay.WechatPay.Requests
+namespace QuickPay.WeChatPay.Requests
 {
     /// <summary>退款查询
     /// </summary>
@@ -9,7 +9,7 @@ namespace QuickPay.WechatPay.Requests
     {
         /// <summary>交易类型名称
         /// </summary>
-        public override string TradeTypeName => WechatPaySettings.ExtTradeType.OrderRefundQuery;
+        public override string TradeTypeName => WeChatPaySettings.ExtTradeType.OrderRefundQuery;
 
         /// <summary>微信订单号
         /// </summary>

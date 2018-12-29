@@ -4,13 +4,13 @@ using DotCommon.Http;
 using DotCommon.Serializing;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
-using QuickPay.WechatPay.Authentication.Model;
-using QuickPay.WechatPay.Util;
+using QuickPay.WeChatPay.Authentication.Model;
+using QuickPay.WeChatPay.Util;
 using System;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace QuickPay.WechatPay.Authentication
+namespace QuickPay.WeChatPay.Authentication
 {
     /// <summary>认证服务
     /// </summary>
@@ -21,11 +21,11 @@ namespace QuickPay.WechatPay.Authentication
         private readonly IJsonSerializer _jsonSerializer;
         private readonly IAccessTokenStore _accessTokenStore;
         private readonly IJsApiTicketStore _jsApiTicketStore;
-        private readonly IDistributedCache<WechatPayAuthenticationStateCacheItem> _stateCache;
+        private readonly IDistributedCache<WeChatPayAuthenticationStateCacheItem> _stateCache;
 
         /// <summary>Ctor
         /// </summary>
-        public AuthenticationService(ILogger<QuickPayLoggerName> logger, IHttpClient httpClient, IJsonSerializer jsonSerializer, IAccessTokenStore accessTokenStore, IJsApiTicketStore jsApiTicketStore, IDistributedCache<WechatPayAuthenticationStateCacheItem> stateCache)
+        public AuthenticationService(ILogger<QuickPayLoggerName> logger, IHttpClient httpClient, IJsonSerializer jsonSerializer, IAccessTokenStore accessTokenStore, IJsApiTicketStore jsApiTicketStore, IDistributedCache<WeChatPayAuthenticationStateCacheItem> stateCache)
         {
             _logger = logger;
             _httpClient = httpClient;
@@ -51,7 +51,7 @@ namespace QuickPay.WechatPay.Authentication
                 .AddQueryParameter("grant_type", "authorization_code");
             var response = await _httpClient.ExecuteAsync(httpRequest);
             //记录日志
-            _logger.LogInformation(WechatPayUtil.ParseLog($"获取小程序用户OpenId返回结果,{response.Content}"));
+            _logger.LogInformation(WeChatPayUtil.ParseLog($"获取小程序用户OpenId返回结果,{response.Content}"));
             var miniProgramOpenIdResponse = _jsonSerializer.Deserialize<MiniProgramOpenIdResponse>(response.Content);
             return miniProgramOpenIdResponse;
         }
@@ -63,7 +63,7 @@ namespace QuickPay.WechatPay.Authentication
         /// <param name="scope">权限</param>
         /// <param name="state">附加状态(a-zA-Z0-9的参数值，最多128字节,如果不为空必须唯一)</param>
         /// <returns></returns>
-        public virtual string GetAuthorizationCodeUrl(string appId, string redirectUri, string scope = WechatPaySettings.Scope.Base, string state = "")
+        public virtual string GetAuthorizationCodeUrl(string appId, string redirectUri, string scope = WeChatPaySettings.Scope.Base, string state = "")
         {
             if (state.IsNullOrWhiteSpace())
             {
@@ -71,12 +71,12 @@ namespace QuickPay.WechatPay.Authentication
             }
             else
             {
-                _stateCache.Set(state, new WechatPayAuthenticationStateCacheItem(state), new DistributedCacheEntryOptions()
+                _stateCache.Set(state, new WeChatPayAuthenticationStateCacheItem(state), new DistributedCacheEntryOptions()
                 {
                     SlidingExpiration = TimeSpan.FromMinutes(5)
                 });
             }
-            var url = $"https://open.weixin.qq.com/connect/oauth2/authorize?appid={appId}&redirect_uri={WebUtility.UrlEncode(redirectUri)}&response_type=code&scope={scope}&state={state}#wechat_redirect";
+            var url = $"https://open.weixin.qq.com/connect/oauth2/authorize?appid={appId}&redirect_uri={WebUtility.UrlEncode(redirectUri)}&response_type=code&scope={scope}&state={state}#weChat_redirect";
             return url;
         }
 
@@ -94,15 +94,15 @@ namespace QuickPay.WechatPay.Authentication
             {
                 if (!state.IsNullOrWhiteSpace())
                 {
-                    var wechatPayAuthenticationStateCacheItem = await _stateCache.GetAsync(state);
-                    if (wechatPayAuthenticationStateCacheItem == null)
+                    var weChatPayAuthenticationStateCacheItem = await _stateCache.GetAsync(state);
+                    if (weChatPayAuthenticationStateCacheItem == null)
                     {
-                        _logger.LogError(WechatPayUtil.ParseLog("JsApi认证验证Status失败,Status不存在"));
+                        _logger.LogError(WeChatPayUtil.ParseLog("JsApi认证验证Status失败,Status不存在"));
                         throw new Exception($"微信Status验证不通过");
                     }
-                    if (wechatPayAuthenticationStateCacheItem.State != state)
+                    if (weChatPayAuthenticationStateCacheItem.State != state)
                     {
-                        _logger.LogError(WechatPayUtil.ParseLog("JsApi认证验证Status失败,Status不匹配"));
+                        _logger.LogError(WeChatPayUtil.ParseLog("JsApi认证验证Status失败,Status不匹配"));
                     }
                 }
             }
@@ -115,7 +115,7 @@ namespace QuickPay.WechatPay.Authentication
                 .AddQueryParameter("grant_type", "authorization_code");
             var response = await _httpClient.ExecuteAsync(httpRequest);
             //记录日志
-            _logger.LogInformation(WechatPayUtil.ParseLog($"获取用户OpenId返回结果,{response.Content}"));
+            _logger.LogInformation(WeChatPayUtil.ParseLog($"获取用户OpenId返回结果,{response.Content}"));
             var getUserOpenIdResponse = _jsonSerializer.Deserialize<UserOpenIdResponse>(response.Content);
             return getUserOpenIdResponse.OpenId;
         }
@@ -211,7 +211,7 @@ namespace QuickPay.WechatPay.Authentication
                 .AddQueryParameter("secret", appSecret);
             var response = await _httpClient.ExecuteAsync(httpRequest);
             //记录日志
-            _logger.LogInformation(WechatPayUtil.ParseLog($"获取公众号AccessToekn返回结果,{response.Content}"));
+            _logger.LogInformation(WeChatPayUtil.ParseLog($"获取公众号AccessToekn返回结果,{response.Content}"));
             var getAccessTokenResponse = _jsonSerializer.Deserialize<AccessTokenResponse>(response.Content);
             //如果返回的不是有效的accessToken的json格式,代表出错了
             if (getAccessTokenResponse.AccessToken.IsNullOrWhiteSpace())
@@ -228,10 +228,10 @@ namespace QuickPay.WechatPay.Authentication
             var url = $"https://api.weixin.qq.com/cgi-bin/ticket/getticket";
             IHttpRequest httpRequest = new HttpRequest(url, Method.GET)
                 .AddQueryParameter("access_token", accessToken)
-                .AddQueryParameter("type", WechatPaySettings.TradeType.JsApi);
+                .AddQueryParameter("type", WeChatPaySettings.TradeType.JsApi);
             var response = await _httpClient.ExecuteAsync(httpRequest);
             //记录日志
-            _logger.LogInformation(WechatPayUtil.ParseLog($"获取公众号JsApi_Ticket返回结果,{response.Content}"));
+            _logger.LogInformation(WeChatPayUtil.ParseLog($"获取公众号JsApi_Ticket返回结果,{response.Content}"));
             var jsApiTicketResponse = _jsonSerializer.Deserialize<JsApiTicketResponse>(response.Content);
             if (jsApiTicketResponse.Ticket.IsNullOrWhiteSpace())
             {

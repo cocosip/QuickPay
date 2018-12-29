@@ -1,6 +1,6 @@
 ﻿using DotCommon.Serializing;
 using QuickPay.Alipay.Apps;
-using QuickPay.WechatPay.Apps;
+using QuickPay.WeChatPay.Apps;
 using System.IO;
 using System.Xml;
 
@@ -81,33 +81,33 @@ namespace QuickPay.Configurations
                 configWapper.AlipayConfig.Apps.Add(alipayApp);
             }
 
-            var wechatPayNode = root.SelectSingleNode("WechatPay");
-            configWapper.WechatPayConfig = new WechatPayConfig()
+            var weChatPayNode = root.SelectSingleNode("WeChatPay");
+            configWapper.WechatPayConfig = new WeChatPayConfig()
             {
-                DefaultAppName = wechatPayNode.SelectSingleNode("DefaultAppName").InnerText,
-                NotifyGateway = wechatPayNode.SelectSingleNode("NotifyGateway").InnerText,
-                LocalAddress = wechatPayNode.SelectSingleNode("LocalAddress").InnerText,
-                WebGateway = wechatPayNode.SelectSingleNode("WebGateway").InnerText,
-                NotifyUrlFragments = wechatPayNode.SelectSingleNode("NotifyUrlFragments").InnerText,
-                SignType = wechatPayNode.SelectSingleNode("SignType").InnerText,
-                SslPassword = wechatPayNode.SelectSingleNode("SslPassword").InnerText,
+                DefaultAppName = weChatPayNode.SelectSingleNode("DefaultAppName").InnerText,
+                NotifyGateway = weChatPayNode.SelectSingleNode("NotifyGateway").InnerText,
+                LocalAddress = weChatPayNode.SelectSingleNode("LocalAddress").InnerText,
+                WebGateway = weChatPayNode.SelectSingleNode("WebGateway").InnerText,
+                NotifyUrlFragments = weChatPayNode.SelectSingleNode("NotifyUrlFragments").InnerText,
+                SignType = weChatPayNode.SelectSingleNode("SignType").InnerText,
+                SslPassword = weChatPayNode.SelectSingleNode("SslPassword").InnerText,
             };
 
-            //wechatPayConfig Apps节点
-            var wechatPayAppNodes = wechatPayNode.SelectSingleNode("Apps");
-            foreach (XmlNode wechatPayAppNode in wechatPayAppNodes)
+            //weChatPayConfig Apps节点
+            var weChatPayAppNodes = weChatPayNode.SelectSingleNode("Apps");
+            foreach (XmlNode weChatPayAppNode in weChatPayAppNodes)
             {
-                var wechatPayApp = new WechatPayApp()
+                var weChatPayApp = new WeChatPayApp()
                 {
-                    AppId = wechatPayAppNode.SelectSingleNode("AppId").InnerText,
-                    AppTypeId = int.Parse(wechatPayAppNode.SelectSingleNode("AppTypeId").InnerText),
-                    Name = wechatPayAppNode.SelectSingleNode("Name").InnerText,
-                    MchId = wechatPayAppNode.SelectSingleNode("MchId").InnerText,
-                    Key = wechatPayAppNode.SelectSingleNode("Key").InnerText,
-                    Appsecret = wechatPayAppNode.SelectSingleNode("Appsecret").InnerText,
+                    AppId = weChatPayAppNode.SelectSingleNode("AppId").InnerText,
+                    AppTypeId = int.Parse(weChatPayAppNode.SelectSingleNode("AppTypeId").InnerText),
+                    Name = weChatPayAppNode.SelectSingleNode("Name").InnerText,
+                    MchId = weChatPayAppNode.SelectSingleNode("MchId").InnerText,
+                    Key = weChatPayAppNode.SelectSingleNode("Key").InnerText,
+                    Appsecret = weChatPayAppNode.SelectSingleNode("Appsecret").InnerText,
                 };
-                var nativeMobileInfoNode = wechatPayAppNode.SelectSingleNode("NativeMobileInfo");
-                wechatPayApp.NativeMobileInfo = new NativeMobileInfo()
+                var nativeMobileInfoNode = weChatPayAppNode.SelectSingleNode("NativeMobileInfo");
+                weChatPayApp.NativeMobileInfo = new NativeMobileInfo()
                 {
                     IosName = nativeMobileInfoNode.SelectSingleNode("IosName").InnerText,
                     BundleId = nativeMobileInfoNode.SelectSingleNode("BundleId").InnerText,
@@ -116,7 +116,7 @@ namespace QuickPay.Configurations
                     WapName = nativeMobileInfoNode.SelectSingleNode("WapName").InnerText,
                     WapUrl = nativeMobileInfoNode.SelectSingleNode("WapUrl").InnerText,
                 };
-                configWapper.WechatPayConfig.Apps.Add(wechatPayApp);
+                configWapper.WechatPayConfig.Apps.Add(weChatPayApp);
             }
             return configWapper;
         }

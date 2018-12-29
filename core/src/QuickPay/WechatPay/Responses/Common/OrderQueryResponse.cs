@@ -1,10 +1,10 @@
 ﻿using QuickPay.Infrastructure.RequestData;
 
-namespace QuickPay.WechatPay.Responses
+namespace QuickPay.WeChatPay.Responses
 {
     /// <summary>订单查询
     /// </summary>
-    public class OrderQueryResponse : WechatPayCommonResponse
+    public class OrderQueryResponse : WeChatPayCommonResponse
     {
         /// <summary>应用Id
         /// </summary>

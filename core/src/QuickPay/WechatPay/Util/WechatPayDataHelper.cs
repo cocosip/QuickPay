@@ -7,17 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 
-namespace QuickPay.WechatPay.Util
+namespace QuickPay.WeChatPay.Util
 {
     /// <summary>微信支付PayData操作帮主类
     /// </summary>
-    public class WechatPayDataHelper
+    public class WeChatPayDataHelper
     {
         private readonly IJsonSerializer _jsonSerializer;
 
         /// <summary>Ctor
         /// </summary>
-        public WechatPayDataHelper(IJsonSerializer jsonSerializer)
+        public WeChatPayDataHelper(IJsonSerializer jsonSerializer)
         {
             _jsonSerializer = jsonSerializer;
         }

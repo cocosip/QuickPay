@@ -1,15 +1,15 @@
 ﻿using DotCommon.Alg;
 using DotCommon.Encrypt;
 using QuickPay.Infrastructure.RequestData;
-using QuickPay.WechatPay.Apps;
+using QuickPay.WeChatPay.Apps;
 using System;
 using System.Security.Cryptography;
 
-namespace QuickPay.WechatPay.Util
+namespace QuickPay.WeChatPay.Util
 {
     /// <summary>微信支付工具类
     /// </summary>
-    public class WechatPayUtil
+    public class WeChatPayUtil
     {
         /// <summary>生成时间戳，标准北京时间，时区为东八区，自1970年1月1日 0点0分0秒以来的秒数
         /// </summary>
@@ -41,7 +41,7 @@ namespace QuickPay.WechatPay.Util
 
         /// <summary>生成MD5签名
         /// </summary>
-        public static string Md5Sign(PayData payData, WechatPayApp app)
+        public static string Md5Sign(PayData payData, WeChatPayApp app)
         {
             //转url格式
             string str = $"{payData.ToUrl()}&key={app.Key}";
@@ -51,7 +51,7 @@ namespace QuickPay.WechatPay.Util
 
         /// <summary>签名验证
         /// </summary>
-        public static bool VerifySign(PayData payData, WechatPayApp app)
+        public static bool VerifySign(PayData payData, WeChatPayApp app)
         {
             if (!payData.IsSet("sign"))
             {

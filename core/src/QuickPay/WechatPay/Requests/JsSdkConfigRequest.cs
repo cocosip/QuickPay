@@ -1,9 +1,9 @@
 ﻿using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.RequestData;
-using QuickPay.WechatPay.Responses;
-using QuickPay.WechatPay.Util;
+using QuickPay.WeChatPay.Responses;
+using QuickPay.WeChatPay.Util;
 
-namespace QuickPay.WechatPay.Requests
+namespace QuickPay.WeChatPay.Requests
 {
     /// <summary>微信JsApi支付 JsSDK config签名
     /// </summary>
@@ -11,15 +11,15 @@ namespace QuickPay.WechatPay.Requests
     {
         /// <summary>签名字段名称
         /// </summary>
-        public override string SignFieldName { get; } = WechatPaySettings.JsSdkConfigSignFieldName;
+        public override string SignFieldName { get; } = WeChatPaySettings.JsSdkConfigSignFieldName;
 
         /// <summary>交易类型名称
         /// </summary>
-        public override string TradeTypeName => WechatPaySettings.TradeType.JsApi;
+        public override string TradeTypeName => WeChatPaySettings.TradeType.JsApi;
 
         /// <summary>签名类型名称
         /// </summary>
-        public override string SignTypeName => WechatPaySettings.SignType.Sha1;
+        public override string SignTypeName => WeChatPaySettings.SignType.Sha1;
 
         /// <summary>应用Id
         /// </summary>
@@ -51,7 +51,7 @@ namespace QuickPay.WechatPay.Requests
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);
-            Timestamp = WechatPayUtil.GenerateTimeStamp();
+            Timestamp = WeChatPayUtil.GenerateTimeStamp();
         }
 
         /// <summary>Ctor

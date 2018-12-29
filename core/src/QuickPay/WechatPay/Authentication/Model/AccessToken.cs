@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace QuickPay.WechatPay.Authentication
+namespace QuickPay.WeChatPay.Authentication
 {
     /// <summary>AccessToken
     /// </summary>

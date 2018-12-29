@@ -1,5 +1,5 @@
 ﻿using QuickPay.Alipay.Apps;
-using QuickPay.WechatPay.Apps;
+using QuickPay.WeChatPay.Apps;
 
 namespace QuickPay
 {
@@ -13,6 +13,6 @@ namespace QuickPay
 
         /// <summary>微信配置
         /// </summary>
-        public WechatPayConfig WechatPayConfig { get; set; }
+        public WeChatPayConfig WechatPayConfig { get; set; }
     }
 }

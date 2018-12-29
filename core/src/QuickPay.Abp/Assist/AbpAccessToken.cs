@@ -1,6 +1,6 @@
 ﻿using Abp.Domain.Entities.Auditing;
 using DotCommon.AutoMapper;
-using QuickPay.WechatPay.Authentication;
+using QuickPay.WeChatPay.Authentication;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;

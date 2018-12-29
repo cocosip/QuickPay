@@ -3,11 +3,11 @@ using QuickPay.Infrastructure.RequestData;
 using System;
 using System.Threading.Tasks;
 
-namespace QuickPay.WechatPay.Services
+namespace QuickPay.WeChatPay.Services
 {
     /// <summary>微信支付相关辅助功能
     /// </summary>
-    public interface IWechatPayAssistService : IWechatPayService
+    public interface IWeChatPayAssistService : IWeChatPayService
     {
         /// <summary>通知签名验证
         /// </summary>

@@ -1,12 +1,12 @@
-﻿using QuickPay.WechatPay.Responses;
-using QuickPay.WechatPay.Services.DTOs;
+﻿using QuickPay.WeChatPay.Responses;
+using QuickPay.WeChatPay.Services.DTOs;
 using System.Threading.Tasks;
 
-namespace QuickPay.WechatPay.Services
+namespace QuickPay.WeChatPay.Services
 {
     /// <summary>微信通用交易接口
     /// </summary>
-    public interface IWechatPayTradeCommonService : IWechatPayService
+    public interface IWeChatPayTradeCommonService : IWeChatPayService
     {
         /// <summary>根据订单交易号查询订单
         /// </summary>

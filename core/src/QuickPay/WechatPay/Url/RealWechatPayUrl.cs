@@ -1,8 +1,8 @@
-﻿namespace QuickPay.WechatPay.Url
+﻿namespace QuickPay.WeChatPay.Url
 {
     /// <summary>真实环境中,各个请求Url
     /// </summary>
-    public class RealWechatPayUrl : BaseWechatPayUrl
+    public class RealWeChatPayUrl : BaseWeChatPayUrl
     {
         /// <summary>H5下单地址
         /// </summary>

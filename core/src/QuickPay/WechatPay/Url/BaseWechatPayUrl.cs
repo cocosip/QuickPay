@@ -1,18 +1,18 @@
-﻿using QuickPay.WechatPay.Requests;
+﻿using QuickPay.WeChatPay.Requests;
 using System;
 using System.Collections.Generic;
 
-namespace QuickPay.WechatPay.Url
+namespace QuickPay.WeChatPay.Url
 {
     /// <summary>微信支付请求基类地址
     /// </summary>
-    public abstract class BaseWechatPayUrl : IWechatPayUrl
+    public abstract class BaseWeChatPayUrl : IWeChatPayUrl
     {
         Dictionary<Type, string> RequestTypeUrlDict = new Dictionary<Type, string>();
 
         /// <summary>Ctor
         /// </summary>
-        public BaseWechatPayUrl()
+        public BaseWeChatPayUrl()
         {
             RequestTypeUrlDict = new Dictionary<Type, string>();
             RequestTypeUrlDict.Add(typeof(AppUnifiedOrderRequest), AppUnifiedOrderUrl);

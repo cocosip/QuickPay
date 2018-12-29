@@ -1,8 +1,8 @@
-﻿namespace QuickPay.WechatPay.Url
+﻿namespace QuickPay.WeChatPay.Url
 {
     /// <summary>微信沙盒环境地址
     /// </summary>
-    public class SandboxWechatPayUrl : BaseWechatPayUrl
+    public class SandboxWeChatPayUrl : BaseWeChatPayUrl
     {
         /// <summary>H5下单地址
         /// </summary>

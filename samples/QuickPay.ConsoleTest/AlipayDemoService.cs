@@ -4,7 +4,7 @@ using QuickPay.Alipay;
 using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Services;
 using QuickPay.Alipay.Services.DTOs;
-using QuickPay.WechatPay.Util;
+using QuickPay.WeChatPay.Util;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,15 +14,15 @@ namespace QuickPay.ConsoleTest
     public class AlipayDemoService
     {
         private readonly ILogger _logger;
-        private WechatPayDataHelper _wechatPayDataHelper;
+        private WeChatPayDataHelper _weChatPayDataHelper;
         private readonly AlipayConfig _alipayConfig;
         private readonly IAlipayTradeCommonService _alipayTradeCommonService;
         private readonly IAlipayAppPayService _alipayAppPayService;
         private readonly IAlipayPagePayService _alipayPagePayService;
-        public AlipayDemoService(ILogger<QuickPayLoggerName> logger, WechatPayDataHelper wechatPayDataHelper, AlipayConfig alipayConfig, IAlipayTradeCommonService alipayTradeCommonService, IAlipayAppPayService alipayAppPayService, IAlipayPagePayService alipayPagePayService)
+        public AlipayDemoService(ILogger<QuickPayLoggerName> logger, WeChatPayDataHelper weChatPayDataHelper, AlipayConfig alipayConfig, IAlipayTradeCommonService alipayTradeCommonService, IAlipayAppPayService alipayAppPayService, IAlipayPagePayService alipayPagePayService)
         {
             _logger = logger;
-            _wechatPayDataHelper = wechatPayDataHelper;
+            _weChatPayDataHelper = weChatPayDataHelper;
             _alipayConfig = alipayConfig;
             _alipayTradeCommonService = alipayTradeCommonService;
             _alipayAppPayService = alipayAppPayService;
@@ -53,7 +53,7 @@ namespace QuickPay.ConsoleTest
                 };
 
                 var response = await _alipayPagePayService.TradePay(input);
-                _logger.LogInformation("AlipayPageTradePay,ReturnUrl:{0},NotifyUrl:{1}", response.ReturnUrl, response.NotifyUrl, _wechatPayDataHelper.DictToJson(new Dictionary<string, object>(response.PayData.GetValues())));
+                _logger.LogInformation("AlipayPageTradePay,ReturnUrl:{0},NotifyUrl:{1}", response.ReturnUrl, response.NotifyUrl, _weChatPayDataHelper.DictToJson(new Dictionary<string, object>(response.PayData.GetValues())));
             }
         }
 

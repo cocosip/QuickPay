@@ -1,17 +1,17 @@
 ﻿using DotCommon.Caching;
 using System;
 
-namespace QuickPay.WechatPay.Authentication.Model
+namespace QuickPay.WeChatPay.Authentication.Model
 {
     /// <summary>微信认证状态缓存实体
     /// </summary>
-    [CacheName(WechatPaySettings.AuthenticationState)]
+    [CacheName(WeChatPaySettings.AuthenticationState)]
     [Serializable]
-    public class WechatPayAuthenticationStateCacheItem
+    public class WeChatPayAuthenticationStateCacheItem
     {
         /// <summary>Ctor
         /// </summary>
-        public WechatPayAuthenticationStateCacheItem()
+        public WeChatPayAuthenticationStateCacheItem()
         {
 
         }
@@ -19,7 +19,7 @@ namespace QuickPay.WechatPay.Authentication.Model
         /// <summary>Ctor
         /// </summary>
         /// <param name="state">状态</param>
-        public WechatPayAuthenticationStateCacheItem(string state)
+        public WeChatPayAuthenticationStateCacheItem(string state)
         {
             State = state;
         }

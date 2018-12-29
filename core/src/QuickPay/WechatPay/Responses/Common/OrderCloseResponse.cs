@@ -1,10 +1,10 @@
 ﻿using QuickPay.Infrastructure.RequestData;
 
-namespace QuickPay.WechatPay.Responses
+namespace QuickPay.WeChatPay.Responses
 {
     /// <summary>关闭订单
     /// </summary>
-    public class OrderCloseResponse : WechatPayCommonResponse
+    public class OrderCloseResponse : WeChatPayCommonResponse
     {
         /// <summary>AppId
         /// </summary>

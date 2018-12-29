@@ -4,25 +4,25 @@ using QuickPay.Assist;
 using QuickPay.Assist.Store;
 using QuickPay.Exceptions;
 using QuickPay.Infrastructure.RequestData;
-using QuickPay.WechatPay.Apps;
-using QuickPay.WechatPay.Util;
+using QuickPay.WeChatPay.Apps;
+using QuickPay.WeChatPay.Util;
 using System;
 using System.Threading.Tasks;
 
-namespace QuickPay.WechatPay.Services.Impl
+namespace QuickPay.WeChatPay.Services.Impl
 {
     /// <summary>微信支付相关辅助
     /// </summary>
-    public class WechatPayAssistService : BaseWechatPayService, IWechatPayAssistService
+    public class WeChatPayAssistService : BaseWeChatPayService, IWeChatPayAssistService
     {
         private readonly IPaymentStore _paymentStore;
-        private readonly WechatPayDataHelper _wechatPayDataHelper;
+        private readonly WeChatPayDataHelper _weChatPayDataHelper;
         /// <summary>Ctor
         /// </summary>
-        public WechatPayAssistService(IServiceProvider provider, IPaymentStore paymentStore, WechatPayDataHelper wechatPayDataHelper) : base(provider)
+        public WeChatPayAssistService(IServiceProvider provider, IPaymentStore paymentStore, WeChatPayDataHelper weChatPayDataHelper) : base(provider)
         {
             _paymentStore = paymentStore;
-            _wechatPayDataHelper = wechatPayDataHelper;
+            _weChatPayDataHelper = weChatPayDataHelper;
         }
 
         /// <summary>通知签名验证
@@ -31,11 +31,11 @@ namespace QuickPay.WechatPay.Services.Impl
         {
             try
             {
-                return await Task.FromResult(WechatPayUtil.VerifySign(payData, App));
+                return await Task.FromResult(WeChatPayUtil.VerifySign(payData, App));
             }
             catch (Exception ex)
             {
-                Logger.LogError(WechatPayUtil.ParseLog($"微信支付回调签名验证出现异常:{ex.Message}"));
+                Logger.LogError(WeChatPayUtil.ParseLog($"微信支付回调签名验证出现异常:{ex.Message}"));
                 return false;
             }
         }
@@ -49,14 +49,14 @@ namespace QuickPay.WechatPay.Services.Impl
             {
                 throw new QuickPayException("微信支付回调出现异常.");
             }
-            var payment = await _paymentStore.GetAsync((int)PayPlat.WechatPay, App.AppId, _wechatPayDataHelper.GetOutTradeNo(payData));
+            var payment = await _paymentStore.GetAsync((int)PayPlat.WechatPay, App.AppId, _weChatPayDataHelper.GetOutTradeNo(payData));
             if (payment == null)
             {
-                Logger.LogError(WechatPayUtil.ParseLog($"支付信息不存在,AppId:{App.AppId}"));
+                Logger.LogError(WeChatPayUtil.ParseLog($"支付信息不存在,AppId:{App.AppId}"));
                 throw new QuickPayException($"支付信息不存在");
             }
             //微信支付订单号
-            string transactionId = _wechatPayDataHelper.GetTransactionId(payData);
+            string transactionId = _weChatPayDataHelper.GetTransactionId(payData);
             //payData.GetTransactionId();
             try
             {
@@ -67,15 +67,15 @@ namespace QuickPay.WechatPay.Services.Impl
                 }
 
                 //交易成功
-                if (_wechatPayDataHelper.GetResultCode(payData) != WechatPaySettings.ResultCode.Success)
+                if (_weChatPayDataHelper.GetResultCode(payData) != WeChatPaySettings.ResultCode.Success)
                 {
-                    throw new QuickPayException(101, $"支付不成功:{_wechatPayDataHelper.GetResultCode(payData)}");
+                    throw new QuickPayException(101, $"支付不成功:{_weChatPayDataHelper.GetResultCode(payData)}");
                 }
 
                 //金额
-                if (payment.Amount != _wechatPayDataHelper.GetTotalFeeYuan(payData))
+                if (payment.Amount != _weChatPayDataHelper.GetTotalFeeYuan(payData))
                 {
-                    throw new QuickPayException(101, $"订单金额不正确,系统存储的金额为:{payment.Amount},回调金额为:{_wechatPayDataHelper.GetTotalFeeYuan(payData)}");
+                    throw new QuickPayException(101, $"订单金额不正确,系统存储的金额为:{payment.Amount},回调金额为:{_weChatPayDataHelper.GetTotalFeeYuan(payData)}");
                 }
                 //业务执行
                 action?.Invoke(payment);
@@ -96,7 +96,7 @@ namespace QuickPay.WechatPay.Services.Impl
             }
             catch (Exception ex)
             {
-                Logger.LogError(WechatPayUtil.ParseLog($"微信支付回调操作出现异常:{ex.Message}"));
+                Logger.LogError(WeChatPayUtil.ParseLog($"微信支付回调操作出现异常:{ex.Message}"));
                 throw;
             }
         }

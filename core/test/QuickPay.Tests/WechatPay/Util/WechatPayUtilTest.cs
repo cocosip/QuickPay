@@ -1,4 +1,4 @@
-﻿using QuickPay.WechatPay.Util;
+﻿using QuickPay.WeChatPay.Util;
 using Xunit;
 
 namespace QuickPay.Tests.WechatPay.Util
@@ -8,14 +8,14 @@ namespace QuickPay.Tests.WechatPay.Util
         [Fact]
         public void GenerateTimeStamp_Test()
         {
-            var t = WechatPayUtil.GenerateTimeStamp();
+            var t = WeChatPayUtil.GenerateTimeStamp();
             Assert.NotEmpty(t);
         }
 
         [Fact]
         public void GenerateNonceStr_Test()
         {
-            var nonceStr = WechatPayUtil.GenerateNonceStr();
+            var nonceStr = WeChatPayUtil.GenerateNonceStr();
             Assert.Equal(32, nonceStr.Length);
         }
 

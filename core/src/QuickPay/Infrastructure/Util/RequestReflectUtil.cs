@@ -65,7 +65,7 @@ namespace QuickPay.Infrastructure.Util
             var assignWechatPayDataExpr = Expression.Assign(payDataExpr, newPayDataExpr);
             bodyExprs.Add(assignWechatPayDataExpr);
 
-            //code:var wechatPay=(Request)o;
+            //code:var weChatPay=(Request)o;
             var payExpr = Expression.Variable(sourceType, "pay");
             var castWechatPayExpr = Expression.Convert(parameterExpr, sourceType);
             var assignWechatPayExpr = Expression.Assign(payExpr, castWechatPayExpr);
@@ -85,7 +85,7 @@ namespace QuickPay.Infrastructure.Util
                     //(object)request.Id 默认转换为object
                     var valueExpr = Expression.Property(payExpr, property);
                     var castValueExpr = Expression.Convert(valueExpr, typeof(object));
-                    //code:wechatPayData.SetValue("xxx",(object)request.Id)
+                    //code:weChatPayData.SetValue("xxx",(object)request.Id)
                     var setValueExpr = Expression.Call(payDataExpr,
                         targetType.GetTypeInfo().GetMethod("SetValue", new Type[] { typeof(string), typeof(object) }),
                         nameExpr, castValueExpr);
@@ -133,13 +133,13 @@ namespace QuickPay.Infrastructure.Util
                     //code : payData.GetValue("name");
                     var getValueExpr = Expression.Call(parameterExpr,
                         sourceType.GetTypeInfo().GetMethod("GetValue", new[] { typeof(string) }), nameExpr);
-                    //code: response.Name=wechatPayData.GetValue("name");
+                    //code: response.Name=weChatPayData.GetValue("name");
                     var fieldExpr = Expression.Property(responseExpr, property);
                     var convertValueExpr = Expression.Call(null,
                         typeof(Convert).GetTypeInfo()
                             .GetMethod(GetConvertMethod(property.PropertyType), new[] { typeof(object) }), getValueExpr);
                     var assignFieldExpr = Expression.Assign(fieldExpr, convertValueExpr);
-                    //code: if(wechatPayData.GetValue("") != null){ ... }
+                    //code: if(weChatPayData.GetValue("") != null){ ... }
                     var ifNotNullExpr = Expression.IfThen(
                         Expression.NotEqual(getValueExpr, Expression.Constant(null)),
                         assignFieldExpr);

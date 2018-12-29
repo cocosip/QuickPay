@@ -11,11 +11,11 @@
     <![CDATA[支付宝支付异步通知默认网关地址]]>
     <NotifyGateway>http://127.0.0.1</NotifyGateway>
     <![CDATA[通知关联Url]]>
-    <NotifyRealateUrl>/Notify/Alipay</NotifyRealateUrl>
+    <NotifyUrlFragments>/Notify/Alipay</NotifyUrlFragments>
     <![CDATA[二维码扫码支付异步通知关联Url]]>
-    <QrcodeNotifyRelateUrl>/Notify/Alipay/QrcodeNotify</QrcodeNotifyRelateUrl>
+    <QrcodeNotifyUrlFragments>/Notify/Alipay/QrcodeNotify</QrcodeNotifyUrlFragments>
     <![CDATA[条码支付异步通知关联Url]]>
-    <BarcodeNotifyRelateUrl>/Notify/Alipay/BarcodeNotify</BarcodeNotifyRelateUrl>
+    <BarcodeNotifyUrlFragments>/Notify/Alipay/BarcodeNotify</BarcodeNotifyUrlFragments>
     <![CDATA[请求数据格式,JSON]]>
     <Format>JSON</Format>
     <![CDATA[版本号]]>
@@ -51,7 +51,7 @@
       </AlipayApp>
     </Apps>
   </Alipay>
-  <WechatPay>
+  <WeChatPay>
     <![CDATA[本地IP地址]]>
     <LocalAddress>8.8.8.8</LocalAddress>
     <![CDATA[本地网关地址]]>
@@ -59,7 +59,7 @@
     <![CDATA[默认通知网关,本地服务器地址]]>
     <NotifyGateway>http://127.0.0.1</NotifyGateway>
     <![CDATA[异步通知关联地址]]>
-    <NotifyRealateUrl>/Notify/WechatPay</NotifyRealateUrl>
+    <NotifyUrlFragments>/Notify/WeChatPay</NotifyUrlFragments>
     <![CDATA[默认App名称]]>
     <DefaultAppName>App1</DefaultAppName>
     <![CDATA[签名类型,MD5]]>
@@ -67,7 +67,7 @@
     <![CDATA[SSL证书]]>
     <SslPassword></SslPassword>
     <Apps>
-      <WechatPayApp>
+      <WeChatPayApp>
         <![CDATA[应用名称]]>
         <Name>App1</Name>
         <![CDATA[应用AppId]]>
@@ -94,7 +94,7 @@
           <![CDATA[移动端Url地址]]>
           <WapUrl>http://wap.b1.com</WapUrl>
         </NativeMobileInfo>
-      </WechatPayApp>
+      </WeChatPayApp>
 
       <WxpayApp>
         <![CDATA[应用名称]]>
@@ -154,5 +154,5 @@
         </NativeMobileInfo>
       </WxpayApp>
     </Apps>
-  </WechatPay>
+  </WeChatPay>
 </QuickPayConfig>

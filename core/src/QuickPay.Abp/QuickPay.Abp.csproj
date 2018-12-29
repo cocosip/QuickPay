@@ -20,7 +20,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="WechatPay\" />
+    <Folder Include="WeChatPay\" />
   </ItemGroup>
 
   <ItemGroup>

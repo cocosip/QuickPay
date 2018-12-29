@@ -1,12 +1,12 @@
-﻿using QuickPay.WechatPay.Responses;
-using QuickPay.WechatPay.Services.DTOs;
+﻿using QuickPay.WeChatPay.Responses;
+using QuickPay.WeChatPay.Services.DTOs;
 using System.Threading.Tasks;
 
-namespace QuickPay.WechatPay.Services
+namespace QuickPay.WeChatPay.Services
 {
     /// <summary>微信扫码支付
     /// </summary>
-    public interface IWechatNativePayService : IWechatPayService
+    public interface IWeChatNativePayService : IWeChatPayService
     {
         /// <summary>当使用扫码支付模式2时,统一下单,返回二维码地址
         /// </summary>

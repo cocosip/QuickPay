@@ -1,14 +1,14 @@
 ﻿using QuickPay.Infrastructure.Apps;
 
-namespace QuickPay.WechatPay.Apps
+namespace QuickPay.WeChatPay.Apps
 {
     /// <summary>微信支付应用
     /// </summary>
-    public class WechatPayApp : QuickPayApp
+    public class WeChatPayApp : QuickPayApp
     {
         /// <summary>管道名称
         /// </summary>
-        public override string Provider => QuickPaySettings.Provider.WechatPay;
+        public override string Provider => QuickPaySettings.Provider.WeChatPay;
 
         /// <summary>应用的名称
         /// </summary>
@@ -41,7 +41,7 @@ namespace QuickPay.WechatPay.Apps
 
         /// <summary>Ctor
         /// </summary>
-        public WechatPayApp()
+        public WeChatPayApp()
         {
 
         }
@@ -55,7 +55,7 @@ namespace QuickPay.WechatPay.Apps
         /// <param name="appsecret">加密Secret</param>
         /// <param name="appTypeId">应用类型</param>
         /// <param name="info">移动端配置信息</param>
-        public WechatPayApp(string name, string appId, string mchId, string key, string appsecret, int appTypeId, NativeMobileInfo info)
+        public WeChatPayApp(string name, string appId, string mchId, string key, string appsecret, int appTypeId, NativeMobileInfo info)
         {
             Name = name;
             AppId = appId;
@@ -68,9 +68,9 @@ namespace QuickPay.WechatPay.Apps
 
         /// <summary>WechatApp转 WechatPayAppOverride
         /// </summary>
-        public WechatPayAppOverride ToOverrideValue()
+        public WeChatPayAppOverride ToOverrideValue()
         {
-            return new WechatPayAppOverride(Name, AppId, MchId, Key, Appsecret, AppTypeId, NativeMobileInfo);
+            return new WeChatPayAppOverride(Name, AppId, MchId, Key, Appsecret, AppTypeId, NativeMobileInfo);
         }
 
     }

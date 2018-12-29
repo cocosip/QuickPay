@@ -3,29 +3,29 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using QuickPay.Infrastructure.Executers;
 using QuickPay.Notify;
-using QuickPay.WechatPay.Apps;
+using QuickPay.WeChatPay.Apps;
 using System;
 
-namespace QuickPay.WechatPay.Services.Impl
+namespace QuickPay.WeChatPay.Services.Impl
 {
     /// <summary>微信支付服务基类
     /// </summary>
-    public abstract class BaseWechatPayService : IWechatPayService
+    public abstract class BaseWeChatPayService : IWeChatPayService
     {
         /// <summary>WechatPayAppOverrideContextKey
         /// </summary>
-        public const string WechatPayAppOverrideContextKey = "Touda.QuickPay.WechatPayApp.Override";
+        public const string WeChatPayAppOverrideContextKey = "Touda.QuickPay.WeChatPayApp.Override";
 
         /// <summary>WechatPayAppOverride
         /// </summary>
-        protected WechatPayAppOverride OverrideValue => WechatPayAppOverrideScopeProvider.GetValue(WechatPayAppOverrideContextKey);
+        protected WeChatPayAppOverride OverrideValue => WeChatPayAppOverrideScopeProvider.GetValue(WeChatPayAppOverrideContextKey);
         /// <summary>WechatPayAppOverrideScopeProvider
         /// </summary>
-        protected IAmbientScopeProvider<WechatPayAppOverride> WechatPayAppOverrideScopeProvider { get; }
+        protected IAmbientScopeProvider<WeChatPayAppOverride> WeChatPayAppOverrideScopeProvider { get; }
 
         /// <summary>微信配置
         /// </summary>
-        protected WechatPayConfig Config { get; }
+        protected WeChatPayConfig Config { get; }
 
         /// <summary>请求执行器
         /// </summary>
@@ -42,10 +42,10 @@ namespace QuickPay.WechatPay.Services.Impl
 
         /// <summary>Ctor
         /// </summary>
-        public BaseWechatPayService(IServiceProvider provider)
+        public BaseWeChatPayService(IServiceProvider provider)
         {
-            WechatPayAppOverrideScopeProvider = provider.GetService<IAmbientScopeProvider<WechatPayAppOverride>>();
-            Config = provider.GetService<WechatPayConfig>();
+            WeChatPayAppOverrideScopeProvider = provider.GetService<IAmbientScopeProvider<WeChatPayAppOverride>>();
+            Config = provider.GetService<WeChatPayConfig>();
             Logger = provider.GetService<ILogger<QuickPayLoggerName>>();
             Executer = provider.GetService<IRequestExecuter>();
             NotifyTypeFinder = provider.GetService<INotifyTypeFinder>();
@@ -53,15 +53,15 @@ namespace QuickPay.WechatPay.Services.Impl
 
         /// <summary>Use
         /// </summary>
-        public IDisposable Use(WechatPayApp app)
+        public IDisposable Use(WeChatPayApp app)
         {
             var overrideValue = app.ToOverrideValue();
-            return WechatPayAppOverrideScopeProvider.BeginScope(WechatPayAppOverrideContextKey, overrideValue);
+            return WeChatPayAppOverrideScopeProvider.BeginScope(WeChatPayAppOverrideContextKey, overrideValue);
         }
 
         /// <summary>微信支付应用
         /// </summary>
-        public WechatPayApp App
+        public WeChatPayApp App
         {
 
             get

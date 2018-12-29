@@ -3,7 +3,7 @@ using DotCommon.AutoMapper;
 using QuickPay.Assist;
 using System.Threading.Tasks;
 
-namespace QuickPay.WechatPay.Authentication
+namespace QuickPay.WeChatPay.Authentication
 {
     /// <summary>AccessToken存储
     /// </summary>

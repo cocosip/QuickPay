@@ -1,7 +1,7 @@
 ﻿using QuickPay.Infrastructure.RequestData;
-using QuickPay.WechatPay.Responses;
+using QuickPay.WeChatPay.Responses;
 
-namespace QuickPay.WechatPay.Requests
+namespace QuickPay.WeChatPay.Requests
 {
     /// <summary>上报
     /// </summary>
@@ -9,7 +9,7 @@ namespace QuickPay.WechatPay.Requests
     {
         /// <summary>交易类型名称
         /// </summary>
-        public override string TradeTypeName => WechatPaySettings.ExtTradeType.Report;
+        public override string TradeTypeName => WeChatPaySettings.ExtTradeType.Report;
 
         /// <summary>自定义参数，可以为终端设备号(门店号或收银设备ID)，PC网页或公众号内支付可以传"WEB"
         /// </summary>

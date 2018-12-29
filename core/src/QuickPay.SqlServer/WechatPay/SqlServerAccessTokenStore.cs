@@ -1,12 +1,12 @@
 ﻿using Dapper;
 using DotCommon.Extensions;
 using Microsoft.Extensions.Logging;
-using QuickPay.WechatPay.Authentication;
-using QuickPay.WechatPay.Util;
+using QuickPay.WeChatPay.Authentication;
+using QuickPay.WeChatPay.Util;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
-namespace QuickPay.WechatPay
+namespace QuickPay.WeChatPay
 {
     /// <summary>AccessToken存储
     /// </summary>
@@ -34,7 +34,7 @@ namespace QuickPay.WechatPay
             }
             catch (SqlException ex)
             {
-                Logger.LogError(WechatPayUtil.ParseLog($"获取应用AccessToken出错,AppId:{appId}.{ex.Message}"));
+                Logger.LogError(WeChatPayUtil.ParseLog($"获取应用AccessToken出错,AppId:{appId}.{ex.Message}"));
                 throw;
             }
         }
@@ -67,7 +67,7 @@ namespace QuickPay.WechatPay
             }
             catch (SqlException ex)
             {
-                Logger.LogError(WechatPayUtil.ParseLog($"获取应用AccessToken出错,{accessToken.ToString()}.{ex.Message}"));
+                Logger.LogError(WeChatPayUtil.ParseLog($"获取应用AccessToken出错,{accessToken.ToString()}.{ex.Message}"));
                 throw;
             }
         }

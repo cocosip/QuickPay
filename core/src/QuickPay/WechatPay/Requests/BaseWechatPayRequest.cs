@@ -3,10 +3,10 @@ using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.RequestData;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Infrastructure.Responses;
-using QuickPay.WechatPay.Apps;
-using QuickPay.WechatPay.Util;
+using QuickPay.WeChatPay.Apps;
+using QuickPay.WeChatPay.Util;
 
-namespace QuickPay.WechatPay.Requests
+namespace QuickPay.WeChatPay.Requests
 {
     /// <summary>微信支付泛型抽象基类
     /// </summary>
@@ -14,11 +14,11 @@ namespace QuickPay.WechatPay.Requests
     {
         /// <summary>微信支付管道名
         /// </summary>
-        public override string Provider => QuickPaySettings.Provider.WechatPay;
+        public override string Provider => QuickPaySettings.Provider.WeChatPay;
 
         /// <summary>签名字段名称
         /// </summary>
-        public override string SignFieldName => WechatPaySettings.DefaultSignFieldName;
+        public override string SignFieldName => WeChatPaySettings.DefaultSignFieldName;
 
         /// <summary>交易类型名称
         /// </summary>
@@ -47,16 +47,16 @@ namespace QuickPay.WechatPay.Requests
         /// </summary>
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
-            var wechatPayConfig = (WechatPayConfig)config;
-            var wechatPayApp = (WechatPayApp)app;
-            AppId = wechatPayApp.AppId;
-            MchId = wechatPayApp.MchId;
-            NonceStr = WechatPayUtil.GenerateNonceStr();
+            var weChatPayConfig = (WeChatPayConfig)config;
+            var weChatPayApp = (WeChatPayApp)app;
+            AppId = weChatPayApp.AppId;
+            MchId = weChatPayApp.MchId;
+            NonceStr = WeChatPayUtil.GenerateNonceStr();
 
             if (SignTypeName.IsNullOrWhiteSpace())
             {
                 //签名类型
-                SignTypeName = wechatPayConfig.SignType;
+                SignTypeName = weChatPayConfig.SignType;
             }
         }
     }

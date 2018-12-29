@@ -1,8 +1,8 @@
-﻿namespace QuickPay.WechatPay.Apps
+﻿namespace QuickPay.WeChatPay.Apps
 {
     /// <summary>微信应用
     /// </summary>
-    public class WechatPayAppOverride
+    public class WeChatPayAppOverride
     {
         /// <summary>应用名称
         /// </summary>
@@ -33,7 +33,7 @@
 
         /// <summary>Ctor
         /// </summary>
-        public WechatPayAppOverride()
+        public WeChatPayAppOverride()
         {
 
         }
@@ -47,7 +47,7 @@
         /// <param name="appsecret">加密Secret</param>
         /// <param name="appTypeId">应用类型</param>
         /// <param name="info">移动端配置信息</param>
-        public WechatPayAppOverride(string name, string appId, string mchId, string key, string appsecret, int appTypeId, NativeMobileInfo info)
+        public WeChatPayAppOverride(string name, string appId, string mchId, string key, string appsecret, int appTypeId, NativeMobileInfo info)
         {
             Name = name;
             AppId = appId;
@@ -60,9 +60,9 @@
 
         /// <summary>WechatPayAppOverride 转 WechatPayApp
         /// </summary>
-        public WechatPayApp ToWechatPayApp()
+        public WeChatPayApp ToWechatPayApp()
         {
-            return new WechatPayApp(Name, AppId, MchId, Key, Appsecret, AppTypeId, NativeMobileInfo);
+            return new WeChatPayApp(Name, AppId, MchId, Key, Appsecret, AppTypeId, NativeMobileInfo);
         }
     }
 

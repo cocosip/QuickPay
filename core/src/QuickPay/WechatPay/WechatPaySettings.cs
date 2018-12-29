@@ -1,8 +1,8 @@
-﻿namespace QuickPay.WechatPay
+﻿namespace QuickPay.WeChatPay
 {
     /// <summary>微信支付常量配置
     /// </summary>
-    public class WechatPaySettings
+    public class WeChatPaySettings
     {
         /// <summary>默认签名字段的名称
         /// </summary>

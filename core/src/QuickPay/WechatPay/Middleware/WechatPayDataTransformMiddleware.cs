@@ -6,16 +6,16 @@ using QuickPay.Middleware;
 using System;
 using System.Threading.Tasks;
 
-namespace QuickPay.WechatPay.Middleware
+namespace QuickPay.WeChatPay.Middleware
 {
     /// <summary>PayRequest转换为PayData的数据
     /// </summary>
-    public class WechatPayDataTransformMiddleware : QuickPayMiddleware
+    public class WeChatPayDataTransformMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
         /// <summary>Ctor
         /// </summary>
-        public WechatPayDataTransformMiddleware(QuickPayExecuteDelegate next,ILogger<QuickPayLoggerName> logger)
+        public WeChatPayDataTransformMiddleware(QuickPayExecuteDelegate next,ILogger<QuickPayLoggerName> logger)
         {
             Logger = logger;
             _next = next;
@@ -25,7 +25,7 @@ namespace QuickPay.WechatPay.Middleware
         /// </summary>
         public async Task Invoke(ExecuteContext context)
         {
-            if (context.Request.Provider == QuickPaySettings.Provider.WechatPay)
+            if (context.Request.Provider == QuickPaySettings.Provider.WeChatPay)
             {
                 if (context.Request == null)
                 {

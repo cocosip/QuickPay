@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace QuickPay.WechatPay.Authentication
+namespace QuickPay.WeChatPay.Authentication
 {
     /// <summary>微信公众号AccessToken返回
     /// </summary>

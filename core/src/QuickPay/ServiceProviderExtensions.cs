@@ -5,8 +5,8 @@ using QuickPay.Configurations;
 using QuickPay.Middleware;
 using QuickPay.Middleware.Pipeline;
 using QuickPay.Notify;
-using QuickPay.WechatPay.Apps;
-using QuickPay.WechatPay.Middleware;
+using QuickPay.WeChatPay.Apps;
+using QuickPay.WeChatPay.Middleware;
 using System;
 namespace QuickPay
 {
@@ -24,13 +24,13 @@ namespace QuickPay
             {
                 var configLoader = provider.GetService<IConfigurationFileTranslator>();
                 var alipayConfig = provider.GetService<AlipayConfig>();
-                var wechatPayConfig = provider.GetService<WechatPayConfig>();
+                var weChatPayConfig = provider.GetService<WeChatPayConfig>();
 
                 var configWapper = configLoader.TranslateToConfigWapper(option.ConfigFileName, option.ConfigFileFormat);
                 if (configWapper != null && configWapper.AlipayConfig != null && configWapper.WechatPayConfig != null)
                 {
                     alipayConfig.SelfCopy(configWapper.AlipayConfig);
-                    wechatPayConfig.SelfCopy(configWapper.WechatPayConfig);
+                    weChatPayConfig.SelfCopy(configWapper.WechatPayConfig);
                 }
             }
 
@@ -55,18 +55,18 @@ namespace QuickPay
 
             //微信
             //Request转PayData
-            pipelineBuilder.UseMiddleware<WechatPayDataTransformMiddleware>();
+            pipelineBuilder.UseMiddleware<WeChatPayDataTransformMiddleware>();
             //签名
-            pipelineBuilder.UseMiddleware<WechatPaySignMiddleware>();
+            pipelineBuilder.UseMiddleware<WeChatPaySignMiddleware>();
             //构建RequestBuilder
-            pipelineBuilder.UseMiddleware<WechatPayRequestBuilderMiddleware>();
+            pipelineBuilder.UseMiddleware<WeChatPayRequestBuilderMiddleware>();
 
             //执行Execute
             pipelineBuilder.UseMiddleware<ExecuterExecutedMiddleware>();
 
             //数据返回格式化
             pipelineBuilder.UseMiddleware<AlipayParseResponseMiddleware>();
-            pipelineBuilder.UseMiddleware<WechatPayParseResponseMiddleware>();
+            pipelineBuilder.UseMiddleware<WeChatPayParseResponseMiddleware>();
             //支付存储
             pipelineBuilder.UseMiddleware<PaymentStoreMiddleware>();
             //退款存储

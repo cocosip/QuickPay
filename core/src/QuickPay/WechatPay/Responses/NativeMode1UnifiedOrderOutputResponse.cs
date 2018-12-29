@@ -1,10 +1,10 @@
 ﻿using QuickPay.Infrastructure.RequestData;
 
-namespace QuickPay.WechatPay.Responses
+namespace QuickPay.WeChatPay.Responses
 {
     /// <summary>Native扫码支付模式1统一下单(返回PrepayId给微信服务器)
     /// </summary>
-    public class NativeMode1UnifiedOrderOutputResponse : WechatPayTradeResponse
+    public class NativeMode1UnifiedOrderOutputResponse : WeChatPayTradeResponse
     {
 
         /// <summary>SUCCESS/FAIL,此字段是通信标识

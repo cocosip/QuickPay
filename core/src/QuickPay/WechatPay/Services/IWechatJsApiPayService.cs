@@ -1,12 +1,12 @@
-﻿using QuickPay.WechatPay.Responses;
-using QuickPay.WechatPay.Services.DTOs;
+﻿using QuickPay.WeChatPay.Responses;
+using QuickPay.WeChatPay.Services.DTOs;
 using System.Threading.Tasks;
 
-namespace QuickPay.WechatPay.Services
+namespace QuickPay.WeChatPay.Services
 {
     /// <summary>微信JsApi支付
     /// </summary>
-    public interface IWechatJsApiPayService : IWechatPayService
+    public interface IWeChatJsApiPayService : IWeChatPayService
     {
         /// <summary>JsApi支付统一下单
         /// </summary>

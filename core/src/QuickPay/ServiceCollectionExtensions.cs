@@ -12,12 +12,12 @@ using QuickPay.Infrastructure.Requests;
 using QuickPay.Middleware;
 using QuickPay.Middleware.Pipeline;
 using QuickPay.Notify;
-using QuickPay.WechatPay.Apps;
-using QuickPay.WechatPay.Authentication;
-using QuickPay.WechatPay.Services;
-using QuickPay.WechatPay.Services.Impl;
-using QuickPay.WechatPay.Url;
-using QuickPay.WechatPay.Util;
+using QuickPay.WeChatPay.Apps;
+using QuickPay.WeChatPay.Authentication;
+using QuickPay.WeChatPay.Services;
+using QuickPay.WeChatPay.Services.Impl;
+using QuickPay.WeChatPay.Url;
+using QuickPay.WeChatPay.Util;
 using System;
 using System.Linq;
 
@@ -29,7 +29,7 @@ namespace QuickPay
     {
         /// <summary>添加配置
         /// </summary>
-        public static IServiceCollection AddQuickPay(this IServiceCollection services, Action<QuickPayConfigurationOption> option, Action<AlipayConfig> alipayOption = null, Action<WechatPayConfig> wechatPayOption = null)
+        public static IServiceCollection AddQuickPay(this IServiceCollection services, Action<QuickPayConfigurationOption> option, Action<AlipayConfig> alipayOption = null, Action<WeChatPayConfig> weChatPayOption = null)
         {
 
             var quickPayConfigurationOption = new QuickPayConfigurationOption();
@@ -37,22 +37,22 @@ namespace QuickPay
             //配置Option
             option(quickPayConfigurationOption);
             var alipayConfig = new AlipayConfig();
-            var wechatPayConfig = new WechatPayConfig();
+            var weChatPayConfig = new WeChatPayConfig();
 
             //从代码中读取
             if (quickPayConfigurationOption.ConfigSourceType == ConfigSourceType.FromClass)
             {
-                if (alipayOption == null || wechatPayOption == null)
+                if (alipayOption == null || weChatPayOption == null)
                 {
                     throw new QuickPayException($"从代码中加载支付配置时,AlipayConfig与WechatPayConfig不能为空.");
                 }
                 alipayOption(alipayConfig);
-                wechatPayOption(wechatPayConfig);
+                weChatPayOption(weChatPayConfig);
             }
 
             services.AddSingleton<QuickPayConfigurationOption>(quickPayConfigurationOption)
                 .UseWechatPaySandbox(quickPayConfigurationOption)
-                .RegisterQuickPay(alipayConfig, wechatPayConfig)
+                .RegisterQuickPay(alipayConfig, weChatPayConfig)
                 .RegisterPipeline();
             return services;
         }
@@ -61,25 +61,25 @@ namespace QuickPay
         /// </summary>
         private static IServiceCollection UseWechatPaySandbox(this IServiceCollection services, QuickPayConfigurationOption option)
         {
-            if (option.EnabledWechatPaySandbox)
+            if (option.EnabledWeChatPaySandbox)
             {
-                services.AddSingleton<IWechatPayUrl, SandboxWechatPayUrl>();
+                services.AddSingleton<IWeChatPayUrl, SandboxWeChatPayUrl>();
             }
             else
             {
-                services.AddSingleton<IWechatPayUrl, RealWechatPayUrl>();
+                services.AddSingleton<IWeChatPayUrl, RealWeChatPayUrl>();
             }
             return services;
         }
 
         /// <summary>注册QuickPay需要的配置
         /// </summary>
-        private static IServiceCollection RegisterQuickPay(this IServiceCollection services, AlipayConfig alipayConfig, WechatPayConfig wechatPayConfig)
+        private static IServiceCollection RegisterQuickPay(this IServiceCollection services, AlipayConfig alipayConfig, WeChatPayConfig weChatPayConfig)
         {
 
             //配置信息
             services.AddSingleton<AlipayConfig>(alipayConfig);
-            services.AddSingleton<WechatPayConfig>(wechatPayConfig);
+            services.AddSingleton<WeChatPayConfig>(weChatPayConfig);
             //配置文件读取器
             services.AddSingleton<IConfigurationFileTranslator, ConfigurationFileTranslator>();
             //RequestType Finder
@@ -114,15 +114,15 @@ namespace QuickPay
 
             //微信Service
 
-            services.AddTransient<IWechatAppPayService, WechatAppPayService>();
-            services.AddTransient<IWechatH5PayService, WechatH5PayService>();
-            services.AddTransient<IWechatJsApiPayService, WechatJsApiPayService>();
-            services.AddTransient<IWechatMicroPayService, WechatMicroPayService>();
-            services.AddTransient<IWechatNativePayService, WechatNativePayService>();
-            services.AddTransient<IWechatMiniProgramPayService, WechatMiniProgramPayService>();
-            services.AddTransient<IWechatPayTradeCommonService, WechatPayTradeCommonService>();
-            services.AddTransient<IWechatPayAssistService, WechatPayAssistService>();
-            services.AddTransient<WechatPayDataHelper>();
+            services.AddTransient<IWeChatAppPayService, WeChatAppPayService>();
+            services.AddTransient<IWeChatH5PayService, WeChatH5PayService>();
+            services.AddTransient<IWeChatJsApiPayService, WeChatJsApiPayService>();
+            services.AddTransient<IWeChatMicroPayService, WeChatMicroPayService>();
+            services.AddTransient<IWeChatNativePayService, WeChatNativePayService>();
+            services.AddTransient<IWeChatMiniProgramPayService, WeChatMiniProgramPayService>();
+            services.AddTransient<IWeChatPayTradeCommonService, WeChatPayTradeCommonService>();
+            services.AddTransient<IWeChatPayAssistService, WeChatPayAssistService>();
+            services.AddTransient<WeChatPayDataHelper>();
 
             return services;
         }

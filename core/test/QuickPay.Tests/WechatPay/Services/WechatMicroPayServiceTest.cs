@@ -1,8 +1,8 @@
 ﻿using DotCommon.Threading;
 using DotCommon.Utility;
 using Microsoft.Extensions.DependencyInjection;
-using QuickPay.WechatPay.Services;
-using QuickPay.WechatPay.Services.DTOs;
+using QuickPay.WeChatPay.Services;
+using QuickPay.WeChatPay.Services.DTOs;
 using System;
 using Xunit;
 
@@ -17,7 +17,7 @@ namespace QuickPay.Tests.WechatPay.Services
         [Fact]
         public void UnifiedOrder_Test()
         {
-            var microPayService = Provider.GetService<IWechatMicroPayService>();
+            var microPayService = Provider.GetService<IWeChatMicroPayService>();
             using (microPayService.Use(WechatPayConfig.GetByName("App2")))
             {
                 var input = new MicropayUnifiedOrderInput("刷卡支付1", ObjectId.GenerateNewStringId(), 1, "8.8.8.8", "扫码支付授权码，设备读取用户微信中的条码或者二维码信息");

@@ -1,25 +1,25 @@
 ﻿using DotCommon.AutoMapper;
 using DotCommon.Extensions;
 using DotCommon.Threading;
-using QuickPay.WechatPay.Apps;
-using QuickPay.WechatPay.Requests;
-using QuickPay.WechatPay.Responses;
-using QuickPay.WechatPay.Services.DTOs;
-using QuickPay.WechatPay.Util;
+using QuickPay.WeChatPay.Apps;
+using QuickPay.WeChatPay.Requests;
+using QuickPay.WeChatPay.Responses;
+using QuickPay.WeChatPay.Services.DTOs;
+using QuickPay.WeChatPay.Util;
 using System;
 using System.Threading.Tasks;
-namespace QuickPay.WechatPay.Services.Impl
+namespace QuickPay.WeChatPay.Services.Impl
 {
     /// <summary>微信H5支付
     /// </summary>
-    public class WechatH5PayService : BaseWechatPayService, IWechatH5PayService
+    public class WeChatH5PayService : BaseWeChatPayService, IWeChatH5PayService
     {
-        private readonly WechatPayDataHelper _wechatPayDataHelper;
+        private readonly WeChatPayDataHelper _weChatPayDataHelper;
         /// <summary>Ctor
         /// </summary>
-        public WechatH5PayService(IServiceProvider provider, WechatPayDataHelper wechatPayDataHelper) : base(provider)
+        public WeChatH5PayService(IServiceProvider provider, WeChatPayDataHelper weChatPayDataHelper) : base(provider)
         {
-            _wechatPayDataHelper = wechatPayDataHelper;
+            _weChatPayDataHelper = weChatPayDataHelper;
         }
 
         /// <summary>H5支付统一下单,返回跳转的url地址
@@ -33,7 +33,7 @@ namespace QuickPay.WechatPay.Services.Impl
 
             var request = input.MapTo<H5UnifiedOrderRequest>();
             var sceneInfoDict = SceneInfoCreator.CreateScene(input.SceneType, App);
-            request.SceneInfo = _wechatPayDataHelper.DictToJson(sceneInfoDict);
+            request.SceneInfo = _weChatPayDataHelper.DictToJson(sceneInfoDict);
             //sceneInfoDict.ToJson(_jsonSerializer);
             var response = await Executer.ExecuteAsync<H5UnifiedOrderResponse>(request, App);
             return response?.MWebUrl;

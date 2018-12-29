@@ -1,10 +1,10 @@
 ﻿using DotCommon.Extensions;
 using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.RequestData;
-using QuickPay.WechatPay.Apps;
-using QuickPay.WechatPay.Responses;
+using QuickPay.WeChatPay.Apps;
+using QuickPay.WeChatPay.Responses;
 
-namespace QuickPay.WechatPay.Requests
+namespace QuickPay.WeChatPay.Requests
 {
     /// <summary>微信App下单
     /// </summary>
@@ -13,7 +13,7 @@ namespace QuickPay.WechatPay.Requests
         //public override string RequestUrl => "https://api.mch.weixin.qq.com/pay/unifiedorder";
         /// <summary>交易类型名称
         /// </summary>
-        public override string TradeTypeName => WechatPaySettings.TradeType.App;
+        public override string TradeTypeName => WeChatPaySettings.TradeType.App;
 
         /// <summary>商品简单描述，该字段请按照规范传递
         /// </summary>
@@ -43,7 +43,7 @@ namespace QuickPay.WechatPay.Requests
         /// <summary>交易类型,取值如下：JSAPI，NATIVE，APP等
         /// </summary>
         [PayElement("trade_type")]
-        public string TradeType { get; set; } = WechatPaySettings.TradeType.App;
+        public string TradeType { get; set; } = WeChatPaySettings.TradeType.App;
 
         /// <summary>Ctor
         /// </summary>
@@ -84,11 +84,11 @@ namespace QuickPay.WechatPay.Requests
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);
-            var wechatPayConfig = (WechatPayConfig)config;
-            SpbillCreateIp = wechatPayConfig.LocalAddress;
+            var weChatPayConfig = (WeChatPayConfig)config;
+            SpbillCreateIp = weChatPayConfig.LocalAddress;
             if (NotifyUrl.IsNullOrWhiteSpace())
             {
-                NotifyUrl = wechatPayConfig.GetDefaultNotifyUrl();
+                NotifyUrl = weChatPayConfig.GetDefaultNotifyUrl();
             }
         }
 

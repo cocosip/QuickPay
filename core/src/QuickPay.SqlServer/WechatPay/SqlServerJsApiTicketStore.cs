@@ -1,12 +1,12 @@
 ﻿using Dapper;
 using DotCommon.Extensions;
 using Microsoft.Extensions.Logging;
-using QuickPay.WechatPay.Authentication;
-using QuickPay.WechatPay.Util;
+using QuickPay.WeChatPay.Authentication;
+using QuickPay.WeChatPay.Util;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
-namespace QuickPay.WechatPay
+namespace QuickPay.WeChatPay
 {
 
     /// <summary>JsApiTicket存储
@@ -36,7 +36,7 @@ namespace QuickPay.WechatPay
             }
             catch (SqlException ex)
             {
-                Logger.LogError(WechatPayUtil.ParseLog($"获取应用JsApiTicket出错,AppId:{appId}.{ex.Message}"));
+                Logger.LogError(WeChatPayUtil.ParseLog($"获取应用JsApiTicket出错,AppId:{appId}.{ex.Message}"));
                 throw;
             }
         }
@@ -69,7 +69,7 @@ namespace QuickPay.WechatPay
             }
             catch (SqlException ex)
             {
-                Logger.LogError(WechatPayUtil.ParseLog($"创建或者修改JsApiTicket出错,{jsApiTicket.ToString()}.{ex.Message}"));
+                Logger.LogError(WeChatPayUtil.ParseLog($"创建或者修改JsApiTicket出错,{jsApiTicket.ToString()}.{ex.Message}"));
                 throw;
             }
         }

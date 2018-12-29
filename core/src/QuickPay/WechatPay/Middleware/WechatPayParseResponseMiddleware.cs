@@ -4,27 +4,27 @@ using QuickPay.Infrastructure.RequestData;
 using QuickPay.Infrastructure.Responses;
 using QuickPay.Infrastructure.Util;
 using QuickPay.Middleware;
-using QuickPay.WechatPay.Responses;
-using QuickPay.WechatPay.Util;
+using QuickPay.WeChatPay.Responses;
+using QuickPay.WeChatPay.Util;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace QuickPay.WechatPay.Middleware
+namespace QuickPay.WeChatPay.Middleware
 {
     /// <summary>微信支付结果转化中间件
     /// </summary>
-    public class WechatPayParseResponseMiddleware : QuickPayMiddleware
+    public class WeChatPayParseResponseMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
-        private readonly WechatPayDataHelper _wechatPayDataHelper;
+        private readonly WeChatPayDataHelper _weChatPayDataHelper;
         /// <summary>Ctor
         /// </summary>
-        public WechatPayParseResponseMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, WechatPayDataHelper wechatPayDataHelper)
+        public WeChatPayParseResponseMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, WeChatPayDataHelper weChatPayDataHelper)
         {
             _next = next;
             Logger = logger;
-            _wechatPayDataHelper = wechatPayDataHelper;
+            _weChatPayDataHelper = weChatPayDataHelper;
         }
 
         /// <summary>Invoke
@@ -33,13 +33,13 @@ namespace QuickPay.WechatPay.Middleware
         {
             try
             {
-                if (context.Request.Provider == QuickPaySettings.Provider.WechatPay)
+                if (context.Request.Provider == QuickPaySettings.Provider.WeChatPay)
                 {
                     var responseType = context.Request.GetType().BaseType.GetGenericArguments()[0];
 
                     if (context.RequestHandler == QuickPaySettings.RequestHandler.Execute)
                     {
-                        var payData = _wechatPayDataHelper.FromXml(context.HttpResponseString);
+                        var payData = _weChatPayDataHelper.FromXml(context.HttpResponseString);
                         //有可能返回的不是期望的
                         if (!payData.GetValues().Any())
                         {
@@ -64,9 +64,9 @@ namespace QuickPay.WechatPay.Middleware
                         context.ResponsePayData = new PayData(context.RequestPayData.GetValues());
 
                         //判断Response对象是包含PayData数据的
-                        if (typeof(WechatPayTradeSourceResponse).IsAssignableFrom(responseType))
+                        if (typeof(WeChatPayTradeSourceResponse).IsAssignableFrom(responseType))
                         {
-                            ((WechatPayTradeSourceResponse)context.Response).PayData = new PayData(context.RequestPayData.GetValues());
+                            ((WeChatPayTradeSourceResponse)context.Response).PayData = new PayData(context.RequestPayData.GetValues());
                         }
                     }
 

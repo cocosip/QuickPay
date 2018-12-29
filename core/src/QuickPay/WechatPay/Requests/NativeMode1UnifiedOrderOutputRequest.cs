@@ -1,9 +1,9 @@
 ﻿using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.RequestData;
-using QuickPay.WechatPay.Apps;
-using QuickPay.WechatPay.Responses;
+using QuickPay.WeChatPay.Apps;
+using QuickPay.WeChatPay.Responses;
 
-namespace QuickPay.WechatPay.Requests
+namespace QuickPay.WeChatPay.Requests
 {
     /// <summary>微信扫码支付模式1,统一下单之后返回PrepayId给微信
     /// </summary>
@@ -11,7 +11,7 @@ namespace QuickPay.WechatPay.Requests
     {
         /// <summary>交易类型名称
         /// </summary>
-        public override string TradeTypeName => WechatPaySettings.TradeType.Native;
+        public override string TradeTypeName => WeChatPaySettings.TradeType.Native;
 
         /// <summary>SUCCESS/FAIL,此字段是通信标识
         /// </summary>
@@ -55,13 +55,13 @@ namespace QuickPay.WechatPay.Requests
             PrepayId = prepayId;
             if (success)
             {
-                ReturnCode = WechatPaySettings.ReturnCode.Success;
-                ResultCode = WechatPaySettings.ResultCode.Success;
+                ReturnCode = WeChatPaySettings.ReturnCode.Success;
+                ResultCode = WeChatPaySettings.ResultCode.Success;
             }
             else
             {
-                ReturnCode = WechatPaySettings.ReturnCode.Fail;
-                ResultCode = WechatPaySettings.ResultCode.Fail;
+                ReturnCode = WeChatPaySettings.ReturnCode.Fail;
+                ResultCode = WeChatPaySettings.ResultCode.Fail;
             }
         }
     }

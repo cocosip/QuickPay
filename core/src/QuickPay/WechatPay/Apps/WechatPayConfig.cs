@@ -5,11 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace QuickPay.WechatPay.Apps
+namespace QuickPay.WeChatPay.Apps
 {
     /// <summary>微信支付配置
     /// </summary>
-    public class WechatPayConfig : QuickPayConfig
+    public class WeChatPayConfig : QuickPayConfig
     {
         /// <summary>默认的应用名
         /// </summary>
@@ -34,7 +34,7 @@ namespace QuickPay.WechatPay.Apps
 
         /// <summary>签名类型
         /// </summary>
-        public string SignType { get; set; } = WechatPaySettings.SignType.Md5;
+        public string SignType { get; set; } = WeChatPaySettings.SignType.Md5;
 
         /// <summary>SSL证书
         /// </summary>
@@ -42,25 +42,25 @@ namespace QuickPay.WechatPay.Apps
 
         /// <summary>应用
         /// </summary>
-        public List<WechatPayApp> Apps = new List<WechatPayApp>();
+        public List<WeChatPayApp> Apps = new List<WeChatPayApp>();
 
         /// <summary>根据名称获取应用
         /// </summary>
-        public WechatPayApp GetByName(string name)
+        public WeChatPayApp GetByName(string name)
         {
             return Apps.FirstOrDefault(x => x.Name == name);
         }
 
         /// <summary>根据AppId获取应用
         /// </summary>
-        public WechatPayApp GetByAppId(string appId)
+        public WeChatPayApp GetByAppId(string appId)
         {
             return Apps.FirstOrDefault(x => x.AppId == appId);
         }
 
         /// <summary>获取默认应用
         /// </summary>
-        public WechatPayApp GetDefaultApp()
+        public WeChatPayApp GetDefaultApp()
         {
             if (!DefaultAppName.IsNullOrWhiteSpace())
             {
@@ -79,19 +79,19 @@ namespace QuickPay.WechatPay.Apps
 
         /// <summary>Copy
         /// </summary>
-        public WechatPayConfig SelfCopy(WechatPayConfig wechatPayConfig)
+        public WeChatPayConfig SelfCopy(WeChatPayConfig weChatPayConfig)
         {
-            DefaultAppName = wechatPayConfig.DefaultAppName;
-            NotifyGateway = wechatPayConfig.NotifyGateway;
-            NotifyUrlFragments = wechatPayConfig.NotifyUrlFragments;
-            LocalAddress = wechatPayConfig.LocalAddress;
-            WebGateway = wechatPayConfig.WebGateway;
-            SignType = wechatPayConfig.SignType;
-            SslPassword = wechatPayConfig.SslPassword;
+            DefaultAppName = weChatPayConfig.DefaultAppName;
+            NotifyGateway = weChatPayConfig.NotifyGateway;
+            NotifyUrlFragments = weChatPayConfig.NotifyUrlFragments;
+            LocalAddress = weChatPayConfig.LocalAddress;
+            WebGateway = weChatPayConfig.WebGateway;
+            SignType = weChatPayConfig.SignType;
+            SslPassword = weChatPayConfig.SslPassword;
             Apps.Clear();
-            foreach (var app in wechatPayConfig.Apps)
+            foreach (var app in weChatPayConfig.Apps)
             {
-                Apps.Add(new WechatPayApp()
+                Apps.Add(new WeChatPayApp()
                 {
                     Name = app.Name,
                         AppId = app.AppId,

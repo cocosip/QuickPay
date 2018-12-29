@@ -1,9 +1,9 @@
 ﻿using DotCommon.AutoMapper;
 using QuickPay.Infrastructure.Services.DTOs;
-using QuickPay.WechatPay.Requests;
+using QuickPay.WeChatPay.Requests;
 using System;
 
-namespace QuickPay.WechatPay.Services.DTOs
+namespace QuickPay.WeChatPay.Services.DTOs
 {
     /// <summary>H5统一下单
     /// </summary>
@@ -28,7 +28,7 @@ namespace QuickPay.WechatPay.Services.DTOs
 
         /// <summary>交易场景
         /// </summary>
-        public string SceneType { get; set; } = WechatPaySettings.H5SceneInfoType.Wap;
+        public string SceneType { get; set; } = WeChatPaySettings.H5SceneInfoType.Wap;
 
         /// <summary>通知类型
         /// </summary>

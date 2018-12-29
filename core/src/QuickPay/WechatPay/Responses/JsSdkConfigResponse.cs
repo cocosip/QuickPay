@@ -1,10 +1,10 @@
 ﻿using QuickPay.Infrastructure.RequestData;
 
-namespace QuickPay.WechatPay.Responses
+namespace QuickPay.WeChatPay.Responses
 {
     /// <summary>微信JsApi支付 JsSDK config签名
     /// </summary>
-    public class JsSdkConfigResponse : WechatPayTradeResponse
+    public class JsSdkConfigResponse : WeChatPayTradeResponse
     {
         /// <summary>应用Id
         /// </summary>

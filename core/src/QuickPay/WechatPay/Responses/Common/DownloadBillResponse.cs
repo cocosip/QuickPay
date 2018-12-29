@@ -1,8 +1,8 @@
-﻿namespace QuickPay.WechatPay.Responses
+﻿namespace QuickPay.WeChatPay.Responses
 {
     /// <summary>下载对账单
     /// </summary>
-    public class DownloadBillResponse : WechatPayCommonResponse
+    public class DownloadBillResponse : WeChatPayCommonResponse
     {
 
     }

@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace QuickPay.WechatPay.Url
+namespace QuickPay.WeChatPay.Url
 {
     /// <summary>微信支付Url
     /// </summary>
-    public interface IWechatPayUrl
+    public interface IWeChatPayUrl
     {
         /// <summary>H5下单地址
         /// </summary>

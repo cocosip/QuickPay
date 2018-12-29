@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using QuickPay.Assist.Store;
-using QuickPay.WechatPay;
-using QuickPay.WechatPay.Authentication;
+using QuickPay.WeChatPay;
+using QuickPay.WeChatPay.Authentication;
 using System;
 
 namespace QuickPay

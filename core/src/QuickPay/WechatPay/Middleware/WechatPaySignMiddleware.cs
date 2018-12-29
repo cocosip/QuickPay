@@ -3,28 +3,28 @@ using Microsoft.Extensions.Logging;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Middleware;
-using QuickPay.WechatPay.Apps;
-using QuickPay.WechatPay.Util;
+using QuickPay.WeChatPay.Apps;
+using QuickPay.WeChatPay.Util;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace QuickPay.WechatPay.Middleware
+namespace QuickPay.WeChatPay.Middleware
 {
     /// <summary>微信支付签名中间件
     /// </summary>
-    public class WechatPaySignMiddleware : QuickPayMiddleware
+    public class WeChatPaySignMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
-        private readonly WechatPayDataHelper _wechatPayDataHelper;
+        private readonly WeChatPayDataHelper _weChatPayDataHelper;
 
         /// <summary>Ctor
         /// </summary>
-        public WechatPaySignMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, WechatPayDataHelper wechatPayDataHelper)
+        public WeChatPaySignMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, WeChatPayDataHelper weChatPayDataHelper)
         {
             _next = next;
             Logger = logger;
-            _wechatPayDataHelper = wechatPayDataHelper;
+            _weChatPayDataHelper = weChatPayDataHelper;
         }
 
         /// <summary>Invoke
@@ -33,7 +33,7 @@ namespace QuickPay.WechatPay.Middleware
         {
             try
             {
-                if (context.Request.Provider == QuickPaySettings.Provider.WechatPay)
+                if (context.Request.Provider == QuickPaySettings.Provider.WeChatPay)
                 {
                     if (!context.RequestPayData.GetValues().Any())
                     {
@@ -48,19 +48,19 @@ namespace QuickPay.WechatPay.Middleware
 
                     var sign = "";
 
-                    if (context.SignType == WechatPaySettings.SignType.Md5)
+                    if (context.SignType == WeChatPaySettings.SignType.Md5)
                     {
-                        sign = WechatPayUtil.Md5Sign(context.RequestPayData, (WechatPayApp)context.App);
+                        sign = WeChatPayUtil.Md5Sign(context.RequestPayData, (WeChatPayApp)context.App);
                         //sign = WechatPayUtil.MakeSign(context.RequestPayData, (WechatPayApp)context.App);
                         context.RequestPayData.SetValue(context.SignFieldName, sign);
                     }
-                    else if (context.SignType == WechatPaySettings.SignType.Sha1)
+                    else if (context.SignType == WeChatPaySettings.SignType.Sha1)
                     {
-                        sign = WechatPayUtil.Sha1Sign(context.RequestPayData);
+                        sign = WeChatPayUtil.Sha1Sign(context.RequestPayData);
                         context.RequestPayData.SetValue(context.SignFieldName, sign);
                     }
 
-                    Logger.LogInformation(context.Request.GetLogFormat($"签名字段:{context.SignFieldName},签名:{sign},签名后数据:[{ _wechatPayDataHelper.ToXml(context.RequestPayData)}]"));
+                    Logger.LogInformation(context.Request.GetLogFormat($"签名字段:{context.SignFieldName},签名:{sign},签名后数据:[{ _weChatPayDataHelper.ToXml(context.RequestPayData)}]"));
                     Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
                 }
             }

@@ -9,8 +9,8 @@ using QuickPay.Assist.Store;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Infrastructure.Util;
-using QuickPay.WechatPay.Apps;
-using QuickPay.WechatPay.Util;
+using QuickPay.WeChatPay.Apps;
+using QuickPay.WeChatPay.Util;
 using System;
 using System.Threading.Tasks;
 
@@ -24,18 +24,18 @@ namespace QuickPay.Middleware
         private readonly IPaymentStore _paymentStore;
         private readonly IRequestTypeFinder _requestTypeFinder;
         private readonly AlipayPayDataHelper _alipayPayDataHelper;
-        private readonly WechatPayDataHelper _wechatPayDataHelper;
+        private readonly WeChatPayDataHelper _weChatPayDataHelper;
         private readonly IJsonSerializer _jsonSerializer;
         /// <summary>Ctor
         /// </summary>
-        public PaymentStoreMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, IPaymentStore paymentStore, IRequestTypeFinder requestTypeFinder, AlipayPayDataHelper alipayPayDataHelper, WechatPayDataHelper wechatPayDataHelper, IJsonSerializer jsonSerializer)
+        public PaymentStoreMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, IPaymentStore paymentStore, IRequestTypeFinder requestTypeFinder, AlipayPayDataHelper alipayPayDataHelper, WeChatPayDataHelper weChatPayDataHelper, IJsonSerializer jsonSerializer)
         {
             _next = next;
             Logger = logger;
             _paymentStore = paymentStore;
             _requestTypeFinder = requestTypeFinder;
             _alipayPayDataHelper = alipayPayDataHelper;
-            _wechatPayDataHelper = wechatPayDataHelper;
+            _weChatPayDataHelper = weChatPayDataHelper;
             _jsonSerializer = jsonSerializer;
         }
 
@@ -91,11 +91,11 @@ namespace QuickPay.Middleware
             else
             {
                 payment.PayPlatId = (int)PayPlat.WechatPay;
-                payment.AppId = ((WechatPayApp)context.App).AppId;
+                payment.AppId = ((WeChatPayApp)context.App).AppId;
                 //交易号,本系统唯一
-                payment.OutTradeNo = _wechatPayDataHelper.GetOutTradeNo(context.RequestPayData);
+                payment.OutTradeNo = _weChatPayDataHelper.GetOutTradeNo(context.RequestPayData);
                 //支付金额,以元为单位,微信是以分为单位,需要进行转换
-                payment.Amount = _wechatPayDataHelper.GetTotalFeeYuan(context.RequestPayData);
+                payment.Amount = _weChatPayDataHelper.GetTotalFeeYuan(context.RequestPayData);
             }
             if (context.RequestPayData != null)
             {

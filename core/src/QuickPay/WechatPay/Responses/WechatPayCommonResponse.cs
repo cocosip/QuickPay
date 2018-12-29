@@ -1,10 +1,10 @@
 ﻿using QuickPay.Infrastructure.RequestData;
 
-namespace QuickPay.WechatPay.Responses
+namespace QuickPay.WeChatPay.Responses
 {
     /// <summary>调用微信服务返回的通用格式
     /// </summary>
-    public class WechatPayCommonResponse : BaseWechatPayResponse
+    public class WeChatPayCommonResponse : BaseWeChatPayResponse
     {
         /// <summary>是否返回成功
         /// </summary>
@@ -14,7 +14,7 @@ namespace QuickPay.WechatPay.Responses
             {
                 if (!string.IsNullOrWhiteSpace(ReturnCode))
                 {
-                    return ReturnCode == WechatPaySettings.ReturnCode.Success;
+                    return ReturnCode == WeChatPaySettings.ReturnCode.Success;
                 }
                 return false;
             }
@@ -28,7 +28,7 @@ namespace QuickPay.WechatPay.Responses
             {
                 if (!string.IsNullOrWhiteSpace(ResultCode))
                 {
-                    return ResultCode == WechatPaySettings.ReturnCode.Success;
+                    return ResultCode == WeChatPaySettings.ReturnCode.Success;
                 }
                 return false;
             }

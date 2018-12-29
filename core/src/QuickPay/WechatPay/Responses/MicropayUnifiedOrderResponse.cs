@@ -1,10 +1,10 @@
 ﻿using QuickPay.Infrastructure.RequestData;
 
-namespace QuickPay.WechatPay.Responses
+namespace QuickPay.WeChatPay.Responses
 {
     /// <summary>刷卡支付统一下单
     /// </summary>
-    public class MicropayUnifiedOrderResponse : WechatPayCommonResponse
+    public class MicropayUnifiedOrderResponse : WeChatPayCommonResponse
     {
         /********************以下字段在return_code为SUCCESS的时候有返回********************/
 

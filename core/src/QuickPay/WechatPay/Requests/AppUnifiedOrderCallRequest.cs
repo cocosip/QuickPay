@@ -1,9 +1,9 @@
 ﻿using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.RequestData;
-using QuickPay.WechatPay.Responses;
-using QuickPay.WechatPay.Util;
+using QuickPay.WeChatPay.Responses;
+using QuickPay.WeChatPay.Util;
 
-namespace QuickPay.WechatPay.Requests
+namespace QuickPay.WeChatPay.Requests
 {
     /// <summary>微信支付App下单唤起支付
     /// </summary>
@@ -11,7 +11,7 @@ namespace QuickPay.WechatPay.Requests
     {
         /// <summary>交易类型名称
         /// </summary>
-        public override string TradeTypeName => WechatPaySettings.TradeType.App;
+        public override string TradeTypeName => WeChatPaySettings.TradeType.App;
 
         /// <summary>微信支付分配的商户号
         /// </summary>
@@ -43,7 +43,7 @@ namespace QuickPay.WechatPay.Requests
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
             base.SetNecessary(config, app);
-            Timestamp = WechatPayUtil.GenerateTimeStamp();
+            Timestamp = WeChatPayUtil.GenerateTimeStamp();
         }
 
         /// <summary>Ctor

@@ -2,11 +2,11 @@
 using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.RequestData;
 using QuickPay.Infrastructure.Requests;
-using QuickPay.WechatPay.Apps;
-using QuickPay.WechatPay.Responses;
-using QuickPay.WechatPay.Util;
+using QuickPay.WeChatPay.Apps;
+using QuickPay.WeChatPay.Responses;
+using QuickPay.WeChatPay.Util;
 
-namespace QuickPay.WechatPay.Requests
+namespace QuickPay.WeChatPay.Requests
 {
     /// <summary>JsApi下单唤起支付
     /// </summary>
@@ -14,15 +14,15 @@ namespace QuickPay.WechatPay.Requests
     {
         /// <summary>微信支付管道名
         /// </summary>
-        public override string Provider => QuickPaySettings.Provider.WechatPay;
+        public override string Provider => QuickPaySettings.Provider.WeChatPay;
 
         /// <summary>签名字段名称
         /// </summary>
-        public override string SignFieldName => WechatPaySettings.JsApiPaySignFieldName;
+        public override string SignFieldName => WeChatPaySettings.JsApiPaySignFieldName;
 
         /// <summary>交易类型名称
         /// </summary>
-        public override string TradeTypeName => WechatPaySettings.TradeType.JsApi;
+        public override string TradeTypeName => WeChatPaySettings.TradeType.JsApi;
 
         /// <summary>签名类型名称
         /// </summary>
@@ -57,18 +57,18 @@ namespace QuickPay.WechatPay.Requests
         /// </summary>
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
-            var wechatPayConfig = (WechatPayConfig)config;
-            var wechatPayApp = (WechatPayApp)app;
+            var weChatPayConfig = (WeChatPayConfig)config;
+            var weChatPayApp = (WeChatPayApp)app;
 
-            AppId = wechatPayApp.AppId;
-            SignType = wechatPayConfig.SignType;
-            NonceStr = WechatPayUtil.GenerateNonceStr();
-            Timestamp = WechatPayUtil.GenerateTimeStamp();
+            AppId = weChatPayApp.AppId;
+            SignType = weChatPayConfig.SignType;
+            NonceStr = WeChatPayUtil.GenerateNonceStr();
+            Timestamp = WeChatPayUtil.GenerateTimeStamp();
 
             if (SignTypeName.IsNullOrWhiteSpace())
             {
                 //签名类型
-                SignTypeName = wechatPayConfig.SignType;
+                SignTypeName = weChatPayConfig.SignType;
             }
         }
 

@@ -1,10 +1,10 @@
 ﻿using QuickPay.Infrastructure.RequestData;
 
-namespace QuickPay.WechatPay.Responses
+namespace QuickPay.WeChatPay.Responses
 {
     /// <summary>H5下单返回
     /// </summary>
-    public class H5UnifiedOrderResponse : WechatPayTradeResponse
+    public class H5UnifiedOrderResponse : WeChatPayTradeResponse
     {
         /********************以下字段在return_code为SUCCESS的时候有返回********************/
 

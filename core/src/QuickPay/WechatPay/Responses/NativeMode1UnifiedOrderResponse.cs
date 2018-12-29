@@ -1,10 +1,10 @@
 ﻿using QuickPay.Infrastructure.RequestData;
 
-namespace QuickPay.WechatPay.Responses
+namespace QuickPay.WeChatPay.Responses
 {
     /// <summary>微信支付扫码支付模式一返回
     /// </summary>
-    public class NativeMode1UnifiedOrderResponse : WechatPayCommonResponse
+    public class NativeMode1UnifiedOrderResponse : WeChatPayCommonResponse
     {
         /********************以下字段在return_code为SUCCESS的时候有返回********************/
 

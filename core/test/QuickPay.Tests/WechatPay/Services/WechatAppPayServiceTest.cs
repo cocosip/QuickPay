@@ -1,8 +1,8 @@
 ﻿using DotCommon.Threading;
 using DotCommon.Utility;
 using Microsoft.Extensions.DependencyInjection;
-using QuickPay.WechatPay.Services;
-using QuickPay.WechatPay.Services.DTOs;
+using QuickPay.WeChatPay.Services;
+using QuickPay.WeChatPay.Services.DTOs;
 using Xunit;
 
 namespace QuickPay.Tests.WechatPay.Services
@@ -14,7 +14,7 @@ namespace QuickPay.Tests.WechatPay.Services
         [Fact]
         public void UnifiedOrder_Test()
         {
-            var appService = Provider.GetService<IWechatAppPayService>();
+            var appService = Provider.GetService<IWeChatAppPayService>();
             using(appService.Use(WechatPayConfig.GetByName("App1")))
             {
                 var input = new AppUnifiedOrderInput("测试支付1", ObjectId.GenerateNewStringId(), 10);

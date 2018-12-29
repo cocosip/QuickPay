@@ -3,9 +3,9 @@
     "NotifyGateway": "支付宝支付异步通知默认网关地址",
     "LocalAddress ": "8.8.8.8",
     "WebGateway": "网址(如果前后端分离,为前端的网址)",
-    "NotifyRealateUrl ": "/Notify/Alipay",
-    "QrcodeNotifyRelateUrl ": "二维码扫码支付异步通知关联Url",
-    "BarcodeNotifyRelateUrl ": "条码支付异步通知关联Url",
+    "NotifyUrlFragments ": "/Notify/Alipay",
+    "QrcodeNotifyUrlFragments ": "二维码扫码支付异步通知关联Url",
+    "BarcodeNotifyUrlFragments ": "条码支付异步通知关联Url",
     "Gateway": "支付宝网关",
     "SandboxGateway": "沙盒支付宝网关",
     "Format": "JSON",
@@ -24,10 +24,10 @@
     ]
 
   },
-  "WechatPay": {
+  "WeChatPay": {
     "NotifyGateway": "微信支付异步通知默认网关地址",
     "LocalAddress": "8.8.8.8",
-    "NotifyRealateUrl": "异步通知关联Url",
+    "NotifyUrlFragments": "异步通知关联Url",
     "WebGateway": "网址(如果前后端分离,为前端的网址)",
     "SignType": "MD5",
     "SslPassword": "SSL证书密码",

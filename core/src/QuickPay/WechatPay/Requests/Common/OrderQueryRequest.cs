@@ -1,8 +1,8 @@
 ﻿using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.RequestData;
-using QuickPay.WechatPay.Responses;
+using QuickPay.WeChatPay.Responses;
 
-namespace QuickPay.WechatPay.Requests
+namespace QuickPay.WeChatPay.Requests
 {
     /// <summary>查询订单
     /// </summary>
@@ -12,7 +12,7 @@ namespace QuickPay.WechatPay.Requests
 
         /// <summary>交易类型名称
         /// </summary>
-        public override string TradeTypeName => WechatPaySettings.ExtTradeType.OrderQuery;
+        public override string TradeTypeName => WeChatPaySettings.ExtTradeType.OrderQuery;
 
 
         /// <summary>微信的订单号，优先使用

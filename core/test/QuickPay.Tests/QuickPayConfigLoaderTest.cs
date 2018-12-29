@@ -42,28 +42,28 @@ namespace QuickPay.Tests
             Assert.Equal("1234567890", alipayApp.EncryptKey);
 
 
-            var wechatPayConfig = configWapper.WechatPayConfig;
-            Assert.Equal("8.8.8.8", wechatPayConfig.LocalAddress);
-            Assert.Equal("http://127.0.0.1", wechatPayConfig.WebGateway);
-            Assert.Equal("http://127.0.0.1", wechatPayConfig.NotifyGateway);
-            Assert.Equal("/Notify/WechatPay", wechatPayConfig.NotifyUrlFragments);
-            Assert.Equal("App1", wechatPayConfig.DefaultAppName);
-            Assert.Equal("MD5", wechatPayConfig.SignType);
-            Assert.Equal("", wechatPayConfig.SslPassword);
+            var weChatPayConfig = configWapper.WechatPayConfig;
+            Assert.Equal("8.8.8.8", weChatPayConfig.LocalAddress);
+            Assert.Equal("http://127.0.0.1", weChatPayConfig.WebGateway);
+            Assert.Equal("http://127.0.0.1", weChatPayConfig.NotifyGateway);
+            Assert.Equal("/Notify/WechatPay", weChatPayConfig.NotifyUrlFragments);
+            Assert.Equal("App1", weChatPayConfig.DefaultAppName);
+            Assert.Equal("MD5", weChatPayConfig.SignType);
+            Assert.Equal("", weChatPayConfig.SslPassword);
 
-            var wechatPayApp = wechatPayConfig.GetDefaultApp();
-            Assert.Equal("wx7462799678470f25", wechatPayApp.AppId);
-            Assert.Equal("1393813602", wechatPayApp.MchId);
-            Assert.Equal("App1", wechatPayApp.Name);
-            Assert.Equal(2, wechatPayApp.AppTypeId);
-            Assert.Equal("WZEIRIwzeiri1234567890123456789", wechatPayApp.Appsecret);
-            Assert.Equal("76bd24f8ec32b4cb21c2db4399caf926", wechatPayApp.Key);
-            Assert.Equal("1111111", wechatPayApp.NativeMobileInfo.BundleId);
-            Assert.Equal("Ios应用名", wechatPayApp.NativeMobileInfo.IosName);
-            Assert.Equal("Android01", wechatPayApp.NativeMobileInfo.AndroidName);
-            Assert.Equal("cn.android.0001p", wechatPayApp.NativeMobileInfo.PackageName);
-            Assert.Equal("Wap001", wechatPayApp.NativeMobileInfo.WapName);
-            Assert.Equal("http://wap.b1.com", wechatPayApp.NativeMobileInfo.WapUrl);
+            var weChatPayApp = weChatPayConfig.GetDefaultApp();
+            Assert.Equal("wx7462799678470f25", weChatPayApp.AppId);
+            Assert.Equal("1393813602", weChatPayApp.MchId);
+            Assert.Equal("App1", weChatPayApp.Name);
+            Assert.Equal(2, weChatPayApp.AppTypeId);
+            Assert.Equal("WZEIRIwzeiri1234567890123456789", weChatPayApp.Appsecret);
+            Assert.Equal("76bd24f8ec32b4cb21c2db4399caf926", weChatPayApp.Key);
+            Assert.Equal("1111111", weChatPayApp.NativeMobileInfo.BundleId);
+            Assert.Equal("Ios应用名", weChatPayApp.NativeMobileInfo.IosName);
+            Assert.Equal("Android01", weChatPayApp.NativeMobileInfo.AndroidName);
+            Assert.Equal("cn.android.0001p", weChatPayApp.NativeMobileInfo.PackageName);
+            Assert.Equal("Wap001", weChatPayApp.NativeMobileInfo.WapName);
+            Assert.Equal("http://wap.b1.com", weChatPayApp.NativeMobileInfo.WapUrl);
         }
     }
 }

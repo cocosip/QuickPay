@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using QuickPay.Alipay.Apps;
-using QuickPay.WechatPay.Apps;
+using QuickPay.WeChatPay.Apps;
 using System;
 namespace QuickPay.Infrastructure.Apps
 {
@@ -26,7 +26,7 @@ namespace QuickPay.Infrastructure.Apps
             }
             else
             {
-                return _provider.GetService<WechatPayConfig>();
+                return _provider.GetService<WeChatPayConfig>();
             }
         }
     }

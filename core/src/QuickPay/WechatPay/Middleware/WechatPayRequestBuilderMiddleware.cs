@@ -4,30 +4,30 @@ using QuickPay.Configurations;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Middleware;
-using QuickPay.WechatPay.Url;
-using QuickPay.WechatPay.Util;
+using QuickPay.WeChatPay.Url;
+using QuickPay.WeChatPay.Util;
 using System;
 using System.Threading.Tasks;
 
-namespace QuickPay.WechatPay.Middleware
+namespace QuickPay.WeChatPay.Middleware
 {
     /// <summary>微信支付请求创建中间件
     /// </summary>
-    public class WechatPayRequestBuilderMiddleware : QuickPayMiddleware
+    public class WeChatPayRequestBuilderMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
         private readonly QuickPayConfigurationOption _option;
-        private readonly IWechatPayUrl _wechatPayUrl;
-        private readonly WechatPayDataHelper _wechatPayDataHelper;
+        private readonly IWeChatPayUrl _weChatPayUrl;
+        private readonly WeChatPayDataHelper _weChatPayDataHelper;
         /// <summary>Ctor
         /// </summary>
-        public WechatPayRequestBuilderMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, QuickPayConfigurationOption option, IWechatPayUrl wechatPayUrl, WechatPayDataHelper wechatPayDataHelper)
+        public WeChatPayRequestBuilderMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, QuickPayConfigurationOption option, IWeChatPayUrl weChatPayUrl, WeChatPayDataHelper weChatPayDataHelper)
         {
             _next = next;
             Logger = logger;
             _option = option;
-            _wechatPayUrl = wechatPayUrl;
-            _wechatPayDataHelper = wechatPayDataHelper;
+            _weChatPayUrl = weChatPayUrl;
+            _weChatPayDataHelper = weChatPayDataHelper;
         }
 
         /// <summary>Invoke
@@ -36,12 +36,12 @@ namespace QuickPay.WechatPay.Middleware
         {
             try
             {
-                if (context.Request.Provider == QuickPaySettings.Provider.WechatPay)
+                if (context.Request.Provider == QuickPaySettings.Provider.WeChatPay)
                 {
                     if (context.RequestHandler == QuickPaySettings.RequestHandler.Execute)
                     {
-                        var requestXml = _wechatPayDataHelper.ToXml(context.RequestPayData);
-                        var requestUrl = _wechatPayUrl.GetRequestUrl(context.Request.GetType());
+                        var requestXml = _weChatPayDataHelper.ToXml(context.RequestPayData);
+                        var requestUrl = _weChatPayUrl.GetRequestUrl(context.Request.GetType());
                         if (requestUrl == null)
                         {
                             SetPipelineError(context, new ExecuteError($"{QuickPaySettings.RequestHandler.Execute},必须要有请求url"));

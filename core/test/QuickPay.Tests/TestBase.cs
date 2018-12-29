@@ -6,7 +6,7 @@ using DotCommon.Log4Net;
 using Microsoft.Extensions.DependencyInjection;
 using QuickPay.Alipay.Apps;
 using QuickPay.Configurations;
-using QuickPay.WechatPay.Apps;
+using QuickPay.WeChatPay.Apps;
 using System;
 
 namespace QuickPay.Tests
@@ -14,7 +14,7 @@ namespace QuickPay.Tests
     public class TestBase
     {
         protected static IServiceProvider Provider { get; }
-        protected static WechatPayConfig WechatPayConfig { get; }
+        protected static WeChatPayConfig WechatPayConfig { get; }
         protected static AlipayConfig AlipayConfig { get; }
         static TestBase()
         {
@@ -40,7 +40,7 @@ namespace QuickPay.Tests
             //配置
             Provider.ConfigureDotCommon().UseQuickPay();
 
-            WechatPayConfig = Provider.GetService<WechatPayConfig>();
+            WechatPayConfig = Provider.GetService<WeChatPayConfig>();
             AlipayConfig = Provider.GetService<AlipayConfig>();
 
         }

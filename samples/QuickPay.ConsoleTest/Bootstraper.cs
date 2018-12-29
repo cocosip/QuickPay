@@ -6,7 +6,7 @@ using DotCommon.Log4Net;
 using Microsoft.Extensions.DependencyInjection;
 using QuickPay.Alipay.Apps;
 using QuickPay.Configurations;
-using QuickPay.WechatPay.Apps;
+using QuickPay.WeChatPay.Apps;
 using System;
 using System.Collections.Generic;
 
@@ -31,16 +31,16 @@ namespace QuickPay.ConsoleTest
                 Apps = new List<AlipayApp>(){
                     new AlipayApp("AppName","AppId","utf-8","RSA","公钥","私钥",1,false,"","") }
             };
-            var wechatPayConfig = new WechatPayConfig()
+            var weChatPayConfig = new WeChatPayConfig()
             {
                 NotifyGateway = "http://127.0.0.1",
                 NotifyUrlFragments = "/Notify/Wxpay",
                 LocalAddress = "8.8.8.8",
                 WebGateway = "127.0.0.1",
                 DefaultAppName = "App1",
-                Apps = new List<WechatPayApp>()
+                Apps = new List<WeChatPayApp>()
                 {
-                    new WechatPayApp("AppName","AppId","商户号","加密的Key","appsecret",1,new NativeMobileInfo())
+                    new WeChatPayApp("AppName","AppId","商户号","加密的Key","appsecret",1,new NativeMobileInfo())
                 }
             };
 
@@ -58,9 +58,9 @@ namespace QuickPay.ConsoleTest
                 option.ConfigFileName = "QuickPayConfig.xml";
                 option.ConfigFileFormat = QuickPay.QuickPaySettings.ConfigFormat.Xml;
                 option.EnabledAlipaySandbox = false; //是否启用支付宝沙盒
-                option.EnabledWechatPaySandbox = false; //是否启用微信沙盒
+                option.EnabledWeChatPaySandbox = false; //是否启用微信沙盒
             })
-            .AddTransient<WechatPayDemoService>()
+            .AddTransient<WeChatPayDemoService>()
             .AddTransient<AlipayDemoService>()
             //.AddQuickPaySqlServer(o =>
             //{

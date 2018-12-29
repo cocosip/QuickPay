@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace QuickPay.WechatPay.Authentication
+namespace QuickPay.WeChatPay.Authentication
 {
     /// <summary>认证服务
     /// </summary>
@@ -21,7 +21,7 @@ namespace QuickPay.WechatPay.Authentication
         /// <param name="scope">权限</param>
         /// <param name="state">附加状态(a-zA-Z0-9的参数值，最多128字节,如果不为空必须唯一)</param>
         /// <returns></returns>
-        string GetAuthorizationCodeUrl(string appId, string redirectUri, string scope = WechatPaySettings.Scope.Base, string state = "");
+        string GetAuthorizationCodeUrl(string appId, string redirectUri, string scope = WeChatPaySettings.Scope.Base, string state = "");
 
         /// <summary>获取用户的OpenId
         /// </summary>

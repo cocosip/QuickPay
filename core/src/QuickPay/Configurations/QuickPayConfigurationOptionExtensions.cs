@@ -25,7 +25,7 @@ namespace QuickPay.Configurations
                 throw new QuickPayException($"添加的通知不是有效的通知类型。Type:{notifyType}");
             }
             //管道名
-            var notifyProvider = notifyType.IsAssignableFrom(typeof(AlipayNotify)) ? QuickPaySettings.Provider.Alipay : QuickPaySettings.Provider.WechatPay;
+            var notifyProvider = notifyType.IsAssignableFrom(typeof(AlipayNotify)) ? QuickPaySettings.Provider.Alipay : QuickPaySettings.Provider.WeChatPay;
             var notifyDefination = new NotifyDefination(notifyProvider, notifyType);
             //添加通知
             option.NotifyDefinations.Add(notifyDefination);

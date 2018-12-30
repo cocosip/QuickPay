@@ -33,32 +33,6 @@ namespace QuickPay.WeChatPay.Authentication
         /// <returns></returns>
         Task<string> GetUserOpenIdAsync(string appId, string appSecret, string code, bool verifyStatus = false, string status = "");
 
-        /// <summary>从微信接口获取公众号AccessToken
-        /// </summary>
-        /// <param name="appId">应用Id</param>
-        /// <param name="appSecret">应用密码</param>
-        /// <returns></returns>
-        Task<AccessTokenResponse> GetRemoteAccessTokenAsync(string appId, string appSecret);
 
-        /// <summary>获取可用的AccessToken(先从本地存储中获取,如果不存在,就从微信接口获取)
-        /// </summary>
-        /// <param name="appId">应用Id</param>
-        /// <param name="appSecret">应用密码</param>
-        /// <returns></returns>
-        Task<string> GetAccessTokenAsync(string appId, string appSecret);
-
-        /// <summary>从微信接口获取微信JsApiTicket
-        /// </summary>
-        /// <param name="appId">应用Id</param>
-        /// <param name="appSecret">应用密码</param>
-        /// <returns></returns>
-        Task<JsApiTicketResponse> GetRemoteJsApiTicketAsync(string appId, string appSecret);
-
-        /// <summary>获取可用的微信JsApiTicket(先从本地存储中获取,如果本地存储不存在就从微信接口获取)
-        /// </summary>
-        /// <param name="appId">应用Id</param>
-        /// <param name="appSecret">应用密码</param>
-        /// <returns></returns>
-        Task<string> GetJsApiTicketAsync(string appId, string appSecret);
     }
 }

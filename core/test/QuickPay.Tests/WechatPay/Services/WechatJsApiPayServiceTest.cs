@@ -6,7 +6,7 @@ using QuickPay.WeChatPay.Services.DTOs;
 using System;
 using Xunit;
 
-namespace QuickPay.Tests.WechatPay.Services
+namespace QuickPay.Tests.WeChatPay.Services
 {
     public class WechatJsApiPayServiceTest : TestBase
     {
@@ -22,19 +22,19 @@ namespace QuickPay.Tests.WechatPay.Services
             }
         }
 
-        [Fact]
-        public void GetJsSdkConfig_Test()
-        {
-            var jsApiService = Provider.GetService<IWeChatJsApiPayService>();
-            using (jsApiService.Use(WechatPayConfig.GetByName("App1")))
-            {
-                //var response = AsyncHelper.RunSync(() => jsApiService.GetJsSdkConfig(""));
-                Assert.Throws<Exception>(() =>
-                {
-                    AsyncHelper.RunSync(() => jsApiService.GetJsSdkConfig("http://127.0.0.1"));
-                });
-                //Assert.Equal(response.AppId, jsApiService.App.AppId);
-            }
-        }
+        // [Fact]
+        // public void GetJsSdkConfig_Test()
+        // {
+        //     var jsApiService = Provider.GetService<IWeChatJsApiPayService>();
+        //     using (jsApiService.Use(WechatPayConfig.GetByName("App1")))
+        //     {
+        //         //var response = AsyncHelper.RunSync(() => jsApiService.GetJsSdkConfig(""));
+        //         Assert.Throws<Exception>(() =>
+        //         {
+        //             AsyncHelper.RunSync(() => jsApiService.GetJsSdkConfig("http://127.0.0.1"));
+        //         });
+        //         //Assert.Equal(response.AppId, jsApiService.App.AppId);
+        //     }
+        // }
     }
 }

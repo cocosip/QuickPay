@@ -8,6 +8,7 @@ using QuickPay.Alipay.Apps;
 using QuickPay.Configurations;
 using QuickPay.WeChatPay.Apps;
 using System;
+using WeChat.Framework;
 
 namespace QuickPay.Tests
 {
@@ -26,6 +27,7 @@ namespace QuickPay.Tests
                 .AddDotCommon()
                 .AddGenericsMemoryCache()
                 .AddJson4Net()
+                .AddWeChatFramework() //微信基础框架使用内存存储AccessToken与JsTicket
                 .AddQuickPay(option =>
                 {
                     option.ConfigSourceType = ConfigSourceType.FromConfigFile;

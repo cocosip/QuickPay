@@ -1,4 +1,5 @@
 # QuickPay 组件
+
 [![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/cocosip/QuickPay/blob/master/LICENSE) [![Build Status](https://travis-ci.com/cocosip/QuickPay.svg?branch=master)](https://travis-ci.com/cocosip/QuickPay) ![GitHub last commit](https://img.shields.io/github/last-commit/cocosip/QuickPay.svg) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/cocosip/QuickPay.svg)
 
 | Package  | Version | Downloads|
@@ -34,6 +35,7 @@ public static IServiceProvider Initialize()
     .AddCommonComponents()
     .AddDistributedMemoryCache()
     .AddJson4Net()
+    .AddWeChatFramework() //添加微信基础框架
     .AddQuickPay(option =>
     {
         option.ConfigSourceType = ConfigSourceType.FromConfigFile;
@@ -45,6 +47,8 @@ public static IServiceProvider Initialize()
     .AddQuickPaySqlServer(o =>
     {
         o.DbConnectionString = "...数据库连接字符串...";
+        o.PaymentTableName="QP_Payments";
+        o.RefundTableName="QP_Refunds";
     });
 
     Mapper.Initialize(config =>
@@ -59,9 +63,9 @@ public static IServiceProvider Initialize()
 ```
 
 > 配置文件初始化:
-- `QuickPay`支持两种方式的配置初始化,1.通过配置的`Xml`([参考](../src/QuickPay/QuickPayConfig.xml))或`Josn`([参考](../src/QuickPay/QuickPayConfig.json)) 2.通过初始化配置对象
+- `QuickPay`支持两种方式的配置初始化,1.通过配置的`Xml`([参考](../core/src/QuickPay/QuickPayConfig.xml))或`Josn`([参考](../core/src/QuickPay/QuickPayConfig.json)) 2.通过初始化配置对象
 
 ## 示例代码
 
-- [微信](/docs/WechatPay.md)
+- [微信](/docs/WeChatPay.md)
 - [支付宝](/docs/Alipay.md)

@@ -6,7 +6,7 @@ using QuickPay.WeChatPay.Services.DTOs;
 using System;
 using Xunit;
 
-namespace QuickPay.Tests.WechatPay.Services
+namespace QuickPay.Tests.WeChatPay.Services
 {
     /// <summary>微信刷卡支付
     /// </summary>

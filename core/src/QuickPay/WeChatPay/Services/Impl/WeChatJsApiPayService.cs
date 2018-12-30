@@ -10,19 +10,20 @@ using QuickPay.WeChatPay.Services.DTOs;
 using QuickPay.WeChatPay.Util;
 using System;
 using System.Threading.Tasks;
-
+using WeChat.Framework;
+using WeChat.Framework.Service;
 namespace QuickPay.WeChatPay.Services.Impl
 {
     /// <summary>微信JsApi支付
     /// </summary>
     public class WeChatJsApiPayService : BaseWeChatPayService, IWeChatJsApiPayService
     {
-        private readonly IAuthenticationService _authenticationService;
+        private readonly IWeChatSdkTicketService _weChatSdkTicketService;
         /// <summary>Ctor
         /// </summary>
-        public WeChatJsApiPayService(IServiceProvider provider, IAuthenticationService authenticationService) : base(provider)
+        public WeChatJsApiPayService(IServiceProvider provider, IWeChatSdkTicketService weChatSdkTicketService) : base(provider)
         {
-            _authenticationService = authenticationService;
+            _weChatSdkTicketService = weChatSdkTicketService;
         }
 
         /// <summary>JsApi支付统一下单
@@ -54,8 +55,8 @@ namespace QuickPay.WeChatPay.Services.Impl
         /// </summary>
         public async Task<JsSdkConfigResponse> GetJsSdkConfig(string currentUrl)
         {
-            //JsApi Ticket
-            var jsApiTicket = await _authenticationService.GetJsApiTicketAsync(App.AppId, App.Appsecret);
+            //JsApiTicket
+            var jsApiTicket = await _weChatSdkTicketService.GetSdkTicketAsync(App.AppId, App.Appsecret, WeChatSettings.SdkTicketType.JsApi);
             Logger.LogInformation(WeChatPayUtil.ParseLog($"获取微信JsApiTicket:{jsApiTicket}"));
             var request = new JsSdkConfigRequest(jsApiTicket, currentUrl);
             //签名,获取JsSdk的时候,签名用的是Sha1

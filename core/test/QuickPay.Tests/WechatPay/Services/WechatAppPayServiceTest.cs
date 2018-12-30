@@ -5,7 +5,7 @@ using QuickPay.WeChatPay.Services;
 using QuickPay.WeChatPay.Services.DTOs;
 using Xunit;
 
-namespace QuickPay.Tests.WechatPay.Services
+namespace QuickPay.Tests.WeChatPay.Services
 {
     public class WechatAppPayServiceTest : TestBase
     {

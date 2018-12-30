@@ -1,7 +1,7 @@
 ﻿using QuickPay.WeChatPay.Util;
 using Xunit;
 
-namespace QuickPay.Tests.WechatPay.Util
+namespace QuickPay.Tests.WeChatPay.Util
 {
     public class WechatPayUtilTest
     {

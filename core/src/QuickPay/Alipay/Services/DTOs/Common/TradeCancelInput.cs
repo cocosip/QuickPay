@@ -7,7 +7,7 @@ namespace QuickPay.Alipay.Services.DTOs
     /// <summary>交易取消
     /// </summary>
     [AutoMapTo(typeof(TradeCancelBizContentRequest))]
-    public class TradeCancelInput : UniqueIdDto
+    public class TradeCancelInput : UniqueIdModel
     {
         /// <summary>订单支付时传入的商户订单号,和支付宝交易号不能同时为空。 trade_no,out_trade_no如果同时存在优先取trade_no
         /// </summary>

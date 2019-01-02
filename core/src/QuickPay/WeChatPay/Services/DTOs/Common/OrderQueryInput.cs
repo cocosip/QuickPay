@@ -7,7 +7,7 @@ namespace QuickPay.WeChatPay.Services.DTOs
     /// <summary>支付查询订单输入
     /// </summary>
     [AutoMapTo(typeof(OrderQueryRequest))]
-    public class OrderQueryInput : UniqueIdDto
+    public class OrderQueryInput : UniqueIdModel
     {
         /// <summary>微信的订单号，优先使用
         /// </summary>

@@ -8,7 +8,7 @@ namespace QuickPay.WeChatPay.Services.DTOs
     /// <summary>小程序下单
     /// </summary>
     [AutoMapTo(typeof(MiniProgramUnifiedOrderRequest))]
-    public class MiniProgramUnifiedOrderInput : UniqueIdDto
+    public class MiniProgramUnifiedOrderInput : UniqueIdModel
     {
         /// <summary>商品简单描述，该字段请按照规范传递
         /// </summary>

@@ -7,7 +7,7 @@ namespace QuickPay.WeChatPay.Services.DTOs
     /// <summary>上报
     /// </summary>
     [AutoMapTo(typeof(ReportRequest))]
-    public class ReportInput : UniqueIdDto
+    public class ReportInput : UniqueIdModel
     {
         /// <summary>自定义参数，可以为终端设备号(门店号或收银设备ID)，PC网页或公众号内支付可以传"WEB"
         /// </summary>

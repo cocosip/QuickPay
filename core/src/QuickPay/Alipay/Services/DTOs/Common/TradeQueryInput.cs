@@ -7,7 +7,7 @@ namespace QuickPay.Alipay.Services.DTOs
     /// <summary>交易订单查询
     /// </summary>
     [AutoMapTo(typeof(TradeQueryBizContentRequest))]
-    public class TradeQueryInput : UniqueIdDto
+    public class TradeQueryInput : UniqueIdModel
     {
         /// <summary>订单支付时传入的商户订单号,和支付宝交易号不能同时为空
         /// </summary>

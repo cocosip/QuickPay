@@ -2,7 +2,7 @@
 {
     /// <summary>UniqueIdDto
     /// </summary>
-    public abstract class UniqueIdDto
+    public abstract class UniqueIdModel
     {
         /// <summary>唯一Id
         /// </summary>

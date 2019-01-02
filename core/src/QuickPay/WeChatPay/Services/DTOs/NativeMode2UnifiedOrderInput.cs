@@ -8,7 +8,7 @@ namespace QuickPay.WeChatPay.Services.DTOs
     /// <summary>扫码支付模式2统一下单
     /// </summary>
     [AutoMapTo(typeof(NativeMode2UnifiedOrderRequest))]
-    public class NativeMode2UnifiedOrderInput : UniqueIdDto
+    public class NativeMode2UnifiedOrderInput : UniqueIdModel
     {
         /// <summary>商品简单描述，该字段请按照规范传递
         /// </summary>

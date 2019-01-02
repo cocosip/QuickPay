@@ -8,7 +8,7 @@ namespace QuickPay.Alipay.Services.DTOs
     /// <summary>支付宝支付
     /// </summary>
     [AutoMapTo(typeof(AppTradeBizContentPayRequest))]
-    public class AppTradePayInput : UniqueIdDto
+    public class AppTradePayInput : UniqueIdModel
     {
 
         /// <summary>对一笔交易的具体描述信息

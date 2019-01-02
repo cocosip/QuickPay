@@ -7,7 +7,7 @@ namespace QuickPay.Alipay.Services.DTOs
     /// <summary>退款
     /// </summary>
     [AutoMapTo(typeof(TradeRefundBizContentRequest))]
-    public class TradeRefundInput : UniqueIdDto
+    public class TradeRefundInput : UniqueIdModel
     {
         /// <summary>订单支付时传入的商户订单号,不能和 trade_no同时为空
         /// </summary>

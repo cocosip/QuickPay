@@ -8,7 +8,7 @@ namespace QuickPay.Alipay.Services.DTOs
     /// <summary>扫码支付创建预订单
     /// </summary>
     [AutoMapTo(typeof(QrcodeTradeBizContentPayRequest))]
-    public class QrcodePayPreCreateInput : UniqueIdDto
+    public class QrcodePayPreCreateInput : UniqueIdModel
     {
         /// <summary>订单标题
         /// </summary>

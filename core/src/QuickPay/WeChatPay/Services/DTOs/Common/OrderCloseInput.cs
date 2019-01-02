@@ -7,7 +7,7 @@ namespace QuickPay.WeChatPay.Services.DTOs
     /// <summary>关闭订单
     /// </summary>
     [AutoMapTo(typeof(OrderCloseRequest))]
-    public class OrderCloseInput : UniqueIdDto
+    public class OrderCloseInput : UniqueIdModel
     {
         /// <summary>>商户系统内部订单号
         /// </summary>

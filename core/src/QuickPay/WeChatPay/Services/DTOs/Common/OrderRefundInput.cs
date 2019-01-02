@@ -7,7 +7,7 @@ namespace QuickPay.WeChatPay.Services.DTOs
     /// <summary>交易退款
     /// </summary>
     [AutoMapTo(typeof(OrderRefundRequest))]
-    public class OrderRefundInput : UniqueIdDto
+    public class OrderRefundInput : UniqueIdModel
     {
         /// <summary>微信订单号
         /// </summary>

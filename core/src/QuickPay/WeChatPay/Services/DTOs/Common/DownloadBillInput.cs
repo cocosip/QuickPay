@@ -7,7 +7,7 @@ namespace QuickPay.WeChatPay.Services.DTOs
     /// <summary>下载对账单
     /// </summary>
     [AutoMapTo(typeof(DownloadBillRequest))]
-    public class DownloadBillInput : UniqueIdDto
+    public class DownloadBillInput : UniqueIdModel
     {
         /// <summary>对账日期
         /// </summary>

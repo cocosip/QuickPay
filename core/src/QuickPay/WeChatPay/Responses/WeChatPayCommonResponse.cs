@@ -4,7 +4,7 @@ namespace QuickPay.WeChatPay.Responses
 {
     /// <summary>调用微信服务返回的通用格式
     /// </summary>
-    public class WeChatPayCommonResponse : BaseWechatPayResponse
+    public class WeChatPayCommonResponse : BaseWeChatPayResponse
     {
         /// <summary>是否返回成功
         /// </summary>

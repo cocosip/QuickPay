@@ -4,7 +4,7 @@ namespace QuickPay.WeChatPay.Responses
 {
     /// <summary>Native扫码支付模式2统一下单返回
     /// </summary>
-    public class NativeMode2UnifiedOrderResponse : BaseWechatPayResponse
+    public class NativeMode2UnifiedOrderResponse : BaseWeChatPayResponse
     {
         /********************以下字段在return_code为SUCCESS的时候有返回********************/
 

@@ -14,7 +14,8 @@ namespace QuickPay.Alipay.Services.Impl
     {
         /// <summary>AlipayAppOverrideContextKey
         /// </summary>
-        public const string AlipayAppOverrideContextKey = "Touda.QuickPay.AlipayApp.Override";
+        public const string AlipayAppOverrideContextKey = "QuickPay.AlipayApp.Override";
+
         /// <summary>AlipayAppOverride
         /// </summary>
         protected AlipayAppOverride OverrideValue => AlipayAppOverrideScopeProvider.GetValue(AlipayAppOverrideContextKey);

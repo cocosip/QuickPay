@@ -12,16 +12,17 @@ namespace QuickPay.WeChatPay.Services.Impl
     /// </summary>
     public abstract class BaseWeChatPayService : IWeChatPayService
     {
-        /// <summary>WechatPayAppOverrideContextKey
+        /// <summary>WeChatPayAppOverrideContextKey
         /// </summary>
-        public const string WechatPayAppOverrideContextKey = "Touda.QuickPay.WechatPayApp.Override";
+        public const string WeChatPayAppOverrideContextKey = "QuickPay.WeChatPayApp.Override";
 
-        /// <summary>WechatPayAppOverride
+        /// <summary>WeChatPayAppOverride
         /// </summary>
-        protected WeChatPayAppOverride OverrideValue => WechatPayAppOverrideScopeProvider.GetValue(WechatPayAppOverrideContextKey);
-        /// <summary>WechatPayAppOverrideScopeProvider
+        protected WeChatPayAppOverride OverrideValue => WeChatPayAppOverrideScopeProvider.GetValue(WeChatPayAppOverrideContextKey);
+
+        /// <summary>WeChatPayAppOverrideScopeProvider
         /// </summary>
-        protected IAmbientScopeProvider<WeChatPayAppOverride> WechatPayAppOverrideScopeProvider { get; }
+        protected IAmbientScopeProvider<WeChatPayAppOverride> WeChatPayAppOverrideScopeProvider { get; }
 
         /// <summary>微信配置
         /// </summary>
@@ -44,7 +45,7 @@ namespace QuickPay.WeChatPay.Services.Impl
         /// </summary>
         public BaseWeChatPayService(IServiceProvider provider)
         {
-            WechatPayAppOverrideScopeProvider = provider.GetService<IAmbientScopeProvider<WeChatPayAppOverride>>();
+            WeChatPayAppOverrideScopeProvider = provider.GetService<IAmbientScopeProvider<WeChatPayAppOverride>>();
             Config = provider.GetService<WeChatPayConfig>();
             Logger = provider.GetService<ILogger<QuickPayLoggerName>>();
             Executer = provider.GetService<IRequestExecuter>();
@@ -56,7 +57,7 @@ namespace QuickPay.WeChatPay.Services.Impl
         public IDisposable Use(WeChatPayApp app)
         {
             var overrideValue = app.ToOverrideValue();
-            return WechatPayAppOverrideScopeProvider.BeginScope(WechatPayAppOverrideContextKey, overrideValue);
+            return WeChatPayAppOverrideScopeProvider.BeginScope(WeChatPayAppOverrideContextKey, overrideValue);
         }
 
         /// <summary>微信支付应用

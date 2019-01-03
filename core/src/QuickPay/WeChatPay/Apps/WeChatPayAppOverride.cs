@@ -60,7 +60,7 @@
 
         /// <summary>WechatPayAppOverride 转 WechatPayApp
         /// </summary>
-        public WeChatPayApp ToWechatPayApp()
+        public WeChatPayApp ToWeChatPayApp()
         {
             return new WeChatPayApp(Name, AppId, MchId, Key, Appsecret, AppTypeId, NativeMobileInfo);
         }

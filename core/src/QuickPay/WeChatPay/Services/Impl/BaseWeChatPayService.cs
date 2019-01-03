@@ -69,7 +69,7 @@ namespace QuickPay.WeChatPay.Services.Impl
             {
                 if (OverrideValue != null)
                 {
-                    return OverrideValue.ToWechatPayApp();
+                    return OverrideValue.ToWeChatPayApp();
                 }
                 var app = Config.GetDefaultApp();
                 if (app != null)

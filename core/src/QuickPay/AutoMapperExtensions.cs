@@ -15,7 +15,7 @@ namespace QuickPay
         {
             var assemblies = new List<Assembly>()
             {
-                typeof(QuickPaySettings).Assembly
+                typeof(QuickPayLoggerName).Assembly
             };
             AutoAttributeMapperHelper.CreateAutoAttributeMappings(assemblies, configuration);
         }

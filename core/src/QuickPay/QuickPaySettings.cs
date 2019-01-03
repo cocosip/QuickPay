@@ -4,9 +4,6 @@
     /// </summary>
     public class QuickPaySettings
     {
-        /// <summary>日志名称
-        /// </summary>
-        public const string LoggerName = "QuickPay";
 
         /// <summary>默认业务代码
         /// </summary>

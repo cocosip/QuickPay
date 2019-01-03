@@ -7,6 +7,6 @@
 
         /// <summary>根据Provider名称获取当前配置
         /// </summary>
-        QuickPayConfig GetCurrentConfig(string provider);
+        QuickPayConfig GetCurrentConfig(string providerName);
     }
 }

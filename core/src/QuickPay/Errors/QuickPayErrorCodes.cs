@@ -8,28 +8,32 @@
         /// </summary>
         SignError = 1,
 
+        /// <summary>设置Necessary参数错误
+        /// </summary>
+        SetNecessaryError = 2,
+
         /// <summary>设置UniqueId错误
         /// </summary>
-        SetUniqueIdError = 2,
+        SetUniqueIdError = 3,
 
         /// <summary>PayData转化错误
         /// </summary>
-        PayDataTransformError = 3,
+        PayDataTransformError = 4,
 
         /// <summary> Execute执行错误
         /// </summary>
-        ExecuteError = 4,
-        
+        ExecuteError = 5,
+
         /// <summary>转化Response错误
         /// </summary>
-        ParseResponseError = 5,
+        ParseResponseError = 6,
 
         /// <summary>支付存储错误
         /// </summary>
-        PaymentStoreError = 6,
+        PaymentStoreError = 7,
 
         /// <summary>退款存储错误
         /// </summary>
-        RefundStoreError = 7,
+        RefundStoreError = 8,
     }
 }

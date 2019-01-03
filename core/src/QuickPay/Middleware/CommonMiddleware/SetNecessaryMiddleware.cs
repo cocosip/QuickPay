@@ -34,27 +34,11 @@ namespace QuickPay.Middleware
                     context.SignType = context.Request.SignTypeName;
                 }
 
-
-                //var methods = context.Request.GetType().GetMethods(BindingFlags.Instance | BindingFlags.Public);
-                //var invokeMethods = methods.Where(m => string.Equals(m.Name, "SetNecessary", StringComparison.Ordinal)).ToArray();
-                //var methodinfo = invokeMethods[0];
-
-                //if (context.Request.Provider == QuickPaySettings.Provider.Alipay)
-                //{
-                //    var setNecessaryMethod = (Action<AlipayConfig, AlipayApp>)methodinfo.CreateDelegate(typeof(Action<AlipayConfig, AlipayApp>), context.Request);
-                //    setNecessaryMethod((AlipayConfig)context.Config, (AlipayApp)context.App);
-                //}
-                //else
-                //{
-                //    var setNecessaryMethod = (Action<WechatPayConfig, WechatPayApp>)methodinfo.CreateDelegate(typeof(Action<WechatPayConfig, WechatPayApp>), context.Request);
-                //    setNecessaryMethod((WechatPayConfig)context.Config, (WechatPayApp)context.App);
-                //}
-
                 Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
             }
             catch (Exception ex)
             {
-                SetPipelineError(context, new PayDataTransformError($"设置Necessary发生错误,{ex.Message}"));
+                SetPipelineError(context, new SetNecessaryError($"设置Necessary发生错误,{ex.Message}"));
                 return;
             }
             await _next.Invoke(context);

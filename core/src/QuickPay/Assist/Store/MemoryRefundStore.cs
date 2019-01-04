@@ -10,16 +10,16 @@ namespace QuickPay.Assist.Store
     public class MemoryRefundStore : IRefundStore
     {
         private const string RefundTableKey = "QuickPay.RefundTable";
-        private readonly IDistributedCache<CacheTable<Refund>> _refundTableCache;
+        private readonly IDistributedCache<List<Refund>> _refundTableCache;
 
         /// <summary>Ctor
         /// </summary>
-        public MemoryRefundStore(IDistributedCache<CacheTable<Refund>> refundTableCache)
+        public MemoryRefundStore(IDistributedCache<List<Refund>> refundTableCache)
         {
             _refundTableCache = refundTableCache;
         }
 
-        private async Task<CacheTable<Refund>> GetTable()
+        private async Task<List<Refund>> GetTable()
         {
             var table = await _refundTableCache.GetAsync(RefundTableKey);
             if (table == null)
@@ -28,7 +28,7 @@ namespace QuickPay.Assist.Store
             }
             return table;
         }
-        private async Task UpdateTable(CacheTable<Refund> paymentTable)
+        private async Task UpdateTable(List<Refund> paymentTable)
         {
             await _refundTableCache.SetAsync(RefundTableKey, paymentTable);
         }

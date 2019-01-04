@@ -1,4 +1,5 @@
 using DotCommon.Caching;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,25 +10,25 @@ namespace QuickPay.Assist.Store
     public class MemoryPaymentStore : IPaymentStore
     {
         private const string PaymentTableKey = "QuickPay.PaymentTable";
-        private readonly IDistributedCache<CacheTable<Payment>> _paymentTableCache;
+        private readonly IDistributedCache<List<Payment>> _paymentTableCache;
 
         /// <summary>Ctor
         /// </summary>
-        public MemoryPaymentStore(IDistributedCache<CacheTable<Payment>> paymentTableCache)
+        public MemoryPaymentStore(IDistributedCache<List<Payment>> paymentTableCache)
         {
             _paymentTableCache = paymentTableCache;
         }
 
-        private async Task<CacheTable<Payment>> GetTable()
+        private async Task<List<Payment>> GetTable()
         {
             var table = await _paymentTableCache.GetAsync(PaymentTableKey);
             if (table == null)
             {
-                table = new CacheTable<Payment>();
+                table = new List<Payment>();
             }
             return table;
         }
-        private async Task UpdateTable(CacheTable<Payment> paymentTable)
+        private async Task UpdateTable(List<Payment> paymentTable)
         {
             await _paymentTableCache.SetAsync(PaymentTableKey, paymentTable);
         }

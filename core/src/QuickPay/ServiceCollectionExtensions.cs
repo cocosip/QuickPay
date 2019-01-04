@@ -96,8 +96,8 @@ namespace QuickPay
             services.AddSingleton<INotifyTypeFinder, NotifyTypeFinder>();
 
             //支付数据存储
-            services.AddTransient<IPaymentStore, EmptyPaymentStore>();
-            services.AddTransient<IRefundStore, EmptyRefundStore>();
+            services.AddTransient<IPaymentStore, MemoryPaymentStore>();
+            services.AddTransient<IRefundStore, MemoryRefundStore>();
             services.AddTransient<IAccessTokenStore, EmptyAccessTokenStore>();
             services.AddTransient<IJsApiTicketStore, EmptyJsApiTicketStore>();
 

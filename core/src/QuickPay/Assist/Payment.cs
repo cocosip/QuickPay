@@ -1,7 +1,10 @@
-﻿namespace QuickPay.Assist
+﻿using System;
+
+namespace QuickPay.Assist
 {
     /// <summary>支付信息
     /// </summary>
+    [Serializable]
     public class Payment
     {
         /// <summary>唯一Id

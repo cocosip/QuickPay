@@ -11,7 +11,7 @@ namespace QuickPay.Assist.Store
         /// </summary>
         Task CreateOrUpdateAsync(Refund refund);
 
-        /// <summary>根据平台Id,AppId,交易号,获取数据
+        /// <summary>根据平台Id,AppId,退款交易号,获取退款信息
         /// </summary>
         Task<Refund> GetAsync(int payPlatId, string appId, string outRefundNo);
 

@@ -25,36 +25,36 @@ namespace QuickPay.ConsoleTest
             _stopwatch.Start();
 
             //微信
-            AsyncHelper.RunSync(() =>
-            {
-                ////微信App下单
-                //return weChatPayDemoService.WeChatAppUnifiedOrder();
+            // AsyncHelper.RunSync(() =>
+            // {
+            //     ////微信App下单
+            //     //return weChatPayDemoService.WeChatAppUnifiedOrder();
 
-                ////微信JsApi下单
-                //return weChatPayDemoService.WeChatJsApiUnifiedOrder();
+            //     ////微信JsApi下单
+            //     //return weChatPayDemoService.WeChatJsApiUnifiedOrder();
 
-                //微信小程序下单
-                return weChatPayDemoService.WeChatMiniProgramUnifiedOrder();
+            //     //微信小程序下单
+            //     return weChatPayDemoService.WeChatMiniProgramUnifiedOrder();
 
-                //微信订单查询
-                //return weChatPayDemoService.WeChatOrderQuery();
+            //     //微信订单查询
+            //     //return weChatPayDemoService.WeChatOrderQuery();
 
-            });
+            // });
 
             //支付宝
-            //AsyncHelper.RunSync(() =>
-            //{
-            //    ////支付宝App下单
-            //    //return alipayDemoService.AlipayAppTradePay();
-            //    ////支付宝PC下单
-            //    //return alipayDemoService.AlipayPageTradePay();
-            //    ////支付宝订单查询
-            //    //return alipayDemoService.Query();
-            //    ////支付宝退款查询
-            //    //return alipayDemoService.RefundQuery();
-            //    //支付宝账单下载
-            //    //return alipayDemoService.BillDownloadUrl();
-            //});
+            AsyncHelper.RunSync(() =>
+            {
+               //支付宝App下单
+               return alipayDemoService.AlipayAppTradePay();
+               ////支付宝PC下单
+               //return alipayDemoService.AlipayPageTradePay();
+               ////支付宝订单查询
+               //return alipayDemoService.Query();
+               ////支付宝退款查询
+               //return alipayDemoService.RefundQuery();
+               //支付宝账单下载
+               //return alipayDemoService.BillDownloadUrl();
+            });
 
 
             _stopwatch.Stop();

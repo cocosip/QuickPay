@@ -1,4 +1,5 @@
 using DotCommon.Caching;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace QuickPay.Assist.Store
@@ -7,25 +8,37 @@ namespace QuickPay.Assist.Store
     /// </summary>
     public class MemoryPaymentStore : IPaymentStore
     {
-        private readonly IDistributedCache<Payment> _paymentCache;
-        private readonly IDistributedCache<PaymentMapperItem> _paymentMapperItemCache;
+        private const string PaymentTableKey = "QuickPay.PaymentTable";
+        private readonly IDistributedCache<CacheTable<Payment>> _paymentTableCache;
 
         /// <summary>Ctor
         /// </summary>
-        public MemoryPaymentStore(IDistributedCache<Payment> paymentCache, IDistributedCache<PaymentMapperItem> paymentMapperItemCache)
+        public MemoryPaymentStore(IDistributedCache<CacheTable<Payment>> paymentTableCache)
         {
-            _paymentCache = paymentCache;
-            _paymentMapperItemCache = paymentMapperItemCache;
+            _paymentTableCache = paymentTableCache;
+        }
+
+        private async Task<CacheTable<Payment>> GetTable()
+        {
+            var table = await _paymentTableCache.GetAsync(PaymentTableKey);
+            if (table == null)
+            {
+                table = new CacheTable<Payment>();
+            }
+            return table;
+        }
+        private async Task UpdateTable(CacheTable<Payment> paymentTable)
+        {
+            await _paymentTableCache.SetAsync(PaymentTableKey, paymentTable);
         }
 
         /// <summary>创建或者修改支付信息
         /// </summary>
         public async Task CreateOrUpdateAsync(Payment payment)
         {
-            await _paymentCache.SetAsync(FormatPaymentKey(payment.UniqueId), payment);
-            //item
-            var paymentMapperItem = new PaymentMapperItem(payment.UniqueId, payment.PayPlatId, payment.AppId, payment.OutTradeNo);
-            await _paymentMapperItemCache.SetAsync(paymentMapperItem.GetFormatKey(), paymentMapperItem);
+            var paymentTable = await GetTable();
+            paymentTable.Add(payment);
+            await UpdateTable(paymentTable);
         }
 
 
@@ -33,14 +46,9 @@ namespace QuickPay.Assist.Store
         /// </summary>
         public async Task<Payment> GetAsync(int payPlatId, string appId, string outTradeNo)
         {
-            //如何做到UniqueId与三者之间的相同?
-            var paymentMapperItem = new PaymentMapperItem("", payPlatId, appId, outTradeNo);
-            var queryPaymentMapperItem = await _paymentMapperItemCache.GetAsync(paymentMapperItem.GetFormatKey());
-            if (queryPaymentMapperItem != null)
-            {
-                return await GetByUniqueIdAsync(queryPaymentMapperItem.UniqueId);
-            }
-            return default(Payment);
+            var paymentTable = await GetTable();
+            var payment = paymentTable.FirstOrDefault(x => x.PayPlatId == payPlatId && x.AppId == appId && x.OutTradeNo == outTradeNo);
+            return payment;
         }
 
 
@@ -48,14 +56,11 @@ namespace QuickPay.Assist.Store
         /// </summary>
         public async Task<Payment> GetByUniqueIdAsync(string uniqueId)
         {
-            return await _paymentCache.GetAsync(FormatPaymentKey(uniqueId));
+            var paymentTable = await GetTable();
+            var payment = paymentTable.FirstOrDefault(x => x.UniqueId == uniqueId);
+            return payment;
         }
 
-        /// <summary>支付存储的Key
-        /// </summary>
-        private string FormatPaymentKey(string uniqueId)
-        {
-            return $"QuickPay:Payment:{uniqueId}";
-        }
+
     }
 }

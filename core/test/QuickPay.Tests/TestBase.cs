@@ -40,7 +40,8 @@ namespace QuickPay.Tests
             });
             Provider = services.BuildServiceProvider();
             //配置
-            Provider.UseDotCommon()
+            Provider
+                .UseDotCommon()
                 .UseQuickPay();
 
             WechatPayConfig = Provider.GetService<WeChatPayConfig>();

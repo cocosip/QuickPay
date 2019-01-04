@@ -9,7 +9,7 @@ namespace QuickPay.Assist.Store
     /// </summary>
     public class MemoryPaymentStore : IPaymentStore
     {
-        private const string PaymentTableKey = "QuickPay.PaymentTable";
+        private const string PaymentListKey = "QuickPay.PaymentList";
         private readonly IDistributedCache<List<Payment>> _paymentTableCache;
 
         /// <summary>Ctor
@@ -19,27 +19,23 @@ namespace QuickPay.Assist.Store
             _paymentTableCache = paymentTableCache;
         }
 
-        private async Task<List<Payment>> GetTable()
+        private async Task<List<Payment>> GetList()
         {
-            var table = await _paymentTableCache.GetAsync(PaymentTableKey);
-            if (table == null)
-            {
-                table = new List<Payment>();
-            }
-            return table;
+            var paymentList = (await _paymentTableCache.GetAsync(PaymentListKey)) ?? new List<Payment>();
+            return paymentList;
         }
-        private async Task UpdateTable(List<Payment> paymentTable)
+        private async Task UpdateList(List<Payment> paymentList)
         {
-            await _paymentTableCache.SetAsync(PaymentTableKey, paymentTable);
+            await _paymentTableCache.SetAsync(PaymentListKey, paymentList);
         }
 
         /// <summary>创建或者修改支付信息
         /// </summary>
         public async Task CreateOrUpdateAsync(Payment payment)
         {
-            var paymentTable = await GetTable();
-            paymentTable.Add(payment);
-            await UpdateTable(paymentTable);
+            var paymentList = await GetList();
+            paymentList.Add(payment);
+            await UpdateList(paymentList);
         }
 
 
@@ -47,8 +43,8 @@ namespace QuickPay.Assist.Store
         /// </summary>
         public async Task<Payment> GetAsync(int payPlatId, string appId, string outTradeNo)
         {
-            var paymentTable = await GetTable();
-            var payment = paymentTable.FirstOrDefault(x => x.PayPlatId == payPlatId && x.AppId == appId && x.OutTradeNo == outTradeNo);
+            var paymentList = await GetList();
+            var payment = paymentList.FirstOrDefault(x => x.PayPlatId == payPlatId && x.AppId == appId && x.OutTradeNo == outTradeNo);
             return payment;
         }
 
@@ -57,8 +53,8 @@ namespace QuickPay.Assist.Store
         /// </summary>
         public async Task<Payment> GetByUniqueIdAsync(string uniqueId)
         {
-            var paymentTable = await GetTable();
-            var payment = paymentTable.FirstOrDefault(x => x.UniqueId == uniqueId);
+            var paymentList = await GetList();
+            var payment = paymentList.FirstOrDefault(x => x.UniqueId == uniqueId);
             return payment;
         }
 

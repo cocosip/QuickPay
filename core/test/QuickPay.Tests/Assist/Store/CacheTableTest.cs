@@ -2,6 +2,7 @@ using DotCommon.Caching;
 using Microsoft.Extensions.DependencyInjection;
 using QuickPay.Assist.Store;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
@@ -14,8 +15,8 @@ namespace QuickPay.Tests.Assist.Store
         {
 
             var tableKey1 = "tb:TestTableClass1";
-            var cache1 = Provider.GetService<IDistributedCache<CacheTable<TestTableClass1>>>();
-            var table1 = new CacheTable<TestTableClass1>();
+            var cache1 = Provider.GetService<IDistributedCache<List<TestTableClass1>>>();
+            var table1 = new List<TestTableClass1>();
             table1.Add(new TestTableClass1(1, "zhangsan"));
             Assert.NotNull(table1);
             cache1.Set(tableKey1, table1);

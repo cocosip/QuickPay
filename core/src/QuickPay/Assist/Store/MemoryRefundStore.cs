@@ -9,7 +9,7 @@ namespace QuickPay.Assist.Store
     /// </summary>
     public class MemoryRefundStore : IRefundStore
     {
-        private const string RefundTableKey = "QuickPay.RefundTable";
+        private const string RefundListKey = "QuickPay.RefundList";
         private readonly IDistributedCache<List<Refund>> _refundTableCache;
 
         /// <summary>Ctor
@@ -19,35 +19,31 @@ namespace QuickPay.Assist.Store
             _refundTableCache = refundTableCache;
         }
 
-        private async Task<List<Refund>> GetTable()
+        private async Task<List<Refund>> GetList()
         {
-            var table = await _refundTableCache.GetAsync(RefundTableKey);
-            if (table == null)
-            {
-                table = new CacheTable<Refund>();
-            }
-            return table;
+            var refundList = (await _refundTableCache.GetAsync(RefundListKey)) ?? new List<Refund>();
+            return refundList;
         }
-        private async Task UpdateTable(List<Refund> paymentTable)
+        private async Task UpdateList(List<Refund> refundList)
         {
-            await _refundTableCache.SetAsync(RefundTableKey, paymentTable);
+            await _refundTableCache.SetAsync(RefundListKey, refundList);
         }
 
         /// <summary>创建或者修改退款信息
         /// </summary>
         public async Task CreateOrUpdateAsync(Refund refund)
         {
-            var refundTable = await GetTable();
-            refundTable.Add(refund);
-            await UpdateTable(refundTable);
+            var refundList = await GetList();
+            refundList.Add(refund);
+            await UpdateList(refundList);
         }
 
         /// <summary>根据平台Id,AppId,退款交易号,获取退款信息
         /// </summary>
         public async Task<Refund> GetAsync(int payPlatId, string appId, string outRefundNo)
         {
-            var refundTable = await GetTable();
-            var refund = refundTable.FirstOrDefault(x => x.PayPlatId == payPlatId && x.AppId == appId && x.OutRefundNo == outRefundNo);
+            var refundList = await GetList();
+            var refund = refundList.FirstOrDefault(x => x.PayPlatId == payPlatId && x.AppId == appId && x.OutRefundNo == outRefundNo);
             return refund;
         }
 
@@ -55,8 +51,8 @@ namespace QuickPay.Assist.Store
         /// </summary>
         public async Task<Refund> GetByUniqueIdAsync(string uniqueId)
         {
-            var refundTable = await GetTable();
-            var refund = refundTable.FirstOrDefault(x => x.UniqueId == uniqueId);
+            var refundList = await GetList();
+            var refund = refundList.FirstOrDefault(x => x.UniqueId == uniqueId);
             return refund;
         }
 
@@ -64,8 +60,8 @@ namespace QuickPay.Assist.Store
         /// </summary>
         public async Task<List<Refund>> GetRefundsAsync(int payPlatId, string appId, string outTradeNo)
         {
-            var refundTable = await GetTable();
-            var refunds = refundTable.Where(x => x.PayPlatId == payPlatId && x.AppId == appId && x.OutTradeNo == outTradeNo).ToList();
+            var refundList = await GetList();
+            var refunds = refundList.Where(x => x.PayPlatId == payPlatId && x.AppId == appId && x.OutTradeNo == outTradeNo).ToList();
             return refunds;
         }
 

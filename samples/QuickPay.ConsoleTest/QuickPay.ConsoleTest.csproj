@@ -5,16 +5,15 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
-
   <ItemGroup>
-    <ProjectReference Include="..\..\core\src\QuickPay.Abp\QuickPay.Abp.csproj" />
-    <ProjectReference Include="..\..\core\src\QuickPay.SqlServer\QuickPay.SqlServer.csproj" />
-    <ProjectReference Include="..\..\core\src\QuickPay\QuickPay.csproj" />
-    <ProjectReference Include="..\..\core\src\QuickPay.AspNetCore.Mvc\QuickPay.AspNetCore.Mvc.csproj" />
+    <PackageReference Include="WeChat.Framework.SqlServer" Version="0.1.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="WeChat.Framework.SqlServer" Version="0.1.2" />
+    <ProjectReference Include="..\..\framework\src\QuickPay.Abp\QuickPay.Abp.csproj" />
+    <ProjectReference Include="..\..\framework\src\QuickPay.AspNetCore.Mvc\QuickPay.AspNetCore.Mvc.csproj" />
+    <ProjectReference Include="..\..\framework\src\QuickPay.SqlServer\QuickPay.SqlServer.csproj" />
+    <ProjectReference Include="..\..\framework\src\QuickPay\QuickPay.csproj" />
   </ItemGroup>
 
   <ItemGroup>

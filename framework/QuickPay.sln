@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.Abp", "src\QuickPa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.AspNetCore.Mvc", "src\QuickPay.AspNetCore.Mvc\QuickPay.AspNetCore.Mvc.csproj", "{7FC4955F-0154-422F-B4C7-17BB38F4870E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickPay.Oracle", "src\QuickPay.Oracle\QuickPay.Oracle.csproj", "{6E0E03DA-8378-404B-BE85-091B03CBFFAA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{7FC4955F-0154-422F-B4C7-17BB38F4870E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FC4955F-0154-422F-B4C7-17BB38F4870E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FC4955F-0154-422F-B4C7-17BB38F4870E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E0E03DA-8378-404B-BE85-091B03CBFFAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E0E03DA-8378-404B-BE85-091B03CBFFAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E0E03DA-8378-404B-BE85-091B03CBFFAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E0E03DA-8378-404B-BE85-091B03CBFFAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -42,7 +42,8 @@ namespace QuickPay.Alipay.Util
         /// </summary>
         public static string AesEncrypt(string encryptKey, string text, string charset)
         {
-            var aesEncrypter = new AesEncryptor(encryptKey, InitIv(16));
+            var keyBytes = Convert.FromBase64String(encryptKey);
+            var aesEncrypter = new AesEncryptor(keyBytes, InitIv(16));
             return aesEncrypter.Encrypt(text, charset);
         }
 
@@ -50,7 +51,8 @@ namespace QuickPay.Alipay.Util
         /// </summary>
         public static string AesDecrypt(string encryptKey, string encryptedText, string charset)
         {
-            var aesEncrypter = new AesEncryptor(encryptKey, InitIv(16));
+            var keyBytes = Convert.FromBase64String(encryptKey);
+            var aesEncrypter = new AesEncryptor(keyBytes, InitIv(16));
             return aesEncrypter.Decrypt(encryptedText, charset);
         }
 

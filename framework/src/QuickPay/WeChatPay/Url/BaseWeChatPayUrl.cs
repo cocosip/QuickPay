@@ -14,19 +14,23 @@ namespace QuickPay.WeChatPay.Url
         /// </summary>
         public BaseWeChatPayUrl()
         {
-            RequestTypeUrlDict = new Dictionary<Type, string>();
-            RequestTypeUrlDict.Add(typeof(AppUnifiedOrderRequest), AppUnifiedOrderUrl);
-            RequestTypeUrlDict.Add(typeof(H5UnifiedOrderRequest), H5UnifiedOrderUrl);
-            RequestTypeUrlDict.Add(typeof(JsApiUnifiedOrderRequest), JsApiUnifiedOrderUrl);
-            RequestTypeUrlDict.Add(typeof(MicropayUnifiedOrderRequest), MicropayUnifiedOrderUrl);
-            RequestTypeUrlDict.Add(typeof(MiniProgramUnifiedOrderRequest), MiniProgramUnifiedOrderUrl);
-            RequestTypeUrlDict.Add(typeof(NativeMode2UnifiedOrderRequest), NativeMode2UnifiedOrderUrl);
-            RequestTypeUrlDict.Add(typeof(RefundQueryRequest), RefundQueryUrl);
-            RequestTypeUrlDict.Add(typeof(DownloadBillRequest), DownloadBillUrl);
-            RequestTypeUrlDict.Add(typeof(OrderCloseRequest), OrderCloseUrl);
-            RequestTypeUrlDict.Add(typeof(OrderQueryRequest), OrderQueryUrl);
-            RequestTypeUrlDict.Add(typeof(OrderRefundRequest), OrderRefundUrl);
-            RequestTypeUrlDict.Add(typeof(ReportRequest), ReportUrl);
+            RequestTypeUrlDict = new Dictionary<Type, string>
+            {
+                { typeof(AppUnifiedOrderRequest), AppUnifiedOrderUrl },
+                { typeof(H5UnifiedOrderRequest), H5UnifiedOrderUrl },
+                { typeof(JsApiUnifiedOrderRequest), JsApiUnifiedOrderUrl },
+                { typeof(MicropayUnifiedOrderRequest), MicropayUnifiedOrderUrl },
+                { typeof(MiniProgramUnifiedOrderRequest), MiniProgramUnifiedOrderUrl },
+                { typeof(NativeMode2UnifiedOrderRequest), NativeMode2UnifiedOrderUrl },
+                { typeof(RefundQueryRequest), RefundQueryUrl },
+                { typeof(DownloadBillRequest), DownloadBillUrl },
+                { typeof(OrderCloseRequest), OrderCloseUrl },
+                { typeof(OrderQueryRequest), OrderQueryUrl },
+                { typeof(OrderRefundRequest), OrderRefundUrl },
+                { typeof(ReportRequest), ReportUrl },
+                { typeof(TransferToAccountRequest), TransferToAccountUrl }
+            };
+
         }
         /// <summary>H5下单地址
         /// </summary>
@@ -66,6 +70,14 @@ namespace QuickPay.WeChatPay.Url
         /// <summary>上报地址
         /// </summary>
         public abstract string ReportUrl { get; }
+
+        /// <summary>企业付款到帐号地址
+        /// </summary>
+        public abstract string TransferToAccountUrl { get; }
+
+        /// <summary>企业付款到银行卡地址
+        /// </summary>
+        public abstract string TransferToBankUrl { get; }
 
         /// <summary>获取请求类型的地址
         /// </summary>

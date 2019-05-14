@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.2043
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay", "src\QuickPay\QuickPay.csproj", "{8854BAB7-96B4-4E01-96E0-EFFD3FB3C755}"
 EndProject
@@ -22,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.Abp", "src\QuickPa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.AspNetCore.Mvc", "src\QuickPay.AspNetCore.Mvc\QuickPay.AspNetCore.Mvc.csproj", "{7FC4955F-0154-422F-B4C7-17BB38F4870E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickPay.Oracle", "src\QuickPay.Oracle\QuickPay.Oracle.csproj", "{6E0E03DA-8378-404B-BE85-091B03CBFFAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.Oracle", "src\QuickPay.Oracle\QuickPay.Oracle.csproj", "{6E0E03DA-8378-404B-BE85-091B03CBFFAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -41,5 +41,11 @@
         /// <summary>上报地址
         /// </summary>
         public override string ReportUrl => "https://api.mch.weixin.qq.com/payitil/report";
+        /// <summary>企业付款到帐号地址
+        /// </summary>
+        public override string TransferToAccountUrl => "https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers";
+        /// <summary>企业付款到银行卡地址
+        /// </summary>
+        public override string TransferToBankUrl => "https://api.mch.weixin.qq.com/mmpaysptrans/pay_bank";
     }
 }

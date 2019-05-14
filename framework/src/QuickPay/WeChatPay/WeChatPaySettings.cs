@@ -43,6 +43,19 @@
             public const string Wap = "Wap";
         }
 
+        /// <summary>付款到帐号CheckName
+        /// </summary>
+        public class TransferToAccountCheckName
+        {
+            /// <summary>不校验真实姓名 
+            /// </summary>
+            public const string NoCheck = "NO_CHECK";
+
+            /// <summary>强校验真实姓名
+            /// </summary>
+            public const string ForceCheck = "FORCE_CHECK";
+        }
+
         /// <summary>压缩类型
         /// </summary>
         public class TarType
@@ -99,6 +112,14 @@
             /// <summary>小程序传参的时候必须用JSAPI,但是本地记录需要用MINIPROGRAM
             /// </summary>
             public const string MiniProgram = "MINIPROGRAM";
+
+            /// <summary>企业付款到帐号
+            /// </summary>
+            public const string TransferToAccount = "TRANSFER";
+
+            /// <summary>企业付款到银行卡
+            /// </summary>
+            public const string TransferToBank = "TRANSFERTOBANK";
         }
 
         /// <summary>扩展交易类型,用于辅助

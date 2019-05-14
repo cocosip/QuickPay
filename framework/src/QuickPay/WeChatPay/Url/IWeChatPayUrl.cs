@@ -54,6 +54,14 @@ namespace QuickPay.WeChatPay.Url
         /// </summary>
         string ReportUrl { get; }
 
+        /// <summary>企业付款到帐号地址
+        /// </summary>
+        string TransferToAccountUrl { get; }
+
+        /// <summary>企业付款到银行卡地址
+        /// </summary>
+        string TransferToBankUrl { get; }
+
         /// <summary>获取请求类型的地址
         /// </summary>
         string GetRequestUrl(Type type);

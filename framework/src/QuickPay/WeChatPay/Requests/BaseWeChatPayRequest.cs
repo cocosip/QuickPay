@@ -47,16 +47,16 @@ namespace QuickPay.WeChatPay.Requests
         /// </summary>
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
         {
-            var wechatPayConfig = (WeChatPayConfig)config;
-            var wechatPayApp = (WeChatPayApp)app;
-            AppId = wechatPayApp.AppId;
-            MchId = wechatPayApp.MchId;
+            var weChatPayConfig = (WeChatPayConfig)config;
+            var weChatPayApp = (WeChatPayApp)app;
+            AppId = weChatPayApp.AppId;
+            MchId = weChatPayApp.MchId;
             NonceStr = WeChatPayUtil.GenerateNonceStr();
 
             if (SignTypeName.IsNullOrWhiteSpace())
             {
                 //签名类型
-                SignTypeName = wechatPayConfig.SignType;
+                SignTypeName = weChatPayConfig.SignType;
             }
         }
     }

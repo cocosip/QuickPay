@@ -73,6 +73,25 @@ namespace QuickPay.Assist.Store
             }
         }
 
+        /// <summary>根据平台Id,AppId,支付宝/微信返回的交易号,获取数据
+        /// </summary>
+        public async Task<Refund> GetByTransactionId(int payPlatId, string appId, string transactionId)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    var sql = $"SELECT TOP 1 * FROM [{_tableName}] WHERE PayPlatId=:PayPlatId AND AppId=:AppId AND TransactionId=:TransactionId";
+                    return await connection.QueryFirstOrDefaultAsync<Refund>(sql, new { PayPlatId = payPlatId, AppId = appId, TransactionId = transactionId });
+                }
+            }
+            catch (SqlException ex)
+            {
+                Logger.LogError($"获取退款信息Refund出错,PayPlatId:{payPlatId},AppId:{appId},TransactionId:{transactionId}.{ex.Message}");
+                throw;
+            }
+        }
+
         /// <summary>根据UniqueId获取退款信息
         /// </summary>
         public async Task<Refund> GetByUniqueIdAsync(string uniqueId)

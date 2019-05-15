@@ -15,5 +15,9 @@
         /// <summary>退款存储的表名
         /// </summary>
         public string RefundTableName { get; set; } = "QP_Refunds";
+
+        /// <summary>转账存储的表名
+        /// </summary>
+        public string TransferTableName { get; set; } = "QP_Transfers";
     }
 }

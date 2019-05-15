@@ -14,6 +14,10 @@ namespace QuickPay.Assist.Store
         /// </summary>
         Task<Payment> GetAsync(int payPlatId, string appId, string outTradeNo);
 
+        /// <summary>根据平台Id,AppId,支付宝/微信返回的交易号,获取数据
+        /// </summary>
+        Task<Payment> GetByTransactionId(int payPlatId, string appId, string transactionId);
+
         /// <summary>根据UniqueId获取支付信息
         /// </summary>
         Task<Payment> GetByUniqueIdAsync(string uniqueId);

@@ -20,6 +20,7 @@ namespace QuickPay
 
             services.AddTransient<IPaymentStore, SqlServerPaymentStore>();
             services.AddTransient<IRefundStore, SqlServerRefundStore>();
+            services.AddTransient<ITransferStore, SqlServerTransferStore>();
             return services;
         }
     }

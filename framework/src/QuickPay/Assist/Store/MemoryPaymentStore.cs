@@ -48,6 +48,15 @@ namespace QuickPay.Assist.Store
             return payment;
         }
 
+        /// <summary>根据平台Id,AppId,支付宝/微信返回的交易号,获取数据
+        /// </summary>
+        public async Task<Payment> GetByTransactionId(int payPlatId,string appId,string transactionId)
+        {
+            var paymentList = await GetList();
+            var payment = paymentList.FirstOrDefault(x => x.PayPlatId == payPlatId && x.AppId == appId && x.TransactionId == transactionId);
+            return payment;
+        }
+
 
         /// <summary>根据UniqueId获取支付信息
         /// </summary>

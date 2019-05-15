@@ -1,10 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using QuickPay.Alipay.Apps;
 using QuickPay.Assist.Store;
-using QuickPay.Configurations;
-using QuickPay.WeChatPay.Apps;
-using QuickPay.WeChatPay.Authentication;
-using System;
 
 namespace QuickPay
 {
@@ -18,6 +13,7 @@ namespace QuickPay
         {
             services.AddTransient<IPaymentStore, AbpPaymentStore>();
             services.AddTransient<IRefundStore, AbpRefundStore>();
+            services.AddTransient<ITransferStore, AbpTransferStore>();
             return services;
         }
     }

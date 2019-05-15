@@ -25,7 +25,7 @@ namespace QuickPay.Assist.Store
         {
             try
             {
-                using(var connection = GetConnection())
+                using (var connection = GetConnection())
                 {
                     //根据UniqueId查询支付信息
                     var queryPayment = await GetByUniqueIdAsync(payment.UniqueId);
@@ -58,7 +58,7 @@ namespace QuickPay.Assist.Store
         {
             try
             {
-                using(var connection = GetConnection())
+                using (var connection = GetConnection())
                 {
                     var sql = $"SELECT TOP 1 * FROM [{_tableName}] WHERE PayPlatId=@PayPlatId AND AppId=@AppId AND OutTradeNo=@OutTradeNo";
                     return await connection.QueryFirstOrDefaultAsync<Payment>(sql, new { PayPlatId = payPlatId, AppId = appId, OutTradeNo = outTradeNo });
@@ -71,13 +71,32 @@ namespace QuickPay.Assist.Store
             }
         }
 
+        /// <summary>根据平台Id,AppId,支付宝/微信返回的交易号,获取数据
+        /// </summary>
+        public async Task<Payment> GetByTransactionId(int payPlatId, string appId, string transactionId)
+        {
+            try
+            {
+                using (var connection = GetConnection())
+                {
+                    var sql = $"SELECT TOP 1 * FROM [{_tableName}] WHERE PayPlatId=@PayPlatId AND AppId=@AppId AND TransactionId=@TransactionId";
+                    return await connection.QueryFirstOrDefaultAsync<Payment>(sql, new { PayPlatId = payPlatId, AppId = appId, TransactionId = transactionId });
+                }
+            }
+            catch (SqlException ex)
+            {
+                Logger.LogError($"获取支付信息Payment出错,PayPlatId:{payPlatId},AppId:{appId},TransactionId:{transactionId}.{ex.Message}");
+                throw;
+            }
+        }
+
         /// <summary>根据UniqueId获取支付信息
         /// </summary>
         public async Task<Payment> GetByUniqueIdAsync(string uniqueId)
         {
             try
             {
-                using(var connection = GetConnection())
+                using (var connection = GetConnection())
                 {
                     var sql = $"SELECT TOP 1 * FROM [{_tableName}] WHERE UniqueId=@UniqueId";
                     return await connection.QueryFirstOrDefaultAsync<Payment>(sql, new { UniqueId = uniqueId });

@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using QuickPay.Assist.Store;
-using QuickPay.WeChatPay;
-using QuickPay.WeChatPay.Authentication;
 using System;
 
 namespace QuickPay
@@ -20,6 +18,7 @@ namespace QuickPay
 
             services.AddTransient<IPaymentStore, OraclePaymentStore>();
             services.AddTransient<IRefundStore, OracleRefundStore>();
+            services.AddTransient<ITransferStore, OracleTransferStore>();
             return services;
         }
     }

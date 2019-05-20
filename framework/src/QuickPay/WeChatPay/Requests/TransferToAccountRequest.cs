@@ -9,6 +9,11 @@ namespace QuickPay.WeChatPay.Requests
     /// </summary>
     public class TransferToAccountRequest : BaseWeChatPayRequest<TransferToAccountResponse>
     {
+
+        /// <summary>交易类型名称
+        /// </summary>
+        public override string TradeTypeName => WeChatPaySettings.TradeType.TransferToAccount;
+
         /// <summary>AppId
         /// </summary>
         [PayElement("mch_appid")]
@@ -62,6 +67,8 @@ namespace QuickPay.WeChatPay.Requests
         [PayElement("re_user_name", false)]
         public string ReUserName { get; set; }
 
+
+ 
         /// <summary>Ctor
         /// </summary>
         public TransferToAccountRequest()

@@ -12,9 +12,9 @@ namespace QuickPay.Infrastructure.Requests
     {
         /// <summary>获取需要进行支付存储的类型
         /// </summary>
-        public List<Type> FindPaymentStoreTypies()
+        public List<Type> FindPaymentStoreTypes()
         {
-            var typies = new List<Type>
+            var types = new List<Type>
             {
                 //支付宝
                 typeof(AppTradePayRequest),
@@ -32,21 +32,21 @@ namespace QuickPay.Infrastructure.Requests
                 typeof(NativeMode2UnifiedOrderRequest),
                 typeof(MiniProgramUnifiedOrderRequest)
             };
-            return typies;
+            return types;
         }
 
         /// <summary>获取需要进行支付存储的类型
         /// </summary>
-        public List<Type> FindPaymentStoreTypies(Func<Type, bool> selector)
+        public List<Type> FindPaymentStoreTypes(Func<Type, bool> selector)
         {
-            return FindPaymentStoreTypies().Where(selector).ToList();
+            return FindPaymentStoreTypes().Where(selector).ToList();
         }
 
         /// <summary>获取需要进行退款存储的
         /// </summary>
-        public List<Type> FindRefundStoreTypies()
+        public List<Type> FindRefundStoreTypes()
         {
-            var typies = new List<Type>
+            var types = new List<Type>
             {
                 //支付宝
                 typeof(TradeRefundRequest),
@@ -54,14 +54,38 @@ namespace QuickPay.Infrastructure.Requests
                 //微信
                 typeof(OrderRefundRequest)
             };
-            return typies;
+            return types;
         }
 
         /// <summary>获取需要进行支付存储的类型
         /// </summary>
-        public List<Type> FindRefundStoreTypies(Func<Type, bool> selector)
+        public List<Type> FindRefundStoreTypes(Func<Type, bool> selector)
         {
-            return FindRefundStoreTypies().Where(selector).ToList();
+            return FindRefundStoreTypes().Where(selector).ToList();
+        }
+
+
+        /// <summary>获取需要进行转账存储的类型
+        /// </summary>
+        public List<Type> FindTransferTypes()
+        {
+            var typies = new List<Type>
+            {
+                //支付宝
+                typeof(TransferToAccountRequest),
+
+                //微信
+                typeof(TransferToAccountRequest),
+                typeof(TransferToBankCardRequest)
+            };
+            return typies;
+        }
+
+        /// <summary>获取需要进行转账存储的类型
+        /// </summary>
+        public List<Type> FindTransferTypes(Func<Type, bool> selector)
+        {
+            return FindTransferTypes().Where(selector).ToList();
         }
     }
 }

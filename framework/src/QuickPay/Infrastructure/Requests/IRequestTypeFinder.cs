@@ -9,18 +9,26 @@ namespace QuickPay.Infrastructure.Requests
     {
         /// <summary>获取需要进行支付存储的类型
         /// </summary>
-        List<Type> FindPaymentStoreTypies();
+        List<Type> FindPaymentStoreTypes();
 
         /// <summary>获取需要进行支付存储的类型
         /// </summary>
-        List<Type> FindPaymentStoreTypies(Func<Type, bool> selector);
+        List<Type> FindPaymentStoreTypes(Func<Type, bool> selector);
 
         /// <summary>获取需要进行退款存储的
         /// </summary>
-        List<Type> FindRefundStoreTypies();
+        List<Type> FindRefundStoreTypes();
 
         /// <summary>获取需要进行支付存储的类型
         /// </summary>
-        List<Type> FindRefundStoreTypies(Func<Type, bool> selector);
+        List<Type> FindRefundStoreTypes(Func<Type, bool> selector);
+
+        /// <summary>获取需要进行转账存储的类型
+        /// </summary>
+        List<Type> FindTransferTypes();
+
+        /// <summary>获取需要进行转账存储的类型
+        /// </summary>
+        List<Type> FindTransferTypes(Func<Type, bool> selector);
     }
 }

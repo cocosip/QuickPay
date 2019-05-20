@@ -119,7 +119,7 @@
 
             /// <summary>企业付款到银行卡
             /// </summary>
-            public const string TransferToBank = "TRANSFERTOBANK";
+            public const string TransferToBankCard = "TRANSFERTOBANKCARD";
         }
 
         /// <summary>扩展交易类型,用于辅助

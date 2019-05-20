@@ -99,7 +99,7 @@ namespace QuickPay.Middleware
 
         private bool ShouldStore(Type requestType)
         {
-            var refundTypies = _requestTypeFinder.FindRefundStoreTypies();
+            var refundTypies = _requestTypeFinder.FindRefundStoreTypes();
             if (refundTypies.Contains(requestType))
             {
                 return true;

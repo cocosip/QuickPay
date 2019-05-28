@@ -2,6 +2,7 @@
 using QuickPay.Alipay.Apps;
 using QuickPay.WeChatPay.Apps;
 using System.IO;
+using System.Text;
 using System.Xml;
 
 namespace QuickPay.Configurations
@@ -20,17 +21,17 @@ namespace QuickPay.Configurations
 
         /// <summary>读取支付宝和微信配置
         /// </summary>
-        public ConfigWapper TranslateToConfigWapper(string file, string format = QuickPaySettings.ConfigFormat.Json)
+        public ConfigWapper TranslateToConfigWapper(string file, string format = QuickPaySettings.ConfigFormat.Xml)
         {
             //检测配置文件是否存在
             if (!File.Exists(file))
             {
                 return default(ConfigWapper);
             }
-            var txt = File.ReadAllText(file).Trim();
             if (format == QuickPaySettings.ConfigFormat.Json)
             {
-                return _jsonSerializer.Deserialize<ConfigWapper>(txt);
+                var jsonContent = File.ReadAllText(file);
+                return _jsonSerializer.Deserialize<ConfigWapper>(jsonContent);
             }
             return LoadFromXml(file);
         }
@@ -120,5 +121,188 @@ namespace QuickPay.Configurations
             }
             return configWapper;
         }
+
+        /// <summary>将配置转换成文件内容
+        /// </summary>
+        public string TranslateToText(ConfigWapper configWapper, string format = QuickPaySettings.ConfigFormat.Xml)
+        {
+            if (format == QuickPaySettings.ConfigFormat.Json)
+            {
+                return _jsonSerializer.Serialize(configWapper);
+            }
+
+            var output = new StringBuilder();
+            output.AppendLine("<QuickPayConfig>");
+            //支付宝
+            output.Append(BuildAlipayXml(configWapper.AlipayConfig));
+            //微信
+            output.Append(BuildWeChatXml(configWapper.WechatPayConfig));
+            output.AppendLine("</QuickPayConfig>");
+            return output.ToString();
+
+        }
+
+        private string BuildAlipayXml(AlipayConfig alipayConfig)
+        {
+            var output = new StringBuilder();
+
+            output.AppendLine("<Alipay>");
+            output.AppendFormat("<Gateway>{0}", alipayConfig.Gateway);
+            output.AppendLine("</Gateway>");
+
+            output.AppendFormat("<SandboxGateway>{0}", alipayConfig.SandboxGateway);
+            output.AppendLine("</SandboxGateway>");
+            output.AppendFormat("<LocalAddress>{0}", alipayConfig.LocalAddress);
+            output.AppendLine("</LocalAddress>");
+
+            output.AppendFormat("<WebGateway>{0}", alipayConfig.WebGateway);
+            output.AppendLine("</WebGateway>");
+
+            output.AppendFormat("<NotifyGateway>{0}", alipayConfig.NotifyGateway);
+            output.AppendLine("</NotifyGateway>");
+
+            output.AppendFormat("<NotifyUrlFragments>{0}", alipayConfig.NotifyUrlFragments);
+            output.AppendLine("</NotifyUrlFragments>");
+
+            output.AppendFormat("<QrcodeNotifyUrlFragments>{0}", alipayConfig.QrcodeNotifyUrlFragments);
+            output.AppendLine("</QrcodeNotifyUrlFragments>");
+
+            output.AppendFormat("<BarcodeNotifyUrlFragments>{0}", alipayConfig.BarcodeNotifyUrlFragments);
+            output.AppendLine("</BarcodeNotifyUrlFragments>");
+
+            output.AppendFormat("<Format>{0}", alipayConfig.Format);
+            output.AppendLine("</Format>");
+
+            output.AppendFormat("<Version>{0}", alipayConfig.Version);
+            output.AppendLine("</Version>");
+
+            output.AppendFormat("<DefaultAppName>{0}", alipayConfig.DefaultAppName);
+            output.AppendLine("</DefaultAppName>");
+
+            output.AppendLine("<Apps>");
+            foreach (var app in alipayConfig.Apps)
+            {
+                output.AppendLine("<AlipayApp>");
+                output.AppendFormat("<Name>{0}", app.Name);
+                output.AppendLine("</Name>");
+
+                output.AppendFormat("<AppId>{0}", app.AppId);
+                output.AppendLine("</AppId>");
+
+                output.AppendFormat("<AppTypeId>{0}", app.AppTypeId);
+                output.AppendLine("</AppTypeId>");
+
+                output.AppendFormat("<Charset>{0}", app.Charset);
+                output.AppendLine("</Charset>");
+
+                output.AppendFormat("<PrivateKey>{0}", app.PrivateKey);
+                output.AppendLine("</PrivateKey>");
+
+                output.AppendFormat("<PublicKey>{0}", app.PublicKey);
+                output.AppendLine("</PublicKey>");
+
+                output.AppendFormat("<SignType>{0}", app.SignType);
+                output.AppendLine("</SignType>");
+
+                output.AppendFormat("<EnableEncrypt>{0}", app.EnableEncrypt);
+                output.AppendLine("</EnableEncrypt>");
+
+                output.AppendFormat("<EncryptType>{0}", app.EncryptType);
+                output.AppendLine("</EncryptType>");
+
+                output.AppendFormat("<EncryptKey>{0}", app.EncryptKey);
+                output.AppendLine("</EncryptKey>");
+
+                output.AppendLine("</AlipayApp>");
+            }
+
+            output.AppendLine("</Apps>");
+            output.AppendLine("</Alipay>");
+
+            return output.ToString();
+        }
+
+
+        private string BuildWeChatXml(WeChatPayConfig weChatPayConfig)
+        {
+            var output = new StringBuilder();
+
+            output.AppendLine("<WeChatPay>");
+
+            output.AppendFormat("<LocalAddress>{0}", weChatPayConfig.LocalAddress);
+            output.AppendLine("</LocalAddress>");
+
+            output.AppendFormat("<WebGateway>{0}", weChatPayConfig.WebGateway);
+            output.AppendLine("</WebGateway>");
+
+            output.AppendFormat("<NotifyGateway>{0}", weChatPayConfig.NotifyGateway);
+            output.AppendLine("</NotifyGateway>");
+
+            output.AppendFormat("<NotifyUrlFragments>{0}", weChatPayConfig.NotifyUrlFragments);
+            output.AppendLine("</NotifyUrlFragments>");
+
+            output.AppendFormat("<DefaultAppName>{0}", weChatPayConfig.DefaultAppName);
+            output.AppendLine("</DefaultAppName>");
+
+            output.AppendFormat("<SignType>{0}", weChatPayConfig.SignType);
+            output.AppendLine("</SignType>");
+
+            output.AppendFormat("<SslPassword>{0}", weChatPayConfig.SslPassword);
+            output.AppendLine("</SslPassword>");
+
+            output.AppendLine("<Apps>");
+            foreach (var app in weChatPayConfig.Apps)
+            {
+                output.AppendLine("<WeChatPayApp>");
+                output.AppendFormat("<Name>{0}", app.Name);
+                output.AppendLine("</Name>");
+
+                output.AppendFormat("<AppId>{0}", app.AppId);
+                output.AppendLine("</AppId>");
+
+                output.AppendFormat("<MchId>{0}", app.MchId);
+                output.AppendLine("</MchId>");
+
+                output.AppendFormat("<AppTypeId>{0}", app.AppTypeId);
+                output.AppendLine("</AppTypeId>");
+
+                output.AppendFormat("<Appsecret>{0}", app.Appsecret);
+                output.AppendLine("</Appsecret>");
+
+                output.AppendFormat("<Key>{0}", app.Key);
+                output.AppendLine("</Key>");
+
+                output.AppendLine("<NativeMobileInfo>");
+                var mobileInfo = app.NativeMobileInfo;
+                output.AppendFormat("<BundleId>{0}", mobileInfo.BundleId);
+                output.AppendLine("</BundleId>");
+
+                output.AppendFormat("<IosName>{0}", mobileInfo.IosName);
+                output.AppendLine("</IosName>");
+
+                output.AppendFormat("<AndroidName>{0}", mobileInfo.AndroidName);
+                output.AppendLine("</AndroidName>");
+
+                output.AppendFormat("<PackageName>{0}", mobileInfo.PackageName);
+                output.AppendLine("</PackageName>");
+
+                output.AppendFormat("<WapName>{0}", mobileInfo.WapName);
+                output.AppendLine("</WapName>");
+
+                output.AppendFormat("<WapUrl>{0}", mobileInfo.WapUrl);
+                output.AppendLine("</WapUrl>");
+
+                output.AppendLine("</NativeMobileInfo>");
+
+                output.AppendLine("</WeChatPayApp>");
+            }
+
+            output.AppendLine("</Apps>");
+
+            output.AppendLine("</WeChatPay>");
+
+            return output.ToString();
+        }
+
     }
 }

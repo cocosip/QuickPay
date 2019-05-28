@@ -6,6 +6,10 @@
     {
         /// <summary>读取支付宝和微信配置
         /// </summary>
-        ConfigWapper TranslateToConfigWapper(string file, string format = QuickPaySettings.ConfigFormat.Json);
+        ConfigWapper TranslateToConfigWapper(string file, string format = QuickPaySettings.ConfigFormat.Xml);
+
+        /// <summary>将配置转换成文件内容
+        /// </summary>
+        string TranslateToText(ConfigWapper configWapper, string format = QuickPaySettings.ConfigFormat.Xml);
     }
 }

@@ -118,7 +118,14 @@ namespace QuickPay.WeChatPay.Util
         /// </summary>
         public string GetResultCode(PayData payData)
         {
-            return payData.GetValue(x => string.Equals(x.Key, "transaction_id", StringComparison.OrdinalIgnoreCase)).ToString();
+            return payData.GetValue(x => string.Equals(x.Key, "result_code", StringComparison.OrdinalIgnoreCase)).ToString();
+        }
+
+          /// <summary>获取ReturnCode
+        /// </summary>
+        public string GetReturnCode(PayData payData)
+        {
+            return payData.GetValue(x => string.Equals(x.Key, "return_code", StringComparison.OrdinalIgnoreCase)).ToString();
         }
 
         /// <summary>字典转换成Json

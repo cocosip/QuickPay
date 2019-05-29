@@ -83,7 +83,7 @@ namespace QuickPay.ConsoleTest
             var provider = services.BuildServiceProvider();
             //配置
             provider
-                .UseDotCommon()
+                .ConfigureDotCommon()
                 .UseQuickPay();
             return provider;
         }

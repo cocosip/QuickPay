@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="WeChat.Framework.SqlServer" Version="0.1.2" />
+    <PackageReference Include="WeChat.Framework.SqlServer" Version="0.1.7" />
   </ItemGroup>
 
   <ItemGroup>

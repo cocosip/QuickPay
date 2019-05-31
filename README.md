@@ -1,6 +1,6 @@
 # QuickPay 组件
 
-[![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/cocosip/QuickPay/blob/master/LICENSE) [![Build Status](https://travis-ci.com/cocosip/QuickPay.svg?branch=master)](https://travis-ci.com/cocosip/QuickPay) ![GitHub last commit](https://img.shields.io/github/last-commit/cocosip/QuickPay.svg) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/cocosip/QuickPay.svg)
+[![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/cocosip/QuickPay/blob/master/LICENSE) [![Build status](https://ci.appveyor.com/api/projects/status/4l8g9noa51qo8nj6?svg=true)](https://ci.appveyor.com/project/cocosip/quickpay) ![GitHub last commit](https://img.shields.io/github/last-commit/cocosip/QuickPay.svg) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/cocosip/QuickPay.svg)
 
 | Package  | Version | Downloads|
 | -------- | ------- | -------- |

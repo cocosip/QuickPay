@@ -10,7 +10,7 @@ image:
 configuration: Release
 environment:
   APPVEYOR_YML_DISABLE_PS_LINUX: true
-
+build: off
 build_script:
 - ps: ./build.ps1
 - sh: chmod +x ./build.sh

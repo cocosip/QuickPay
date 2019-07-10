@@ -119,6 +119,8 @@ namespace QuickPay.Configurations
                 };
                 configWapper.WechatPayConfig.Apps.Add(weChatPayApp);
             }
+            //关闭xml读取流,避免新配置文件无法覆盖
+            reader.Close();
             return configWapper;
         }
 

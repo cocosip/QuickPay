@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace QuickPay.Middleware.Pipeline
 {
@@ -18,10 +19,10 @@ namespace QuickPay.Middleware.Pipeline
         public IServiceProvider Provider { get; }
         /// <summary>Ctor
         /// </summary>
-        public QuickPayPipelineBuilder(ILogger<QuickPayLoggerName> logger, IServiceProvider provider)
+        public QuickPayPipelineBuilder(IServiceProvider provider)
         {
-            _logger = logger;
             Provider = provider;
+            _logger = Provider.GetService<ILoggerFactory>().CreateLogger(QuickPaySettings.LoggerName);
             _middlewares = new List<Func<QuickPayExecuteDelegate, QuickPayExecuteDelegate>>();
         }
 

@@ -51,7 +51,7 @@ namespace QuickPay.WeChatPay.Services.Impl
         {
             WeChatPayAppOverrideScopeProvider = provider.GetService<IAmbientScopeProvider<WeChatPayAppOverride>>();
             Config = provider.GetService<WeChatPayConfig>();
-            Logger = provider.GetService<ILogger<QuickPayLoggerName>>();
+            Logger = provider.GetService<ILoggerFactory>().CreateLogger(QuickPaySettings.LoggerName);
             Executer = provider.GetService<IRequestExecuter>();
             NotifyTypeFinder = provider.GetService<INotifyTypeFinder>();
             ObjectMapper = provider.GetService<IObjectMapper>();

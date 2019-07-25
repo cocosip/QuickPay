@@ -1,16 +1,17 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace QuickPay.Middleware
 {
     /// <summary>结尾管道
     /// </summary>
-    public class EndMiddleware: QuickPayMiddleware
+    public class EndMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
 
         /// <summary>Ctor
         /// </summary>
-        public EndMiddleware(QuickPayExecuteDelegate next)
+        public EndMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next) : base(provider)
         {
             _next = next;
         }

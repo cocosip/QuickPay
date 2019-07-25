@@ -2,11 +2,11 @@
 using Microsoft.Extensions.Logging;
 using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Requests;
+using QuickPay.Assist;
+using QuickPay.Assist.Store;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Infrastructure.Util;
-using QuickPay.Assist;
-using QuickPay.Assist.Store;
 using QuickPay.WeChatPay.Apps;
 using System;
 using System.Threading.Tasks;
@@ -22,10 +22,9 @@ namespace QuickPay.Middleware
         private readonly IRequestTypeFinder _requestTypeFinder;
         /// <summary>Ctor
         /// </summary>
-        public RefundStoreMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, IRefundStore refundStore, IRequestTypeFinder requestTypeFinder)
+        public RefundStoreMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next, IRefundStore refundStore, IRequestTypeFinder requestTypeFinder) : base(provider)
         {
             _next = next;
-            Logger = logger;
             _refundStore = refundStore;
             _requestTypeFinder = requestTypeFinder;
         }

@@ -10,11 +10,11 @@ namespace QuickPay.Assist.Store
     /// </summary>
     public class OraclePaymentStore : BaseOracleStore, IPaymentStore
     {
-        private string _tableName;
+        private readonly string _tableName;
 
         /// <summary>Ctor
         /// </summary>
-        public OraclePaymentStore(QuickPayOracleOption option, ILogger<QuickPayLoggerName> logger) : base(option, logger)
+        public OraclePaymentStore(ILoggerFactory loggerFactory, QuickPayOracleOption option) : base(loggerFactory, option)
         {
             _tableName = option.PaymentTableName;
         }

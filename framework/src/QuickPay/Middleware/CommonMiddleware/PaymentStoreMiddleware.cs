@@ -28,10 +28,9 @@ namespace QuickPay.Middleware
         private readonly IJsonSerializer _jsonSerializer;
         /// <summary>Ctor
         /// </summary>
-        public PaymentStoreMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, IPaymentStore paymentStore, IRequestTypeFinder requestTypeFinder, AlipayPayDataHelper alipayPayDataHelper, WeChatPayDataHelper weChatPayDataHelper, IJsonSerializer jsonSerializer)
+        public PaymentStoreMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next, IPaymentStore paymentStore, IRequestTypeFinder requestTypeFinder, AlipayPayDataHelper alipayPayDataHelper, WeChatPayDataHelper weChatPayDataHelper, IJsonSerializer jsonSerializer) : base(provider)
         {
             _next = next;
-            Logger = logger;
             _paymentStore = paymentStore;
             _requestTypeFinder = requestTypeFinder;
             _alipayPayDataHelper = alipayPayDataHelper;

@@ -15,10 +15,9 @@ namespace QuickPay.Middleware
         private readonly IHttpClient _httpClient;
         /// <summary>Ctor
         /// </summary>
-        public ExecuterExecutedMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, IHttpClient httpClient)
+        public ExecuterExecutedMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next, IHttpClient httpClient) : base(provider)
         {
             _next = next;
-            Logger = logger;
             _httpClient = httpClient;
         }
 

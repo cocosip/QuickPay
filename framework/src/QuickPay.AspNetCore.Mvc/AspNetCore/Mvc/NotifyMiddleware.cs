@@ -10,12 +10,12 @@ namespace QuickPay.AspNetCore.Mvc
     public class NotifyMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger<QuickPayLoggerName> _logger;
+        private readonly ILogger _logger;
         private readonly INotifyManager _notifyManager;
-        public NotifyMiddleware(RequestDelegate next, ILogger<QuickPayLoggerName> logger, INotifyManager notifyManager)
+        public NotifyMiddleware(RequestDelegate next, ILoggerFactory loggerFactory, INotifyManager notifyManager)
         {
             _next = next;
-            _logger = logger;
+            _logger = loggerFactory.CreateLogger(QuickPaySettings.LoggerName);
             _notifyManager = notifyManager;
         }
 

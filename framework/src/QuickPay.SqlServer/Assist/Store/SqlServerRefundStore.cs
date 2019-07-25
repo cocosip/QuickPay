@@ -16,7 +16,7 @@ namespace QuickPay.Assist.Store
 
         /// <summary>Ctor
         /// </summary>
-        public SqlServerRefundStore(QuickPaySqlServerOption option, ILogger<QuickPayLoggerName> logger) : base(option, logger)
+        public SqlServerRefundStore(ILoggerFactory loggerFactory, QuickPaySqlServerOption option) : base(loggerFactory, option)
         {
             _tableName = option.RefundTableName;
         }
@@ -27,7 +27,7 @@ namespace QuickPay.Assist.Store
         {
             try
             {
-                using(var connection = GetConnection())
+                using (var connection = GetConnection())
                 {
                     //根据UniqueId查询退款信息
                     var queryRefund = await GetByUniqueIdAsync(refund.UniqueId);
@@ -60,7 +60,7 @@ namespace QuickPay.Assist.Store
         {
             try
             {
-                using(var connection = GetConnection())
+                using (var connection = GetConnection())
                 {
                     var sql = $"SELECT TOP 1 * FROM [{_tableName}] WHERE PayPlatId=@PayPlatId AND AppId=@AppId AND OutRefundNo=@outRefundNo";
                     return await connection.QueryFirstOrDefaultAsync<Refund>(sql, new { PayPlatId = payPlatId, AppId = appId, OutRefundNo = outRefundNo });
@@ -98,7 +98,7 @@ namespace QuickPay.Assist.Store
         {
             try
             {
-                using(var connection = GetConnection())
+                using (var connection = GetConnection())
                 {
                     var sql = $"SELECT TOP 1 * FROM [{_tableName}] WHERE UniqueId=@UniqueId";
                     return await connection.QueryFirstOrDefaultAsync<Refund>(sql, new { UniqueId = uniqueId });
@@ -117,7 +117,7 @@ namespace QuickPay.Assist.Store
         {
             try
             {
-                using(var connection = GetConnection())
+                using (var connection = GetConnection())
                 {
                     var sql = $"SELECT * FROM [{_tableName}] WHERE PayPlatId=@PayPlatId AND AppId=@AppId AND OutTradeNo=@OutTradeNo";
                     return (await connection.QueryAsync<Refund>(sql, new { PayPlatId = payPlatId, AppId = appId, OutTradeNo = outTradeNo })).ToList();

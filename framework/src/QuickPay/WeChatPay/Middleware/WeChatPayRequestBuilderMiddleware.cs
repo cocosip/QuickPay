@@ -21,10 +21,9 @@ namespace QuickPay.WeChatPay.Middleware
         private readonly WeChatPayDataHelper _wechatPayDataHelper;
         /// <summary>Ctor
         /// </summary>
-        public WeChatPayRequestBuilderMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, QuickPayConfigurationOption option, IWeChatPayUrl wechatPayUrl, WeChatPayDataHelper wechatPayDataHelper)
+        public WeChatPayRequestBuilderMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next, QuickPayConfigurationOption option, IWeChatPayUrl wechatPayUrl, WeChatPayDataHelper wechatPayDataHelper) : base(provider)
         {
             _next = next;
-            Logger = logger;
             _option = option;
             _wechatPayUrl = wechatPayUrl;
             _wechatPayDataHelper = wechatPayDataHelper;

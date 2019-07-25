@@ -14,7 +14,7 @@ namespace QuickPay.Assist.Store
 
         /// <summary>Ctor
         /// </summary>
-        public OracleTransferStore(QuickPayOracleOption option, ILogger<QuickPayLoggerName> logger) : base(option, logger)
+        public OracleTransferStore(ILoggerFactory loggerFactory, QuickPayOracleOption option) : base(loggerFactory, option)
         {
             _tableName = option.TransferTableName;
         }

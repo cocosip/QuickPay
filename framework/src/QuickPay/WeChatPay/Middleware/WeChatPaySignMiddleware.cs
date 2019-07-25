@@ -20,10 +20,9 @@ namespace QuickPay.WeChatPay.Middleware
 
         /// <summary>Ctor
         /// </summary>
-        public WeChatPaySignMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, WeChatPayDataHelper wechatPayDataHelper)
+        public WeChatPaySignMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next, WeChatPayDataHelper wechatPayDataHelper) : base(provider)
         {
             _next = next;
-            Logger = logger;
             _wechatPayDataHelper = wechatPayDataHelper;
         }
 

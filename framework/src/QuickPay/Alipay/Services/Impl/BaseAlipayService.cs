@@ -1,5 +1,4 @@
-﻿using DotCommon.Logging;
-using DotCommon.ObjectMapping;
+﻿using DotCommon.ObjectMapping;
 using DotCommon.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -53,7 +52,7 @@ namespace QuickPay.Alipay.Services.Impl
             Config = provider.GetService<AlipayConfig>();
             Executer = provider.GetService<IRequestExecuter>();
             NotifyTypeFinder = provider.GetService<INotifyTypeFinder>();
-            Logger = provider.GetService<ILogger<QuickPayLoggerName>>();
+            Logger = provider.GetService<ILoggerFactory>().CreateLogger(QuickPaySettings.LoggerName);
             ObjectMapper = provider.GetService<IObjectMapper>();
         }
 

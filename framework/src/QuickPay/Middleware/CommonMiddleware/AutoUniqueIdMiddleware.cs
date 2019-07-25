@@ -17,10 +17,9 @@ namespace QuickPay.Middleware
         private readonly QuickPayExecuteDelegate _next;
         /// <summary>Ctor
         /// </summary>
-        public AutoUniqueIdMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger)
+        public AutoUniqueIdMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next) : base(provider)
         {
             _next = next;
-            Logger = logger;
         }
 
         /// <summary>Invoke

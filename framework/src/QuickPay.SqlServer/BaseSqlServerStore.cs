@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using QuickPay.Configurations;
 using System.Data.SqlClient;
 
 namespace QuickPay
@@ -17,10 +16,10 @@ namespace QuickPay
 
         /// <summary>Ctor
         /// </summary>
-        public BaseSqlServerStore(QuickPaySqlServerOption option, ILogger<QuickPayLoggerName> logger)
+        public BaseSqlServerStore(ILoggerFactory loggerFactory, QuickPaySqlServerOption option)
         {
             Option = option;
-            Logger = logger;
+            Logger = loggerFactory.CreateLogger(QuickPaySettings.LoggerName);
         }
 
         /// <summary>获取连接

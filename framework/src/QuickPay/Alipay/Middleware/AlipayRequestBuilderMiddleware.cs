@@ -18,10 +18,9 @@ namespace QuickPay.Alipay.Middleware
         private readonly QuickPayConfigurationOption _option;
         /// <summary>Ctor
         /// </summary>
-        public AlipayRequestBuilderMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, QuickPayConfigurationOption option)
+        public AlipayRequestBuilderMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next, QuickPayConfigurationOption option) : base(provider)
         {
             _next = next;
-            Logger = logger;
             _option = option;
         }
         /// <summary>Invoke

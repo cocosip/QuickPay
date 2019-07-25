@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using Oracle.ManagedDataAccess.Client;
-using QuickPay.Configurations;
-
 
 namespace QuickPay
 {
@@ -18,10 +16,10 @@ namespace QuickPay
 
         /// <summary>Ctor
         /// </summary>
-        public BaseOracleStore(QuickPayOracleOption option, ILogger<QuickPayLoggerName> logger)
+        public BaseOracleStore(ILoggerFactory loggerFactory, QuickPayOracleOption option)
         {
             Option = option;
-            Logger = logger;
+            Logger = loggerFactory.CreateLogger(QuickPaySettings.LoggerName);
         }
 
         /// <summary>获取连接

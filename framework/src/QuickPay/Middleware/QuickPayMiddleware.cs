@@ -2,7 +2,10 @@
 using Microsoft.Extensions.Logging.Abstractions;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
+using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.DependencyInjection;
+
 namespace QuickPay.Middleware
 {
     /// <summary>QuickPayMiddleware
@@ -13,15 +16,21 @@ namespace QuickPay.Middleware
         /// </summary>
         public string MiddlewareName => this.GetType().Name;
 
+        /// <summary>Provider
+        /// </summary>
+        protected IServiceProvider Provider { get; private set; }
+
         /// <summary>Logger
         /// </summary>
         protected ILogger Logger { get; set; }
 
+
         /// <summary>Ctor
         /// </summary>
-        public QuickPayMiddleware()
+        public QuickPayMiddleware(IServiceProvider provider)
         {
-            Logger = NullLogger.Instance;
+            Provider = provider;
+            Logger = provider.GetService<ILoggerFactory>().CreateLogger(QuickPaySettings.LoggerName);
         }
 
         /// <summary>设置错误信息

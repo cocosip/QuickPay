@@ -17,10 +17,9 @@ namespace QuickPay.Alipay.Middleware
         private readonly AlipayPayDataHelper _alipayPayDataHelper;
         /// <summary>Ctor
         /// </summary>
-        public AlipaySignMiddleware(QuickPayExecuteDelegate next, ILogger<QuickPayLoggerName> logger, AlipayPayDataHelper alipayPayDataHelper)
+        public AlipaySignMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next, AlipayPayDataHelper alipayPayDataHelper) : base(provider)
         {
             _next = next;
-            Logger = logger;
             _alipayPayDataHelper = alipayPayDataHelper;
         }
 

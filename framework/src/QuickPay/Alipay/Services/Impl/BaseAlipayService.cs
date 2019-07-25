@@ -1,4 +1,5 @@
 ﻿using DotCommon.Logging;
+using DotCommon.ObjectMapping;
 using DotCommon.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -40,6 +41,10 @@ namespace QuickPay.Alipay.Services.Impl
         /// </summary>
         protected ILogger Logger { get; }
 
+        /// <summary>对象映射
+        /// </summary>
+        protected IObjectMapper ObjectMapper { get; }
+
         /// <summary>Ctor
         /// </summary>
         public BaseAlipayService(IServiceProvider provider)
@@ -49,7 +54,7 @@ namespace QuickPay.Alipay.Services.Impl
             Executer = provider.GetService<IRequestExecuter>();
             NotifyTypeFinder = provider.GetService<INotifyTypeFinder>();
             Logger = provider.GetService<ILogger<QuickPayLoggerName>>();
-
+            ObjectMapper = provider.GetService<IObjectMapper>();
         }
 
         /// <summary>Use

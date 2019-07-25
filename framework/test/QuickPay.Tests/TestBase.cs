@@ -9,6 +9,7 @@ using QuickPay.Configurations;
 using QuickPay.WeChatPay.Apps;
 using System;
 using WeChat.Framework;
+using DotCommon.AutoMapper;
 
 namespace QuickPay.Tests
 {
@@ -25,6 +26,7 @@ namespace QuickPay.Tests
                     c.AddLog4Net();
                 })
                 .AddDotCommon()
+                .AddDotCommonAutoMapper()
                 .AddGenericsMemoryCache()
                 .AddJson4Net()
                 .AddWeChatFramework() //微信基础框架使用内存存储AccessToken与JsTicket
@@ -32,12 +34,8 @@ namespace QuickPay.Tests
                 {
                     option.ConfigSourceType = ConfigSourceType.FromConfigFile;
                     option.ConfigFileName = "QuickPayConfig.xml";
-                });
-
-            Mapper.Initialize(config =>
-            {
-                config.CreateQuickPayMaps();
-            });
+                })
+                .BuildAutoMapper();
             Provider = services.BuildServiceProvider();
             //配置
             Provider

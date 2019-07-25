@@ -1,5 +1,4 @@
-﻿using DotCommon.AutoMapper;
-using DotCommon.Extensions;
+﻿using DotCommon.Extensions;
 using Microsoft.Extensions.Logging;
 using QuickPay.WeChatPay.Requests;
 using QuickPay.WeChatPay.Responses;
@@ -29,7 +28,7 @@ namespace QuickPay.WeChatPay.Services.Impl
                 input.NotifyUrl = NotifyTypeFinder.FindUrlFragments(input.NotifyType);
             }
 
-            var request = input.MapTo<NativeMode2UnifiedOrderRequest>();
+            var request = ObjectMapper.Map<NativeMode2UnifiedOrderRequest>(input);
             var response = await Executer.ExecuteAsync<NativeMode2UnifiedOrderResponse>(request, App);
             return response?.CodeUrl;
         }
@@ -38,7 +37,7 @@ namespace QuickPay.WeChatPay.Services.Impl
         /// </summary>
         public async Task<string> Mode1CreateCode(NativeMode1CreateCodeInput input)
         {
-            var request = input.MapTo<NativeMode1CreateCodeRequest>();
+            var request = ObjectMapper.Map<NativeMode1CreateCodeRequest>(input);
             var response = await Executer.SignRequest<NativeMode1CreateCodeResponse>(request, App);
             //将签名后的Response转换成二维码
             return response.ToCodeUrl();
@@ -53,8 +52,8 @@ namespace QuickPay.WeChatPay.Services.Impl
             {
                 input.NotifyUrl = NotifyTypeFinder.FindUrlFragments(input.NotifyType);
             }
-            
-            var request = input.MapTo<NativeMode1UnifiedOrderRequest>();
+
+            var request = ObjectMapper.Map<NativeMode1UnifiedOrderRequest>(input);
             var response = await Executer.ExecuteAsync<NativeMode1UnifiedOrderResponse>(request, App);
             //响应与执行都成功
             if (response.ReturnSuccess && response.ResultSuccess)

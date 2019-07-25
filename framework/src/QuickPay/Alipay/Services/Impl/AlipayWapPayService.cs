@@ -1,7 +1,4 @@
-﻿using DotCommon.AutoMapper;
-using DotCommon.Extensions;
-using DotCommon.Threading;
-using QuickPay.Alipay.Apps;
+﻿using DotCommon.Extensions;
 using QuickPay.Alipay.Requests;
 using QuickPay.Alipay.Responses;
 using QuickPay.Alipay.Services.DTOs;
@@ -30,7 +27,7 @@ namespace QuickPay.Alipay.Services.Impl
             {
                 input.NotifyUrl = NotifyTypeFinder.FindUrlFragments(input.NotifyType);
             }
-            var bizContentRequest = input.MapTo<WapTradeBizContentPayRequest>();
+            var bizContentRequest = ObjectMapper.Map<WapTradeBizContentPayRequest>(input);
             var request = new WapTradePayRequest(bizContentRequest, input.ReturnUrl, input.NotifyUrl);
             var response = await Executer.SignRequest<WapTradePayResponse>(request, App);
             return response;

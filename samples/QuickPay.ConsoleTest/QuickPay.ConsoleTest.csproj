@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="WeChat.Framework.SqlServer" Version="0.1.9" />
-    <PackageReference Include="DotCommon.Log4Net" Version="3.0.5" />
+    <PackageReference Include="WeChat.Framework.SqlServer" Version="0.2.0" />
+    <PackageReference Include="DotCommon.Log4Net" Version="3.0.7" />
 
   </ItemGroup>
 

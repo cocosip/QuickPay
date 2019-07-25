@@ -10,17 +10,17 @@ namespace QuickPay.Tests.WeChatPay.Services
 {
     public class WechatJsApiPayServiceTest : TestBase
     {
-        [Fact]
-        public void UnifiedOrder_Test()
-        {
-            var jsApiService = Provider.GetService<IWeChatJsApiPayService>();
-            using (jsApiService.Use(WechatPayConfig.GetByName("App2")))
-            {
-                var input = new JsApiUnifiedOrderInput("JsApi支付测试", ObjectId.GenerateNewStringId(), 1, "8.8.8.8", "http://114.55.101.33", "opaInxF28ub-ea5JVrZOosDHyXZY");
-                var response = AsyncHelper.RunSync(() => jsApiService.UnifiedOrder(input));
-                Assert.Equal(response.AppId, jsApiService.App.AppId);
-            }
-        }
+        //[Fact]
+        //public void UnifiedOrder_Test()
+        //{
+        //    var jsApiService = Provider.GetService<IWeChatJsApiPayService>();
+        //    using (jsApiService.Use(WechatPayConfig.GetByName("App2")))
+        //    {
+        //        var input = new JsApiUnifiedOrderInput("JsApi支付测试", ObjectId.GenerateNewStringId(), 1, "8.8.8.8", "http://114.55.101.33", "opaInxF28ub-ea5JVrZOosDHyXZY");
+        //        var response = AsyncHelper.RunSync(() => jsApiService.UnifiedOrder(input));
+        //        Assert.Equal(response.AppId, jsApiService.App.AppId);
+        //    }
+        //}
 
         // [Fact]
         // public void GetJsSdkConfig_Test()

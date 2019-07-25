@@ -1,7 +1,4 @@
-﻿using DotCommon.AutoMapper;
-using DotCommon.Threading;
-using Microsoft.Extensions.Logging;
-using QuickPay.WeChatPay.Apps;
+﻿using Microsoft.Extensions.Logging;
 using QuickPay.WeChatPay.Requests;
 using QuickPay.WeChatPay.Responses;
 using QuickPay.WeChatPay.Services.DTOs;
@@ -25,7 +22,7 @@ namespace QuickPay.WeChatPay.Services.Impl
         /// </summary>
         public async Task<MiniProgramUnifiedOrderCallResponse> UnifiedOrder(MiniProgramUnifiedOrderInput input)
         {
-            var request = input.MapTo<MiniProgramUnifiedOrderRequest>();
+            var request = ObjectMapper.Map<MiniProgramUnifiedOrderRequest>(input);
             var response = await Executer.ExecuteAsync<MiniProgramUnifiedOrderResponse>(request, App);
 
             //响应与执行都成功

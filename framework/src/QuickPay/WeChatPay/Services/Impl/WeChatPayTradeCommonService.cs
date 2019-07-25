@@ -1,7 +1,4 @@
-﻿using DotCommon.AutoMapper;
-using DotCommon.Threading;
-using QuickPay.WeChatPay.Apps;
-using QuickPay.WeChatPay.Requests;
+﻿using QuickPay.WeChatPay.Requests;
 using QuickPay.WeChatPay.Responses;
 using QuickPay.WeChatPay.Services.DTOs;
 using System;
@@ -24,7 +21,7 @@ namespace QuickPay.WeChatPay.Services.Impl
         /// </summary>
         public async Task<OrderQueryResponse> OrderQuery(OrderQueryInput input)
         {
-            var request = input.MapTo<OrderQueryRequest>();
+            var request = ObjectMapper.Map<OrderQueryRequest>(input);
             var response = await Executer.ExecuteAsync<OrderQueryResponse>(request, App);
             return response;
         }
@@ -43,7 +40,7 @@ namespace QuickPay.WeChatPay.Services.Impl
         /// </summary>
         public async Task<OrderRefundResponse> Refund(OrderRefundInput input)
         {
-            var request = input.MapTo<OrderRefundRequest>();
+            var request = ObjectMapper.Map<OrderRefundRequest>(input);
             var response = await Executer.ExecuteAsync<OrderRefundResponse>(request, App);
             return response;
         }
@@ -52,7 +49,7 @@ namespace QuickPay.WeChatPay.Services.Impl
         /// </summary>
         public async Task<RefundQueryResponse> RefundQuery(RefundQueryInput input)
         {
-            var request = input.MapTo<RefundQueryRequest>();
+            var request = ObjectMapper.Map<RefundQueryRequest>(input);
             var response = await Executer.ExecuteAsync<RefundQueryResponse>(request, App);
             return response;
         }
@@ -61,7 +58,7 @@ namespace QuickPay.WeChatPay.Services.Impl
         /// </summary>
         public async Task<DownloadBillResponse> DownloadBill(DownloadBillInput input)
         {
-            var request = input.MapTo<DownloadBillRequest>();
+            var request = ObjectMapper.Map<DownloadBillRequest>(input);
             var response = await Executer.ExecuteAsync<DownloadBillResponse>(request, App);
             return response;
         }
@@ -70,7 +67,7 @@ namespace QuickPay.WeChatPay.Services.Impl
         /// </summary>
         public async Task<ReportResponse> Report(ReportInput input)
         {
-            var request = input.MapTo<ReportRequest>();
+            var request = ObjectMapper.Map<ReportRequest>(input);
             var response = await Executer.ExecuteAsync<ReportResponse>(request, App);
             return response;
         }

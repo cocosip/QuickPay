@@ -10,6 +10,8 @@ using QuickPay.WeChatPay.Apps;
 using System;
 using System.Collections.Generic;
 using WeChat.Framework;
+using DotCommon.AutoMapper;
+
 namespace QuickPay.ConsoleTest
 {
     public class Bootstraper
@@ -52,9 +54,11 @@ namespace QuickPay.ConsoleTest
                     c.AddLog4Net();
                 })
                 .AddDotCommon()
+                .AddDotCommonAutoMapper()
                 .AddJson4Net()
                 .AddGenericsMemoryCache()
-                .AddWeChatFramework() //微信基础框架
+                .AddWeChatFramework()
+                //微信基础框架
                 // .AddWeChatFrameworkSqlServer(o =>
                 // {
                 //     o.DbConnectionString = "数据库连接字符串"
@@ -69,17 +73,12 @@ namespace QuickPay.ConsoleTest
                 })
                 .AddTransient<WeChatPayDemoService>()
                 .AddTransient<AlipayDemoService>()
-            //.AddQuickPaySqlServer(o =>
-            //{
-            //    o.DbConnectionString = "";
-            //})
-            ;
+                //.AddQuickPaySqlServer(o =>
+                //{
+                //    o.DbConnectionString = "";
+                //})
+                .BuildAutoMapper();
 
-
-            Mapper.Initialize(config =>
-            {
-                config.CreateQuickPayMaps();
-            });
             var provider = services.BuildServiceProvider();
             //配置
             provider

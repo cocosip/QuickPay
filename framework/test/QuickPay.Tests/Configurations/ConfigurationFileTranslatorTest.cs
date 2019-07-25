@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Xunit;
+using DotCommon.AutoMapper;
 
 namespace QuickPay.Tests.Configurations
 {
@@ -17,6 +18,7 @@ namespace QuickPay.Tests.Configurations
             IServiceCollection services = new ServiceCollection();
             services
                 .AddDotCommon()
+                .AddDotCommonAutoMapper()
                 .AddQuickPay(o => { });
 
             _provider = services.BuildServiceProvider();

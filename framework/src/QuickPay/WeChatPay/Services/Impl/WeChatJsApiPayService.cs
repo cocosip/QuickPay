@@ -1,9 +1,5 @@
-﻿using DotCommon.AutoMapper;
-using DotCommon.Extensions;
-using DotCommon.Threading;
+﻿using DotCommon.Extensions;
 using Microsoft.Extensions.Logging;
-using QuickPay.WeChatPay.Apps;
-using QuickPay.WeChatPay.Authentication;
 using QuickPay.WeChatPay.Requests;
 using QuickPay.WeChatPay.Responses;
 using QuickPay.WeChatPay.Services.DTOs;
@@ -35,7 +31,7 @@ namespace QuickPay.WeChatPay.Services.Impl
                 input.NotifyUrl = NotifyTypeFinder.FindUrlFragments(input.NotifyType);
             }
 
-            var request = input.MapTo<JsApiUnifiedOrderRequest>();
+            var request = ObjectMapper.Map<JsApiUnifiedOrderRequest>(input);
             var response = await Executer.ExecuteAsync<JsApiUnifiedOrderResponse>(request, App);
             //响应与执行都成功
             if (response.ReturnSuccess && response.ResultSuccess)

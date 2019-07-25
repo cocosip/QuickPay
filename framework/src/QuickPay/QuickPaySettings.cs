@@ -9,6 +9,10 @@
         /// </summary>
         public const string DefaultBusinessCode = "Default";
 
+        /// <summary>日志名称
+        /// </summary>
+        public const string LoggerName = "QuickPayLogger";
+
         /// <summary>配置格式
         /// </summary>
         public class ConfigFormat

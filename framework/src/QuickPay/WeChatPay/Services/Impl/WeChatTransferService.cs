@@ -22,7 +22,7 @@ namespace QuickPay.WeChatPay.Services.Impl
         /// </summary>
         public async Task<TransferToAccountResponse> TransferToAccount(TransferToAccountInput input)
         {
-            var request = input.MapTo<TransferToAccountRequest>();
+            var request = ObjectMapper.Map<TransferToAccountRequest>(input);
             var response = await Executer.ExecuteAsync<TransferToAccountResponse>(request, App);
             if (response.ReturnSuccess)
             {

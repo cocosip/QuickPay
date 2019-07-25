@@ -1,4 +1,5 @@
-﻿using DotCommon.Threading;
+﻿using DotCommon.ObjectMapping;
+using DotCommon.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using QuickPay.Infrastructure.Executers;
@@ -40,6 +41,9 @@ namespace QuickPay.WeChatPay.Services.Impl
         /// </summary>
         protected ILogger Logger { get; }
 
+        /// <summary>对象映射
+        /// </summary>
+        protected IObjectMapper ObjectMapper { get; }
 
         /// <summary>Ctor
         /// </summary>
@@ -50,6 +54,7 @@ namespace QuickPay.WeChatPay.Services.Impl
             Logger = provider.GetService<ILogger<QuickPayLoggerName>>();
             Executer = provider.GetService<IRequestExecuter>();
             NotifyTypeFinder = provider.GetService<INotifyTypeFinder>();
+            ObjectMapper = provider.GetService<IObjectMapper>();
         }
 
         /// <summary>Use

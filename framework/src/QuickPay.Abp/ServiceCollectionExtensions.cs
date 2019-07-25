@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DotCommon.AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
+using QuickPay.Assist;
 using QuickPay.Assist.Store;
 
 namespace QuickPay
@@ -11,9 +13,11 @@ namespace QuickPay
         /// </summary>
         public static IServiceCollection AddQuickPayAbp(this IServiceCollection services)
         {
-            services.AddTransient<IPaymentStore, AbpPaymentStore>();
-            services.AddTransient<IRefundStore, AbpRefundStore>();
-            services.AddTransient<ITransferStore, AbpTransferStore>();
+            services
+                .AddTransient<IPaymentStore, AbpPaymentStore>()
+                .AddTransient<IRefundStore, AbpRefundStore>()
+                .AddTransient<ITransferStore, AbpTransferStore>()
+                .AddAssemblyAutoMaps(typeof(AbpPayment).Assembly);
             return services;
         }
     }

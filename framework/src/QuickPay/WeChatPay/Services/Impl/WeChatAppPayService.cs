@@ -30,7 +30,7 @@ namespace QuickPay.WeChatPay.Services.Impl
                 input.NotifyUrl = NotifyTypeFinder.FindUrlFragments(input.NotifyType);
             }
 
-            var request = input.MapTo<AppUnifiedOrderRequest>();
+            var request = ObjectMapper.Map<AppUnifiedOrderRequest>(input);
             var response = await Executer.ExecuteAsync<AppUnifiedOrderResponse>(request, App);
             if (response.ReturnSuccess)
             {

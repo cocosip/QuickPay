@@ -1,5 +1,5 @@
 ﻿using Abp.Domain.Repositories;
-using DotCommon.AutoMapper;
+using DotCommon.ObjectMapping;
 using System.Threading.Tasks;
 
 namespace QuickPay.Assist.Store
@@ -8,11 +8,13 @@ namespace QuickPay.Assist.Store
     /// </summary>
     public class AbpPaymentStore : IPaymentStore
     {
+        private readonly IObjectMapper _objectMapper;
         private readonly IRepository<AbpPayment> _abpPaymentRepository;
         /// <summary>Ctor
         /// </summary>
-        public AbpPaymentStore(IRepository<AbpPayment> abpPaymentRepository)
+        public AbpPaymentStore(IObjectMapper objectMapper, IRepository<AbpPayment> abpPaymentRepository)
         {
+            _objectMapper = objectMapper;
             _abpPaymentRepository = abpPaymentRepository;
         }
 
@@ -24,12 +26,12 @@ namespace QuickPay.Assist.Store
             if (abpPayment == null)
             {
                 //Create
-                abpPayment = payment.MapTo<AbpPayment>();
+                abpPayment = _objectMapper.Map<AbpPayment>(payment);
                 await _abpPaymentRepository.InsertAsync(abpPayment);
             }
             else
             {
-                payment.MapTo(abpPayment);
+                _objectMapper.Map(payment, abpPayment);
             }
         }
 
@@ -38,7 +40,7 @@ namespace QuickPay.Assist.Store
         public async Task<Payment> GetAsync(int payPlatId, string appId, string outTradeNo)
         {
             var abpPayment = await _abpPaymentRepository.FirstOrDefaultAsync(x => x.PayPlatId == payPlatId && x.AppId == appId && x.OutTradeNo == outTradeNo);
-            return abpPayment.MapTo<Payment>();
+            return _objectMapper.Map<Payment>(abpPayment);
         }
 
         /// <summary>根据平台Id,AppId,支付宝/微信返回的交易号,获取数据
@@ -46,7 +48,7 @@ namespace QuickPay.Assist.Store
         public async Task<Payment> GetByTransactionId(int payPlatId, string appId, string transactionId)
         {
             var abpPayment = await _abpPaymentRepository.FirstOrDefaultAsync(x => x.PayPlatId == payPlatId && x.AppId == appId && x.TransactionId == transactionId);
-            return abpPayment.MapTo<Payment>();
+            return _objectMapper.Map<Payment>(abpPayment);
         }
 
 
@@ -55,7 +57,7 @@ namespace QuickPay.Assist.Store
         public async Task<Payment> GetByUniqueIdAsync(string uniqueId)
         {
             var abpPayment = await _abpPaymentRepository.FirstOrDefaultAsync(x => x.UniqueId == uniqueId);
-            return abpPayment.MapTo<Payment>();
+            return _objectMapper.Map<Payment>(abpPayment);
         }
 
     }

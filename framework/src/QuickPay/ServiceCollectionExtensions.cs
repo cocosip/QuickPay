@@ -20,6 +20,7 @@ using QuickPay.WeChatPay.Url;
 using QuickPay.WeChatPay.Util;
 using System;
 using System.Linq;
+using DotCommon.AutoMapper;
 
 namespace QuickPay
 {
@@ -50,10 +51,12 @@ namespace QuickPay
                 weChatPayOption(weChatPayConfig);
             }
 
-            services.AddSingleton<QuickPayConfigurationOption>(quickPayConfigurationOption)
+            services
+                .AddSingleton<QuickPayConfigurationOption>(quickPayConfigurationOption)
                 .UseWechatPaySandbox(quickPayConfigurationOption)
                 .RegisterQuickPay(alipayConfig, weChatPayConfig)
-                .RegisterPipeline();
+                .RegisterPipeline()
+                .AddAssemblyAutoMaps(typeof(ConfigWapper).Assembly);
             return services;
         }
 

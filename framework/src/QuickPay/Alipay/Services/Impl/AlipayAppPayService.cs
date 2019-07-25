@@ -30,7 +30,7 @@ namespace QuickPay.Alipay.Services.Impl
             {
                 input.NotifyUrl = NotifyTypeFinder.FindUrlFragments(input.NotifyType);
             }
-            var bizContentRequest = input.MapTo<AppTradeBizContentPayRequest>();
+            var bizContentRequest = ObjectMapper.Map<AppTradeBizContentPayRequest>(input);
             var request = new AppTradePayRequest(bizContentRequest, input.NotifyUrl);
             var response = await Executer.SignRequest<AppTradePayResponse>(request, App);
             return response;

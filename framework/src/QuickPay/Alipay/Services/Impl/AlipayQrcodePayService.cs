@@ -1,7 +1,4 @@
-﻿using DotCommon.AutoMapper;
-using DotCommon.Extensions;
-using DotCommon.Threading;
-using QuickPay.Alipay.Apps;
+﻿using DotCommon.Extensions;
 using QuickPay.Alipay.Requests;
 using QuickPay.Alipay.Responses;
 using QuickPay.Alipay.Services.DTOs;
@@ -30,7 +27,7 @@ namespace QuickPay.Alipay.Services.Impl
                 input.NotifyUrl = NotifyTypeFinder.FindUrlFragments(input.NotifyType);
             }
 
-            var bizContentRequest = input.MapTo<QrcodeTradeBizContentPayRequest>();
+            var bizContentRequest = ObjectMapper.Map<QrcodeTradeBizContentPayRequest>(input);
             var request = new QrcodeTradePayRequest(bizContentRequest, input.NotifyUrl);
             //发送请求到支付宝服务器
             var response = await Executer.ExecuteAsync<QrcodeTradePayResponse>(request, App);

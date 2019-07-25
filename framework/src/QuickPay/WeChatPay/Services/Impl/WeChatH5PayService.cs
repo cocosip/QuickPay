@@ -31,7 +31,7 @@ namespace QuickPay.WeChatPay.Services.Impl
                 input.NotifyUrl = NotifyTypeFinder.FindUrlFragments(input.NotifyType);
             }
 
-            var request = input.MapTo<H5UnifiedOrderRequest>();
+            var request = ObjectMapper.Map<H5UnifiedOrderRequest>(input);
             var sceneInfoDict = SceneInfoCreator.CreateScene(input.SceneType, App);
             request.SceneInfo = _wechatPayDataHelper.DictToJson(sceneInfoDict);
             //sceneInfoDict.ToJson(_jsonSerializer);

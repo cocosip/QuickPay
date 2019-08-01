@@ -43,6 +43,68 @@
             public const string Wap = "Wap";
         }
 
+        /// <summary>地址
+        /// </summary>
+        public class Urls
+        {
+            /// <summary>真实的基地址
+            /// </summary>
+            public const string RealBaseUrl = "https://api.mch.weixin.qq.com";
+
+            /// <summary>沙盒基地址
+            /// </summary>
+            public const string SandboxBaseUrl = "https://api.mch.weixin.qq.com/sendbox";
+
+        }
+
+        /// <summary>微信支付请求的Url的Resource
+        /// </summary>
+        public class Resources
+        {
+            /// <summary>H5下单地址
+            /// </summary>
+            public const string H5UnifiedOrder = "/pay/unifiedorder";
+            /// <summary>JsApi下单地址
+            /// </summary>
+            public const string JsApiUnifiedOrder = "/pay/unifiedorder";
+            /// <summary>App下单
+            /// </summary>
+            public const string AppUnifiedOrder = "/pay/unifiedorder";
+            /// <summary>刷卡支付地址
+            /// </summary>
+            public const string MicropayUnifiedOrder = "/pay/unifiedorder";
+            /// <summary>小程序支付地址
+            /// </summary>
+            public const string MiniProgramUnifiedOrder = "/pay/unifiedorder";
+            /// <summary>扫码支付场景二地址
+            /// </summary>
+            public const string NativeMode2UnifiedOrder = "/pay/unifiedorder";
+            /// <summary>退款地址
+            /// </summary>
+            public const string RefundQuery = "/pay/refundquery";
+            /// <summary>下载订单地址
+            /// </summary>
+            public const string DownloadBill = "/pay/downloadbill";
+            /// <summary>订单关闭地址
+            /// </summary>
+            public const string OrderClose = "/pay/closeorder";
+            /// <summary>订单查询地址
+            /// </summary>
+            public const string OrderQuery = "/pay/orderquery";
+            /// <summary>订单退款地址
+            /// </summary>
+            public const string OrderRefund = "/secapi/pay/refund";
+            /// <summary>上报地址
+            /// </summary>
+            public const string Report = "/payitil/report";
+            /// <summary>企业付款到帐号地址
+            /// </summary>
+            public const string TransferToAccount = "/mmpaymkttransfers/promotion/transfers";
+            /// <summary>企业付款到银行卡地址
+            /// </summary>
+            public const string TransferToBank = "/mmpaysptrans/pay_bank";
+        }
+
         /// <summary>付款到帐号CheckName
         /// </summary>
         public class TransferToAccountCheckName

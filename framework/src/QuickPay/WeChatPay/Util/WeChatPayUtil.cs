@@ -4,7 +4,6 @@ using DotCommon.Utility;
 using QuickPay.Infrastructure.RequestData;
 using QuickPay.WeChatPay.Apps;
 using System;
-using System.Security.Cryptography;
 
 namespace QuickPay.WeChatPay.Util
 {
@@ -12,6 +11,7 @@ namespace QuickPay.WeChatPay.Util
     /// </summary>
     public class WeChatPayUtil
     {
+
         /// <summary>生成时间戳，标准北京时间，时区为东八区，自1970年1月1日 0点0分0秒以来的秒数
         /// </summary>
         public static string GenerateTimeStamp()

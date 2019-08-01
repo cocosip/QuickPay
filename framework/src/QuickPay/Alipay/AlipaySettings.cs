@@ -29,6 +29,20 @@
             public const string FaceToFace = "FACE_TO_FACE_PAYMENT";
         }
 
+        /// <summary>地址
+        /// </summary>
+        public class Urls
+        {
+            /// <summary>真实的基地址
+            /// </summary>
+            public const string Gateway = "https://openapi.alipay.com/gateway.do";
+
+            /// <summary>沙盒基地址
+            /// </summary>
+            public const string SandboxGateway = "https://openapi.alipaydev.com/gateway.do";
+
+        }
+
         /// <summary>调用结果
         /// </summary>
         public class ReturnCode
@@ -51,9 +65,6 @@
             public const string Fail = "Fail";
 
         }
-
-
-
 
         /// <summary>交易状态
         /// </summary>

@@ -53,27 +53,12 @@ namespace QuickPay
 
             services
                 .AddSingleton<QuickPayConfigurationOption>(quickPayConfigurationOption)
-                .UseWechatPaySandbox(quickPayConfigurationOption)
                 .RegisterQuickPay(alipayConfig, weChatPayConfig)
                 .RegisterPipeline()
                 .AddAssemblyAutoMaps(typeof(ConfigWapper).Assembly);
             return services;
         }
 
-        /// <summary>微信沙盒
-        /// </summary>
-        private static IServiceCollection UseWechatPaySandbox(this IServiceCollection services, QuickPayConfigurationOption option)
-        {
-            if (option.EnabledWeChatPaySandbox)
-            {
-                services.AddSingleton<IWeChatPayUrl, SandboxWeChatPayUrl>();
-            }
-            else
-            {
-                services.AddSingleton<IWeChatPayUrl, RealWeChatPayUrl>();
-            }
-            return services;
-        }
 
         /// <summary>注册QuickPay需要的配置
         /// </summary>

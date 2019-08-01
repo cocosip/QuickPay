@@ -1,10 +1,9 @@
-﻿using DotCommon.Http;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using QuickPay.Alipay.Apps;
-using QuickPay.Configurations;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Middleware;
+using RestSharp;
 using System;
 using System.Threading.Tasks;
 
@@ -15,13 +14,12 @@ namespace QuickPay.Alipay.Middleware
     public class AlipayRequestBuilderMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
-        private readonly QuickPayConfigurationOption _option;
+
         /// <summary>Ctor
         /// </summary>
-        public AlipayRequestBuilderMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next, QuickPayConfigurationOption option) : base(provider)
+        public AlipayRequestBuilderMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next) : base(provider)
         {
             _next = next;
-            _option = option;
         }
         /// <summary>Invoke
         /// </summary>
@@ -35,15 +33,15 @@ namespace QuickPay.Alipay.Middleware
                     {
                         var app = (AlipayApp)context.App;
                         var config = (AlipayConfig)context.Config;
-                        var gateway = _option.EnabledAlipaySandbox ? config.SandboxGateway : config.Gateway;
+                        //var gateway = _option.EnabledAlipaySandbox ? config.SandboxGateway : config.Gateway;
 
+                        IRestRequest request = new RestRequest(Method.POST);
                         //构建Http
-                        IHttpRequest httpRequest = new HttpRequest(gateway, Method.POST);
                         foreach (var pValue in context.RequestPayData.GetValues())
                         {
-                            httpRequest.AddParameter(pValue.Key, pValue.Value);
+                            request.AddParameter(pValue.Key, pValue.Value);
                         }
-                        context.HttpRequest = httpRequest;
+                        context.HttpRequest = request;
 
                         Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
                     }

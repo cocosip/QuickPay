@@ -1,11 +1,11 @@
-﻿using DotCommon.Http;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using QuickPay.Configurations;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Middleware;
 using QuickPay.WeChatPay.Url;
 using QuickPay.WeChatPay.Util;
+using RestSharp;
 using System;
 using System.Threading.Tasks;
 
@@ -17,15 +17,13 @@ namespace QuickPay.WeChatPay.Middleware
     {
         private readonly QuickPayExecuteDelegate _next;
         private readonly QuickPayConfigurationOption _option;
-        private readonly IWeChatPayUrl _wechatPayUrl;
         private readonly WeChatPayDataHelper _wechatPayDataHelper;
         /// <summary>Ctor
         /// </summary>
-        public WeChatPayRequestBuilderMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next, QuickPayConfigurationOption option, IWeChatPayUrl wechatPayUrl, WeChatPayDataHelper wechatPayDataHelper) : base(provider)
+        public WeChatPayRequestBuilderMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next, QuickPayConfigurationOption option, WeChatPayDataHelper wechatPayDataHelper) : base(provider)
         {
             _next = next;
             _option = option;
-            _wechatPayUrl = wechatPayUrl;
             _wechatPayDataHelper = wechatPayDataHelper;
         }
 
@@ -40,15 +38,16 @@ namespace QuickPay.WeChatPay.Middleware
                     if (context.RequestHandler == QuickPaySettings.RequestHandler.Execute)
                     {
                         var requestXml = _wechatPayDataHelper.ToXml(context.RequestPayData);
-                        var requestUrl = _wechatPayUrl.GetRequestUrl(context.Request.GetType());
-                        if (requestUrl == null)
+                        var requestResource = WeChatPayUrlHelper.GetRequestResource(context.Request.GetType());
+                        if (requestResource == null)
                         {
                             SetPipelineError(context, new ExecuteError($"{QuickPaySettings.RequestHandler.Execute},必须要有请求url"));
                             return;
                         }
-                        IHttpRequest httpRequest = new HttpRequest(requestUrl, Method.POST);
-                        httpRequest.AddXmlBody(requestXml);
-                        context.HttpRequest = httpRequest;
+
+                        IRestRequest request = new RestRequest(requestResource, Method.POST,DataFormat.Xml);
+                        request.AddParameter("", requestXml, ParameterType.RequestBody);
+                        context.HttpRequest = request;
                     }
 
                     Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));

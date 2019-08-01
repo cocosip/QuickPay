@@ -41,11 +41,12 @@ namespace QuickPay.Alipay.Apps
 
         /// <summary>支付宝网关
         /// </summary>
-        public string Gateway { get; set; } = "https://openapi.alipay.com/gateway.do";
+        public string Gateway { get; set; } = AlipaySettings.Urls.Gateway;
 
         /// <summary>沙箱网关
         /// </summary>
-        public string SandboxGateway { get; set; } = "https://openapi.alipaydev.com/gateway.do";
+
+        public string SandboxGateway { get; set; } = AlipaySettings.Urls.SandboxGateway;
 
         /// <summary>格式--JSON
         /// </summary>
@@ -126,15 +127,15 @@ namespace QuickPay.Alipay.Apps
                 Apps.Add(new AlipayApp()
                 {
                     Name = app.Name,
-                        AppId = app.AppId,
-                        Charset = app.Charset,
-                        SignType = app.SignType,
-                        PublicKey = app.PublicKey,
-                        PrivateKey = app.PrivateKey,
-                        AppTypeId = app.AppTypeId,
-                        EnableEncrypt = app.EnableEncrypt,
-                        EncryptType = app.EncryptType,
-                        EncryptKey = app.EncryptKey
+                    AppId = app.AppId,
+                    Charset = app.Charset,
+                    SignType = app.SignType,
+                    PublicKey = app.PublicKey,
+                    PrivateKey = app.PrivateKey,
+                    AppTypeId = app.AppTypeId,
+                    EnableEncrypt = app.EnableEncrypt,
+                    EncryptType = app.EncryptType,
+                    EncryptKey = app.EncryptKey
                 });
             }
 

@@ -1,11 +1,11 @@
 ﻿using DotCommon.Caching;
 using DotCommon.Extensions;
-using DotCommon.Http;
 using DotCommon.Serializing;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using QuickPay.WeChatPay.Authentication.Model;
 using QuickPay.WeChatPay.Util;
+using RestSharp;
 using System;
 using System.Net;
 using System.Threading.Tasks;
@@ -16,8 +16,8 @@ namespace QuickPay.WeChatPay.Authentication
     /// </summary>
     public class AuthenticationService : IAuthenticationService
     {
+        private readonly IRestClient _client;
         private readonly ILogger _logger;
-        private readonly IHttpClient _httpClient;
         private readonly IJsonSerializer _jsonSerializer;
         private readonly IAccessTokenStore _accessTokenStore;
         private readonly IJsApiTicketStore _jsApiTicketStore;
@@ -25,10 +25,10 @@ namespace QuickPay.WeChatPay.Authentication
 
         /// <summary>Ctor
         /// </summary>
-        public AuthenticationService(ILoggerFactory loggerFactory, IHttpClient httpClient, IJsonSerializer jsonSerializer, IAccessTokenStore accessTokenStore, IJsApiTicketStore jsApiTicketStore, IDistributedCache<WeChatPayAuthenticationStateCacheItem> stateCache)
+        public AuthenticationService(ILoggerFactory loggerFactory, IJsonSerializer jsonSerializer, IAccessTokenStore accessTokenStore, IJsApiTicketStore jsApiTicketStore, IDistributedCache<WeChatPayAuthenticationStateCacheItem> stateCache)
         {
+            _client = new RestClient("https://api.weixin.qq.com");
             _logger = loggerFactory.CreateLogger(QuickPaySettings.LoggerName);
-            _httpClient = httpClient;
             _jsonSerializer = jsonSerializer;
             _accessTokenStore = accessTokenStore;
             _jsApiTicketStore = jsApiTicketStore;
@@ -43,13 +43,12 @@ namespace QuickPay.WeChatPay.Authentication
         /// <returns></returns>
         public virtual async Task<MiniProgramOpenIdResponse> GetMiniProgramOpenId(string appId, string appSecret, string jsCode)
         {
-            var url = $"https://api.weixin.qq.com/sns/jscode2session";
-            IHttpRequest httpRequest = new HttpRequest(url, Method.GET)
+            IRestRequest httpRequest = new RestRequest("/sns/jscode2session", Method.GET)
                 .AddQueryParameter("appid", appId)
                 .AddQueryParameter("secret", appSecret)
                 .AddQueryParameter("js_code", jsCode)
                 .AddQueryParameter("grant_type", "authorization_code");
-            var response = await _httpClient.ExecuteAsync(httpRequest);
+            var response = await _client.ExecuteTaskAsync(httpRequest);
             //记录日志
             _logger.LogInformation(WeChatPayUtil.ParseLog($"获取小程序用户OpenId返回结果,{response.Content}"));
             var miniProgramOpenIdResponse = _jsonSerializer.Deserialize<MiniProgramOpenIdResponse>(response.Content);
@@ -107,13 +106,12 @@ namespace QuickPay.WeChatPay.Authentication
                 }
             }
 
-            var url = $"https://api.weixin.qq.com/sns/oauth2/access_token";
-            IHttpRequest httpRequest = new HttpRequest(url, Method.GET)
+            IRestRequest httpRequest = new RestRequest("/sns/oauth2/access_token", Method.GET)
                 .AddQueryParameter("appId", appId)
                 .AddQueryParameter("secret", appSecret)
                 .AddQueryParameter("code", code)
                 .AddQueryParameter("grant_type", "authorization_code");
-            var response = await _httpClient.ExecuteAsync(httpRequest);
+            var response = await _client.ExecuteTaskAsync(httpRequest);
             //记录日志
             _logger.LogInformation(WeChatPayUtil.ParseLog($"获取用户OpenId返回结果,{response.Content}"));
             var getUserOpenIdResponse = _jsonSerializer.Deserialize<UserOpenIdResponse>(response.Content);

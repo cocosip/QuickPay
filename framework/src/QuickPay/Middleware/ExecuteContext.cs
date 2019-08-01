@@ -1,9 +1,9 @@
-﻿using DotCommon.Http;
-using QuickPay.Errors;
+﻿using QuickPay.Errors;
 using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.RequestData;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Infrastructure.Responses;
+using RestSharp;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -51,7 +51,7 @@ namespace QuickPay.Middleware
 
         /// <summary>Http请求所需数据
         /// </summary>
-        public IHttpRequest HttpRequest { get; set; }
+        public IRestRequest HttpRequest { get; set; }
 
         /// <summary>Http响应字符串
         /// </summary>

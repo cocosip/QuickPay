@@ -19,9 +19,9 @@ namespace QuickPay.ConsoleTest
         private readonly IAlipayTradeCommonService _alipayTradeCommonService;
         private readonly IAlipayAppPayService _alipayAppPayService;
         private readonly IAlipayPagePayService _alipayPagePayService;
-        public AlipayDemoService(ILogger<QuickPayLoggerName> logger, WeChatPayDataHelper weChatPayDataHelper, AlipayConfig alipayConfig, IAlipayTradeCommonService alipayTradeCommonService, IAlipayAppPayService alipayAppPayService, IAlipayPagePayService alipayPagePayService)
+        public AlipayDemoService(ILoggerFactory loggerFactory, WeChatPayDataHelper weChatPayDataHelper, AlipayConfig alipayConfig, IAlipayTradeCommonService alipayTradeCommonService, IAlipayAppPayService alipayAppPayService, IAlipayPagePayService alipayPagePayService)
         {
-            _logger = logger;
+            _logger = loggerFactory.CreateLogger(QuickPaySettings.LoggerName);
             _weChatPayDataHelper = weChatPayDataHelper;
             _alipayConfig = alipayConfig;
             _alipayTradeCommonService = alipayTradeCommonService;

@@ -4,7 +4,6 @@ using QuickPay.WeChatPay.Apps;
 using QuickPay.WeChatPay.Authentication;
 using QuickPay.WeChatPay.Services;
 using QuickPay.WeChatPay.Services.DTOs;
-using System;
 using System.Threading.Tasks;
 
 namespace QuickPay.ConsoleTest
@@ -19,9 +18,9 @@ namespace QuickPay.ConsoleTest
         private readonly IWeChatJsApiPayService _weChatJsApiPayService;
         private readonly IWeChatMiniProgramPayService _weChatMiniProgramPayService;
 
-        public WeChatPayDemoService(ILogger<QuickPayLoggerName> logger, WeChatPayConfig weChatPayConfig, IAuthenticationService authenticationService, IWeChatPayTradeCommonService weChatPayTradeCommonService, IWeChatAppPayService weChatAppPayService, IWeChatJsApiPayService weChatJsApiPayService, IWeChatMiniProgramPayService weChatMiniProgramPayService)
+        public WeChatPayDemoService(ILoggerFactory loggerFactory, WeChatPayConfig weChatPayConfig, IAuthenticationService authenticationService, IWeChatPayTradeCommonService weChatPayTradeCommonService, IWeChatAppPayService weChatAppPayService, IWeChatJsApiPayService weChatJsApiPayService, IWeChatMiniProgramPayService weChatMiniProgramPayService)
         {
-            _logger = logger;
+            _logger = loggerFactory.CreateLogger(QuickPaySettings.LoggerName);
             _weChatPayConfig = weChatPayConfig;
             _authenticationService = authenticationService;
             _weChatPayTradeCommonService = weChatPayTradeCommonService;

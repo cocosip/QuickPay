@@ -45,12 +45,7 @@ namespace QuickPay.WeChatPay.Middleware
                         }
 
                         HttpBuilder builder = new HttpBuilder(requestResource, Method.POST, DataFormat.Xml);
-                        var p = new Parameter("x", requestXml, ParameterType.RequestBody)
-                        {
-                            DataFormat = DataFormat.Xml
-                        };
-
-                        builder.AddParameter(p);
+                        builder.AddParameter(new Parameter("", requestXml, ParameterType.RequestBody));
                         context.HttpBuilder = builder;
                     }
 

@@ -13,7 +13,7 @@ namespace QuickPay.Middleware
             IRestRequest request = new RestRequest
             {
                 Method = ParseMethod(builder.Method),
-                Resource = builder.Resource.IsNullOrWhiteSpace() ? "" : builder.Resource,
+                Resource = builder.Resource.IsNullOrWhiteSpace() ? "" : builder.Resource
             };
 
             foreach (var p in builder.Parameters)

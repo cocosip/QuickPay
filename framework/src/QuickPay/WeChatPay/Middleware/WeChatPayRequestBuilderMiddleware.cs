@@ -5,7 +5,6 @@ using QuickPay.Infrastructure.Requests;
 using QuickPay.Middleware;
 using QuickPay.WeChatPay.Url;
 using QuickPay.WeChatPay.Util;
-using RestSharp;
 using System;
 using System.Threading.Tasks;
 
@@ -45,9 +44,14 @@ namespace QuickPay.WeChatPay.Middleware
                             return;
                         }
 
-                        IRestRequest request = new RestRequest(requestResource, Method.POST,DataFormat.Xml);
-                        request.AddParameter("", requestXml, ParameterType.RequestBody);
-                        context.HttpRequest = request;
+                        HttpBuilder builder = new HttpBuilder(requestResource, Method.POST, DataFormat.Xml);
+                        var p = new Parameter("x", requestXml, ParameterType.RequestBody)
+                        {
+                            DataFormat = DataFormat.Xml
+                        };
+
+                        builder.AddParameter(p);
+                        context.HttpBuilder = builder;
                     }
 
                     Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));

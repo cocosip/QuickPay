@@ -3,7 +3,6 @@ using QuickPay.Alipay.Apps;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Middleware;
-using RestSharp;
 using System;
 using System.Threading.Tasks;
 
@@ -31,13 +30,13 @@ namespace QuickPay.Alipay.Middleware
                 {
                     if (context.RequestHandler == QuickPaySettings.RequestHandler.Execute)
                     {
-                        IRestRequest request = new RestRequest(Method.POST);
+                        HttpBuilder builder = new HttpBuilder(Method.POST);
                         //构建Http
                         foreach (var pValue in context.RequestPayData.GetValues())
                         {
-                            request.AddParameter(pValue.Key, pValue.Value);
+                            builder.AddParameter(pValue.Key, pValue.Value);
                         }
-                        context.HttpRequest = request;
+                        context.HttpBuilder = builder;
 
                         Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
                     }

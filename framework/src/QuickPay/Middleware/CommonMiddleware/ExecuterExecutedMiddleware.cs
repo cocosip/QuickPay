@@ -37,7 +37,10 @@ namespace QuickPay.Middleware
                 try
                 {
                     var client = context.Request.Provider == QuickPaySettings.Provider.Alipay ? _alipayRestClient : _weChatRestClient;
-                    var response = await client.ExecuteTaskAsync(context.HttpRequest);
+
+                    //根据HttpBuilder构建请求
+                    var request = context.HttpBuilder.BuildRequest();
+                    var response = await client.ExecuteTaskAsync(request);
                     context.HttpResponseString = response.Content;
                     Logger.LogInformation(context.Request.GetLogFormat($"执行Execute返回结果:[{response.Content}]"));
                     Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));

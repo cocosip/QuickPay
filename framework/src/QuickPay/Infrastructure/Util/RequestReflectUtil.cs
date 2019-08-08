@@ -1,7 +1,6 @@
 ﻿using DotCommon.Reflecting;
 using QuickPay.Infrastructure.RequestData;
 using QuickPay.Infrastructure.Requests;
-using QuickPay.Infrastructure.Responses;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;

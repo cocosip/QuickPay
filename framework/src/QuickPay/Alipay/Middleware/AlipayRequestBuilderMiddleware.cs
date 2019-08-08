@@ -31,10 +31,6 @@ namespace QuickPay.Alipay.Middleware
                 {
                     if (context.RequestHandler == QuickPaySettings.RequestHandler.Execute)
                     {
-                        var app = (AlipayApp)context.App;
-                        var config = (AlipayConfig)context.Config;
-                        //var gateway = _option.EnabledAlipaySandbox ? config.SandboxGateway : config.Gateway;
-
                         IRestRequest request = new RestRequest(Method.POST);
                         //构建Http
                         foreach (var pValue in context.RequestPayData.GetValues())

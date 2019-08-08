@@ -16,7 +16,7 @@ namespace QuickPay.Middleware
 
         /// <summary>数据格式
         /// </summary>
-        public DataFormat DataFormat { get; set; }
+        public DataFormat DataFormat { get; set; } = DataFormat.None;
 
         /// <summary>参数
         /// </summary>
@@ -33,15 +33,20 @@ namespace QuickPay.Middleware
         /// </summary>
         public HttpBuilder(Method method)
         {
-            Method = Method;
+            Method = method;
         }
 
         /// <summary>Ctor
         /// </summary>
-        public HttpBuilder(string resource, Method method, DataFormat dataFormat)
+        public HttpBuilder(string resource, Method method) : this(method)
         {
             Resource = resource;
-            Method = method;
+        }
+
+        /// <summary>Ctor
+        /// </summary>
+        public HttpBuilder(string resource, Method method, DataFormat dataFormat) : this(resource, method)
+        {
             DataFormat = dataFormat;
         }
 

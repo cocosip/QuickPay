@@ -15,7 +15,6 @@
         /// </summary>
         public Parameter(string name, object value, ParameterType type)
         {
-
             Name = name;
             Value = value;
             Type = type;

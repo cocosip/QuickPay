@@ -18,7 +18,7 @@ namespace QuickPay.Middleware
 
             foreach (var p in builder.Parameters)
             {
-                var rp = new RestSharp.Parameter()
+                var sp = new RestSharp.Parameter()
                 {
                     Name = p.Name,
                     Value = p.Value,
@@ -26,7 +26,7 @@ namespace QuickPay.Middleware
                     ContentType = p.ContentType,
                     Type = p.Type.ParseParameterType()
                 };
-                request.AddParameter(rp);
+                request.AddParameter(sp);
             }
             return request;
         }

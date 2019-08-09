@@ -1,4 +1,4 @@
-﻿namespace QuickPay.Middleware
+﻿namespace QuickPay.Http
 {
     /// <summary>请求参数
     /// </summary>

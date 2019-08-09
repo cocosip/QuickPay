@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using QuickPay.Configurations;
 using QuickPay.Errors;
+using QuickPay.Http;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Middleware;
 using QuickPay.WeChatPay.Url;

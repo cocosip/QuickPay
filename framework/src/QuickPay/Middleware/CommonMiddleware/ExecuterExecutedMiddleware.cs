@@ -2,6 +2,7 @@
 using QuickPay.Alipay;
 using QuickPay.Configurations;
 using QuickPay.Errors;
+using QuickPay.Http;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.WeChatPay;
 using RestSharp;

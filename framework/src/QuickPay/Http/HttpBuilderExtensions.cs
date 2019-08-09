@@ -1,6 +1,6 @@
 ﻿using DotCommon.Extensions;
 using RestSharp;
-namespace QuickPay.Middleware
+namespace QuickPay.Http
 {
     /// <summary>Http请求辅助类
     /// </summary>
@@ -16,18 +16,32 @@ namespace QuickPay.Middleware
                 Resource = builder.Resource.IsNullOrWhiteSpace() ? "" : builder.Resource
             };
 
-            foreach (var p in builder.Parameters)
+            foreach (var parameter in builder.Parameters)
             {
-                var sp = new RestSharp.Parameter()
+                var p = new RestSharp.Parameter()
                 {
-                    Name = p.Name,
-                    Value = p.Value,
-                    DataFormat = p.DataFormat.ParseDataFormat(),
-                    ContentType = p.ContentType,
-                    Type = p.Type.ParseParameterType()
+                    Name = parameter.Name,
+                    Value = parameter.Value,
+                    DataFormat = parameter.DataFormat.ParseDataFormat(),
+                    ContentType = parameter.ContentType,
+                    Type = parameter.Type.ParseParameterType()
                 };
-                request.AddParameter(sp);
+                request.AddParameter(p);
             }
+
+            foreach (var file in builder.Files)
+            {
+                var f = new RestSharp.FileParameter()
+                {
+                    Name = file.Name,
+                    FileName = file.FileName,
+                    ContentLength = file.ContentLength,
+                    ContentType = file.ContentType,
+                    Writer = file.Writer
+                };
+                request.Files.Add(f);
+            }
+
             return request;
         }
 

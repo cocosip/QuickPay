@@ -1,4 +1,5 @@
 ﻿using QuickPay.Errors;
+using QuickPay.Http;
 using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.RequestData;
 using QuickPay.Infrastructure.Requests;

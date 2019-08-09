@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using QuickPay.Alipay.Apps;
 using QuickPay.Errors;
+using QuickPay.Http;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Middleware;
 using System;

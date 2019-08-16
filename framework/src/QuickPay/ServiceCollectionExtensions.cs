@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DotCommon.AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
 using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Services;
 using QuickPay.Alipay.Services.Impl;
@@ -16,11 +17,9 @@ using QuickPay.WeChatPay.Apps;
 using QuickPay.WeChatPay.Authentication;
 using QuickPay.WeChatPay.Services;
 using QuickPay.WeChatPay.Services.Impl;
-using QuickPay.WeChatPay.Url;
 using QuickPay.WeChatPay.Util;
 using System;
 using System.Linq;
-using DotCommon.AutoMapper;
 
 namespace QuickPay
 {
@@ -30,29 +29,29 @@ namespace QuickPay
     {
         /// <summary>添加配置
         /// </summary>
-        public static IServiceCollection AddQuickPay(this IServiceCollection services, Action<QuickPayConfigurationOption> option, Action<AlipayConfig> alipayOption = null, Action<WeChatPayConfig> weChatPayOption = null)
+        public static IServiceCollection AddQuickPay(this IServiceCollection services, Action<QuickPayConfigurationOption> configure, Action<AlipayConfig> alipayConfigure = null, Action<WeChatPayConfig> weChatPayConfigure = null)
         {
 
-            var quickPayConfigurationOption = new QuickPayConfigurationOption();
+            var option = new QuickPayConfigurationOption();
 
             //配置Option
-            option(quickPayConfigurationOption);
+            configure(option);
             var alipayConfig = new AlipayConfig();
             var weChatPayConfig = new WeChatPayConfig();
 
             //从代码中读取
-            if (quickPayConfigurationOption.ConfigSourceType == ConfigSourceType.FromClass)
+            if (option.ConfigSourceType == ConfigSourceType.FromClass)
             {
-                if (alipayOption == null || weChatPayOption == null)
+                if (alipayConfigure == null || weChatPayConfigure == null)
                 {
                     throw new QuickPayException($"从代码中加载支付配置时,AlipayConfig与WechatPayConfig不能为空.");
                 }
-                alipayOption(alipayConfig);
-                weChatPayOption(weChatPayConfig);
+                alipayConfigure(alipayConfig);
+                weChatPayConfigure(weChatPayConfig);
             }
 
             services
-                .AddSingleton<QuickPayConfigurationOption>(quickPayConfigurationOption)
+                .AddSingleton<QuickPayConfigurationOption>(option)
                 .RegisterQuickPay(alipayConfig, weChatPayConfig)
                 .RegisterPipeline()
                 .AddAssemblyAutoMaps(typeof(ConfigWapper).Assembly);

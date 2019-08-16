@@ -1,10 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using System;
 using System.Collections.Generic;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace QuickPay.Middleware
 {
@@ -14,7 +13,7 @@ namespace QuickPay.Middleware
     {
         /// <summary>中间件名称
         /// </summary>
-        public string MiddlewareName => this.GetType().Name;
+        public string MiddlewareName => GetType().Name;
 
         /// <summary>Provider
         /// </summary>
@@ -49,7 +48,7 @@ namespace QuickPay.Middleware
         {
             if (context.Request == null)
             {
-                Logger.LogError($"支付执行出错,并且Context.Request为NULL.,{error.Message}");
+                Logger.LogError("支付执行出错,并且Context.Request为NULL,{0}", error.Message);
             }
             else
             {

@@ -12,7 +12,7 @@ namespace QuickPay.Middleware.Pipeline
 
         /// <summary>Use
         /// </summary>
-        QuickPayPipelineBuilder Use(Func<QuickPayExecuteDelegate, QuickPayExecuteDelegate> middleware);
+        IQuickPayPipelineBuilder Use(Func<QuickPayExecuteDelegate, QuickPayExecuteDelegate> middleware);
         
         /// <summary>Build
         /// </summary>

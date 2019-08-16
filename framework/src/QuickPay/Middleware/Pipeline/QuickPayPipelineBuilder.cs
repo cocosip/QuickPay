@@ -1,9 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace QuickPay.Middleware.Pipeline
 {
@@ -12,7 +10,6 @@ namespace QuickPay.Middleware.Pipeline
     public class QuickPayPipelineBuilder : IQuickPayPipelineBuilder
     {
         private readonly IList<Func<QuickPayExecuteDelegate, QuickPayExecuteDelegate>> _middlewares;
-        private readonly ILogger _logger;
 
         /// <summary>Provider
         /// </summary>
@@ -22,13 +19,12 @@ namespace QuickPay.Middleware.Pipeline
         public QuickPayPipelineBuilder(IServiceProvider provider)
         {
             Provider = provider;
-            _logger = Provider.GetService<ILoggerFactory>().CreateLogger(QuickPaySettings.LoggerName);
             _middlewares = new List<Func<QuickPayExecuteDelegate, QuickPayExecuteDelegate>>();
         }
 
         /// <summary>Use
         /// </summary>
-        public QuickPayPipelineBuilder Use(Func<QuickPayExecuteDelegate, QuickPayExecuteDelegate> middleware)
+        public IQuickPayPipelineBuilder Use(Func<QuickPayExecuteDelegate, QuickPayExecuteDelegate> middleware)
         {
             _middlewares.Add(middleware);
             return this;

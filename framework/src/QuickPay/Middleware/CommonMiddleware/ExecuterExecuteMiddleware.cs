@@ -13,7 +13,7 @@ namespace QuickPay.Middleware
 {
     /// <summary>执行器执行中间件
     /// </summary>
-    public class ExecuterExecutedMiddleware : QuickPayMiddleware
+    public class ExecuterExecuteMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
         private readonly IRestClient _alipayRestClient;
@@ -21,7 +21,7 @@ namespace QuickPay.Middleware
 
         /// <summary>Ctor
         /// </summary>
-        public ExecuterExecutedMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next, QuickPayConfigurationOption option) : base(provider)
+        public ExecuterExecuteMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next, QuickPayConfigurationOption option) : base(provider)
         {
             _next = next;
             _alipayRestClient = option.EnabledAlipaySandbox ? new RestClient(AlipaySettings.Urls.Gateway) : new RestClient(AlipaySettings.Urls.SandboxGateway);

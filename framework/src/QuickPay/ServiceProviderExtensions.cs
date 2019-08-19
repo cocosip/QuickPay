@@ -40,40 +40,23 @@ namespace QuickPay
 
             //Pipeline
             var pipelineBuilder = provider.GetService<IQuickPayPipelineBuilder>();
-            //设置必要参数
-            pipelineBuilder.UseMiddleware<SetNecessaryMiddleware>();
-            //自动UniqueId
-            pipelineBuilder.UseMiddleware<AutoUniqueIdMiddleware>();
+            pipelineBuilder
+                .UseMiddleware<SetNecessaryMiddleware>()  
+                .UseMiddleware<AutoUniqueIdMiddleware>()  
+                .UseMiddleware<AlipayPayDataTransformMiddleware>()  
+                .UseMiddleware<AlipaySignMiddleware>()  
+                .UseMiddleware<AlipayRequestBuilderMiddleware>()
 
-            //支付宝
-            //Request转PayData
-            pipelineBuilder.UseMiddleware<AlipayPayDataTransformMiddleware>();
-            //签名
-            pipelineBuilder.UseMiddleware<AlipaySignMiddleware>();
-            //构建RequestBuilder
-            pipelineBuilder.UseMiddleware<AlipayRequestBuilderMiddleware>();
-
-            //微信
-            //Request转PayData
-            pipelineBuilder.UseMiddleware<WeChatPayDataTransformMiddleware>();
-            //签名
-            pipelineBuilder.UseMiddleware<WeChatPaySignMiddleware>();
-            //构建RequestBuilder
-            pipelineBuilder.UseMiddleware<WeChatPayRequestBuilderMiddleware>();
-
-            //执行Execute
-            pipelineBuilder.UseMiddleware<ExecuterExecutedMiddleware>();
-
-            //数据返回格式化
-            pipelineBuilder.UseMiddleware<AlipayParseResponseMiddleware>();
-            pipelineBuilder.UseMiddleware<WeChatPayParseResponseMiddleware>();
-            //支付存储
-            pipelineBuilder.UseMiddleware<PaymentStoreMiddleware>();
-            //退款存储
-            pipelineBuilder.UseMiddleware<RefundStoreMiddleware>();
-            //结束
-            pipelineBuilder.UseMiddleware<EndMiddleware>();
-
+                .UseMiddleware<WeChatPayDataTransformMiddleware>() 
+                .UseMiddleware<WeChatPaySignMiddleware>() 
+                .UseMiddleware<WeChatPayRequestBuilderMiddleware>()  
+                
+                .UseMiddleware<ExecuterExecuteMiddleware>()   
+                .UseMiddleware<AlipayParseResponseMiddleware>()  
+                .UseMiddleware<WeChatPayParseResponseMiddleware>() 
+                .UseMiddleware<PaymentStoreMiddleware>()
+                .UseMiddleware<RefundStoreMiddleware>()
+                .UseMiddleware<EndMiddleware>();
             return provider;
         }
 

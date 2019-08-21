@@ -29,7 +29,7 @@ namespace QuickPay.WeChatPay.Services.Impl
             }
 
             var request = ObjectMapper.Map<NativeMode2UnifiedOrderRequest>(input);
-            var response = await Executer.ExecuteAsync<NativeMode2UnifiedOrderResponse>(request, App);
+            var response = await Executer.ExecuteAsync<NativeMode2UnifiedOrderResponse>(request,Config, App);
             return response?.CodeUrl;
         }
 
@@ -38,7 +38,7 @@ namespace QuickPay.WeChatPay.Services.Impl
         public async Task<string> Mode1CreateCode(NativeMode1CreateCodeInput input)
         {
             var request = ObjectMapper.Map<NativeMode1CreateCodeRequest>(input);
-            var response = await Executer.SignRequest<NativeMode1CreateCodeResponse>(request, App);
+            var response = await Executer.SignRequest<NativeMode1CreateCodeResponse>(request,Config, App);
             //将签名后的Response转换成二维码
             return response.ToCodeUrl();
         }
@@ -54,7 +54,7 @@ namespace QuickPay.WeChatPay.Services.Impl
             }
 
             var request = ObjectMapper.Map<NativeMode1UnifiedOrderRequest>(input);
-            var response = await Executer.ExecuteAsync<NativeMode1UnifiedOrderResponse>(request, App);
+            var response = await Executer.ExecuteAsync<NativeMode1UnifiedOrderResponse>(request,Config, App);
             //响应与执行都成功
             if (response.ReturnSuccess && response.ResultSuccess)
             {
@@ -63,7 +63,7 @@ namespace QuickPay.WeChatPay.Services.Impl
                 {
                     //输出给微信,详情见https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=6_4  (输出参数)
                     var outputRequest = new NativeMode1UnifiedOrderOutputRequest(prepayId);
-                    var outputResponse = await Executer.SignRequest<NativeMode1UnifiedOrderOutputResponse>(outputRequest, App);
+                    var outputResponse = await Executer.SignRequest<NativeMode1UnifiedOrderOutputResponse>(outputRequest, Config, App);
                     return outputResponse;
                 }
             }

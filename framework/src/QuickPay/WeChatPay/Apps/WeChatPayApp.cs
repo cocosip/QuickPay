@@ -66,13 +66,6 @@ namespace QuickPay.WeChatPay.Apps
             NativeMobileInfo = info.SelfCopy();
         }
 
-        /// <summary>WechatApp转 WechatPayAppOverride
-        /// </summary>
-        public WeChatPayAppOverride ToOverrideValue()
-        {
-            return new WeChatPayAppOverride(Name, AppId, MchId, Key, Appsecret, AppTypeId, NativeMobileInfo);
-        }
-
     }
     /// <summary>移动端配置
     /// </summary>

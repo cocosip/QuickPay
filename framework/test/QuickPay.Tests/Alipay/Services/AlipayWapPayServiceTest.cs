@@ -15,7 +15,7 @@ namespace QuickPay.Tests.Alipay.Services
         public void TradePay_Test()
         {
             var wapPayService = Provider.GetService<IAlipayWapPayService>();
-            using (wapPayService.Use(AlipayConfig.GetByName("App1")))
+            using (wapPayService.Use("2017061307479603"))
             {
                 var input = new WapTradePayInput("手机网站支付1", "支付宝手机网站支付", ObjectId.GenerateNewStringId(), "0.1");
                 var response = AsyncHelper.RunSync(() => wapPayService.TradePay(input));
@@ -27,7 +27,7 @@ namespace QuickPay.Tests.Alipay.Services
         public void TradePayStringResponse_Test()
         {
             var wapPayService = Provider.GetService<IAlipayWapPayService>();
-            using (wapPayService.Use(AlipayConfig.GetByName("App1")))
+            using (wapPayService.Use("2017061307479603"))
             {
                 var input = new WapTradePayInput("手机网站支付1", "支付宝手机网站支付", ObjectId.GenerateNewStringId(), "0.1");
                 var responseString = AsyncHelper.RunSync(() => wapPayService.TradePayStringResponse(input));

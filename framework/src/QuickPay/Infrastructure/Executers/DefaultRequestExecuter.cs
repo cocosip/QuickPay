@@ -16,28 +16,25 @@ namespace QuickPay.Infrastructure.Executers
     {
         private readonly IQuickPayPipelineBuilder _quickPayPipelineBuilder;
         private readonly IExecuteContextFactory _executeContextFactory;
-        private readonly IQuickPayConfigManager _quickPayConfigManager;
+ 
         private readonly ILogger _logger;
         /// <summary>
         /// </summary>
-        public DefaultRequestExecuter(ILoggerFactory loggerFactory, IQuickPayPipelineBuilder quickPayPipelineBuilder, IExecuteContextFactory executeContextFactory, IQuickPayConfigManager quickPayConfigManager)
+        public DefaultRequestExecuter(ILoggerFactory loggerFactory, IQuickPayPipelineBuilder quickPayPipelineBuilder, IExecuteContextFactory executeContextFactory)
         {
             _logger = loggerFactory.CreateLogger(QuickPaySettings.LoggerName);
             _quickPayPipelineBuilder = quickPayPipelineBuilder;
             _executeContextFactory = executeContextFactory;
-            _quickPayConfigManager = quickPayConfigManager;
+         
         }
 
         /// <summary>执行器执行
         /// </summary>
-        public async Task<T> ExecuteAsync<T>(IPayRequest<T> request, QuickPayApp app) where T : PayResponse
+        public async Task<T> ExecuteAsync<T>(IPayRequest<T> request, QuickPayConfig config, QuickPayApp app) where T : PayResponse
         {
             try
             {
                 var firstDelegate = _quickPayPipelineBuilder.Build();
-                //当前请求的配置
-                var config = _quickPayConfigManager.GetCurrentConfig(request.Provider);
-
                 var context = _executeContextFactory.CreateContext<T>(request, config, app, QuickPaySettings.RequestHandler.Execute);
                 await firstDelegate(context);
                 if (context.IsError)
@@ -61,14 +58,11 @@ namespace QuickPay.Infrastructure.Executers
 
         /// <summary>请求签名
         /// </summary>
-        public async Task<T> SignRequest<T>(IPayRequest<T> request, QuickPayApp app) where T : PayResponse
+        public async Task<T> SignRequest<T>(IPayRequest<T> request, QuickPayConfig config, QuickPayApp app) where T : PayResponse
         {
             try
             {
                 var firstDelegate = _quickPayPipelineBuilder.Build();
-                //当前请求的配置
-                var config = _quickPayConfigManager.GetCurrentConfig(request.Provider);
-
                 var context = _executeContextFactory.CreateContext<T>(request, config, app, QuickPaySettings.RequestHandler.Sign);
                 await firstDelegate(context);
                 if (context.IsError)

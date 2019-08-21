@@ -30,7 +30,7 @@ namespace QuickPay.Alipay.Services.Impl
             var bizContentRequest = ObjectMapper.Map<QrcodeTradeBizContentPayRequest>(input);
             var request = new QrcodeTradePayRequest(bizContentRequest, input.NotifyUrl);
             //发送请求到支付宝服务器
-            var response = await Executer.ExecuteAsync<QrcodeTradePayResponse>(request, App);
+            var response = await Executer.ExecuteAsync<QrcodeTradePayResponse>(request, Config, App);
             return response;
         }
     }

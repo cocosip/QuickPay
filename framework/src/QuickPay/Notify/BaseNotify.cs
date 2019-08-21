@@ -1,4 +1,3 @@
-using QuickPay.Infrastructure.RequestData;
 using System.Threading.Tasks;
 
 namespace QuickPay.Notify

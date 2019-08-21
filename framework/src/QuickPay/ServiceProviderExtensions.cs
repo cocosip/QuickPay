@@ -19,19 +19,19 @@ namespace QuickPay
         public static IServiceProvider ConfigureQuickPay(this IServiceProvider provider)
         {
             var option = provider.GetService<QuickPayConfigurationOption>();
-            //从文件中读取配置
-            if (option.ConfigSourceType == ConfigSourceType.FromConfigFile)
-            {
-                var alipayConfig = provider.GetService<AlipayConfig>();
-                var weChatPayConfig = provider.GetService<WeChatPayConfig>();
-                var wrapper = ConfigurationFileHelper.TranslateToConfigWrapper(option.ConfigFileName);
+            ////从文件中读取配置
+            //if (option.ConfigSourceType == ConfigSourceType.FromConfigFile)
+            //{
+            //    var alipayConfig = provider.GetService<AlipayConfig>();
+            //    var weChatPayConfig = provider.GetService<WeChatPayConfig>();
+            //    var wrapper = ConfigurationFileHelper.TranslateToConfigWrapper(option.ConfigFileName);
 
-                if (wrapper != null && wrapper.AlipayConfig != null && wrapper.WeChatPayConfig != null)
-                {
-                    alipayConfig.SelfCopy(wrapper.AlipayConfig);
-                    weChatPayConfig.SelfCopy(wrapper.WeChatPayConfig);
-                }
-            }
+            //    if (wrapper != null && wrapper.AlipayConfig != null && wrapper.WeChatPayConfig != null)
+            //    {
+            //        alipayConfig.SelfCopy(wrapper.AlipayConfig);
+            //        weChatPayConfig.SelfCopy(wrapper.WeChatPayConfig);
+            //    }
+            //}
 
             //设置NotifyManager中的Notify
             provider.RegisterNotifies(option);

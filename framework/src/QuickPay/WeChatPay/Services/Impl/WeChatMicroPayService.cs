@@ -25,7 +25,7 @@ namespace QuickPay.WeChatPay.Services.Impl
         public async Task<MicropayUnifiedOrderResponse> UnifiedOrder(MicropayUnifiedOrderInput input)
         {
             var request = ObjectMapper.Map<MicropayUnifiedOrderRequest>(input);
-            var response = await Executer.ExecuteAsync<MicropayUnifiedOrderResponse>(request, App);
+            var response = await Executer.ExecuteAsync<MicropayUnifiedOrderResponse>(request, Config, App);
             return response;
         }
     }

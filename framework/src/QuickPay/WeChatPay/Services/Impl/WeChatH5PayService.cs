@@ -35,7 +35,7 @@ namespace QuickPay.WeChatPay.Services.Impl
             var sceneInfoDict = SceneInfoCreator.CreateScene(input.SceneType, App);
             request.SceneInfo = _wechatPayDataHelper.DictToJson(sceneInfoDict);
             //sceneInfoDict.ToJson(_jsonSerializer);
-            var response = await Executer.ExecuteAsync<H5UnifiedOrderResponse>(request, App);
+            var response = await Executer.ExecuteAsync<H5UnifiedOrderResponse>(request, Config, App);
             return response?.MWebUrl;
         }
     }

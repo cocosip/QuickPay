@@ -1,6 +1,5 @@
 using QuickPay.Alipay;
 using QuickPay.Assist;
-using QuickPay.Infrastructure.RequestData;
 using System;
 using System.Threading.Tasks;
 
@@ -22,8 +21,8 @@ namespace QuickPay.Notify
         public override async Task<string> InvokeAsync(string notifyBody)
         {
             var payData = PayDataHelper.FromJson(notifyBody);
-            var alipayApp = GetApp(payData);
-            using(AlipayAssistService.Use(alipayApp))
+            var appId = PayDataHelper.GetAlipayAppId(payData);
+            using (AlipayAssistService.Use(appId))
             {
                 await AlipayAssistService.PaySuccess(payData, async payment => await PaySuccess(payment));
                 //支付成功

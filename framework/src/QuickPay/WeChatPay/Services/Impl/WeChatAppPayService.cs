@@ -31,7 +31,7 @@ namespace QuickPay.WeChatPay.Services.Impl
             }
 
             var request = ObjectMapper.Map<AppUnifiedOrderRequest>(input);
-            var response = await Executer.ExecuteAsync<AppUnifiedOrderResponse>(request, App);
+            var response = await Executer.ExecuteAsync<AppUnifiedOrderResponse>(request, Config, App);
             if (response.ReturnSuccess)
             {
                 if (response.ResultSuccess)
@@ -40,7 +40,7 @@ namespace QuickPay.WeChatPay.Services.Impl
                     var prepayId = response.PrepayId;
 
                     var appUnifiedOrderCallRequest = new AppUnifiedOrderCallRequest(prepayId);
-                    var appUnifiedOrderCallResonse = await Executer.SignRequest<AppUnifiedOrderCallResponse>(appUnifiedOrderCallRequest, App);
+                    var appUnifiedOrderCallResonse = await Executer.SignRequest<AppUnifiedOrderCallResponse>(appUnifiedOrderCallRequest, Config, App);
                     return appUnifiedOrderCallResonse;
                 }
             }

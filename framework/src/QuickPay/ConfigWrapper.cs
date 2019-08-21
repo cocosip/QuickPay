@@ -14,5 +14,20 @@ namespace QuickPay
         /// <summary>微信配置
         /// </summary>
         public WeChatPayConfig WeChatPayConfig { get; set; }
+
+        /// <summary>Ctor
+        /// </summary>
+        public ConfigWrapper()
+        {
+
+        }
+
+        /// <summary>Ctor
+        /// </summary>
+        public ConfigWrapper(AlipayConfig alipayConfig, WeChatPayConfig weChatPayConfig)
+        {
+            AlipayConfig = alipayConfig;
+            WeChatPayConfig = weChatPayConfig;
+        }
     }
 }

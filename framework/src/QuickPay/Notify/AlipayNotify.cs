@@ -13,7 +13,6 @@ namespace QuickPay.Notify
     /// </summary>
     public abstract class AlipayNotify : BaseNotify
     {
-
         /// <summary>支付宝管道名
         /// </summary>
         public override string Provider => QuickPaySettings.Provider.Alipay;
@@ -21,10 +20,6 @@ namespace QuickPay.Notify
         /// <summary>ServiceProvider
         /// </summary>
         protected IServiceProvider ServiceProvider { get; }
-
-        /// <summary>支付宝配置信息
-        /// </summary>
-        protected AlipayConfig Config { get; }
 
         /// <summary>PayDataHelper
         /// </summary>
@@ -34,25 +29,19 @@ namespace QuickPay.Notify
         /// </summary>
         protected IAlipayAssistService AlipayAssistService { get; }
 
+        /// <summary>支付宝配置文件存储
+        /// </summary>
+        protected IAlipayConfigStore ConfigStore { get; }
+
         /// <summary>Ctor
         /// </summary>
         public AlipayNotify(IServiceProvider serviceProvider)
         {
             ServiceProvider = serviceProvider;
-            Config = ServiceProvider.GetService<AlipayConfig>();
             PayDataHelper = ServiceProvider.GetService<AlipayPayDataHelper>();
             AlipayAssistService = ServiceProvider.GetService<IAlipayAssistService>();
+            ConfigStore = ServiceProvider.GetService<IAlipayConfigStore>();
         }
-
-        /// <summary>从PayData中获取App信息
-        /// </summary>
-        protected AlipayApp GetApp(PayData payData)
-        {
-            //获取AppId
-            var appId = PayDataHelper.GetAlipayAppId(payData);
-            return Config.GetByAppId(appId);
-        }
-
 
 
         /// <summary>是否为真实的通知(通知签名校验)
@@ -60,8 +49,8 @@ namespace QuickPay.Notify
         public override Task<bool> IsRealNotify(string notifyBody)
         {
             var payData = PayDataHelper.FromJson(notifyBody);
-            var alipayApp = GetApp(payData);
-            using(AlipayAssistService.Use(alipayApp))
+            var appId = PayDataHelper.GetAlipayAppId(payData);
+            using (AlipayAssistService.Use(appId))
             {
                 return AlipayAssistService.VerifySign(payData);
             }

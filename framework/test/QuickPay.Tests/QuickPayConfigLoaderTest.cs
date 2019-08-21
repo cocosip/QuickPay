@@ -4,14 +4,12 @@ using Xunit;
 
 namespace QuickPay.Tests
 {
-    public class QuickPayConfigLoaderTest : TestBase
+    public class QuickPayConfigLoaderTest 
     {
         [Fact]
         public void LoadQuickPayConfigTest()
         {
-
-            var configLoader = Provider.GetService<IConfigurationFileTranslator>();
-            var configWrapper = configLoader.TranslateToConfigWapper("QuickPayConfig.xml", QuickPaySettings.ConfigFormat.Xml);
+            var configWrapper = ConfigurationFileHelper.TranslateToConfigWrapper("QuickPayConfig.xml");
 
             var alipayConfig = configWrapper.AlipayConfig;
             Assert.Equal("http://127.0.0.1", alipayConfig.NotifyGateway);

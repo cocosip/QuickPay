@@ -23,7 +23,7 @@ namespace QuickPay.WeChatPay.Services.Impl
         public async Task<MiniProgramUnifiedOrderCallResponse> UnifiedOrder(MiniProgramUnifiedOrderInput input)
         {
             var request = ObjectMapper.Map<MiniProgramUnifiedOrderRequest>(input);
-            var response = await Executer.ExecuteAsync<MiniProgramUnifiedOrderResponse>(request, App);
+            var response = await Executer.ExecuteAsync<MiniProgramUnifiedOrderResponse>(request, Config, App);
 
             //响应与执行都成功
             if (response.ReturnSuccess && response.ResultSuccess)
@@ -32,7 +32,7 @@ namespace QuickPay.WeChatPay.Services.Impl
                 var prepayId = response.PrepayId;
 
                 var miniProgramUnifiedOrderCallRequest = new MiniProgramUnifiedOrderCallRequest(response.PrepayId);
-                var miniProgramUnifiedOrderCallResponse = await Executer.SignRequest<MiniProgramUnifiedOrderCallResponse>(miniProgramUnifiedOrderCallRequest, App);
+                var miniProgramUnifiedOrderCallResponse = await Executer.SignRequest<MiniProgramUnifiedOrderCallResponse>(miniProgramUnifiedOrderCallRequest, Config, App);
                 return miniProgramUnifiedOrderCallResponse;
             }
             Logger.LogError($"微信小程序下单请求出错,ReturnMsg:{response.ReturnMsg},ErrorCodeMsg:{response.ErrCodeDes}");

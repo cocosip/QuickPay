@@ -16,7 +16,7 @@ namespace QuickPay.Tests.WeChatPay.Services
         public void UnifiedOrder_Test()
         {
             var h5PayService = Provider.GetService<IWeChatH5PayService>();
-            using (h5PayService.Use(WechatPayConfig.GetByName("App1")))
+            using (h5PayService.Use("App1"))
             {
                 var input = new H5UnifiedOrderInput("微信H5支付", ObjectId.GenerateNewStringId(), 1);
                 //微信H5开通没有

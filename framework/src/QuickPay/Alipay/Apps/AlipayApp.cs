@@ -83,11 +83,5 @@ namespace QuickPay.Alipay.Apps
             AppTypeId = appTypeId;
         }
 
-        /// <summary>将AlipayApp转换成AlipayAppOverride
-        /// </summary>
-        public AlipayAppOverride ToOverrideValue()
-        {
-            return new AlipayAppOverride(Name, AppId, Charset, SignType, PublicKey, PrivateKey, AppTypeId, EnableEncrypt, EncryptType, EncryptKey);
-        }
     }
 }

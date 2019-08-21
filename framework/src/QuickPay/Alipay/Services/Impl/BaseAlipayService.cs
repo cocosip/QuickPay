@@ -6,7 +6,6 @@ using QuickPay.Alipay.Apps;
 using QuickPay.Infrastructure.Executers;
 using QuickPay.Notify;
 using System;
-using System.Linq;
 
 namespace QuickPay.Alipay.Services.Impl
 {
@@ -14,21 +13,17 @@ namespace QuickPay.Alipay.Services.Impl
     /// </summary>
     public abstract class BaseAlipayService : IAlipayService
     {
-        /// <summary>AlipayAppOverrideContextKey
+        /// <summary>AlipayOverrideContextKey
         /// </summary>
-        public const string AlipayAppOverrideContextKey = "QuickPay.AlipayApp.Override";
+        public const string AlipayOverrideContextKey = "QuickPay.Alipay.Override";
 
-        /// <summary>AlipayAppOverride
+        /// <summary>AlipayOverride
         /// </summary>
-        protected AlipayAppOverride OverrideValue => AlipayAppOverrideScopeProvider.GetValue(AlipayAppOverrideContextKey);
+        protected AlipayOverride OverrideValue => AlipayOverrideScopeProvider.GetValue(AlipayOverrideContextKey);
 
         /// <summary>AlipayAppOverrideScopeProvider
         /// </summary>
-        protected IAmbientScopeProvider<AlipayAppOverride> AlipayAppOverrideScopeProvider { get; }
-
-        /// <summary>支付宝配置信息
-        /// </summary>
-        protected AlipayConfig Config { get; private set; }
+        protected IAmbientScopeProvider<AlipayOverride> AlipayOverrideScopeProvider { get; }
 
         /// <summary>支付宝请求执行器
         /// </summary>
@@ -38,6 +33,10 @@ namespace QuickPay.Alipay.Services.Impl
         /// </summary>
         protected INotifyTypeFinder NotifyTypeFinder { get; }
 
+        /// <summary>配置文件存储
+        /// </summary>
+        protected IAlipayConfigStore ConfigStore { get; }
+
         /// <summary>Logger
         /// </summary>
         protected ILogger Logger { get; }
@@ -46,58 +45,74 @@ namespace QuickPay.Alipay.Services.Impl
         /// </summary>
         protected IObjectMapper ObjectMapper { get; }
 
+
         /// <summary>Ctor
         /// </summary>
         public BaseAlipayService(IServiceProvider provider)
         {
-            AlipayAppOverrideScopeProvider = provider.GetService<IAmbientScopeProvider<AlipayAppOverride>>();
-            Config = provider.GetService<AlipayConfig>();
+            AlipayOverrideScopeProvider = provider.GetService<IAmbientScopeProvider<AlipayOverride>>();
             Executer = provider.GetService<IRequestExecuter>();
             NotifyTypeFinder = provider.GetService<INotifyTypeFinder>();
+            ConfigStore = provider.GetService<IAlipayConfigStore>();
             Logger = provider.GetService<ILoggerFactory>().CreateLogger(QuickPaySettings.LoggerName);
             ObjectMapper = provider.GetService<IObjectMapper>();
         }
 
         /// <summary>Use
         /// </summary>
-        public IDisposable Use(AlipayConfig config)
+        public IDisposable Use(string appId)
         {
-            return Use(config, c => c.Apps.FirstOrDefault());
+            var config = ConfigStore.GetConfigByAppId(appId);
+            var app = config.GetByAppId(appId);
+            return Use(config, app);
+        }
+
+
+        /// <summary>Use
+        /// </summary>
+        public IDisposable Use(string configId, string appId)
+        {
+            var config = ConfigStore.GetConfig(configId);
+            var app = config.GetByAppId(appId);
+            return Use(config, app);
         }
 
         /// <summary>Use
         /// </summary>
-        public IDisposable Use(AlipayConfig config, string appName)
+        public IDisposable Use(AlipayConfig config, AlipayApp app)
         {
-            return Use(config, c => c.Apps.FirstOrDefault(x => x.Name == appName));
+            var mapConfig = ObjectMapper.Map<AlipayConfig>(config);
+            var mapApp = ObjectMapper.Map<AlipayApp>(app);
+            var overrideValue = new AlipayOverride(mapConfig, mapApp);
+            return AlipayOverrideScopeProvider.BeginScope(AlipayOverrideContextKey, overrideValue);
         }
 
-        /// <summary>Use
+
+        /// <summary>支付宝配置信息
         /// </summary>
-        public IDisposable Use(AlipayConfig config, Func<AlipayConfig, AlipayApp> predicate)
+        public AlipayConfig Config
         {
-            Config = config;
-            var overrideValue = predicate(config).ToOverrideValue();
-            return AlipayAppOverrideScopeProvider.BeginScope(AlipayAppOverrideContextKey, overrideValue);
+            get
+            {
+                if (OverrideValue != null)
+                {
+                    return OverrideValue.Config;
+                }
+                throw new ArgumentException($"OverrideValue为空!");
+            }
         }
 
         /// <summary>支付宝应用
         /// </summary>
         public AlipayApp App
         {
-
             get
             {
                 if (OverrideValue != null)
                 {
-                    return OverrideValue.ToAlipayApp();
+                    return OverrideValue.App;
                 }
-                var app = Config.GetDefaultApp();
-                if (app != null)
-                {
-                    return app;
-                }
-                throw new ArgumentException($"AlipayApp为空!");
+                throw new ArgumentException($"OverrideValue为空!");
             }
         }
     }

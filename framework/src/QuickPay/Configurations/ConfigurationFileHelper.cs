@@ -27,8 +27,6 @@ namespace QuickPay.Configurations
         /// </summary>
         public static string TranslateToText(ConfigWrapper configWrapper)
         {
-
-
             var output = new StringBuilder();
             output.AppendLine("<QuickPayConfig>");
             //支付宝
@@ -135,45 +133,49 @@ namespace QuickPay.Configurations
 
         /// <summary>构建支付宝配置xml字符串
         /// </summary>
-        private static string BuildAlipayXml(AlipayConfig alipayConfig)
+        private static string BuildAlipayXml(AlipayConfig config)
         {
             var output = new StringBuilder();
 
             output.AppendLine("<Alipay>");
-            output.AppendFormat("<Gateway>{0}", alipayConfig.Gateway);
+
+            output.AppendFormat("<Id>{0}", config.Id);
+            output.AppendLine("</Id>");
+
+            output.AppendFormat("<Gateway>{0}", config.Gateway);
             output.AppendLine("</Gateway>");
 
-            output.AppendFormat("<SandboxGateway>{0}", alipayConfig.SandboxGateway);
+            output.AppendFormat("<SandboxGateway>{0}", config.SandboxGateway);
             output.AppendLine("</SandboxGateway>");
-            output.AppendFormat("<LocalAddress>{0}", alipayConfig.LocalAddress);
+            output.AppendFormat("<LocalAddress>{0}", config.LocalAddress);
             output.AppendLine("</LocalAddress>");
 
-            output.AppendFormat("<WebGateway>{0}", alipayConfig.WebGateway);
+            output.AppendFormat("<WebGateway>{0}", config.WebGateway);
             output.AppendLine("</WebGateway>");
 
-            output.AppendFormat("<NotifyGateway>{0}", alipayConfig.NotifyGateway);
+            output.AppendFormat("<NotifyGateway>{0}", config.NotifyGateway);
             output.AppendLine("</NotifyGateway>");
 
-            output.AppendFormat("<NotifyUrlFragments>{0}", alipayConfig.NotifyUrlFragments);
+            output.AppendFormat("<NotifyUrlFragments>{0}", config.NotifyUrlFragments);
             output.AppendLine("</NotifyUrlFragments>");
 
-            output.AppendFormat("<QrcodeNotifyUrlFragments>{0}", alipayConfig.QrcodeNotifyUrlFragments);
+            output.AppendFormat("<QrcodeNotifyUrlFragments>{0}", config.QrcodeNotifyUrlFragments);
             output.AppendLine("</QrcodeNotifyUrlFragments>");
 
-            output.AppendFormat("<BarcodeNotifyUrlFragments>{0}", alipayConfig.BarcodeNotifyUrlFragments);
+            output.AppendFormat("<BarcodeNotifyUrlFragments>{0}", config.BarcodeNotifyUrlFragments);
             output.AppendLine("</BarcodeNotifyUrlFragments>");
 
-            output.AppendFormat("<Format>{0}", alipayConfig.Format);
+            output.AppendFormat("<Format>{0}", config.Format);
             output.AppendLine("</Format>");
 
-            output.AppendFormat("<Version>{0}", alipayConfig.Version);
+            output.AppendFormat("<Version>{0}", config.Version);
             output.AppendLine("</Version>");
 
-            output.AppendFormat("<DefaultAppName>{0}", alipayConfig.DefaultAppName);
+            output.AppendFormat("<DefaultAppName>{0}", config.DefaultAppName);
             output.AppendLine("</DefaultAppName>");
 
             output.AppendLine("<Apps>");
-            foreach (var app in alipayConfig.Apps)
+            foreach (var app in config.Apps)
             {
                 output.AppendLine("<AlipayApp>");
                 output.AppendFormat("<Name>{0}", app.Name);
@@ -217,35 +219,38 @@ namespace QuickPay.Configurations
 
         /// <summary>构建微信支付配置xml字符串
         /// </summary>
-        private static string BuildWeChatXml(WeChatPayConfig weChatPayConfig)
+        private static string BuildWeChatXml(WeChatPayConfig config)
         {
             var output = new StringBuilder();
 
             output.AppendLine("<WeChatPay>");
 
-            output.AppendFormat("<LocalAddress>{0}", weChatPayConfig.LocalAddress);
+            output.AppendFormat("<Id>{0}", config.Id);
+            output.AppendLine("</Id>");
+
+            output.AppendFormat("<LocalAddress>{0}", config.LocalAddress);
             output.AppendLine("</LocalAddress>");
 
-            output.AppendFormat("<WebGateway>{0}", weChatPayConfig.WebGateway);
+            output.AppendFormat("<WebGateway>{0}", config.WebGateway);
             output.AppendLine("</WebGateway>");
 
-            output.AppendFormat("<NotifyGateway>{0}", weChatPayConfig.NotifyGateway);
+            output.AppendFormat("<NotifyGateway>{0}", config.NotifyGateway);
             output.AppendLine("</NotifyGateway>");
 
-            output.AppendFormat("<NotifyUrlFragments>{0}", weChatPayConfig.NotifyUrlFragments);
+            output.AppendFormat("<NotifyUrlFragments>{0}", config.NotifyUrlFragments);
             output.AppendLine("</NotifyUrlFragments>");
 
-            output.AppendFormat("<DefaultAppName>{0}", weChatPayConfig.DefaultAppName);
+            output.AppendFormat("<DefaultAppName>{0}", config.DefaultAppName);
             output.AppendLine("</DefaultAppName>");
 
-            output.AppendFormat("<SignType>{0}", weChatPayConfig.SignType);
+            output.AppendFormat("<SignType>{0}", config.SignType);
             output.AppendLine("</SignType>");
 
-            output.AppendFormat("<SslPassword>{0}", weChatPayConfig.SslPassword);
+            output.AppendFormat("<SslPassword>{0}", config.SslPassword);
             output.AppendLine("</SslPassword>");
 
             output.AppendLine("<Apps>");
-            foreach (var app in weChatPayConfig.Apps)
+            foreach (var app in config.Apps)
             {
                 output.AppendLine("<WeChatPayApp>");
                 output.AppendFormat("<Name>{0}", app.Name);

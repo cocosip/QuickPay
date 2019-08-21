@@ -32,7 +32,7 @@ namespace QuickPay.WeChatPay.Services.Impl
             }
 
             var request = ObjectMapper.Map<JsApiUnifiedOrderRequest>(input);
-            var response = await Executer.ExecuteAsync<JsApiUnifiedOrderResponse>(request, App);
+            var response = await Executer.ExecuteAsync<JsApiUnifiedOrderResponse>(request, Config, App);
             //响应与执行都成功
             if (response.ReturnSuccess && response.ResultSuccess)
             {
@@ -40,7 +40,7 @@ namespace QuickPay.WeChatPay.Services.Impl
                 var prepayId = response.PrepayId;
 
                 var jsApiUnifiedOrderCallRequest = new JsApiUnifiedOrderCallRequest(response.PrepayId);
-                var jsApiUnifiedOrderCallResonse = await Executer.SignRequest<JsApiUnifiedOrderCallResponse>(jsApiUnifiedOrderCallRequest, App);
+                var jsApiUnifiedOrderCallResonse = await Executer.SignRequest<JsApiUnifiedOrderCallResponse>(jsApiUnifiedOrderCallRequest, Config, App);
                 return jsApiUnifiedOrderCallResonse;
             }
             Logger.LogError($"微信JsApi下单请求出错,ReturnMsg:{response.ReturnMsg},ErrorCodeMsg:{response.ErrCodeDes}");
@@ -56,7 +56,7 @@ namespace QuickPay.WeChatPay.Services.Impl
             Logger.LogInformation(WeChatPayUtil.ParseLog($"获取微信JsApiTicket:{jsApiTicket}"));
             var request = new JsSdkConfigRequest(jsApiTicket, currentUrl);
             //签名,获取JsSdk的时候,签名用的是Sha1
-            var response = await Executer.SignRequest<JsSdkConfigResponse>(request, App);
+            var response = await Executer.SignRequest<JsSdkConfigResponse>(request, Config, App);
             return response;
         }
 

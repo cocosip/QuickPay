@@ -29,7 +29,7 @@ namespace QuickPay.Alipay.Services.Impl
             }
             var bizContentRequest = ObjectMapper.Map<WapTradeBizContentPayRequest>(input);
             var request = new WapTradePayRequest(bizContentRequest, input.ReturnUrl, input.NotifyUrl);
-            var response = await Executer.SignRequest<WapTradePayResponse>(request, App);
+            var response = await Executer.SignRequest<WapTradePayResponse>(request, Config, App);
             return response;
         }
 

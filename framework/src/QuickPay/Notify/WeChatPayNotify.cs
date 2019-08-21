@@ -10,7 +10,7 @@ namespace QuickPay.Notify
 {
     /// <summary>微信支付通知策略
     /// </summary>
-    public abstract class WechatPayNotify : BaseNotify
+    public abstract class WeChatPayNotify : BaseNotify
     {
         /// <summary>支付宝管道名
         /// </summary>
@@ -20,47 +20,37 @@ namespace QuickPay.Notify
         /// </summary>
         protected IServiceProvider ServiceProvider { get; }
 
-        /// <summary>微信支付配置信息
-        /// </summary>
-        protected WeChatPayConfig Config { get; }
-
         /// <summary>PayDataHelper
         /// </summary>
         protected WeChatPayDataHelper PayDataHelper { get; }
 
         /// <summary>微信支付相关辅助服务
         /// </summary>
-        protected IWeChatPayAssistService WechatPayAssistService { get; }
+        protected IWeChatPayAssistService WeChatPayAssistService { get; }
+
+        /// <summary>配置文件存储
+        /// </summary>
+        protected IWeChatPayConfigStore ConfigStore { get; }
 
         /// <summary>Ctor
         /// </summary>
-        public WechatPayNotify(IServiceProvider serviceProvider)
+        public WeChatPayNotify(IServiceProvider serviceProvider)
         {
             ServiceProvider = serviceProvider;
-            Config = ServiceProvider.GetService<WeChatPayConfig>();
             PayDataHelper = ServiceProvider.GetService<WeChatPayDataHelper>();
-            WechatPayAssistService = ServiceProvider.GetService<IWeChatPayAssistService>();
+            WeChatPayAssistService = ServiceProvider.GetService<IWeChatPayAssistService>();
+            ConfigStore = ServiceProvider.GetService<IWeChatPayConfigStore>();
         }
-
-        /// <summary>从PayData中获取App信息
-        /// </summary>
-        protected WeChatPayApp GetApp(PayData payData)
-        {
-            //获取AppId
-            var appId = PayDataHelper.GetWechatAppId(payData);
-            return Config.GetByAppId(appId);
-        }
-
 
         /// <summary>是否为真实的通知(通知签名校验)
         /// </summary>
         public override Task<bool> IsRealNotify(string notifyBody)
         {
             var payData = PayDataHelper.FromXml(notifyBody);
-            var weChatPayApp = GetApp(payData);
-            using(WechatPayAssistService.Use(weChatPayApp))
+            var appId = PayDataHelper.GetWeChatAppId(payData);
+            using (WeChatPayAssistService.Use(appId))
             {
-                return WechatPayAssistService.VerifySign(payData);
+                return WeChatPayAssistService.VerifySign(payData);
             }
         }
     }

@@ -62,14 +62,14 @@ namespace QuickPay.Alipay.Apps
 
         public List<AlipayApp> Apps = new List<AlipayApp>();
 
-        /// <summary>根据名称获取支付宝
+        /// <summary>根据名称获取支付宝应用
         /// </summary>
         public AlipayApp GetByName(string name)
         {
             return Apps.FirstOrDefault(x => x.Name == name);
         }
 
-        /// <summary>根据AppId获取支付宝
+        /// <summary>根据AppId获取支付宝应用
         /// </summary>
         public AlipayApp GetByAppId(string appId)
         {

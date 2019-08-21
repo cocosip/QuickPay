@@ -15,7 +15,7 @@ namespace QuickPay.Tests.Alipay.Services
         public void TradePay_Test()
         {
             var pagePayService = Provider.GetService<IAlipayPagePayService>();
-            using (pagePayService.Use(AlipayConfig.GetByName("App1")))
+            using (pagePayService.Use("2017061307479603"))
             {
                 var input = new PageTradePayInput("测试1", "支付宝测试支付", ObjectId.GenerateNewStringId(), "0.1")
                 {
@@ -30,7 +30,7 @@ namespace QuickPay.Tests.Alipay.Services
         public void TradePayStringResponse_Test()
         {
             var pagePayService = Provider.GetService<IAlipayPagePayService>();
-            using (pagePayService.Use(AlipayConfig.GetByName("App1")))
+            using (pagePayService.Use("2017061307479603"))
             {
                 var input = new PageTradePayInput("测试1", "支付宝测试支付", ObjectId.GenerateNewStringId(), "0.1")
                 {

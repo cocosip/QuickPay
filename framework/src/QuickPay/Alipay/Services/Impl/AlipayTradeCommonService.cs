@@ -23,7 +23,7 @@ namespace QuickPay.Alipay.Services.Impl
         {
             var bizContentRequest = ObjectMapper.Map<TradeQueryBizContentRequest>(input);
             var request = new TradeQueryRequest(bizContentRequest);
-            var response = await Executer.ExecuteAsync<TradeQueryResponse>(request, App);
+            var response = await Executer.ExecuteAsync<TradeQueryResponse>(request, Config, App);
             return response;
         }
 
@@ -33,7 +33,7 @@ namespace QuickPay.Alipay.Services.Impl
         {
             var bizContentRequest = ObjectMapper.Map<TradeCloseBizContentRequest>(input);
             var request = new TradeCloseRequest(bizContentRequest);
-            var response = await Executer.ExecuteAsync<TradeCloseResponse>(request, App);
+            var response = await Executer.ExecuteAsync<TradeCloseResponse>(request, Config, App);
             return response;
         }
 
@@ -43,7 +43,7 @@ namespace QuickPay.Alipay.Services.Impl
         {
             var bizContentRequest = ObjectMapper.Map<TradeCancelBizContentRequest>(input);
             var request = new TradeCancelRequest(bizContentRequest);
-            var response = await Executer.ExecuteAsync<TradeCancelResponse>(request, App);
+            var response = await Executer.ExecuteAsync<TradeCancelResponse>(request, Config, App);
             return response;
         }
 
@@ -53,7 +53,7 @@ namespace QuickPay.Alipay.Services.Impl
         {
             var bizContentRequest = ObjectMapper.Map<TradeRefundBizContentRequest>(input);
             var request = new TradeRefundRequest(bizContentRequest);
-            var response = await Executer.ExecuteAsync<TradeRefundResponse>(request, App);
+            var response = await Executer.ExecuteAsync<TradeRefundResponse>(request, Config, App);
             return response;
         }
 
@@ -63,7 +63,7 @@ namespace QuickPay.Alipay.Services.Impl
         {
             var bizContentRequest = ObjectMapper.Map<TradeRefundQueryBizContentRequest>(input);
             var request = new TradeRefundQueryRequest(bizContentRequest);
-            var response = await Executer.ExecuteAsync<TradeRefundQueryResponse>(request, App);
+            var response = await Executer.ExecuteAsync<TradeRefundQueryResponse>(request, Config, App);
             return response;
         }
 
@@ -73,7 +73,7 @@ namespace QuickPay.Alipay.Services.Impl
         {
             var bizContentRequest = ObjectMapper.Map<TradeBillDownloadUrlBizContentRequest>(input);
             var request = new TradeBillDownloadUrlRequest(bizContentRequest);
-            var response = await Executer.ExecuteAsync<TradeBillDownloadUrlResponse>(request, App);
+            var response = await Executer.ExecuteAsync<TradeBillDownloadUrlResponse>(request, Config, App);
             return response;
         }
 

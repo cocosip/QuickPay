@@ -8,11 +8,11 @@ namespace QuickPay.Notify
 {
     /// <summary>微信支付支付结果通知
     /// </summary>
-    public abstract class WechatPaymentNotify : WechatPayNotify
+    public abstract class WeChatPaymentNotify : WeChatPayNotify
     {
         /// <summary>Ctor
         /// </summary>
-        public WechatPaymentNotify(IServiceProvider serviceProvider) : base(serviceProvider)
+        public WeChatPaymentNotify(IServiceProvider serviceProvider) : base(serviceProvider)
         {
 
         }
@@ -22,10 +22,11 @@ namespace QuickPay.Notify
         public override async Task<string> InvokeAsync(string notifyBody)
         {
             var payData = PayDataHelper.FromXml(notifyBody);
-            var weChatPayApp = GetApp(payData);
-            using(WechatPayAssistService.Use(weChatPayApp))
+            var appId = PayDataHelper.GetWeChatAppId(payData);
+
+            using (WeChatPayAssistService.Use(appId))
             {
-                await WechatPayAssistService.PaySuccess(payData, async payment => await PaySuccess(payment));
+                await WeChatPayAssistService.PaySuccess(payData, async payment => await PaySuccess(payment));
                 //支付成功返回
                 return PaySuccessResponse();
             }

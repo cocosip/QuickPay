@@ -88,7 +88,7 @@ namespace QuickPay.WeChatPay.Util
 
         /// <summary>微信AppId
         /// </summary>
-        public string GetWechatAppId(PayData payData)
+        public string GetWeChatAppId(PayData payData)
         {
             return payData.GetValue(x => string.Equals(x.Key, "appid", StringComparison.OrdinalIgnoreCase)).ToString();
         }

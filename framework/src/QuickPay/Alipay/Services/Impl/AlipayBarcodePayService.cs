@@ -29,7 +29,7 @@ namespace QuickPay.Alipay.Services.Impl
             var bizContentRequest = ObjectMapper.Map<BarcodeTradeBizContentPayRequest>(input);
             var request = new BarcodeTradePayRequest(bizContentRequest, input.NotifyUrl);
             //发送请求到支付宝服务器
-            var response = await Executer.ExecuteAsync<BarcodeTradePayResponse>(request, App);
+            var response = await Executer.ExecuteAsync<BarcodeTradePayResponse>(request, Config, App);
             return response;
         }
     }

@@ -7,40 +7,27 @@ using System.IO;
 using System.Text;
 using Xunit;
 using DotCommon.AutoMapper;
+using DotCommon.Utility;
+using DotCommon.IO;
 
 namespace QuickPay.Tests.Configurations
 {
     public class ConfigurationFileTranslatorTest
     {
-        static IServiceProvider _provider;
-        static ConfigurationFileTranslatorTest()
-        {
-            IServiceCollection services = new ServiceCollection();
-            services
-                .AddDotCommon()
-                .AddDotCommonAutoMapper()
-                .AddQuickPay(o => { });
 
-            _provider = services.BuildServiceProvider();
-
-        }
 
         [Fact]
         public void TranslateToText_Test()
         {
-            var translator = _provider.GetService<IConfigurationFileTranslator>();
+            var wrapper = ConfigurationFileHelper.TranslateToConfigWrapper("QuickPayConfig.xml");
+            var xml = ConfigurationFileHelper.TranslateToText(wrapper);
+            var filePath = "test_quickpay_config.xml";
+            File.WriteAllText(filePath, xml);
 
-            var configWapper = translator.TranslateToConfigWapper("QuickPayConfig.xml", QuickPaySettings.ConfigFormat.Xml);
-            var xml = translator.TranslateToText(configWapper, QuickPaySettings.ConfigFormat.Xml);
+            var wrapper2 = ConfigurationFileHelper.TranslateToConfigWrapper(filePath);
+            Assert.Equal(wrapper.AlipayConfig.WebGateway, wrapper2.AlipayConfig.WebGateway);
 
-            var fileName = "test_quickpay_config.xml";
-            File.WriteAllText(fileName, xml);
-
-            Assert.True(File.Exists(fileName));
-
-            var configWapper2 = translator.TranslateToConfigWapper(fileName, QuickPaySettings.ConfigFormat.Xml);
-            Assert.Equal(configWapper.AlipayConfig.WebGateway, configWapper2.AlipayConfig.WebGateway);
-
+            FileHelper.DeleteIfExists(filePath);
         }
 
 

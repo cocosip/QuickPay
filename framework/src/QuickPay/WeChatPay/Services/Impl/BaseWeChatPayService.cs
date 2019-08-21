@@ -13,21 +13,17 @@ namespace QuickPay.WeChatPay.Services.Impl
     /// </summary>
     public abstract class BaseWeChatPayService : IWeChatPayService
     {
-        /// <summary>WeChatPayAppOverrideContextKey
+        /// <summary>WeChatPayOverrideContextKey
         /// </summary>
-        public const string WeChatPayAppOverrideContextKey = "QuickPay.WeChatPayApp.Override";
+        public const string WeChatPayOverrideContextKey = "QuickPay.WeChatPay.Override";
 
-        /// <summary>WeChatPayAppOverride
+        /// <summary>WeChatPayOverride
         /// </summary>
-        protected WeChatPayAppOverride OverrideValue => WeChatPayAppOverrideScopeProvider.GetValue(WeChatPayAppOverrideContextKey);
+        protected WeChatPayOverride OverrideValue => WeChatPayOverrideScopeProvider.GetValue(WeChatPayOverrideContextKey);
 
         /// <summary>WeChatPayAppOverrideScopeProvider
         /// </summary>
-        protected IAmbientScopeProvider<WeChatPayAppOverride> WeChatPayAppOverrideScopeProvider { get; }
-
-        /// <summary>微信配置
-        /// </summary>
-        protected WeChatPayConfig Config { get; }
+        protected IAmbientScopeProvider<WeChatPayOverride> WeChatPayOverrideScopeProvider { get; }
 
         /// <summary>请求执行器
         /// </summary>
@@ -36,6 +32,10 @@ namespace QuickPay.WeChatPay.Services.Impl
         /// <summary>NotifyTypeFinder
         /// </summary>
         protected INotifyTypeFinder NotifyTypeFinder { get; }
+
+        /// <summary>配置文件存储
+        /// </summary>
+        protected IWeChatPayConfigStore ConfigStore { get; }
 
         /// <summary>Logger
         /// </summary>
@@ -49,44 +49,69 @@ namespace QuickPay.WeChatPay.Services.Impl
         /// </summary>
         public BaseWeChatPayService(IServiceProvider provider)
         {
-            WeChatPayAppOverrideScopeProvider = provider.GetService<IAmbientScopeProvider<WeChatPayAppOverride>>();
-            Config = provider.GetService<WeChatPayConfig>();
+            WeChatPayOverrideScopeProvider = provider.GetService<IAmbientScopeProvider<WeChatPayOverride>>();
             Logger = provider.GetService<ILoggerFactory>().CreateLogger(QuickPaySettings.LoggerName);
             Executer = provider.GetService<IRequestExecuter>();
             NotifyTypeFinder = provider.GetService<INotifyTypeFinder>();
+            ConfigStore = provider.GetService<IWeChatPayConfigStore>();
             ObjectMapper = provider.GetService<IObjectMapper>();
         }
 
         /// <summary>Use
         /// </summary>
-        public IDisposable Use(WeChatPayApp app)
+        public IDisposable Use(string appId)
         {
-            var overrideValue = app.ToOverrideValue();
-            return WeChatPayAppOverrideScopeProvider.BeginScope(WeChatPayAppOverrideContextKey, overrideValue);
+            var config = ConfigStore.GetByAppId(appId);
+            var app = config.GetByAppId(appId);
+            return Use(config, app);
+        }
+
+        /// <summary>Use
+        /// </summary>
+        public IDisposable Use(string configId, string appId)
+        {
+            var config = ConfigStore.GetConfig(configId);
+            var app = config.GetByAppId(appId);
+            return Use(config, app);
+        }
+
+        /// <summary>Use
+        /// </summary>
+        public IDisposable Use(WeChatPayConfig config, WeChatPayApp app)
+        {
+            var mapConfig = ObjectMapper.Map<WeChatPayConfig>(config);
+            var mapApp = ObjectMapper.Map<WeChatPayApp>(app);
+            var overrideValue = new WeChatPayOverride(mapConfig, mapApp);
+            return WeChatPayOverrideScopeProvider.BeginScope(WeChatPayOverrideContextKey, overrideValue);
+        }
+
+        /// <summary>微信支付配置信息
+        /// </summary>
+        public WeChatPayConfig Config
+        {
+            get
+            {
+                if (OverrideValue != null)
+                {
+                    return OverrideValue.Config;
+                }
+                throw new ArgumentException($"OverrideValue为空!");
+            }
         }
 
         /// <summary>微信支付应用
         /// </summary>
         public WeChatPayApp App
         {
-
             get
             {
-                if (OverrideValue != null)
+                if (OverrideValue != null && Config != null)
                 {
-                    return OverrideValue.ToWeChatPayApp();
+                    return OverrideValue.App;
                 }
-                var app = Config.GetDefaultApp();
-                if (app != null)
-                {
-                    return app;
-                }
-                throw new ArgumentException($"WechatPayApp为空!");
+                throw new ArgumentException($"OverrideValue为空!");
             }
         }
-
-
-
 
     }
 }

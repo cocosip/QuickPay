@@ -16,8 +16,7 @@ namespace QuickPay.Tests
     public class TestBase
     {
         protected static IServiceProvider Provider { get; }
-        protected static WeChatPayConfig WechatPayConfig { get; }
-        protected static AlipayConfig AlipayConfig { get; }
+        protected static ConfigWrapper Wrapper { get; }
         static TestBase()
         {
             IServiceCollection services = new ServiceCollection();
@@ -40,10 +39,9 @@ namespace QuickPay.Tests
             //配置
             Provider
                 .ConfigureDotCommon()
-                .UseQuickPay();
+                .ConfigureQuickPay();
 
-            WechatPayConfig = Provider.GetService<WeChatPayConfig>();
-            AlipayConfig = Provider.GetService<AlipayConfig>();
+            Wrapper = Provider.GetService<ConfigWrapper>();
 
         }
     }

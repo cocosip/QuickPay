@@ -5,7 +5,7 @@ namespace QuickPay
 {
     /// <summary>配置文件包裹类
     /// </summary>
-    public class ConfigWapper
+    public class ConfigWrapper
     {
         /// <summary>支付宝配置
         /// </summary>
@@ -13,6 +13,6 @@ namespace QuickPay
 
         /// <summary>微信配置
         /// </summary>
-        public WeChatPayConfig WechatPayConfig { get; set; }
+        public WeChatPayConfig WeChatPayConfig { get; set; }
     }
 }

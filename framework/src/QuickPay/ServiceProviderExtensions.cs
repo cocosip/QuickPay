@@ -27,10 +27,10 @@ namespace QuickPay
                 var weChatPayConfig = provider.GetService<WeChatPayConfig>();
 
                 var configWapper = configLoader.TranslateToConfigWapper(option.ConfigFileName, option.ConfigFileFormat);
-                if (configWapper != null && configWapper.AlipayConfig != null && configWapper.WechatPayConfig != null)
+                if (configWapper != null && configWapper.AlipayConfig != null && configWapper.WeChatPayConfig != null)
                 {
                     alipayConfig.SelfCopy(configWapper.AlipayConfig);
-                    weChatPayConfig.SelfCopy(configWapper.WechatPayConfig);
+                    weChatPayConfig.SelfCopy(configWapper.WeChatPayConfig);
                 }
             }
 

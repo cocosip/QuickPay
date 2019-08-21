@@ -54,7 +54,7 @@ namespace QuickPay
                 .AddSingleton<QuickPayConfigurationOption>(option)
                 .RegisterQuickPay(alipayConfig, weChatPayConfig)
                 .RegisterPipeline()
-                .AddAssemblyAutoMaps(typeof(ConfigWapper).Assembly);
+                .AddAssemblyAutoMaps(typeof(ConfigWrapper).Assembly);
             return services;
         }
 

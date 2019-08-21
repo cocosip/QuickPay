@@ -11,9 +11,9 @@ namespace QuickPay.Tests
         {
 
             var configLoader = Provider.GetService<IConfigurationFileTranslator>();
-            var configWapper = configLoader.TranslateToConfigWapper("QuickPayConfig.xml", QuickPaySettings.ConfigFormat.Xml);
+            var configWrapper = configLoader.TranslateToConfigWapper("QuickPayConfig.xml", QuickPaySettings.ConfigFormat.Xml);
 
-            var alipayConfig = configWapper.AlipayConfig;
+            var alipayConfig = configWrapper.AlipayConfig;
             Assert.Equal("http://127.0.0.1", alipayConfig.NotifyGateway);
             Assert.Equal("127.0.0.1", alipayConfig.LocalAddress);
             Assert.Equal("http://127.0.0.1", alipayConfig.WebGateway);
@@ -42,7 +42,7 @@ namespace QuickPay.Tests
             Assert.Equal("1234567890", alipayApp.EncryptKey);
 
 
-            var weChatPayConfig = configWapper.WechatPayConfig;
+            var weChatPayConfig = configWrapper.WeChatPayConfig;
             Assert.Equal("8.8.8.8", weChatPayConfig.LocalAddress);
             Assert.Equal("http://127.0.0.1", weChatPayConfig.WebGateway);
             Assert.Equal("http://127.0.0.1", weChatPayConfig.NotifyGateway);

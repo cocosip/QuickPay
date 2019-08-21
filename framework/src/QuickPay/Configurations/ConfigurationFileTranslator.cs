@@ -21,24 +21,24 @@ namespace QuickPay.Configurations
 
         /// <summary>读取支付宝和微信配置
         /// </summary>
-        public ConfigWapper TranslateToConfigWapper(string file, string format = QuickPaySettings.ConfigFormat.Xml)
+        public ConfigWrapper TranslateToConfigWapper(string file, string format = QuickPaySettings.ConfigFormat.Xml)
         {
             //检测配置文件是否存在
             if (!File.Exists(file))
             {
-                return default(ConfigWapper);
+                return default(ConfigWrapper);
             }
             if (format == QuickPaySettings.ConfigFormat.Json)
             {
                 var jsonContent = File.ReadAllText(file);
-                return _jsonSerializer.Deserialize<ConfigWapper>(jsonContent);
+                return _jsonSerializer.Deserialize<ConfigWrapper>(jsonContent);
             }
             return LoadFromXml(file);
         }
 
-        private ConfigWapper LoadFromXml(string file)
+        private ConfigWrapper LoadFromXml(string file)
         {
-            var configWapper = new ConfigWapper();
+            var configWapper = new ConfigWrapper();
             var doc = new XmlDocument();
             XmlReaderSettings settings = new XmlReaderSettings
             {
@@ -83,7 +83,7 @@ namespace QuickPay.Configurations
             }
 
             var weChatPayNode = root.SelectSingleNode("WeChatPay");
-            configWapper.WechatPayConfig = new WeChatPayConfig()
+            configWapper.WeChatPayConfig = new WeChatPayConfig()
             {
                 DefaultAppName = weChatPayNode.SelectSingleNode("DefaultAppName").InnerText,
                 NotifyGateway = weChatPayNode.SelectSingleNode("NotifyGateway").InnerText,
@@ -117,7 +117,7 @@ namespace QuickPay.Configurations
                     WapName = nativeMobileInfoNode.SelectSingleNode("WapName").InnerText,
                     WapUrl = nativeMobileInfoNode.SelectSingleNode("WapUrl").InnerText,
                 };
-                configWapper.WechatPayConfig.Apps.Add(weChatPayApp);
+                configWapper.WeChatPayConfig.Apps.Add(weChatPayApp);
             }
             //关闭xml读取流,避免新配置文件无法覆盖
             reader.Close();
@@ -126,7 +126,7 @@ namespace QuickPay.Configurations
 
         /// <summary>将配置转换成文件内容
         /// </summary>
-        public string TranslateToText(ConfigWapper configWapper, string format = QuickPaySettings.ConfigFormat.Xml)
+        public string TranslateToText(ConfigWrapper configWapper, string format = QuickPaySettings.ConfigFormat.Xml)
         {
             if (format == QuickPaySettings.ConfigFormat.Json)
             {
@@ -138,7 +138,7 @@ namespace QuickPay.Configurations
             //支付宝
             output.Append(BuildAlipayXml(configWapper.AlipayConfig));
             //微信
-            output.Append(BuildWeChatXml(configWapper.WechatPayConfig));
+            output.Append(BuildWeChatXml(configWapper.WeChatPayConfig));
             output.AppendLine("</QuickPayConfig>");
             return output.ToString();
 

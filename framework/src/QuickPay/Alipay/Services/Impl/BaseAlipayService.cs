@@ -6,6 +6,8 @@ using QuickPay.Alipay.Apps;
 using QuickPay.Infrastructure.Executers;
 using QuickPay.Notify;
 using System;
+using System.Linq;
+
 namespace QuickPay.Alipay.Services.Impl
 {
     /// <summary>支付宝服务基类
@@ -26,7 +28,7 @@ namespace QuickPay.Alipay.Services.Impl
 
         /// <summary>支付宝配置信息
         /// </summary>
-        protected AlipayConfig Config;
+        protected AlipayConfig Config { get; private set; }
 
         /// <summary>支付宝请求执行器
         /// </summary>
@@ -58,9 +60,24 @@ namespace QuickPay.Alipay.Services.Impl
 
         /// <summary>Use
         /// </summary>
-        public IDisposable Use(AlipayApp app)
+        public IDisposable Use(AlipayConfig config)
         {
-            var overrideValue = app.ToOverrideValue();
+            return Use(config, c => c.Apps.FirstOrDefault());
+        }
+
+        /// <summary>Use
+        /// </summary>
+        public IDisposable Use(AlipayConfig config, string appName)
+        {
+            return Use(config, c => c.Apps.FirstOrDefault(x => x.Name == appName));
+        }
+
+        /// <summary>Use
+        /// </summary>
+        public IDisposable Use(AlipayConfig config, Func<AlipayConfig, AlipayApp> predicate)
+        {
+            Config = config;
+            var overrideValue = predicate(config).ToOverrideValue();
             return AlipayAppOverrideScopeProvider.BeginScope(AlipayAppOverrideContextKey, overrideValue);
         }
 

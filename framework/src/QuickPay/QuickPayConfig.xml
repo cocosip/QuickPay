@@ -1,5 +1,7 @@
 ﻿<QuickPayConfig>
   <Alipay>
+    <![CDATA[当前配置的Id值,唯一]]>
+    <Id>1</Id>
     <![CDATA[支付宝网关]]>
     <Gateway>https://openapi.alipay.com/gateway.do</Gateway>
     <![CDATA[支付宝沙盒网关]]>
@@ -52,6 +54,8 @@
     </Apps>
   </Alipay>
   <WeChatPay>
+    <![CDATA[当前配置的Id,唯一值]]>
+    <Id>2</Id>
     <![CDATA[本地IP地址]]>
     <LocalAddress>8.8.8.8</LocalAddress>
     <![CDATA[本地网关地址]]>

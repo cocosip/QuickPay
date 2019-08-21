@@ -9,7 +9,15 @@ namespace QuickPay.Alipay.Services
     {
         /// <summary>Use
         /// </summary>
-        IDisposable Use(AlipayApp app);
+        IDisposable Use(AlipayConfig config);
+
+        /// <summary>Use
+        /// </summary>
+        IDisposable Use(AlipayConfig config, string appName);
+
+        /// <summary>Use
+        /// </summary>
+        IDisposable Use(AlipayConfig config, Func<AlipayConfig, AlipayApp> predicate);
 
         /// <summary>支付宝应用
         /// </summary>

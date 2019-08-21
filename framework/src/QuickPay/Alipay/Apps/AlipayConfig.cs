@@ -11,6 +11,7 @@ namespace QuickPay.Alipay.Apps
     /// </summary>
     public class AlipayConfig : QuickPayConfig
     {
+
         /// <summary>默认的应用名
         /// </summary>
         public string DefaultAppName { get; set; }

@@ -14,6 +14,11 @@ namespace QuickPay.Configurations
         /// <summary>从代码中获取配置
         /// </summary>
         [Description("从代码中获取配置")]
-        FromClass = 2
+        FromClass = 2,
+
+        /// <summary>自定义获取配置
+        /// </summary>
+        [Description("自定义获取配置")]
+        Custom = 3
     }
 }

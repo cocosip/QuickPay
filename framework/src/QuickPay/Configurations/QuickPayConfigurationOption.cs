@@ -16,10 +16,6 @@ namespace QuickPay.Configurations
         /// </summary>
         public string ConfigFileName { get; set; }
 
-        /// <summary>配置的格式(默认XML)
-        /// </summary>
-        public string ConfigFileFormat { get; set; } = QuickPaySettings.ConfigFormat.Xml;
-
         /// <summary>是否开启微信沙盒
         /// </summary>
         public bool EnabledWeChatPaySandbox { get; set; }

@@ -67,8 +67,7 @@ namespace QuickPay
             //配置信息
             services.AddSingleton<AlipayConfig>(alipayConfig);
             services.AddSingleton<WeChatPayConfig>(weChatPayConfig);
-            //配置文件读取器
-            services.AddSingleton<IConfigurationFileTranslator, ConfigurationFileTranslator>();
+           
             //RequestType Finder
             services.AddSingleton<IRequestTypeFinder, RequestTypeFinder>();
             services.AddSingleton<IQuickPayPipelineBuilder, QuickPayPipelineBuilder>();

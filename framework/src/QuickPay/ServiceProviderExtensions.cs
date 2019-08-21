@@ -16,21 +16,20 @@ namespace QuickPay
     {
         /// <summary>配置QuickPay的相关信息
         /// </summary>
-        public static IServiceProvider UseQuickPay(this IServiceProvider provider)
+        public static IServiceProvider ConfigureQuickPay(this IServiceProvider provider)
         {
             var option = provider.GetService<QuickPayConfigurationOption>();
             //从文件中读取配置
             if (option.ConfigSourceType == ConfigSourceType.FromConfigFile)
             {
-                var configLoader = provider.GetService<IConfigurationFileTranslator>();
                 var alipayConfig = provider.GetService<AlipayConfig>();
                 var weChatPayConfig = provider.GetService<WeChatPayConfig>();
+                var wrapper = ConfigurationFileHelper.TranslateToConfigWrapper(option.ConfigFileName);
 
-                var configWapper = configLoader.TranslateToConfigWapper(option.ConfigFileName, option.ConfigFileFormat);
-                if (configWapper != null && configWapper.AlipayConfig != null && configWapper.WeChatPayConfig != null)
+                if (wrapper != null && wrapper.AlipayConfig != null && wrapper.WeChatPayConfig != null)
                 {
-                    alipayConfig.SelfCopy(configWapper.AlipayConfig);
-                    weChatPayConfig.SelfCopy(configWapper.WeChatPayConfig);
+                    alipayConfig.SelfCopy(wrapper.AlipayConfig);
+                    weChatPayConfig.SelfCopy(wrapper.WeChatPayConfig);
                 }
             }
 
@@ -41,19 +40,19 @@ namespace QuickPay
             //Pipeline
             var pipelineBuilder = provider.GetService<IQuickPayPipelineBuilder>();
             pipelineBuilder
-                .UseMiddleware<SetNecessaryMiddleware>()  
-                .UseMiddleware<AutoUniqueIdMiddleware>()  
-                .UseMiddleware<AlipayPayDataTransformMiddleware>()  
-                .UseMiddleware<AlipaySignMiddleware>()  
+                .UseMiddleware<SetNecessaryMiddleware>()
+                .UseMiddleware<AutoUniqueIdMiddleware>()
+                .UseMiddleware<AlipayPayDataTransformMiddleware>()
+                .UseMiddleware<AlipaySignMiddleware>()
                 .UseMiddleware<AlipayRequestBuilderMiddleware>()
 
-                .UseMiddleware<WeChatPayDataTransformMiddleware>() 
-                .UseMiddleware<WeChatPaySignMiddleware>() 
-                .UseMiddleware<WeChatPayRequestBuilderMiddleware>()  
-                
-                .UseMiddleware<ExecuterExecuteMiddleware>()   
-                .UseMiddleware<AlipayParseResponseMiddleware>()  
-                .UseMiddleware<WeChatPayParseResponseMiddleware>() 
+                .UseMiddleware<WeChatPayDataTransformMiddleware>()
+                .UseMiddleware<WeChatPaySignMiddleware>()
+                .UseMiddleware<WeChatPayRequestBuilderMiddleware>()
+
+                .UseMiddleware<ExecuterExecuteMiddleware>()
+                .UseMiddleware<AlipayParseResponseMiddleware>()
+                .UseMiddleware<WeChatPayParseResponseMiddleware>()
                 .UseMiddleware<PaymentStoreMiddleware>()
                 .UseMiddleware<RefundStoreMiddleware>()
                 .UseMiddleware<EndMiddleware>();

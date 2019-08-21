@@ -1,42 +1,49 @@
-﻿using DotCommon.Serializing;
-using QuickPay.Alipay.Apps;
+﻿using QuickPay.Alipay.Apps;
 using QuickPay.WeChatPay.Apps;
+using System;
 using System.IO;
 using System.Text;
 using System.Xml;
 
 namespace QuickPay.Configurations
 {
-    /// <summary>配置文件转化
+    /// <summary>配置文件帮助类
     /// </summary>
-    public class ConfigurationFileTranslator : IConfigurationFileTranslator
+    public static class ConfigurationFileHelper
     {
-        private readonly IJsonSerializer _jsonSerializer;
-        /// <summary>Ctor
-        /// </summary>
-        public ConfigurationFileTranslator(IJsonSerializer jsonSerializer)
-        {
-            _jsonSerializer = jsonSerializer;
-        }
-
         /// <summary>读取支付宝和微信配置
         /// </summary>
-        public ConfigWrapper TranslateToConfigWapper(string file, string format = QuickPaySettings.ConfigFormat.Xml)
+        public static ConfigWrapper TranslateToConfigWrapper(string file)
         {
             //检测配置文件是否存在
             if (!File.Exists(file))
             {
-                return default(ConfigWrapper);
-            }
-            if (format == QuickPaySettings.ConfigFormat.Json)
-            {
-                var jsonContent = File.ReadAllText(file);
-                return _jsonSerializer.Deserialize<ConfigWrapper>(jsonContent);
+                throw new ArgumentNullException($"未找到支付配置文件:{file}");
             }
             return LoadFromXml(file);
         }
 
-        private ConfigWrapper LoadFromXml(string file)
+        /// <summary>将配置转换成文件内容
+        /// </summary>
+        public static string TranslateToText(ConfigWrapper configWrapper)
+        {
+
+
+            var output = new StringBuilder();
+            output.AppendLine("<QuickPayConfig>");
+            //支付宝
+            output.Append(BuildAlipayXml(configWrapper.AlipayConfig));
+            //微信
+            output.Append(BuildWeChatXml(configWrapper.WeChatPayConfig));
+            output.AppendLine("</QuickPayConfig>");
+            return output.ToString();
+
+        }
+
+
+        /// <summary>从文件中加载配置包装,ConfigWrapper
+        /// </summary>
+        private static ConfigWrapper LoadFromXml(string file)
         {
             var configWapper = new ConfigWrapper();
             var doc = new XmlDocument();
@@ -50,6 +57,7 @@ namespace QuickPay.Configurations
             var alipayNode = root.SelectSingleNode("Alipay");
             configWapper.AlipayConfig = new AlipayConfig()
             {
+                Id = alipayNode.SelectSingleNode("Id").InnerText,
                 DefaultAppName = alipayNode.SelectSingleNode("DefaultAppName").InnerText,
                 NotifyGateway = alipayNode.SelectSingleNode("NotifyGateway").InnerText,
                 LocalAddress = alipayNode.SelectSingleNode("LocalAddress").InnerText,
@@ -85,6 +93,7 @@ namespace QuickPay.Configurations
             var weChatPayNode = root.SelectSingleNode("WeChatPay");
             configWapper.WeChatPayConfig = new WeChatPayConfig()
             {
+                Id = weChatPayNode.SelectSingleNode("Id").InnerText,
                 DefaultAppName = weChatPayNode.SelectSingleNode("DefaultAppName").InnerText,
                 NotifyGateway = weChatPayNode.SelectSingleNode("NotifyGateway").InnerText,
                 LocalAddress = weChatPayNode.SelectSingleNode("LocalAddress").InnerText,
@@ -124,27 +133,9 @@ namespace QuickPay.Configurations
             return configWapper;
         }
 
-        /// <summary>将配置转换成文件内容
+        /// <summary>构建支付宝配置xml字符串
         /// </summary>
-        public string TranslateToText(ConfigWrapper configWapper, string format = QuickPaySettings.ConfigFormat.Xml)
-        {
-            if (format == QuickPaySettings.ConfigFormat.Json)
-            {
-                return _jsonSerializer.Serialize(configWapper);
-            }
-
-            var output = new StringBuilder();
-            output.AppendLine("<QuickPayConfig>");
-            //支付宝
-            output.Append(BuildAlipayXml(configWapper.AlipayConfig));
-            //微信
-            output.Append(BuildWeChatXml(configWapper.WeChatPayConfig));
-            output.AppendLine("</QuickPayConfig>");
-            return output.ToString();
-
-        }
-
-        private string BuildAlipayXml(AlipayConfig alipayConfig)
+        private static string BuildAlipayXml(AlipayConfig alipayConfig)
         {
             var output = new StringBuilder();
 
@@ -224,8 +215,9 @@ namespace QuickPay.Configurations
             return output.ToString();
         }
 
-
-        private string BuildWeChatXml(WeChatPayConfig weChatPayConfig)
+        /// <summary>构建微信支付配置xml字符串
+        /// </summary>
+        private static string BuildWeChatXml(WeChatPayConfig weChatPayConfig)
         {
             var output = new StringBuilder();
 
@@ -305,6 +297,5 @@ namespace QuickPay.Configurations
 
             return output.ToString();
         }
-
     }
 }

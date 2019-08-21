@@ -67,7 +67,6 @@ namespace QuickPay.ConsoleTest
                 {
                     option.ConfigSourceType = ConfigSourceType.FromConfigFile;
                     option.ConfigFileName = "QuickPayConfig.xml";
-                    option.ConfigFileFormat = QuickPay.QuickPaySettings.ConfigFormat.Xml;
                     option.EnabledAlipaySandbox = false; //是否启用支付宝沙盒
                     option.EnabledWeChatPaySandbox = false; //是否启用微信沙盒
                 })
@@ -83,7 +82,7 @@ namespace QuickPay.ConsoleTest
             //配置
             provider
                 .ConfigureDotCommon()
-                .UseQuickPay();
+                .ConfigureQuickPay();
             return provider;
         }
     }

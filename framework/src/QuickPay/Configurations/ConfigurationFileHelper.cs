@@ -56,7 +56,7 @@ namespace QuickPay.Configurations
             configWapper.AlipayConfig = new AlipayConfig()
             {
                 Id = alipayNode.SelectSingleNode("Id").InnerText,
-                DefaultAppName = alipayNode.SelectSingleNode("DefaultAppName").InnerText,
+                DefaultAppId = alipayNode.SelectSingleNode("DefaultAppId").InnerText,
                 NotifyGateway = alipayNode.SelectSingleNode("NotifyGateway").InnerText,
                 LocalAddress = alipayNode.SelectSingleNode("LocalAddress").InnerText,
                 WebGateway = alipayNode.SelectSingleNode("WebGateway").InnerText,
@@ -92,7 +92,7 @@ namespace QuickPay.Configurations
             configWapper.WeChatPayConfig = new WeChatPayConfig()
             {
                 Id = weChatPayNode.SelectSingleNode("Id").InnerText,
-                DefaultAppName = weChatPayNode.SelectSingleNode("DefaultAppName").InnerText,
+                DefaultAppId = weChatPayNode.SelectSingleNode("DefaultAppId").InnerText,
                 NotifyGateway = weChatPayNode.SelectSingleNode("NotifyGateway").InnerText,
                 LocalAddress = weChatPayNode.SelectSingleNode("LocalAddress").InnerText,
                 WebGateway = weChatPayNode.SelectSingleNode("WebGateway").InnerText,
@@ -171,8 +171,8 @@ namespace QuickPay.Configurations
             output.AppendFormat("<Version>{0}", config.Version);
             output.AppendLine("</Version>");
 
-            output.AppendFormat("<DefaultAppName>{0}", config.DefaultAppName);
-            output.AppendLine("</DefaultAppName>");
+            output.AppendFormat("<DefaultAppId>{0}", config.DefaultAppId);
+            output.AppendLine("</DefaultAppId>");
 
             output.AppendLine("<Apps>");
             foreach (var app in config.Apps)
@@ -240,8 +240,8 @@ namespace QuickPay.Configurations
             output.AppendFormat("<NotifyUrlFragments>{0}", config.NotifyUrlFragments);
             output.AppendLine("</NotifyUrlFragments>");
 
-            output.AppendFormat("<DefaultAppName>{0}", config.DefaultAppName);
-            output.AppendLine("</DefaultAppName>");
+            output.AppendFormat("<DefaultAppId>{0}", config.DefaultAppId);
+            output.AppendLine("</DefaultAppId>");
 
             output.AppendFormat("<SignType>{0}", config.SignType);
             output.AppendLine("</SignType>");

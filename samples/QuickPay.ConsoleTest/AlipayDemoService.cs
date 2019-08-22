@@ -15,15 +15,13 @@ namespace QuickPay.ConsoleTest
     {
         private readonly ILogger _logger;
         private WeChatPayDataHelper _weChatPayDataHelper;
-        private readonly AlipayConfig _alipayConfig;
         private readonly IAlipayTradeCommonService _alipayTradeCommonService;
         private readonly IAlipayAppPayService _alipayAppPayService;
         private readonly IAlipayPagePayService _alipayPagePayService;
-        public AlipayDemoService(ILoggerFactory loggerFactory, WeChatPayDataHelper weChatPayDataHelper, AlipayConfig alipayConfig, IAlipayTradeCommonService alipayTradeCommonService, IAlipayAppPayService alipayAppPayService, IAlipayPagePayService alipayPagePayService)
+        public AlipayDemoService(ILoggerFactory loggerFactory, WeChatPayDataHelper weChatPayDataHelper, IAlipayTradeCommonService alipayTradeCommonService, IAlipayAppPayService alipayAppPayService, IAlipayPagePayService alipayPagePayService)
         {
             _logger = loggerFactory.CreateLogger(QuickPaySettings.LoggerName);
             _weChatPayDataHelper = weChatPayDataHelper;
-            _alipayConfig = alipayConfig;
             _alipayTradeCommonService = alipayTradeCommonService;
             _alipayAppPayService = alipayAppPayService;
             _alipayPagePayService = alipayPagePayService;
@@ -33,7 +31,7 @@ namespace QuickPay.ConsoleTest
         /// </summary>
         public async Task AlipayAppTradePay()
         {
-            using (_alipayAppPayService.Use(_alipayConfig.GetByName("App1")))
+            using (_alipayAppPayService.Use("2017061307479603"))
             {
                 var input = new AppTradePayInput("测试1", "支付宝测试支付", ObjectId.GenerateNewStringId(), "0.1");
                 var responseString = await _alipayAppPayService.TradePayStringResponse(input);
@@ -45,7 +43,7 @@ namespace QuickPay.ConsoleTest
         /// </summary>
         public async Task AlipayPageTradePay()
         {
-            using (_alipayPagePayService.Use(_alipayConfig.GetByName("App1")))
+            using (_alipayPagePayService.Use("2017061307479603"))
             {
                 var input = new PageTradePayInput("测试1", "支付宝测试支付", ObjectId.GenerateNewStringId(), "0.1")
                 {
@@ -61,7 +59,7 @@ namespace QuickPay.ConsoleTest
         /// </summary>
         public async Task Query()
         {
-            using (_alipayTradeCommonService.Use(_alipayConfig.GetByName("App1")))
+            using (_alipayTradeCommonService.Use("2017061307479603"))
             {
                 var response = await _alipayTradeCommonService.Query(new TradeQueryInput("123456"));
                 _logger.LogInformation("ReturnSuccess:{0},Code:{1}", response.ReturnSuccess, response.Code);
@@ -72,7 +70,7 @@ namespace QuickPay.ConsoleTest
         /// </summary>
         public async Task RefundQuery()
         {
-            using (_alipayTradeCommonService.Use(_alipayConfig.GetByName("App1")))
+            using (_alipayTradeCommonService.Use("2017061307479603"))
             {
                 var response = await _alipayTradeCommonService.RefundQuery(new TradeRefundQueryInput("123456", "1234567890"));
                 _logger.LogInformation("ReturnSuccess:{0},Code:{1}", response.ReturnSuccess, response.Code);
@@ -83,7 +81,7 @@ namespace QuickPay.ConsoleTest
         /// </summary>
         public async Task BillDownloadUrl()
         {
-            using (_alipayTradeCommonService.Use(_alipayConfig.GetByName("App1")))
+            using (_alipayTradeCommonService.Use("2017061307479603"))
             {
                 var response = await _alipayTradeCommonService.BillDownloadUrl(new TradeBillDownloadUrlInput(AlipaySettings.BillType.Trade, "2017-03"));
                 _logger.LogInformation("ReturnSuccess:{0},Code:{1},BillDownloadUrl:{2}", response.ReturnSuccess, response.Code, response.BillDownloadUrl);

@@ -13,7 +13,7 @@ namespace QuickPay.WeChatPay.Apps
     {
         /// <summary>默认的应用名
         /// </summary>
-        public string DefaultAppName { get; set; }
+        public string DefaultAppId { get; set; }
 
         /// <summary>微信支付异步通知默认网关地址
         /// </summary>
@@ -62,9 +62,13 @@ namespace QuickPay.WeChatPay.Apps
         /// </summary>
         public WeChatPayApp GetDefaultApp()
         {
-            if (!DefaultAppName.IsNullOrWhiteSpace())
+            if (!DefaultAppId.IsNullOrWhiteSpace())
             {
-                return Apps.First(x => x.Name == DefaultAppName);
+                var app = Apps.FirstOrDefault(x => x.AppId == DefaultAppId);
+                if (app != null)
+                {
+                    return app;
+                }
             }
             throw new ArgumentException($"DefaultAppName 未配置!");
         }
@@ -81,7 +85,7 @@ namespace QuickPay.WeChatPay.Apps
         /// </summary>
         public WeChatPayConfig SelfCopy(WeChatPayConfig wechatPayConfig)
         {
-            DefaultAppName = wechatPayConfig.DefaultAppName;
+            DefaultAppId = wechatPayConfig.DefaultAppId;
             NotifyGateway = wechatPayConfig.NotifyGateway;
             NotifyUrlFragments = wechatPayConfig.NotifyUrlFragments;
             LocalAddress = wechatPayConfig.LocalAddress;

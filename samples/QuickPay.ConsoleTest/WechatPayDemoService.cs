@@ -1,6 +1,5 @@
 ﻿using DotCommon.Utility;
 using Microsoft.Extensions.Logging;
-using QuickPay.WeChatPay.Apps;
 using QuickPay.WeChatPay.Authentication;
 using QuickPay.WeChatPay.Services;
 using QuickPay.WeChatPay.Services.DTOs;
@@ -11,17 +10,16 @@ namespace QuickPay.ConsoleTest
     public class WeChatPayDemoService
     {
         private readonly ILogger _logger;
-        private readonly WeChatPayConfig _weChatPayConfig;
+
         private readonly IAuthenticationService _authenticationService;
         private readonly IWeChatPayTradeCommonService _weChatPayTradeCommonService;
         private readonly IWeChatAppPayService _weChatAppPayService;
         private readonly IWeChatJsApiPayService _weChatJsApiPayService;
         private readonly IWeChatMiniProgramPayService _weChatMiniProgramPayService;
 
-        public WeChatPayDemoService(ILoggerFactory loggerFactory, WeChatPayConfig weChatPayConfig, IAuthenticationService authenticationService, IWeChatPayTradeCommonService weChatPayTradeCommonService, IWeChatAppPayService weChatAppPayService, IWeChatJsApiPayService weChatJsApiPayService, IWeChatMiniProgramPayService weChatMiniProgramPayService)
+        public WeChatPayDemoService(ILoggerFactory loggerFactory, IAuthenticationService authenticationService, IWeChatPayTradeCommonService weChatPayTradeCommonService, IWeChatAppPayService weChatAppPayService, IWeChatJsApiPayService weChatJsApiPayService, IWeChatMiniProgramPayService weChatMiniProgramPayService)
         {
             _logger = loggerFactory.CreateLogger(QuickPaySettings.LoggerName);
-            _weChatPayConfig = weChatPayConfig;
             _authenticationService = authenticationService;
             _weChatPayTradeCommonService = weChatPayTradeCommonService;
             _weChatAppPayService = weChatAppPayService;
@@ -34,7 +32,7 @@ namespace QuickPay.ConsoleTest
         /// </summary>
         public async Task WeChatAppUnifiedOrder()
         {
-            using (_weChatAppPayService.Use(_weChatPayConfig.GetByName("App1")))
+            using (_weChatAppPayService.Use("wx7462799678470f25"))
             {
                 var input = new AppUnifiedOrderInput("测试支付1", ObjectId.GenerateNewStringId(), 10);
                 await _weChatAppPayService.UnifiedOrder(input);
@@ -45,7 +43,7 @@ namespace QuickPay.ConsoleTest
         /// </summary>
         public async Task WeChatJsApiUnifiedOrder()
         {
-            using (_weChatJsApiPayService.Use(_weChatPayConfig.GetByName("App2")))
+            using (_weChatJsApiPayService.Use("wx0b53a07382f48372"))
             {
                 var input = new JsApiUnifiedOrderInput("JsApi支付测试", ObjectId.GenerateNewStringId(), 1, "8.8.8.8", "http://114.55.101.33", "opaInxF28ub-ea5JVrZOosDHyXZY");
                 await _weChatJsApiPayService.UnifiedOrder(input);
@@ -56,7 +54,7 @@ namespace QuickPay.ConsoleTest
         /// </summary>
         public async Task WeChatMiniProgramUnifiedOrder()
         {
-            using (_weChatMiniProgramPayService.Use(_weChatPayConfig.GetByName("App3")))
+            using (_weChatMiniProgramPayService.Use("wx4239531fdf3896e6"))
             {
                 //var openId = await authenticationService.GetMiniProgramOpenId(miniProgramService.App.AppId, miniProgramService.App.Appsecret, "071FCmZX1ixU011SMv0Y1KAvZX1FCmZo");
 
@@ -71,7 +69,7 @@ namespace QuickPay.ConsoleTest
         /// </summary>
         public async Task WeChatOrderQuery()
         {
-            using (_weChatPayTradeCommonService.Use(_weChatPayConfig.GetByName("App3")))
+            using (_weChatPayTradeCommonService.Use("wx4239531fdf3896e6"))
             {
                 var response = await _weChatPayTradeCommonService.OrderQuery(new OrderQueryInput("123"));
                 _logger.LogInformation("ReturnSuccess:{0},outTradeNo:{1}", response.ReturnSuccess, response.OutTradeNo);

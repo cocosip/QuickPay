@@ -21,7 +21,7 @@ namespace QuickPay.Tests
             Assert.Equal("https://openapi.alipay.com/gateway.do", alipayConfig.Gateway);
             Assert.Equal("JSON", alipayConfig.Format);
             Assert.Equal("1.0", alipayConfig.Version);
-            Assert.Equal("App1", alipayConfig.DefaultAppName);
+            Assert.Equal("2017061307479603", alipayConfig.DefaultAppId);
 
             Assert.Equal("http://127.0.0.1/Notify/Alipay", alipayConfig.GetDefaultNotifyUrl());
 
@@ -45,7 +45,7 @@ namespace QuickPay.Tests
             Assert.Equal("http://127.0.0.1", weChatPayConfig.WebGateway);
             Assert.Equal("http://127.0.0.1", weChatPayConfig.NotifyGateway);
             Assert.Equal("/Notify/WechatPay", weChatPayConfig.NotifyUrlFragments);
-            Assert.Equal("App1", weChatPayConfig.DefaultAppName);
+            Assert.Equal("wx7462799678470f25", weChatPayConfig.DefaultAppId);
             Assert.Equal("MD5", weChatPayConfig.SignType);
             Assert.Equal("", weChatPayConfig.SslPassword);
 

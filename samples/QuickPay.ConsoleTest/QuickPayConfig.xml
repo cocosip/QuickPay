@@ -1,5 +1,6 @@
 ﻿<QuickPayConfig>
   <Alipay>
+    <Id>1</Id>
     <![CDATA[支付宝网关]]>
     <Gateway>https://openapi.alipay.com/gateway.do</Gateway>
     <![CDATA[支付宝沙盒网关]]>
@@ -21,7 +22,7 @@
     <![CDATA[版本号]]>
     <Version>1.0</Version>
     <![CDATA[默认支付使用的App名称]]>
-    <DefaultAppName>App1</DefaultAppName>
+    <DefaultAppId>2017061307479603</DefaultAppId>
     <Apps>
       <AlipayApp>
         <![CDATA[App名称]]>
@@ -52,6 +53,7 @@
     </Apps>
   </Alipay>
   <WeChatPay>
+    <Id>3</Id>
     <![CDATA[本地IP地址]]>
     <LocalAddress>8.8.8.8</LocalAddress>
     <![CDATA[本地网关地址]]>
@@ -60,8 +62,8 @@
     <NotifyGateway>http://127.0.0.1</NotifyGateway>
     <![CDATA[异步通知关联地址]]>
     <NotifyUrlFragments>/Notify/WeChatPay</NotifyUrlFragments>
-    <![CDATA[默认App名称]]>
-    <DefaultAppName>App1</DefaultAppName>
+    <![CDATA[默认AppId]]>
+    <DefaultAppId>wx0b53a07382f48372</DefaultAppId>
     <![CDATA[签名类型,MD5]]>
     <SignType>MD5</SignType>
     <![CDATA[SSL证书]]>
@@ -96,7 +98,7 @@
         </NativeMobileInfo>
       </WeChatPayApp>
 
-      <WxpayApp>
+      <WeChatPayApp>
         <![CDATA[应用名称]]>
         <Name>App2</Name>
         <![CDATA[应用AppId]]>
@@ -123,9 +125,9 @@
           <![CDATA[移动端Url地址]]>
           <WapUrl>http://wap.b1.com</WapUrl>
         </NativeMobileInfo>
-      </WxpayApp>
+      </WeChatPayApp>
 
-      <WxpayApp>
+      <WeChatPayApp>
         <![CDATA[应用名称,小程序]]>
         <Name>App3</Name>
         <![CDATA[应用AppId]]>
@@ -152,7 +154,7 @@
           <![CDATA[移动端Url地址]]>
           <WapUrl>http://wap.b1.com</WapUrl>
         </NativeMobileInfo>
-      </WxpayApp>
+      </WeChatPayApp>
     </Apps>
   </WeChatPay>
 </QuickPayConfig>

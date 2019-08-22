@@ -27,7 +27,7 @@ namespace QuickPay.ConsoleTest
                 QrcodeNotifyUrlFragments = "/Notify/AlipayQrcode",
                 LocalAddress = "8.8.8.8",
                 WebGateway = "127.0.0.1",
-                DefaultAppName = "App1",
+                DefaultAppId = "2017061307479603",
                 Format = "JSON",
                 Version = "1.0",
                 Apps = new List<AlipayApp>()
@@ -41,7 +41,7 @@ namespace QuickPay.ConsoleTest
                 NotifyUrlFragments = "/Notify/Wxpay",
                 LocalAddress = "8.8.8.8",
                 WebGateway = "127.0.0.1",
-                DefaultAppName = "App1",
+                DefaultAppId = "wx7462799678470f25",
                 Apps = new List<WeChatPayApp>()
                 {
                 new WeChatPayApp("AppName", "AppId", "商户号", "加密的Key", "appsecret", 1, new NativeMobileInfo())
@@ -49,7 +49,8 @@ namespace QuickPay.ConsoleTest
             };
 
             IServiceCollection services = new ServiceCollection();
-            services.AddLogging(c =>
+            services
+                .AddLogging(c =>
                 {
                     c.AddLog4Net();
                 })

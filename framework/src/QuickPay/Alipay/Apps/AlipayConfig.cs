@@ -14,7 +14,7 @@ namespace QuickPay.Alipay.Apps
 
         /// <summary>默认的应用名
         /// </summary>
-        public string DefaultAppName { get; set; }
+        public string DefaultAppId { get; set; }
 
         /// <summary>支付宝支付异步通知默认网关地址
         /// </summary>
@@ -46,7 +46,6 @@ namespace QuickPay.Alipay.Apps
 
         /// <summary>沙箱网关
         /// </summary>
-
         public string SandboxGateway { get; set; } = AlipaySettings.Urls.SandboxGateway;
 
         /// <summary>格式--JSON
@@ -80,9 +79,13 @@ namespace QuickPay.Alipay.Apps
         /// </summary>
         public AlipayApp GetDefaultApp()
         {
-            if (!DefaultAppName.IsNullOrWhiteSpace())
+            if (!DefaultAppId.IsNullOrWhiteSpace())
             {
-                return Apps.First(x => x.Name == DefaultAppName);
+                var app = Apps.First(x => x.AppId == DefaultAppId);
+                if (app != null)
+                {
+                    return app;
+                }
             }
             throw new ArgumentException($"DefaultAppName 未配置!");
         }
@@ -112,7 +115,7 @@ namespace QuickPay.Alipay.Apps
         /// </summary>
         public AlipayConfig SelfCopy(AlipayConfig alipayConfig)
         {
-            DefaultAppName = alipayConfig.DefaultAppName;
+            DefaultAppId = alipayConfig.DefaultAppId;
             NotifyGateway = alipayConfig.NotifyGateway;
             LocalAddress = alipayConfig.LocalAddress;
             WebGateway = alipayConfig.WebGateway;

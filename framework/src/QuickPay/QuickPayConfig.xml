@@ -22,8 +22,8 @@
     <Format>JSON</Format>
     <![CDATA[版本号]]>
     <Version>1.0</Version>
-    <![CDATA[默认支付使用的App名称]]>
-    <DefaultAppName>App1</DefaultAppName>
+    <![CDATA[默认支付使用的AppId]]>
+    <DefaultAppId>App1</DefaultAppId>
     <Apps>
       <AlipayApp>
         <![CDATA[App名称]]>
@@ -65,7 +65,7 @@
     <![CDATA[异步通知关联地址]]>
     <NotifyUrlFragments>/Notify/WechatPay</NotifyUrlFragments>
     <![CDATA[默认App名称]]>
-    <DefaultAppName>App1</DefaultAppName>
+    <DefaultAppId>wx7462799678470f25</DefaultAppId>
     <![CDATA[签名类型,MD5]]>
     <SignType>MD5</SignType>
     <![CDATA[SSL证书]]>

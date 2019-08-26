@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using DotCommon.Http;
+using Microsoft.Extensions.Logging;
 using QuickPay.Errors;
-using QuickPay.Http;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Middleware;
 using System;

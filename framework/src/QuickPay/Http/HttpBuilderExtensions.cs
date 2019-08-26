@@ -1,5 +1,6 @@
 ﻿using DotCommon.Extensions;
-using RestSharp;
+using DotCommon.Http;
+
 namespace QuickPay.Http
 {
     /// <summary>Http请求辅助类
@@ -8,9 +9,9 @@ namespace QuickPay.Http
     {
         /// <summary>根据HttpBuilder构建RequestRequest请求
         /// </summary>
-        public static IRestRequest BuildRequest(this HttpBuilder builder)
+        public static RestSharp.IRestRequest BuildRequest(this HttpBuilder builder)
         {
-            IRestRequest request = new RestRequest
+            RestSharp.IRestRequest request = new RestSharp.RestRequest
             {
                 Method = ParseMethod(builder.Method),
                 Resource = builder.Resource.IsNullOrWhiteSpace() ? "" : builder.Resource

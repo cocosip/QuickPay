@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotCommon.AspNetCore.Mvc" Version="3.0.7" />
+    <PackageReference Include="DotCommon.AspNetCore.Mvc" Version="3.0.8" />
   </ItemGroup>
 
 </Project>

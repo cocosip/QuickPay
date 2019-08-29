@@ -1,11 +1,10 @@
-﻿
-using DotCommon.Encrypt;
+﻿using DotCommon.Encrypt;
 using DotCommon.Utility;
 using QuickPay.Infrastructure.RequestData;
 using QuickPay.WeChatPay.Apps;
 using System;
 
-namespace QuickPay.WeChatPay.Util
+namespace QuickPay.WeChatPay.Utility
 {
     /// <summary>微信支付工具类
     /// </summary>

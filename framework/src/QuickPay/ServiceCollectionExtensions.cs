@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Services;
 using QuickPay.Alipay.Services.Impl;
-using QuickPay.Alipay.Util;
+using QuickPay.Alipay.Utility;
 using QuickPay.Assist.Store;
 using QuickPay.Configurations;
 using QuickPay.Exceptions;
@@ -17,7 +17,7 @@ using QuickPay.WeChatPay.Apps;
 using QuickPay.WeChatPay.Authentication;
 using QuickPay.WeChatPay.Services;
 using QuickPay.WeChatPay.Services.Impl;
-using QuickPay.WeChatPay.Util;
+using QuickPay.WeChatPay.Utility;
 using System;
 using System.Linq;
 

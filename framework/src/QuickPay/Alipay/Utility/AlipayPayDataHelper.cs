@@ -3,7 +3,7 @@ using QuickPay.Infrastructure.RequestData;
 using System;
 using System.Collections.Generic;
 
-namespace QuickPay.Alipay.Util
+namespace QuickPay.Alipay.Utility
 {
     /// <summary>支付宝PayData帮助类
     /// </summary>

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using QuickPay.Alipay.Apps;
-using QuickPay.Alipay.Util;
+using QuickPay.Alipay.Utility;
 using QuickPay.Assist;
 using QuickPay.Assist.Store;
 using QuickPay.Exceptions;

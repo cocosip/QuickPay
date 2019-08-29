@@ -4,7 +4,7 @@ using QuickPay.Alipay;
 using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Services;
 using QuickPay.Alipay.Services.DTOs;
-using QuickPay.WeChatPay.Util;
+using QuickPay.WeChatPay.Utility;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

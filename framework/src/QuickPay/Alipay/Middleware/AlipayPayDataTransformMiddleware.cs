@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using QuickPay.Alipay.Requests;
 using QuickPay.Alipay.Responses;
-using QuickPay.Alipay.Util;
+using QuickPay.Alipay.Utility;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Infrastructure.Util;

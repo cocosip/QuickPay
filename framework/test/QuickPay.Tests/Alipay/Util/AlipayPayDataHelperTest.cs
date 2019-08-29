@@ -1,6 +1,6 @@
 ﻿using DotCommon.Json4Net;
 using DotCommon.Serializing;
-using QuickPay.Alipay.Util;
+using QuickPay.Alipay.Utility;
 using QuickPay.Infrastructure.RequestData;
 using Xunit;
 

@@ -1,4 +1,4 @@
-﻿using QuickPay.WeChatPay.Util;
+﻿using QuickPay.WeChatPay.Utility;
 using Xunit;
 
 namespace QuickPay.Tests.WeChatPay.Util

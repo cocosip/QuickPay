@@ -1,4 +1,4 @@
-﻿using QuickPay.Alipay.Util;
+﻿using QuickPay.Alipay.Utility;
 using System.Collections.Generic;
 using Xunit;
 

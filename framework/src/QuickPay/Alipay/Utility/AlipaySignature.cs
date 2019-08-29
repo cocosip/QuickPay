@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace QuickPay.Alipay.Util
+namespace QuickPay.Alipay.Utility
 {
     /// <summary>支付宝签名工具类
     /// </summary>

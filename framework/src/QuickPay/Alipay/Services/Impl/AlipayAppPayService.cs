@@ -5,7 +5,7 @@ using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Requests;
 using QuickPay.Alipay.Responses;
 using QuickPay.Alipay.Services.DTOs;
-using QuickPay.Alipay.Util;
+using QuickPay.Alipay.Utility;
 using System;
 using System.Threading.Tasks;
 

@@ -1,6 +1,6 @@
 ﻿using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Responses;
-using QuickPay.Alipay.Util;
+using QuickPay.Alipay.Utility;
 using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.RequestData;
 using QuickPay.Infrastructure.Requests;

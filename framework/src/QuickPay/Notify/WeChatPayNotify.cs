@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using QuickPay.WeChatPay.Apps;
 using QuickPay.WeChatPay.Services;
-using QuickPay.WeChatPay.Util;
+using QuickPay.WeChatPay.Utility;
 using System;
 using System.Threading.Tasks;
 

@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using QuickPay.WeChatPay.Requests;
 using QuickPay.WeChatPay.Responses;
 using QuickPay.WeChatPay.Services.DTOs;
-using QuickPay.WeChatPay.Util;
+using QuickPay.WeChatPay.Utility;
 using System;
 using System.Threading.Tasks;
 using WeChat.Framework;

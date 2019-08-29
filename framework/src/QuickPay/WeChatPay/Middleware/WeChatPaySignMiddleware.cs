@@ -4,7 +4,7 @@ using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Middleware;
 using QuickPay.WeChatPay.Apps;
-using QuickPay.WeChatPay.Util;
+using QuickPay.WeChatPay.Utility;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

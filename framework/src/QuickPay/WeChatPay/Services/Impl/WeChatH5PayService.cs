@@ -5,7 +5,7 @@ using QuickPay.WeChatPay.Apps;
 using QuickPay.WeChatPay.Requests;
 using QuickPay.WeChatPay.Responses;
 using QuickPay.WeChatPay.Services.DTOs;
-using QuickPay.WeChatPay.Util;
+using QuickPay.WeChatPay.Utility;
 using System;
 using System.Threading.Tasks;
 namespace QuickPay.WeChatPay.Services.Impl

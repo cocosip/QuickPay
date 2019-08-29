@@ -4,7 +4,7 @@ using DotCommon.Serializing;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using QuickPay.WeChatPay.Authentication.Model;
-using QuickPay.WeChatPay.Util;
+using QuickPay.WeChatPay.Utility;
 using RestSharp;
 using System;
 using System.Net;

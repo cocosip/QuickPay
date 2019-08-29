@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Services;
-using QuickPay.Alipay.Util;
+using QuickPay.Alipay.Utility;
 using QuickPay.Infrastructure.RequestData;
 using System;
 using System.Threading.Tasks;

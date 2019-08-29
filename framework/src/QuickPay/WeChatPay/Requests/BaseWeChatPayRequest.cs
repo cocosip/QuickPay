@@ -4,7 +4,7 @@ using QuickPay.Infrastructure.RequestData;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Infrastructure.Responses;
 using QuickPay.WeChatPay.Apps;
-using QuickPay.WeChatPay.Util;
+using QuickPay.WeChatPay.Utility;
 
 namespace QuickPay.WeChatPay.Requests
 {

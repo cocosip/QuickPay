@@ -3,14 +3,14 @@ using DotCommon.Utility;
 using Microsoft.Extensions.Logging;
 using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Requests;
-using QuickPay.Alipay.Util;
+using QuickPay.Alipay.Utility;
 using QuickPay.Assist;
 using QuickPay.Assist.Store;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Infrastructure.Util;
 using QuickPay.WeChatPay.Apps;
-using QuickPay.WeChatPay.Util;
+using QuickPay.WeChatPay.Utility;
 using System;
 using System.Threading.Tasks;
 

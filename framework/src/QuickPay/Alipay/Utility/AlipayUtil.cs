@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
-namespace QuickPay.Alipay.Util
+namespace QuickPay.Alipay.Utility
 {
     /// <summary>支付宝工具类
     /// </summary>

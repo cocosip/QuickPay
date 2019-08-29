@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 
-namespace QuickPay.WeChatPay.Util
+namespace QuickPay.WeChatPay.Utility
 {
     /// <summary>微信支付中PayData扩展
     /// </summary>

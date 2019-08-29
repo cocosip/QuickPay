@@ -5,7 +5,7 @@ using QuickPay.Assist.Store;
 using QuickPay.Exceptions;
 using QuickPay.Infrastructure.RequestData;
 using QuickPay.WeChatPay.Apps;
-using QuickPay.WeChatPay.Util;
+using QuickPay.WeChatPay.Utility;
 using System;
 using System.Threading.Tasks;
 

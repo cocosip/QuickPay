@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using DotCommon.Extensions;
 using Microsoft.Extensions.Logging;
+using Oracle.ManagedDataAccess.Client;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -47,7 +48,7 @@ namespace QuickPay.Assist.Store
 
                 }
             }
-            catch (SqlException ex)
+            catch (OracleException ex)
             {
                 Logger.LogError($"创建或者修改Refund出错,UniqueId:{refund.UniqueId} {ex.Message}");
                 throw;
@@ -66,7 +67,7 @@ namespace QuickPay.Assist.Store
                     return await connection.QueryFirstOrDefaultAsync<Refund>(sql, new { PayPlatId = payPlatId, AppId = appId, OutRefundNo = outRefundNo });
                 }
             }
-            catch (SqlException ex)
+            catch (OracleException ex)
             {
                 Logger.LogError($"获取退款信息Refund出错,PayPlatId:{payPlatId},AppId:{appId},OutRefundNo:{outRefundNo}.{ex.Message}");
                 throw;
@@ -85,7 +86,7 @@ namespace QuickPay.Assist.Store
                     return await connection.QueryFirstOrDefaultAsync<Refund>(sql, new { PayPlatId = payPlatId, AppId = appId, TransactionId = transactionId });
                 }
             }
-            catch (SqlException ex)
+            catch (OracleException ex)
             {
                 Logger.LogError($"获取退款信息Refund出错,PayPlatId:{payPlatId},AppId:{appId},TransactionId:{transactionId}.{ex.Message}");
                 throw;
@@ -104,7 +105,7 @@ namespace QuickPay.Assist.Store
                     return await connection.QueryFirstOrDefaultAsync<Refund>(sql, new { UniqueId = uniqueId });
                 }
             }
-            catch (SqlException ex)
+            catch (OracleException ex)
             {
                 Logger.LogError($"根据UniqueId获取退款信息Refund出错,UniqueId:{uniqueId}.{ex.Message}");
                 throw;
@@ -123,7 +124,7 @@ namespace QuickPay.Assist.Store
                     return (await connection.QueryAsync<Refund>(sql, new { PayPlatId = payPlatId, AppId = appId, OutTradeNo = outTradeNo })).ToList();
                 }
             }
-            catch (SqlException ex)
+            catch (OracleException ex)
             {
                 Logger.LogError($"根据交易号获取全部的退款订单出错,PayPlatId:{payPlatId},AppId:{appId},OutTradeNo:{outTradeNo}.{ex.Message}");
                 throw;

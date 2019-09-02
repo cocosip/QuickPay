@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>QuickPay</AssemblyName>
     <PackageId>QuickPay</PackageId>
-    <Description>QuickPay快速支付</Description>
+    <Description>QuickPay快捷支付,使用简单的代码就能实现微信,支付宝等支付形式</Description>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -21,6 +21,6 @@
 
 
   <ItemGroup>
-    <PackageReference Include="WeChat.Framework" Version="0.2.2" />
+    <PackageReference Include="WeChat.Framework" Version="0.2.3" />
   </ItemGroup>
 </Project>

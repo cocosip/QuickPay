@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using DotCommon.Extensions;
 using Microsoft.Extensions.Logging;
+using Oracle.ManagedDataAccess.Client;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
@@ -45,7 +46,7 @@ namespace QuickPay.Assist.Store
 
                 }
             }
-            catch (SqlException ex)
+            catch (OracleException ex)
             {
                 Logger.LogError($"创建或者修改Transfer出错,UniqueId:{transfer.UniqueId} {ex.Message}");
                 throw;
@@ -64,7 +65,7 @@ namespace QuickPay.Assist.Store
                     return await connection.QueryFirstOrDefaultAsync<Transfer>(sql, new { PayPlatId = payPlatId, AppId = appId, OutTradeNo = outTradeNo });
                 }
             }
-            catch (SqlException ex)
+            catch (OracleException ex)
             {
                 Logger.LogError($"获取转账信息Transfer出错,PayPlatId:{payPlatId},AppId:{appId},OutTradeNo:{outTradeNo}.{ex.Message}");
                 throw;
@@ -83,7 +84,7 @@ namespace QuickPay.Assist.Store
                     return await connection.QueryFirstOrDefaultAsync<Transfer>(sql, new { PayPlatId = payPlatId, AppId = appId, TransferNo = transferNo });
                 }
             }
-            catch (SqlException ex)
+            catch (OracleException ex)
             {
                 Logger.LogError($"获取转账信息Transfer出错,PayPlatId:{payPlatId},AppId:{appId},TransferNo:{transferNo}.{ex.Message}");
                 throw;
@@ -102,7 +103,7 @@ namespace QuickPay.Assist.Store
                     return await connection.QueryFirstOrDefaultAsync<Transfer>(sql, new { UniqueId = uniqueId });
                 }
             }
-            catch (SqlException ex)
+            catch (OracleException ex)
             {
                 Logger.LogError($"根据UniqueId获取转账信息Payment出错,UniqueId:{uniqueId}.{ex.Message}");
                 throw;

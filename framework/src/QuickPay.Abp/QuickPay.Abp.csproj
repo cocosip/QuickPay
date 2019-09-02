@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>QuickPay.Abp</PackageId>
     <RootNamespace>QuickPay</RootNamespace>
-    <Description>QuickPay快速支付Abp扩展</Description>
+    <Description>QuickPay快捷支付,使用ABP进行存储的扩展</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

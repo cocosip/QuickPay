@@ -13,19 +13,6 @@
         /// </summary>
         public const string LoggerName = "QuickPayLogger";
 
-        /// <summary>配置格式
-        /// </summary>
-        public class ConfigFormat
-        {
-            /// <summary>JSON
-            /// </summary>
-            public const string Json = "JSON";
-
-            /// <summary>XML
-            /// </summary>
-            public const string Xml = "XML";
-        }
-
         /// <summary>支付通道,微信,支付宝,银联等
         /// </summary>
         public class Provider
@@ -58,7 +45,7 @@
         {
             /// <summary>微信支付的相关通知
             /// </summary>
-            public const string PaymentUrlFragments = "/QuickPay/WechatPay/PaymentNotify";
+            public const string PaymentUrlFragments = "/QuickPay/WeChatPay/PaymentNotify";
 
         }
 
@@ -69,7 +56,6 @@
             /// <summary>支付宝支付相关通知
             /// </summary>
             public const string PaymentUrlFragments = "/QuickPay/Alipay/PaymentNotify";
-
         }
 
     }

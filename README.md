@@ -5,7 +5,6 @@
 | Package  | Version | Downloads|
 | -------- | ------- | -------- |
 | `QuickPay` | [![NuGet](https://img.shields.io/nuget/v/QuickPay.svg)](https://www.nuget.org/packages/QuickPay) |![NuGet](https://img.shields.io/nuget/dt/QuickPay.svg)|
-| `QuickPay.Abp` | [![NuGet](https://img.shields.io/nuget/v/QuickPay.Abp.svg)](https://www.nuget.org/packages/QuickPay.Abp) |![NuGet](https://img.shields.io/nuget/dt/QuickPay.Abp.svg)|
 | `QuickPay.AspNetCore.Mvc` | [![NuGet](https://img.shields.io/nuget/v/QuickPay.AspNetCore.Mvc.svg)](https://www.nuget.org/packages/QuickPay.AspNetCore.Mvc) |![NuGet](https://img.shields.io/nuget/dt/QuickPay.AspNetCore.Mvc.svg)|
 | `QuickPay.SqlServer` | [![NuGet](https://img.shields.io/nuget/v/QuickPay.SqlServer.svg)](https://www.nuget.org/packages/QuickPay.SqlServer) |![NuGet](https://img.shields.io/nuget/dt/QuickPay.SqlServer.svg)|
 `QuickPay.Oracle` | [![NuGet](https://img.shields.io/nuget/v/QuickPay.Oracle.svg)](https://www.nuget.org/packages/QuickPay.Oracle) |![NuGet](https://img.shields.io/nuget/dt/QuickPay.Oracle.svg)|
@@ -58,7 +57,7 @@ public static IServiceProvider Initialize()
     });
     var provider = services.BuildServiceProvider();
     //配置
-    provider.UseQuickPay();
+    provider.ConfigureQuickPay();
     return provider;
 }
 ```

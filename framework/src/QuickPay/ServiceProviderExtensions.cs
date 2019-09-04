@@ -1,11 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Middleware;
 using QuickPay.Configurations;
 using QuickPay.Middleware;
 using QuickPay.Middleware.Pipeline;
 using QuickPay.Notify;
-using QuickPay.WeChatPay.Apps;
 using QuickPay.WeChatPay.Middleware;
 using System;
 namespace QuickPay
@@ -19,23 +17,8 @@ namespace QuickPay
         public static IServiceProvider ConfigureQuickPay(this IServiceProvider provider)
         {
             var option = provider.GetService<QuickPayConfigurationOption>();
-            ////从文件中读取配置
-            //if (option.ConfigSourceType == ConfigSourceType.FromConfigFile)
-            //{
-            //    var alipayConfig = provider.GetService<AlipayConfig>();
-            //    var weChatPayConfig = provider.GetService<WeChatPayConfig>();
-            //    var wrapper = ConfigurationFileHelper.TranslateToConfigWrapper(option.ConfigFileName);
-
-            //    if (wrapper != null && wrapper.AlipayConfig != null && wrapper.WeChatPayConfig != null)
-            //    {
-            //        alipayConfig.SelfCopy(wrapper.AlipayConfig);
-            //        weChatPayConfig.SelfCopy(wrapper.WeChatPayConfig);
-            //    }
-            //}
-
             //设置NotifyManager中的Notify
             provider.RegisterNotifies(option);
-
 
             //Pipeline
             var pipelineBuilder = provider.GetService<IQuickPayPipelineBuilder>();

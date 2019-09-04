@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\framework\src\QuickPay.Abp\QuickPay.Abp.csproj" />
     <ProjectReference Include="..\..\framework\src\QuickPay.AspNetCore.Mvc\QuickPay.AspNetCore.Mvc.csproj" />
     <ProjectReference Include="..\..\framework\src\QuickPay.SqlServer\QuickPay.SqlServer.csproj" />
     <ProjectReference Include="..\..\framework\src\QuickPay\QuickPay.csproj" />

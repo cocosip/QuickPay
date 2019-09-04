@@ -18,8 +18,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.Tests", "test\Quic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.SqlServer", "src\QuickPay.SqlServer\QuickPay.SqlServer.csproj", "{3299EC3F-A66B-4D10-A4F8-E222B6253E41}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.Abp", "src\QuickPay.Abp\QuickPay.Abp.csproj", "{2E933B89-4660-42AD-B214-33655F6814B3}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.AspNetCore.Mvc", "src\QuickPay.AspNetCore.Mvc\QuickPay.AspNetCore.Mvc.csproj", "{7FC4955F-0154-422F-B4C7-17BB38F4870E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickPay.Oracle", "src\QuickPay.Oracle\QuickPay.Oracle.csproj", "{6E0E03DA-8378-404B-BE85-091B03CBFFAA}"
@@ -42,10 +40,6 @@ Global
 		{3299EC3F-A66B-4D10-A4F8-E222B6253E41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3299EC3F-A66B-4D10-A4F8-E222B6253E41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3299EC3F-A66B-4D10-A4F8-E222B6253E41}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2E933B89-4660-42AD-B214-33655F6814B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E933B89-4660-42AD-B214-33655F6814B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2E933B89-4660-42AD-B214-33655F6814B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2E933B89-4660-42AD-B214-33655F6814B3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7FC4955F-0154-422F-B4C7-17BB38F4870E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7FC4955F-0154-422F-B4C7-17BB38F4870E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FC4955F-0154-422F-B4C7-17BB38F4870E}.Release|Any CPU.ActiveCfg = Release|Any CPU

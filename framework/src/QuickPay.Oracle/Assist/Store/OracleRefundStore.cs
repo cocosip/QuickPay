@@ -3,7 +3,7 @@ using DotCommon.Extensions;
 using Microsoft.Extensions.Logging;
 using Oracle.ManagedDataAccess.Client;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+ 
 using System.Linq;
 using System.Threading.Tasks;
 

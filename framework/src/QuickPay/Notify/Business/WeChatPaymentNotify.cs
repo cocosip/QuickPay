@@ -1,3 +1,4 @@
+using DotCommon.Threading;
 using QuickPay.Assist;
 using QuickPay.Infrastructure.RequestData;
 using QuickPay.WeChatPay;
@@ -26,7 +27,10 @@ namespace QuickPay.Notify
 
             using (WeChatPayAssistService.Use(appId))
             {
-                await WeChatPayAssistService.PaySuccess(payData, async payment => await PaySuccess(payment));
+                await WeChatPayAssistService.PaySuccess(payData, payment => AsyncHelper.RunSync(() =>
+                {
+                    return PaySuccess(payment);
+                }));
                 //支付成功返回
                 return PaySuccessResponse();
             }

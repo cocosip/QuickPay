@@ -1,3 +1,4 @@
+using DotCommon.Threading;
 using QuickPay.Alipay;
 using QuickPay.Assist;
 using System;
@@ -24,7 +25,10 @@ namespace QuickPay.Notify
             var appId = PayDataHelper.GetAlipayAppId(payData);
             using (AlipayAssistService.Use(appId))
             {
-                await AlipayAssistService.PaySuccess(payData, async payment => await PaySuccess(payment));
+                await AlipayAssistService.PaySuccess(payData, payment => AsyncHelper.RunSync(() =>
+                {
+                    return PaySuccess(payment);
+                }));
                 //支付成功
                 return PaySuccessResponse();
             }

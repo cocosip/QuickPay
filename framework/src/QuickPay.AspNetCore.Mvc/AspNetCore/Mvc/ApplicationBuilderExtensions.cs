@@ -8,7 +8,7 @@ namespace QuickPay.AspNetCore.Mvc
     {
         /// <summary>使用QuickPay
         /// </summary>
-        public static IApplicationBuilder UseQuickPay(this IApplicationBuilder builder)
+        public static IApplicationBuilder ConfigureQuickPay(this IApplicationBuilder builder)
         {
             builder.ApplicationServices.ConfigureQuickPay();
             return builder.UseQuickPayNotify();

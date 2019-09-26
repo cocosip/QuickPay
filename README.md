@@ -1,6 +1,11 @@
 # QuickPay 组件
 
-[![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/cocosip/QuickPay/blob/master/LICENSE) [![Build status](https://ci.appveyor.com/api/projects/status/4l8g9noa51qo8nj6?svg=true)](https://ci.appveyor.com/project/cocosip/quickpay) ![GitHub last commit](https://img.shields.io/github/last-commit/cocosip/QuickPay.svg) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/cocosip/QuickPay.svg)
+[![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/cocosip/QuickPay/blob/master/LICENSE) ![GitHub last commit](https://img.shields.io/github/last-commit/cocosip/QuickPay.svg) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/cocosip/QuickPay.svg)
+
+| Build Server | Platform | Build Status |
+| ------------ | -------- | ------------ |
+| Azure Pipelines| Windows |[![Build Status](https://dev.azure.com/cocosip/QuickPay/_apis/build/status/cocosip.QuickPay?branchName=master&jobName=Windows)](https://dev.azure.com/cocosip/QuickPay/_build/latest?definitionId=8&branchName=master)|
+| Azure Pipelines| Linux |[![Build Status](https://dev.azure.com/cocosip/QuickPay/_apis/build/status/cocosip.QuickPay?branchName=master&jobName=Linux)](https://dev.azure.com/cocosip/QuickPay/_build/latest?definitionId=8&branchName=master)|
 
 | Package  | Version | Downloads|
 | -------- | ------- | -------- |

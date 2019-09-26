@@ -21,6 +21,6 @@
 
 
   <ItemGroup>
-    <PackageReference Include="WeChat.Framework" Version="0.2.4" />
+    <PackageReference Include="WeChat.Framework" Version="0.2.7" />
   </ItemGroup>
 </Project>

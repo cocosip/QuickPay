@@ -4,7 +4,6 @@
     <LangVersion>latest</LangVersion>
     <Authors>virtual</Authors>
     <Product>QuickPay</Product>
-    <PackageIconUrl>https://github.com/cocosip/QuickPay</PackageIconUrl>
     <PackageProjectUrl>https://github.com/cocosip/QuickPay</PackageProjectUrl>
     <PackageLicense>https://github.com/cocosip/QuickPay/blob/master/LICENSE</PackageLicense>
     <RepositoryType>git</RepositoryType>

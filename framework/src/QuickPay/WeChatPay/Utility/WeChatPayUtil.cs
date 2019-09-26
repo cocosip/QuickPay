@@ -34,7 +34,7 @@ namespace QuickPay.WeChatPay.Utility
             //转url格式
             string str = $"{payData.ToUrl()}";
             //var encrypted = BitConverter.ToString(SHA1.Create().ComputeHash(Encoding.GetEncoding("UTF-8").GetBytes(str))).Replace("-", "");
-            var encrypted = ShaUtil.GetStringSha1Hash(str);
+            var encrypted = ShaUtil.GetHex16StringSha1Hash(str);
             return encrypted;
         }
 

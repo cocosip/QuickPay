@@ -64,6 +64,8 @@ namespace QuickPay
                     .AddTransient<IWeChatPayConfigStore, FileWeChatPayConfigStore>();
             }
 
+            //如果从数据库加载多个应用,那么需要自己实现 IAlipayConfigStore,IWeChatPayConfigStore
+            //改造后的QuickPay,他可能同时存在多个Config
 
             services
                 .AddSingleton<QuickPayConfigurationOption>(option)
@@ -89,6 +91,7 @@ namespace QuickPay
             services.AddTransient<IExecuteContextFactory, ExecuteContextFactory>();
             services.AddTransient<IRequestExecuter, DefaultRequestExecuter>();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
+            services.AddSingleton<IRestClientFactory, RestClientFactory>();
 
             //通知
             services.AddSingleton<INotifyManager, NotifyManager>();

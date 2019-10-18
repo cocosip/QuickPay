@@ -49,11 +49,11 @@
         {
             /// <summary>真实的基地址
             /// </summary>
-            public const string RealBaseUrl = "https://api.mch.weixin.qq.com";
+            public const string Gateway = "https://api.mch.weixin.qq.com";
 
             /// <summary>沙盒基地址
             /// </summary>
-            public const string SandboxBaseUrl = "https://api.mch.weixin.qq.com/sendbox";
+            public const string SandboxGateway = "https://api.mch.weixin.qq.com/sendbox";
 
         }
 

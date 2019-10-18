@@ -56,12 +56,12 @@ namespace QuickPay.Configurations
             configWapper.AlipayConfig = new AlipayConfig()
             {
                 Id = alipayNode.SelectSingleNode("Id").InnerText,
+                Gateway = alipayNode.SelectSingleNode("Gateway").InnerText,
+                SandboxGateway = alipayNode.SelectSingleNode("SandboxGateway").InnerText,
                 DefaultAppId = alipayNode.SelectSingleNode("DefaultAppId").InnerText,
                 NotifyGateway = alipayNode.SelectSingleNode("NotifyGateway").InnerText,
                 LocalAddress = alipayNode.SelectSingleNode("LocalAddress").InnerText,
                 WebGateway = alipayNode.SelectSingleNode("WebGateway").InnerText,
-                Gateway = alipayNode.SelectSingleNode("Gateway").InnerText,
-                SandboxGateway = alipayNode.SelectSingleNode("SandboxGateway").InnerText,
                 Format = alipayNode.SelectSingleNode("Format").InnerText,
                 Version = alipayNode.SelectSingleNode("Version").InnerText,
                 NotifyUrlFragments = alipayNode.SelectSingleNode("NotifyUrlFragments").InnerText,
@@ -92,6 +92,8 @@ namespace QuickPay.Configurations
             configWapper.WeChatPayConfig = new WeChatPayConfig()
             {
                 Id = weChatPayNode.SelectSingleNode("Id").InnerText,
+                Gateway = weChatPayNode.SelectSingleNode("Gateway").InnerText,
+                SandboxGateway = weChatPayNode.SelectSingleNode("SandboxGateway").InnerText,
                 DefaultAppId = weChatPayNode.SelectSingleNode("DefaultAppId").InnerText,
                 NotifyGateway = weChatPayNode.SelectSingleNode("NotifyGateway").InnerText,
                 LocalAddress = weChatPayNode.SelectSingleNode("LocalAddress").InnerText,

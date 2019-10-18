@@ -1,11 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
-using QuickPay.Alipay;
+using QuickPay.Alipay.Apps;
 using QuickPay.Configurations;
 using QuickPay.Errors;
 using QuickPay.Http;
 using QuickPay.Infrastructure.Requests;
-using QuickPay.WeChatPay;
-using RestSharp;
+using QuickPay.WeChatPay.Apps;
 using System;
 using System.Threading.Tasks;
 
@@ -16,16 +15,16 @@ namespace QuickPay.Middleware
     public class ExecuterExecuteMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
-        private readonly IRestClient _alipayRestClient;
-        private readonly IRestClient _weChatRestClient;
+        private QuickPayConfigurationOption _option;
+        private readonly IRestClientFactory _restClientFactory;
 
         /// <summary>Ctor
         /// </summary>
-        public ExecuterExecuteMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next, QuickPayConfigurationOption option) : base(provider)
+        public ExecuterExecuteMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next, QuickPayConfigurationOption option, IRestClientFactory restClientFactory) : base(provider)
         {
             _next = next;
-            _alipayRestClient = option.EnabledAlipaySandbox ? new RestClient(AlipaySettings.Urls.Gateway) : new RestClient(AlipaySettings.Urls.SandboxGateway);
-            _weChatRestClient = option.EnabledWeChatPaySandbox ? new RestClient(WeChatPaySettings.Urls.SandboxBaseUrl) : new RestClient(WeChatPaySettings.Urls.RealBaseUrl);
+            _option = option;
+            _restClientFactory = restClientFactory;
         }
 
         /// <summary>Invoke
@@ -37,8 +36,9 @@ namespace QuickPay.Middleware
             {
                 try
                 {
-                    var client = context.Request.Provider == QuickPaySettings.Provider.Alipay ? _alipayRestClient : _weChatRestClient;
-
+                    //获取当前配置下的请求地址(网关或者/Sandbox)
+                    var url = GetUrl(context);
+                    var client = _restClientFactory.GetOrAddClient(url);
                     //根据HttpBuilder构建请求
                     var request = context.HttpBuilder.BuildRequest();
                     var response = await client.ExecuteTaskAsync(request);
@@ -54,5 +54,24 @@ namespace QuickPay.Middleware
             }
             await _next.Invoke(context);
         }
+
+
+        private string GetUrl(ExecuteContext context)
+        {
+            string url;
+            if (context.Request.Provider == QuickPaySettings.Provider.Alipay)
+            {
+                var alipayConfig = (AlipayConfig)context.Config;
+                url = _option.EnabledAlipaySandbox ? alipayConfig.SandboxGateway : alipayConfig.Gateway;
+            }
+            else
+            {
+                //微信支付
+                var weChatPayConfig = (WeChatPayConfig)context.Config;
+                url = _option.EnabledWeChatPaySandbox ? weChatPayConfig.SandboxGateway : weChatPayConfig.Gateway;
+            }
+            return url;
+        }
+
     }
 }

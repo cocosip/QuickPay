@@ -54,6 +54,10 @@
   </Alipay>
   <WeChatPay>
     <Id>3</Id>
+    <![CDATA[微信支付网关]]>
+    <Gateway>https://api.mch.weixin.qq.com</Gateway>
+    <![CDATA[微信支付沙盒网关]]>
+    <SandboxGateway>https://api.mch.weixin.qq.com/sendbox</SandboxGateway>
     <![CDATA[本地IP地址]]>
     <LocalAddress>8.8.8.8</LocalAddress>
     <![CDATA[本地网关地址]]>

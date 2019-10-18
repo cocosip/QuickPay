@@ -8,7 +8,7 @@ namespace QuickPay.WeChatPay.Url
     /// </summary>
     public static class WeChatPayUrlHelper
     {
-        static Dictionary<Type, string> RequestTypeUrlDict = new Dictionary<Type, string>()
+        static readonly Dictionary<Type, string> RequestTypeUrlDict = new Dictionary<Type, string>()
         {
             { typeof(AppUnifiedOrderRequest), WeChatPaySettings.Resources.AppUnifiedOrder },
             { typeof(H5UnifiedOrderRequest), WeChatPaySettings.Resources.H5UnifiedOrder },

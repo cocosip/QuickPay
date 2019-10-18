@@ -20,6 +20,7 @@ namespace QuickPay.ConsoleTest
         {
             var alipayConfig = new AlipayConfig()
             {
+                Id = "1",
                 Gateway = "https://openapi.alipay.com/gateway.do",
                 NotifyGateway = "http://127.0.0.1",
                 NotifyUrlFragments = "/Notify/Alipay",
@@ -37,6 +38,9 @@ namespace QuickPay.ConsoleTest
             };
             var weChatPayConfig = new WeChatPayConfig()
             {
+                Id = "2",
+                Gateway = "https://api.mch.weixin.qq.com",
+                SandboxGateway = "https://api.mch.weixin.qq.com/sendbox",
                 NotifyGateway = "http://127.0.0.1",
                 NotifyUrlFragments = "/Notify/Wxpay",
                 LocalAddress = "8.8.8.8",

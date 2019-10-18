@@ -15,6 +15,14 @@ namespace QuickPay.WeChatPay.Apps
         /// </summary>
         public string DefaultAppId { get; set; }
 
+        /// <summary>支付宝网关
+        /// </summary>
+        public string Gateway { get; set; } = WeChatPaySettings.Urls.Gateway;
+
+        /// <summary>沙箱网关
+        /// </summary>
+        public string SandboxGateway { get; set; } = WeChatPaySettings.Urls.SandboxGateway;
+
         /// <summary>微信支付异步通知默认网关地址
         /// </summary>
         public string NotifyGateway { get; set; }
@@ -22,7 +30,6 @@ namespace QuickPay.WeChatPay.Apps
         /// <summary>异步通知关联Url
         /// </summary>
         public string NotifyUrlFragments { get; set; }
-
 
         /// <summary>本地IP地址
         /// </summary>

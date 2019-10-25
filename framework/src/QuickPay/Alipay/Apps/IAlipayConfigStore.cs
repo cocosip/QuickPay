@@ -6,8 +6,6 @@
     {
         /// <summary>根据配置文件Id获取支付宝配置信息
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         AlipayConfig GetConfig(string id);
 
         /// <summary>根据应用AppId查询出配置文件

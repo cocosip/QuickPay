@@ -14,8 +14,6 @@
 
         /// <summary>根据配置文件Id获取支付宝配置信息
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public AlipayConfig GetConfig(string id)
         {
             return _configWrapper.AlipayConfig;

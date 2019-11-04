@@ -44,7 +44,7 @@ namespace QuickPay.Tests
             Assert.Equal("8.8.8.8", weChatPayConfig.LocalAddress);
             Assert.Equal("http://127.0.0.1", weChatPayConfig.WebGateway);
             Assert.Equal("http://127.0.0.1", weChatPayConfig.NotifyGateway);
-            Assert.Equal("/Notify/WechatPay", weChatPayConfig.NotifyUrlFragments);
+            Assert.Equal("/Notify/WeChatPay", weChatPayConfig.NotifyUrlFragments);
             Assert.Equal("wx7462799678470f25", weChatPayConfig.DefaultAppId);
             Assert.Equal("MD5", weChatPayConfig.SignType);
             Assert.Equal("", weChatPayConfig.SslPassword);

@@ -7,7 +7,7 @@ using Xunit;
 
 namespace QuickPay.Tests.WeChatPay.Services
 {
-    public class WechatAppPayServiceTest : TestBase
+    public class WeChatAppPayServiceTest : TestBase
     {
         /// <summary>微信统一下单
         /// </summary>
@@ -15,7 +15,7 @@ namespace QuickPay.Tests.WeChatPay.Services
         //public void UnifiedOrder_Test()
         //{
         //    var appService = Provider.GetService<IWeChatAppPayService>();
-        //    using(appService.Use(WechatPayConfig.GetByName("App1")))
+        //    using(appService.Use(WeChatPayConfig.GetByName("App1")))
         //    {
         //        var input = new AppUnifiedOrderInput("测试支付1", ObjectId.GenerateNewStringId(), 10);
         //        var response = AsyncHelper.RunSync(() => appService.UnifiedOrder(input));

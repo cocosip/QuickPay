@@ -49,7 +49,7 @@ namespace QuickPay.WeChatPay.Utility
             var values = payData.GetValues();
             if (!values.Any())
             {
-                throw new Exception("WechatPayData数据为空!");
+                throw new Exception("WeChatPayData数据为空!");
             }
             var sb = new StringBuilder();
             sb.Append($"<xml>");
@@ -57,7 +57,7 @@ namespace QuickPay.WeChatPay.Utility
             {
                 if (kv.Value == null)
                 {
-                    throw new Exception($"WechatPayData内部含有值为null的字段,key:{kv.Key}");
+                    throw new Exception($"WeChatPayData内部含有值为null的字段,key:{kv.Key}");
                 }
                 if (kv.Value is int)
                 {
@@ -73,7 +73,7 @@ namespace QuickPay.WeChatPay.Utility
                 }
                 else
                 {
-                    throw new Exception("WechatPayData字段数据类型错误!");
+                    throw new Exception("WeChatPayData字段数据类型错误!");
                 }
             }
             //包含签名,把签名放到最后面

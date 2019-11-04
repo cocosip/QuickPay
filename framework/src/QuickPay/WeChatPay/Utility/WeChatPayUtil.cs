@@ -55,11 +55,11 @@ namespace QuickPay.WeChatPay.Utility
         {
             if (!payData.IsSet("sign"))
             {
-                throw new Exception("WechatPayData签名不存在");
+                throw new Exception("WeChatPayData签名不存在");
             }
             if (payData.GetValue("sign") == null || payData.GetValue("sign").ToString() == "")
             {
-                throw new Exception("WechatPayData签名存在但是为空");
+                throw new Exception("WeChatPayData签名存在但是为空");
             }
             //返回的签名
             var returnSign = payData.GetValue("sign").ToString();

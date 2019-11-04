@@ -19,6 +19,6 @@ namespace QuickPay.Assist
         /// <summary>微信
         /// </summary>
         [Description("微信")]
-        WechatPay = 2
+        WeChatPay = 2
     }
 }

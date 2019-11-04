@@ -47,7 +47,7 @@ namespace QuickPay
                 {
                     if (alipayConfigure == null || weChatPayConfigure == null)
                     {
-                        throw new QuickPayException($"从代码中加载支付配置时,AlipayConfig与WechatPayConfig不能为空.");
+                        throw new QuickPayException($"从代码中加载支付配置时,AlipayConfig与WeChatPayConfig不能为空.");
                     }
                     alipayConfigure(alipayConfig);
                     weChatPayConfigure(weChatPayConfig);

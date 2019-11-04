@@ -17,14 +17,14 @@ namespace QuickPay.WeChatPay.Middleware
     {
         private readonly QuickPayExecuteDelegate _next;
         private readonly QuickPayConfigurationOption _option;
-        private readonly WeChatPayDataHelper _wechatPayDataHelper;
+        private readonly WeChatPayDataHelper _weChatPayDataHelper;
         /// <summary>Ctor
         /// </summary>
-        public WeChatPayRequestBuilderMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next, QuickPayConfigurationOption option, WeChatPayDataHelper wechatPayDataHelper) : base(provider)
+        public WeChatPayRequestBuilderMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next, QuickPayConfigurationOption option, WeChatPayDataHelper weChatPayDataHelper) : base(provider)
         {
             _next = next;
             _option = option;
-            _wechatPayDataHelper = wechatPayDataHelper;
+            _weChatPayDataHelper = weChatPayDataHelper;
         }
 
         /// <summary>Invoke
@@ -37,7 +37,7 @@ namespace QuickPay.WeChatPay.Middleware
                 {
                     if (context.RequestHandler == QuickPaySettings.RequestHandler.Execute)
                     {
-                        var requestXml = _wechatPayDataHelper.ToXml(context.RequestPayData);
+                        var requestXml = _weChatPayDataHelper.ToXml(context.RequestPayData);
                         var requestResource = WeChatPayUrlHelper.GetRequestResource(context.Request.GetType());
                         if (requestResource == null)
                         {

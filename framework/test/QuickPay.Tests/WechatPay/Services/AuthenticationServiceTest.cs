@@ -14,7 +14,7 @@ namespace QuickPay.Tests.WeChatPay.Services
         {
             var authenticationService = Provider.GetService<IAuthenticationService>();
             var url = authenticationService.GetAuthorizationCodeUrl("AppId1", "http://127.0.0.1", state: "STATE1");
-            var expceted = $"https://open.weixin.qq.com/connect/oauth2/authorize?appid=AppId1&redirect_uri={WebUtility.UrlEncode("http://127.0.0.1")}&response_type=code&scope=snsapi_base&state=STATE1#wechat_redirect";
+            var expceted = $"https://open.weixin.qq.com/connect/oauth2/authorize?appid=AppId1&redirect_uri={WebUtility.UrlEncode("http://127.0.0.1")}&response_type=code&scope=snsapi_base&state=STATE1#weChat_redirect";
             Assert.Equal(expceted, url);
         }
 
@@ -23,7 +23,7 @@ namespace QuickPay.Tests.WeChatPay.Services
         // [Fact]
         // public void GetAccessToken_Test()
         // {
-        //     var weChatPayApp = WechatPayConfig.GetByName("App2");
+        //     var weChatPayApp = WeChatPayConfig.GetByName("App2");
         //     var authenticationService = Provider.GetService<IAuthenticationService>();
         //     //未在白名单
         //     Assert.Throws<Exception>(() =>

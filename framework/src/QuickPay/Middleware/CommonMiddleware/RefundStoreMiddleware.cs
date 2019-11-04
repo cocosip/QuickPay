@@ -80,7 +80,7 @@ namespace QuickPay.Middleware
             }
             else
             {
-                refund.PayPlatId = (int)PayPlat.WechatPay;
+                refund.PayPlatId = (int)PayPlat.WeChatPay;
                 refund.AppId = ((WeChatPayApp)context.App).AppId;
 
                 //交易号,本系统唯一

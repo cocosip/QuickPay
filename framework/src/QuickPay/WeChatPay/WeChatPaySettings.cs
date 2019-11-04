@@ -24,7 +24,7 @@
 
         /// <summary>状态
         /// </summary>
-        public const string AuthenticationState = "QuickPay.WechatPay.AuthenticationState";
+        public const string AuthenticationState = "QuickPay.WeChatPay.AuthenticationState";
 
         /// <summary>H5场景
         /// </summary>

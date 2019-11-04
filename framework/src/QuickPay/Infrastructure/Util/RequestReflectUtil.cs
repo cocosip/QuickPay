@@ -61,16 +61,16 @@ namespace QuickPay.Infrastructure.Util
             //code:var payData=new PayData();
             var payDataExpr = Expression.Variable(targetType, "payData");
             var newPayDataExpr = Expression.New(targetType);
-            var assignWechatPayDataExpr = Expression.Assign(payDataExpr, newPayDataExpr);
-            bodyExprs.Add(assignWechatPayDataExpr);
+            var assignWeChatPayDataExpr = Expression.Assign(payDataExpr, newPayDataExpr);
+            bodyExprs.Add(assignWeChatPayDataExpr);
 
             //code:var weChatPay=(Request)o;
             var payExpr = Expression.Variable(sourceType, "pay");
-            var castWechatPayExpr = Expression.Convert(parameterExpr, sourceType);
-            var assignWechatPayExpr = Expression.Assign(payExpr, castWechatPayExpr);
-            bodyExprs.Add(assignWechatPayExpr);
+            var castWeChatPayExpr = Expression.Convert(parameterExpr, sourceType);
+            var assignWeChatPayExpr = Expression.Assign(payExpr, castWeChatPayExpr);
+            bodyExprs.Add(assignWeChatPayExpr);
 
-            //获取IWechatPay中所有的属性
+            //获取IWeChatPay中所有的属性
             var properties = PropertyInfoUtil.GetProperties(sourceType);
             foreach (var property in properties)
             {
@@ -79,7 +79,7 @@ namespace QuickPay.Infrastructure.Util
                 if (attribute != null)
                 {
                     //code:var id=(object)request.Id;
-                    //某属性的WechatPayData中的Name值
+                    //某属性的WeChatPayData中的Name值
                     var nameExpr = Expression.Constant(attribute.Name);
                     //(object)request.Id 默认转换为object
                     var valueExpr = Expression.Property(payExpr, property);
@@ -119,8 +119,8 @@ namespace QuickPay.Infrastructure.Util
             //code:var response=new Response();
             var responseExpr = Expression.Variable(targetType, "response");
             var newResponseExpr = Expression.New(targetType);
-            var assignWechatPayExpr = Expression.Assign(responseExpr, newResponseExpr);
-            bodyExprs.Add(assignWechatPayExpr);
+            var assignWeChatPayExpr = Expression.Assign(responseExpr, newResponseExpr);
+            bodyExprs.Add(assignWeChatPayExpr);
             //获取Response的全部属性
             var properties = PropertyInfoUtil.GetProperties(targetType);
             foreach (var property in properties)

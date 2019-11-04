@@ -90,17 +90,17 @@ namespace QuickPay.WeChatPay.Apps
 
         /// <summary>Copy
         /// </summary>
-        public WeChatPayConfig SelfCopy(WeChatPayConfig wechatPayConfig)
+        public WeChatPayConfig SelfCopy(WeChatPayConfig weChatPayConfig)
         {
-            DefaultAppId = wechatPayConfig.DefaultAppId;
-            NotifyGateway = wechatPayConfig.NotifyGateway;
-            NotifyUrlFragments = wechatPayConfig.NotifyUrlFragments;
-            LocalAddress = wechatPayConfig.LocalAddress;
-            WebGateway = wechatPayConfig.WebGateway;
-            SignType = wechatPayConfig.SignType;
-            SslPassword = wechatPayConfig.SslPassword;
+            DefaultAppId = weChatPayConfig.DefaultAppId;
+            NotifyGateway = weChatPayConfig.NotifyGateway;
+            NotifyUrlFragments = weChatPayConfig.NotifyUrlFragments;
+            LocalAddress = weChatPayConfig.LocalAddress;
+            WebGateway = weChatPayConfig.WebGateway;
+            SignType = weChatPayConfig.SignType;
+            SslPassword = weChatPayConfig.SslPassword;
             Apps.Clear();
-            foreach (var app in wechatPayConfig.Apps)
+            foreach (var app in weChatPayConfig.Apps)
             {
                 Apps.Add(new WeChatPayApp()
                 {

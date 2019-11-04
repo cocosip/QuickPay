@@ -3,7 +3,7 @@ using Xunit;
 
 namespace QuickPay.Tests.WeChatPay.Util
 {
-    public class WechatPayUtilTest
+    public class WeChatPayUtilTest
     {
         [Fact]
         public void GenerateTimeStamp_Test()

@@ -20,7 +20,7 @@ namespace QuickPay.WeChatPay.Utility
             {
                 if (pair.Value == null)
                 {
-                    throw new Exception("WechatPayData内部含有值为null的字段!");
+                    throw new Exception("WeChatPayData内部含有值为null的字段!");
                 }
                 if (pair.Key.ToLower() != "sign" && !pair.Value.ToString().IsNullOrWhiteSpace())
                 {

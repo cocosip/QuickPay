@@ -89,7 +89,7 @@ namespace QuickPay.Middleware
             }
             else
             {
-                payment.PayPlatId = (int)PayPlat.WechatPay;
+                payment.PayPlatId = (int)PayPlat.WeChatPay;
                 payment.AppId = ((WeChatPayApp)context.App).AppId;
                 //交易号,本系统唯一
                 payment.OutTradeNo = _weChatPayDataHelper.GetOutTradeNo(context.RequestPayData);

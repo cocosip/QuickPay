@@ -10,7 +10,7 @@ namespace QuickPay.Tests.WeChatPay.Services
 {
     /// <summary>微信刷卡支付
     /// </summary>
-    public class WechatMicroPayServiceTest : TestBase
+    public class WeChatMicroPayServiceTest : TestBase
     {
         /// <summary>刷卡支付提交订单
         /// </summary>

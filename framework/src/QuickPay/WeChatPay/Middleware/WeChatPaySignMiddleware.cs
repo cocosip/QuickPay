@@ -16,14 +16,14 @@ namespace QuickPay.WeChatPay.Middleware
     public class WeChatPaySignMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
-        private readonly WeChatPayDataHelper _wechatPayDataHelper;
+        private readonly WeChatPayDataHelper _weChatPayDataHelper;
 
         /// <summary>Ctor
         /// </summary>
-        public WeChatPaySignMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next, WeChatPayDataHelper wechatPayDataHelper) : base(provider)
+        public WeChatPaySignMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next, WeChatPayDataHelper weChatPayDataHelper) : base(provider)
         {
             _next = next;
-            _wechatPayDataHelper = wechatPayDataHelper;
+            _weChatPayDataHelper = weChatPayDataHelper;
         }
 
         /// <summary>Invoke
@@ -50,7 +50,7 @@ namespace QuickPay.WeChatPay.Middleware
                     if (context.SignType == WeChatPaySettings.SignType.Md5)
                     {
                         sign = WeChatPayUtil.Md5Sign(context.RequestPayData, (WeChatPayApp)context.App);
-                        //sign = WechatPayUtil.MakeSign(context.RequestPayData, (WechatPayApp)context.App);
+                        //sign = WeChatPayUtil.MakeSign(context.RequestPayData, (WeChatPayApp)context.App);
                         context.RequestPayData.SetValue(context.SignFieldName, sign);
                     }
                     else if (context.SignType == WeChatPaySettings.SignType.Sha1)
@@ -59,7 +59,7 @@ namespace QuickPay.WeChatPay.Middleware
                         context.RequestPayData.SetValue(context.SignFieldName, sign);
                     }
 
-                    Logger.LogInformation(context.Request.GetLogFormat($"签名字段:{context.SignFieldName},签名:{sign},签名后数据:[{ _wechatPayDataHelper.ToXml(context.RequestPayData)}]"));
+                    Logger.LogInformation(context.Request.GetLogFormat($"签名字段:{context.SignFieldName},签名:{sign},签名后数据:[{ _weChatPayDataHelper.ToXml(context.RequestPayData)}]"));
                     Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
                 }
             }

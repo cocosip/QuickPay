@@ -61,7 +61,7 @@
     <![CDATA[默认通知网关,本地服务器地址]]>
     <NotifyGateway>http://127.0.0.1</NotifyGateway>
     <![CDATA[异步通知关联地址]]>
-    <NotifyUrlFragments>/Notify/WechatPay</NotifyUrlFragments>
+    <NotifyUrlFragments>/Notify/WeChatPay</NotifyUrlFragments>
     <![CDATA[默认App名称]]>
     <DefaultAppId>wx7462799678470f25</DefaultAppId>
     <![CDATA[签名类型,MD5]]>

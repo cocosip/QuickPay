@@ -14,12 +14,12 @@ namespace QuickPay.WeChatPay.Services.Impl
     /// </summary>
     public class WeChatH5PayService : BaseWeChatPayService, IWeChatH5PayService
     {
-        private readonly WeChatPayDataHelper _wechatPayDataHelper;
+        private readonly WeChatPayDataHelper _weChatPayDataHelper;
         /// <summary>Ctor
         /// </summary>
-        public WeChatH5PayService(IServiceProvider provider, WeChatPayDataHelper wechatPayDataHelper) : base(provider)
+        public WeChatH5PayService(IServiceProvider provider, WeChatPayDataHelper weChatPayDataHelper) : base(provider)
         {
-            _wechatPayDataHelper = wechatPayDataHelper;
+            _weChatPayDataHelper = weChatPayDataHelper;
         }
 
         /// <summary>H5支付统一下单,返回跳转的url地址
@@ -33,7 +33,7 @@ namespace QuickPay.WeChatPay.Services.Impl
 
             var request = ObjectMapper.Map<H5UnifiedOrderRequest>(input);
             var sceneInfoDict = SceneInfoCreator.CreateScene(input.SceneType, App);
-            request.SceneInfo = _wechatPayDataHelper.DictToJson(sceneInfoDict);
+            request.SceneInfo = _weChatPayDataHelper.DictToJson(sceneInfoDict);
             //sceneInfoDict.ToJson(_jsonSerializer);
             var response = await Executer.ExecuteAsync<H5UnifiedOrderResponse>(request, Config, App);
             return response?.MWebUrl;

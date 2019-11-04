@@ -10,7 +10,7 @@ namespace QuickPay.Tests.WeChatPay.Services
 {
     /// <summary>微信H5支付
     /// </summary>
-    public class WechatH5PayServiceTest : TestBase
+    public class WeChatH5PayServiceTest : TestBase
     {
         [Fact]
         public void UnifiedOrder_Test()

@@ -75,7 +75,7 @@ namespace QuickPay.WeChatPay.Authentication
                     SlidingExpiration = TimeSpan.FromMinutes(5)
                 });
             }
-            var url = $"https://open.weixin.qq.com/connect/oauth2/authorize?appid={appId}&redirect_uri={WebUtility.UrlEncode(redirectUri)}&response_type=code&scope={scope}&state={state}#wechat_redirect";
+            var url = $"https://open.weixin.qq.com/connect/oauth2/authorize?appid={appId}&redirect_uri={WebUtility.UrlEncode(redirectUri)}&response_type=code&scope={scope}&state={state}#weChat_redirect";
             return url;
         }
 
@@ -93,13 +93,13 @@ namespace QuickPay.WeChatPay.Authentication
             {
                 if (!state.IsNullOrWhiteSpace())
                 {
-                    var wechatPayAuthenticationStateCacheItem = await _stateCache.GetAsync(state);
-                    if (wechatPayAuthenticationStateCacheItem == null)
+                    var weChatPayAuthenticationStateCacheItem = await _stateCache.GetAsync(state);
+                    if (weChatPayAuthenticationStateCacheItem == null)
                     {
                         _logger.LogError(WeChatPayUtil.ParseLog("JsApi认证验证Status失败,Status不存在"));
                         throw new Exception($"微信Status验证不通过");
                     }
-                    if (wechatPayAuthenticationStateCacheItem.State != state)
+                    if (weChatPayAuthenticationStateCacheItem.State != state)
                     {
                         _logger.LogError(WeChatPayUtil.ParseLog("JsApi认证验证Status失败,Status不匹配"));
                     }

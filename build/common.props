@@ -9,12 +9,7 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/cocosip/QuickPay</RepositoryUrl>
     <Description>Easy to use alipay and wechatpay!</Description>
-    <PackageTags>Payment,Alipay,WechatPay</PackageTags>
-    
+    <PackageTags>Payment,Alipay,WeChatPay</PackageTags>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" PrivateAssets="All" />
-  </ItemGroup>
 
 </Project>

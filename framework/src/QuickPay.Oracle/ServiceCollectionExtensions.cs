@@ -14,11 +14,10 @@ namespace QuickPay
         {
             var quickPaySqlServerOption = new QuickPayOracleOption();
             option(quickPaySqlServerOption);
-            services.AddSingleton<QuickPayOracleOption>(quickPaySqlServerOption);
-
-            services.AddTransient<IPaymentStore, OraclePaymentStore>();
-            services.AddTransient<IRefundStore, OracleRefundStore>();
-            services.AddTransient<ITransferStore, OracleTransferStore>();
+            services
+                .AddSingleton<QuickPayOracleOption>(quickPaySqlServerOption)
+                .AddTransient<IPaymentStore, OraclePaymentStore>()
+                .AddTransient<IRefundStore, OracleRefundStore>();
             return services;
         }
     }

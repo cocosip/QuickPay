@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using DotCommon.Extensions;
 using Microsoft.Extensions.Logging;
-using Oracle.ManagedDataAccess.Client;
+using Npgsql;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,17 +10,16 @@ namespace QuickPay.Assist.Store
 {
     /// <summary>退款存储
     /// </summary>
-    public class OracleRefundStore : BaseOracleStore, IRefundStore
+    public class PostgreSqlRefundStore : BasePostgreSqlStore, IRefundStore
     {
         private readonly string _tableName;
 
         /// <summary>Ctor
         /// </summary>
-        public OracleRefundStore(ILoggerFactory loggerFactory, QuickPayOracleOption option) : base(loggerFactory, option)
+        public PostgreSqlRefundStore(ILoggerFactory loggerFactory, QuickPayPostgreSqlOption option) : base(loggerFactory, option)
         {
             _tableName = option.RefundTableName;
         }
-
         /// <summary>创建或者修改退款信息
         /// </summary>
         public async Task CreateOrUpdateAsync(Refund refund)
@@ -47,7 +46,7 @@ namespace QuickPay.Assist.Store
 
                 }
             }
-            catch (OracleException ex)
+            catch (NpgsqlException ex)
             {
                 Logger.LogError($"创建或者修改Refund出错,UniqueId:{refund.UniqueId} {ex.Message}");
                 throw;
@@ -66,7 +65,7 @@ namespace QuickPay.Assist.Store
                     return await connection.QueryFirstOrDefaultAsync<Refund>(sql, new { PayPlatId = payPlatId, AppId = appId, OutRefundNo = outRefundNo });
                 }
             }
-            catch (OracleException ex)
+            catch (NpgsqlException ex)
             {
                 Logger.LogError($"获取退款信息Refund出错,PayPlatId:{payPlatId},AppId:{appId},OutRefundNo:{outRefundNo}.{ex.Message}");
                 throw;
@@ -85,7 +84,7 @@ namespace QuickPay.Assist.Store
                     return await connection.QueryFirstOrDefaultAsync<Refund>(sql, new { PayPlatId = payPlatId, AppId = appId, TransactionId = transactionId });
                 }
             }
-            catch (OracleException ex)
+            catch (NpgsqlException ex)
             {
                 Logger.LogError($"获取退款信息Refund出错,PayPlatId:{payPlatId},AppId:{appId},TransactionId:{transactionId}.{ex.Message}");
                 throw;
@@ -104,7 +103,7 @@ namespace QuickPay.Assist.Store
                     return await connection.QueryFirstOrDefaultAsync<Refund>(sql, new { UniqueId = uniqueId });
                 }
             }
-            catch (OracleException ex)
+            catch (NpgsqlException ex)
             {
                 Logger.LogError($"根据UniqueId获取退款信息Refund出错,UniqueId:{uniqueId}.{ex.Message}");
                 throw;
@@ -123,7 +122,7 @@ namespace QuickPay.Assist.Store
                     return (await connection.QueryAsync<Refund>(sql, new { PayPlatId = payPlatId, AppId = appId, OutTradeNo = outTradeNo })).ToList();
                 }
             }
-            catch (OracleException ex)
+            catch (NpgsqlException ex)
             {
                 Logger.LogError($"根据交易号获取全部的退款订单出错,PayPlatId:{payPlatId},AppId:{appId},OutTradeNo:{outTradeNo}.{ex.Message}");
                 throw;

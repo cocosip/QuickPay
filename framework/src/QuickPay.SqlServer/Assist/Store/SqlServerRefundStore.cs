@@ -12,7 +12,7 @@ namespace QuickPay.Assist.Store
     /// </summary>
     public class SqlServerRefundStore : BaseSqlServerStore, IRefundStore
     {
-        private string _tableName;
+        private readonly string _tableName;
 
         /// <summary>Ctor
         /// </summary>
@@ -36,12 +36,12 @@ namespace QuickPay.Assist.Store
                     if (queryRefund == null || queryRefund.AppId.IsNullOrWhiteSpace())
                     {
                         //创建
-                        sql = $"INSERT INTO {_tableName} (UniqueId,PayPlatId,AppId,OutTradeNo,TransactionId,OutRefundNo,RefundAmount,RefundId,PayObject,Describe) VALUES (@UniqueId,@PayPlatId,@AppId,@OutTradeNo,@TransactionId,@OutRefundNo,@RefundAmount,@RefundId,@PayObject,@Describe)";
+                        sql = $"INSERT INTO {_tableName} ([UniqueId],[PayPlatId],[AppId],[OutTradeNo],[TransactionId],[OutRefundNo],[RefundAmount],[RefundId],[PayObject],[Describe]) VALUES (@UniqueId,@PayPlatId,@AppId,@OutTradeNo,@TransactionId,@OutRefundNo,@RefundAmount,@RefundId,@PayObject,@Describe)";
                     }
                     else
                     {
                         //修改
-                        sql = $"UPDATE {_tableName} SET UniqueId=@UniqueId,PayPlatId=@PayPlatId,AppId=@AppId,OutTradeNo=@OutTradeNo,TransactionId=@TransactionId,OutRefundNo=@OutRefundNo,RefundAmount=@RefundAmount,RefundId=@RefundId,PayObject=@PayObject,Describe=@Describe";
+                        sql = $"UPDATE {_tableName} SET [UniqueId]=@UniqueId,[PayPlatId]=@PayPlatId,[AppId]=@AppId,[OutTradeNo]=@OutTradeNo,[TransactionId]=@TransactionId,[OutRefundNo]=@OutRefundNo,[RefundAmount]=@RefundAmount,[RefundId]=@RefundId,[PayObject]=@PayObject,[Describe]=@Describe";
                     }
                     await connection.ExecuteAsync(sql, refund);
 
@@ -62,7 +62,7 @@ namespace QuickPay.Assist.Store
             {
                 using (var connection = GetConnection())
                 {
-                    var sql = $"SELECT TOP 1 * FROM [{_tableName}] WHERE PayPlatId=@PayPlatId AND AppId=@AppId AND OutRefundNo=@outRefundNo";
+                    var sql = $"SELECT TOP 1 * FROM [{_tableName}] WHERE [PayPlatId]=@PayPlatId AND [AppId]=@AppId AND [OutRefundNo]=@outRefundNo";
                     return await connection.QueryFirstOrDefaultAsync<Refund>(sql, new { PayPlatId = payPlatId, AppId = appId, OutRefundNo = outRefundNo });
                 }
             }
@@ -81,7 +81,7 @@ namespace QuickPay.Assist.Store
             {
                 using (var connection = GetConnection())
                 {
-                    var sql = $"SELECT TOP 1 * FROM [{_tableName}] WHERE PayPlatId=@PayPlatId AND AppId=@AppId AND TransactionId=@TransactionId";
+                    var sql = $"SELECT TOP 1 * FROM [{_tableName}] WHERE [PayPlatId]=@PayPlatId AND [AppId]=@AppId AND [TransactionId]=@TransactionId";
                     return await connection.QueryFirstOrDefaultAsync<Refund>(sql, new { PayPlatId = payPlatId, AppId = appId, TransactionId = transactionId });
                 }
             }
@@ -100,7 +100,7 @@ namespace QuickPay.Assist.Store
             {
                 using (var connection = GetConnection())
                 {
-                    var sql = $"SELECT TOP 1 * FROM [{_tableName}] WHERE UniqueId=@UniqueId";
+                    var sql = $"SELECT TOP 1 * FROM [{_tableName}] WHERE [UniqueId]=@UniqueId";
                     return await connection.QueryFirstOrDefaultAsync<Refund>(sql, new { UniqueId = uniqueId });
                 }
             }
@@ -119,7 +119,7 @@ namespace QuickPay.Assist.Store
             {
                 using (var connection = GetConnection())
                 {
-                    var sql = $"SELECT * FROM [{_tableName}] WHERE PayPlatId=@PayPlatId AND AppId=@AppId AND OutTradeNo=@OutTradeNo";
+                    var sql = $"SELECT * FROM [{_tableName}] WHERE [PayPlatId]=@PayPlatId AND [AppId]=@AppId AND [OutTradeNo]=@OutTradeNo";
                     return (await connection.QueryAsync<Refund>(sql, new { PayPlatId = payPlatId, AppId = appId, OutTradeNo = outTradeNo })).ToList();
                 }
             }

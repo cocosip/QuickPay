@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using QuickPay.Assist.Store;
-using QuickPay.WeChatPay;
-using QuickPay.WeChatPay.Authentication;
 using System;
 
 namespace QuickPay
@@ -16,11 +14,10 @@ namespace QuickPay
         {
             var quickPaySqlServerOption = new QuickPaySqlServerOption();
             option(quickPaySqlServerOption);
-            services.AddSingleton<QuickPaySqlServerOption>(quickPaySqlServerOption);
-
-            services.AddTransient<IPaymentStore, SqlServerPaymentStore>();
-            services.AddTransient<IRefundStore, SqlServerRefundStore>();
-            services.AddTransient<ITransferStore, SqlServerTransferStore>();
+            services
+                .AddSingleton<QuickPaySqlServerOption>(quickPaySqlServerOption)
+                .AddTransient<IPaymentStore, SqlServerPaymentStore>()
+                .AddTransient<IRefundStore, SqlServerRefundStore>();
             return services;
         }
     }

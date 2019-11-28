@@ -1,20 +1,20 @@
 ﻿using Dapper;
 using DotCommon.Extensions;
 using Microsoft.Extensions.Logging;
-using Oracle.ManagedDataAccess.Client;
+using Npgsql;
 using System.Threading.Tasks;
 
 namespace QuickPay.Assist.Store
 {
     /// <summary>支付信息存储
     /// </summary>
-    public class OraclePaymentStore : BaseOracleStore, IPaymentStore
+    public class PostgreSqlPaymentStore : BasePostgreSqlStore, IPaymentStore
     {
         private readonly string _tableName;
 
         /// <summary>Ctor
         /// </summary>
-        public OraclePaymentStore(ILoggerFactory loggerFactory, QuickPayOracleOption option) : base(loggerFactory, option)
+        public PostgreSqlPaymentStore(ILoggerFactory loggerFactory, QuickPayPostgreSqlOption option) : base(loggerFactory, option)
         {
             _tableName = option.PaymentTableName;
         }
@@ -45,7 +45,7 @@ namespace QuickPay.Assist.Store
 
                 }
             }
-            catch (OracleException ex)
+            catch (NpgsqlException ex)
             {
                 Logger.LogError($"创建或者修改Payment出错,UniqueId:{payment.UniqueId} {ex.Message}");
                 throw;
@@ -64,7 +64,7 @@ namespace QuickPay.Assist.Store
                     return await connection.QueryFirstOrDefaultAsync<Payment>(sql, new { PayPlatId = payPlatId, AppId = appId, OutTradeNo = outTradeNo });
                 }
             }
-            catch (OracleException ex)
+            catch (NpgsqlException ex)
             {
                 Logger.LogError($"获取支付信息Payment出错,PayPlatId:{payPlatId},AppId:{appId},OutTradeNo:{outTradeNo}.{ex.Message}");
                 throw;
@@ -83,7 +83,7 @@ namespace QuickPay.Assist.Store
                     return await connection.QueryFirstOrDefaultAsync<Payment>(sql, new { PayPlatId = payPlatId, AppId = appId, TransactionId = transactionId });
                 }
             }
-            catch (OracleException ex)
+            catch (NpgsqlException ex)
             {
                 Logger.LogError($"获取支付信息Payment出错,PayPlatId:{payPlatId},AppId:{appId},TransactionId:{transactionId}.{ex.Message}");
                 throw;
@@ -102,7 +102,7 @@ namespace QuickPay.Assist.Store
                     return await connection.QueryFirstOrDefaultAsync<Payment>(sql, new { UniqueId = uniqueId });
                 }
             }
-            catch (OracleException ex)
+            catch (NpgsqlException ex)
             {
                 Logger.LogError($"根据UniqueId获取支付信息Payment出错,UniqueId:{uniqueId}.{ex.Message}");
                 throw;

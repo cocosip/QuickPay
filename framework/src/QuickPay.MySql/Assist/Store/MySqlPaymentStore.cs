@@ -1,24 +1,23 @@
 ﻿using Dapper;
 using DotCommon.Extensions;
 using Microsoft.Extensions.Logging;
-using Oracle.ManagedDataAccess.Client;
+using MySql.Data.MySqlClient;
 using System.Threading.Tasks;
 
 namespace QuickPay.Assist.Store
 {
     /// <summary>支付信息存储
     /// </summary>
-    public class OraclePaymentStore : BaseOracleStore, IPaymentStore
+    public class MySqlPaymentStore : BaseMySqlStore, IPaymentStore
     {
         private readonly string _tableName;
 
         /// <summary>Ctor
         /// </summary>
-        public OraclePaymentStore(ILoggerFactory loggerFactory, QuickPayOracleOption option) : base(loggerFactory, option)
+        public MySqlPaymentStore(ILoggerFactory loggerFactory, QuickPayMySqlOption option) : base(loggerFactory, option)
         {
             _tableName = option.PaymentTableName;
         }
-
         /// <summary>创建或者修改支付信息
         /// </summary>
         public async Task CreateOrUpdateAsync(Payment payment)
@@ -34,18 +33,18 @@ namespace QuickPay.Assist.Store
                     if (queryPayment == null || queryPayment.AppId.IsNullOrWhiteSpace())
                     {
                         //创建
-                        sql = $"INSERT INTO {_tableName} (\"UniqueId\",\"PayPlatId\",\"AppId\",\"OutTradeNo\",\"TradeType\",\"BusinessCode\",\"TransactionId\",\"Amount\",\"PayStatusId\",\"PayObject\",\"Describe\") VALUES (:UniqueId,:PayPlatId,:AppId,:OutTradeNo,:TradeType,:BusinessCode,:TransactionId,:Amount,:PayStatusId,:PayObject,:Describe)";
+                        sql = $"INSERT INTO {_tableName} (`UniqueId`,`PayPlatId`,`AppId`,`OutTradeNo`,`TradeType`,`BusinessCode`,`TransactionId`,`Amount`,`PayStatusId`,`PayObject`,`Describe`) VALUES (@UniqueId,@PayPlatId,@AppId,@OutTradeNo,@TradeType,@BusinessCode,@TransactionId,@Amount,@PayStatusId,@PayObject,@Describe)";
                     }
                     else
                     {
                         //修改
-                        sql = $"UPDATE {_tableName} SET \"UniqueId\"=:UniqueId,\"PayPlatId\"=:PayPlatId,\"AppId\"=:AppId,\"OutTradeNo\"=:AppId,\"TradeType\"=:TradeType,\"BusinessCode\"=:BusinessCode,\"TransactionId\"=:TransactionId,\"Amount\"=:Amount,\"PayStatusId\"=:PayStatusId,\"PayObject\"=:PayObject,\"Describe\"=:Describe";
+                        sql = $"UPDATE {_tableName} SET `UniqueId`=@UniqueId,`PayPlatId`=@PayPlatId,`AppId`=@AppId,`OutTradeNo`=@AppId,`TradeType`=@TradeType,`BusinessCode`=@BusinessCode,`TransactionId`=@TransactionId,`Amount`=@Amount,`PayStatusId`=@PayStatusId,`PayObject`=@PayObject,`Describe`=@Describe";
                     }
                     await connection.ExecuteAsync(sql, payment);
 
                 }
             }
-            catch (OracleException ex)
+            catch (MySqlException ex)
             {
                 Logger.LogError($"创建或者修改Payment出错,UniqueId:{payment.UniqueId} {ex.Message}");
                 throw;
@@ -60,11 +59,11 @@ namespace QuickPay.Assist.Store
             {
                 using (var connection = GetConnection())
                 {
-                    var sql = $"SELECT TOP 1 * FROM \"{_tableName}\" WHERE \"PayPlatId\"=:PayPlatId AND \"AppId\"=:AppId AND \"OutTradeNo\"=:OutTradeNo";
+                    var sql = $"SELECT TOP 1 * FROM `{_tableName}` WHERE `PayPlatId`=@PayPlatId AND `AppId`=@AppId AND `OutTradeNo`=@OutTradeNo";
                     return await connection.QueryFirstOrDefaultAsync<Payment>(sql, new { PayPlatId = payPlatId, AppId = appId, OutTradeNo = outTradeNo });
                 }
             }
-            catch (OracleException ex)
+            catch (MySqlException ex)
             {
                 Logger.LogError($"获取支付信息Payment出错,PayPlatId:{payPlatId},AppId:{appId},OutTradeNo:{outTradeNo}.{ex.Message}");
                 throw;
@@ -79,11 +78,11 @@ namespace QuickPay.Assist.Store
             {
                 using (var connection = GetConnection())
                 {
-                    var sql = $"SELECT TOP 1 * FROM \"{_tableName}\" WHERE \"PayPlatId\"=:PayPlatId AND \"AppId\"=:AppId AND \"TransactionId\"=:TransactionId";
+                    var sql = $"SELECT TOP 1 * FROM `{_tableName}` WHERE `PayPlatId`=@PayPlatId AND `AppId`=@AppId AND `TransactionId`=@TransactionId";
                     return await connection.QueryFirstOrDefaultAsync<Payment>(sql, new { PayPlatId = payPlatId, AppId = appId, TransactionId = transactionId });
                 }
             }
-            catch (OracleException ex)
+            catch (MySqlException ex)
             {
                 Logger.LogError($"获取支付信息Payment出错,PayPlatId:{payPlatId},AppId:{appId},TransactionId:{transactionId}.{ex.Message}");
                 throw;
@@ -98,11 +97,11 @@ namespace QuickPay.Assist.Store
             {
                 using (var connection = GetConnection())
                 {
-                    var sql = $"SELECT TOP 1 * FROM \"{_tableName}\" WHERE \"UniqueId\"=:UniqueId";
+                    var sql = $"SELECT TOP 1 * FROM `{_tableName}` WHERE `UniqueId`=@UniqueId";
                     return await connection.QueryFirstOrDefaultAsync<Payment>(sql, new { UniqueId = uniqueId });
                 }
             }
-            catch (OracleException ex)
+            catch (MySqlException ex)
             {
                 Logger.LogError($"根据UniqueId获取支付信息Payment出错,UniqueId:{uniqueId}.{ex.Message}");
                 throw;

@@ -13,6 +13,8 @@
 | `QuickPay.AspNetCore.Mvc` | [![NuGet](https://img.shields.io/nuget/v/QuickPay.AspNetCore.Mvc.svg)](https://www.nuget.org/packages/QuickPay.AspNetCore.Mvc) |![NuGet](https://img.shields.io/nuget/dt/QuickPay.AspNetCore.Mvc.svg)|
 | `QuickPay.SqlServer` | [![NuGet](https://img.shields.io/nuget/v/QuickPay.SqlServer.svg)](https://www.nuget.org/packages/QuickPay.SqlServer) |![NuGet](https://img.shields.io/nuget/dt/QuickPay.SqlServer.svg)|
 `QuickPay.Oracle` | [![NuGet](https://img.shields.io/nuget/v/QuickPay.Oracle.svg)](https://www.nuget.org/packages/QuickPay.Oracle) |![NuGet](https://img.shields.io/nuget/dt/QuickPay.Oracle.svg)|
+`QuickPay.MySql` | [![NuGet](https://img.shields.io/nuget/v/QuickPay.MySql.svg)](https://www.nuget.org/packages/QuickPay.MySql) |![NuGet](https://img.shields.io/nuget/dt/QuickPay.MySql.svg)|
+`QuickPay.PostgreSql` | [![NuGet](https://img.shields.io/nuget/v/QuickPay.PostgreSql.svg)](https://www.nuget.org/packages/QuickPay.PostgreSql) |![NuGet](https://img.shields.io/nuget/dt/QuickPay.PostgreSql.svg)|
 
 ## 简介
 
@@ -37,8 +39,8 @@ public static IServiceProvider Initialize()
     {
         c.AddLog4Net();
     })
-    .AddCommonComponents()
-    .AddDistributedMemoryCache()
+    .AddDotCommon()
+    .AddGenericsMemoryCache()
     .AddJson4Net()
     .AddWeChatFramework() //添加微信基础框架
     .AddQuickPay(option =>
@@ -69,7 +71,8 @@ public static IServiceProvider Initialize()
 
 > 配置文件初始化:
 
-- `QuickPay`支持两种方式的配置初始化,1.通过配置的`Xml`([参考](../core/src/QuickPay/QuickPayConfig.xml))或`Josn`([参考](../core/src/QuickPay/QuickPayConfig.json)) 2.通过初始化配置对象
+- `QuickPay`支持两种方式的配置初始化,1.通过配置的`Xml`([参考](../framework/src/QuickPay/QuickPayConfig.xml)) 2.通过初始化配置对象 3.通过数据库动态加载配置
+- 如果通过数据库动态加载配置,需要自定义实现 `IAlipayConfigStore`,`IWeChatPayConfigStore` 配置存储接口,并且需要把他们添加到依赖注入中去。可参考[源码](/framework/src/QuickPay/ServiceCollectionExtensions.cs)
 
 ## 示例代码
 

@@ -25,10 +25,10 @@ namespace QuickPay.WeChatPay.Authentication
 
         /// <summary>Ctor
         /// </summary>
-        public AuthenticationService(ILoggerFactory loggerFactory, IJsonSerializer jsonSerializer, IAccessTokenStore accessTokenStore, IJsApiTicketStore jsApiTicketStore, IDistributedCache<WeChatPayAuthenticationStateCacheItem> stateCache)
+        public AuthenticationService(ILogger<AuthenticationService> logger, IJsonSerializer jsonSerializer, IAccessTokenStore accessTokenStore, IJsApiTicketStore jsApiTicketStore, IDistributedCache<WeChatPayAuthenticationStateCacheItem> stateCache)
         {
             _client = new RestClient("https://api.weixin.qq.com");
-            _logger = loggerFactory.CreateLogger(QuickPaySettings.LoggerName);
+            _logger = logger;
             _jsonSerializer = jsonSerializer;
             _accessTokenStore = accessTokenStore;
             _jsApiTicketStore = jsApiTicketStore;

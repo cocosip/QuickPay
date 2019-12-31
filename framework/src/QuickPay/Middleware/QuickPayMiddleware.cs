@@ -29,7 +29,7 @@ namespace QuickPay.Middleware
         public QuickPayMiddleware(IServiceProvider provider)
         {
             Provider = provider;
-            Logger = provider.GetService<ILoggerFactory>().CreateLogger(QuickPaySettings.LoggerName);
+            Logger = provider.GetService<ILogger<QuickPayMiddleware>>(); ;
         }
 
         /// <summary>设置错误信息

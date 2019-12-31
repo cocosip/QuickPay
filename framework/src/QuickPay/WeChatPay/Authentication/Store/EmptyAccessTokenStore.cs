@@ -10,9 +10,9 @@ namespace QuickPay.WeChatPay.Authentication
         private readonly ILogger _logger;
         /// <summary>
         /// </summary>
-        public EmptyAccessTokenStore(ILoggerFactory loggerFactory)
+        public EmptyAccessTokenStore(ILogger<EmptyAccessTokenStore> logger)
         {
-            _logger = loggerFactory.CreateLogger(QuickPaySettings.LoggerName);
+            _logger = logger;
         }
 
         /// <summary>

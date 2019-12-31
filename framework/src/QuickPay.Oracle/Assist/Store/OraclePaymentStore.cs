@@ -14,7 +14,7 @@ namespace QuickPay.Assist.Store
 
         /// <summary>Ctor
         /// </summary>
-        public OraclePaymentStore(ILoggerFactory loggerFactory, QuickPayOracleOption option) : base(loggerFactory, option)
+        public OraclePaymentStore(ILogger<BaseOracleStore> logger, QuickPayOracleOption option) : base(logger, option)
         {
             _tableName = option.PaymentTableName;
         }

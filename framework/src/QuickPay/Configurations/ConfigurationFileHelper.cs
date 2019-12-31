@@ -230,6 +230,11 @@ namespace QuickPay.Configurations
             output.AppendFormat("<Id>{0}", config.Id);
             output.AppendLine("</Id>");
 
+            output.AppendFormat("<Gateway>{0}", config.Gateway);
+            output.AppendLine("</Gateway>");
+            output.AppendFormat("<SandboxGateway>{0}", config.SandboxGateway);
+            output.AppendLine("</SandboxGateway>");
+
             output.AppendFormat("<LocalAddress>{0}", config.LocalAddress);
             output.AppendLine("</LocalAddress>");
 

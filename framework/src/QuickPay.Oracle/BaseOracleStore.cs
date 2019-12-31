@@ -16,10 +16,10 @@ namespace QuickPay
 
         /// <summary>Ctor
         /// </summary>
-        public BaseOracleStore(ILoggerFactory loggerFactory, QuickPayOracleOption option)
+        public BaseOracleStore(ILogger<BaseOracleStore> logger, QuickPayOracleOption option)
         {
+            Logger = logger;
             Option = option;
-            Logger = loggerFactory.CreateLogger(QuickPaySettings.LoggerName);
         }
 
         /// <summary>获取连接

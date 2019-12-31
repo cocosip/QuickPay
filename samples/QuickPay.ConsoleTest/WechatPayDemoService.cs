@@ -17,9 +17,9 @@ namespace QuickPay.ConsoleTest
         private readonly IWeChatJsApiPayService _weChatJsApiPayService;
         private readonly IWeChatMiniProgramPayService _weChatMiniProgramPayService;
 
-        public WeChatPayDemoService(ILoggerFactory loggerFactory, IAuthenticationService authenticationService, IWeChatPayTradeCommonService weChatPayTradeCommonService, IWeChatAppPayService weChatAppPayService, IWeChatJsApiPayService weChatJsApiPayService, IWeChatMiniProgramPayService weChatMiniProgramPayService)
+        public WeChatPayDemoService(ILogger<WeChatPayDemoService> logger, IAuthenticationService authenticationService, IWeChatPayTradeCommonService weChatPayTradeCommonService, IWeChatAppPayService weChatAppPayService, IWeChatJsApiPayService weChatJsApiPayService, IWeChatMiniProgramPayService weChatMiniProgramPayService)
         {
-            _logger = loggerFactory.CreateLogger(QuickPaySettings.LoggerName);
+            _logger = logger;
             _authenticationService = authenticationService;
             _weChatPayTradeCommonService = weChatPayTradeCommonService;
             _weChatAppPayService = weChatAppPayService;

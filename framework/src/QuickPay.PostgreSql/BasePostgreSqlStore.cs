@@ -17,10 +17,10 @@ namespace QuickPay
 
         /// <summary>Ctor
         /// </summary>
-        public BasePostgreSqlStore(ILoggerFactory loggerFactory, QuickPayPostgreSqlOption option)
+        public BasePostgreSqlStore(ILogger<BasePostgreSqlStore> logger, QuickPayPostgreSqlOption option)
         {
+            Logger = logger;
             Option = option;
-            Logger = loggerFactory.CreateLogger(QuickPaySettings.LoggerName);
         }
 
         /// <summary>获取连接

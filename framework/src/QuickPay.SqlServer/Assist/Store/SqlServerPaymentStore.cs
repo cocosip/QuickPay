@@ -14,7 +14,7 @@ namespace QuickPay.Assist.Store
 
         /// <summary>Ctor
         /// </summary>
-        public SqlServerPaymentStore(ILoggerFactory loggerFactory, QuickPaySqlServerOption option) : base(loggerFactory, option)
+        public SqlServerPaymentStore(ILogger<BaseSqlServerStore> logger, QuickPaySqlServerOption option) : base(logger, option)
         {
             _tableName = option.PaymentTableName;
         }

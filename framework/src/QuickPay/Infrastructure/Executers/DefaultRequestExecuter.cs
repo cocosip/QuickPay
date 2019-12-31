@@ -16,16 +16,15 @@ namespace QuickPay.Infrastructure.Executers
     {
         private readonly IQuickPayPipelineBuilder _quickPayPipelineBuilder;
         private readonly IExecuteContextFactory _executeContextFactory;
- 
+
         private readonly ILogger _logger;
         /// <summary>
         /// </summary>
-        public DefaultRequestExecuter(ILoggerFactory loggerFactory, IQuickPayPipelineBuilder quickPayPipelineBuilder, IExecuteContextFactory executeContextFactory)
+        public DefaultRequestExecuter(ILogger<DefaultRequestExecuter> logger, IQuickPayPipelineBuilder quickPayPipelineBuilder, IExecuteContextFactory executeContextFactory)
         {
-            _logger = loggerFactory.CreateLogger(QuickPaySettings.LoggerName);
+            _logger = logger;
             _quickPayPipelineBuilder = quickPayPipelineBuilder;
             _executeContextFactory = executeContextFactory;
-         
         }
 
         /// <summary>执行器执行

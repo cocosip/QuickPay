@@ -16,7 +16,7 @@ namespace QuickPay.Assist.Store
 
         /// <summary>Ctor
         /// </summary>
-        public PostgreSqlRefundStore(ILoggerFactory loggerFactory, QuickPayPostgreSqlOption option) : base(loggerFactory, option)
+        public PostgreSqlRefundStore(ILogger<BasePostgreSqlStore> logger, QuickPayPostgreSqlOption option) : base(logger, option)
         {
             _tableName = option.RefundTableName;
         }

@@ -28,8 +28,8 @@
         <![CDATA[App名称]]>
         <Name>App1</Name>
         <![CDATA[应用AppId]]>
-        <![CDATA[应用类型,填1]]>
         <AppId>2017061307479603</AppId>
+        <![CDATA[应用类型,填1]]>
         <AppTypeId>1</AppTypeId>
         <![CDATA[编码,utf-8]]>
         <Charset>utf-8</Charset>

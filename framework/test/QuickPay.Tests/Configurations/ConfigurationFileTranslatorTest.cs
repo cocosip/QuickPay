@@ -28,6 +28,11 @@ namespace QuickPay.Tests.Configurations
             Assert.Equal(wrapper.AlipayConfig.WebGateway, wrapper2.AlipayConfig.WebGateway);
 
             FileHelper.DeleteIfExists(filePath);
+
+            var wrapper3 = new ConfigWrapper(wrapper.AlipayConfig, wrapper.WeChatPayConfig);
+            Assert.Equal(wrapper.AlipayConfig, wrapper3.AlipayConfig);
+            Assert.Equal(wrapper.WeChatPayConfig, wrapper3.WeChatPayConfig);
+
         }
 
 

@@ -7,7 +7,6 @@ using QuickPay.Alipay.Utility;
 using QuickPay.Assist.Store;
 using QuickPay.Configurations;
 using QuickPay.Exceptions;
-using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.Executers;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Middleware;

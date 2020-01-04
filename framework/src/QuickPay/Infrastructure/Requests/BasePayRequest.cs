@@ -1,5 +1,6 @@
 ﻿using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.Responses;
+using System.Collections.Generic;
 
 namespace QuickPay.Infrastructure.Requests
 {
@@ -30,6 +31,17 @@ namespace QuickPay.Infrastructure.Requests
         /// <summary>签名类型名称
         /// </summary>
         public abstract string SignTypeName { get; set; }
+
+        /// <summary>扩展数据
+        /// </summary>
+        public Dictionary<string, object> Extras { get; set; }
+
+        /// <summary>Ctor
+        /// </summary>
+        public BasePayRequest()
+        {
+            Extras = new Dictionary<string, object>();
+        }
 
         /// <summary>
         /// </summary>

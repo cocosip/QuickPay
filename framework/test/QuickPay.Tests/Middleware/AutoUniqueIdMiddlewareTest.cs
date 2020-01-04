@@ -1,13 +1,11 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using QuickPay.Alipay.Apps;
+using QuickPay.Alipay.Requests;
 using QuickPay.Middleware;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
-using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
+using Xunit;
 
 namespace QuickPay.Tests.Middleware
 {
@@ -29,10 +27,9 @@ namespace QuickPay.Tests.Middleware
 
 
         [Fact]
-        public void Invoke_Test()
+        public void Invoke_RequestIsNull_Test()
         {
             var autoUniqueIdMiddleware = new AutoUniqueIdMiddleware(_provider, _mockQuickPayExecuteDelegate.Object);
-
             var context = new ExecuteContext()
             {
                 Request = null,
@@ -41,21 +38,38 @@ namespace QuickPay.Tests.Middleware
             autoUniqueIdMiddleware.Invoke(context).Wait();
             Assert.True(context.Errors.Any());
             _mockQuickPayExecuteDelegate.Verify(x => x.Invoke(It.IsAny<ExecuteContext>()), Times.Never);
+        }
 
-            context = new ExecuteContext()
+        [Fact]
+        public void Invoke_SetUniqueId_BusinessCode_Test()
+        {
+            var autoUniqueIdMiddleware = new AutoUniqueIdMiddleware(_provider, _mockQuickPayExecuteDelegate.Object);
+            var context = new ExecuteContext()
             {
                 Request = new QuickPay.Alipay.Requests.AppTradePayRequest()
-                {
-                    BusinessCode = "BusinessCode1"
-                }
             };
-            Assert.Null(context.Request.UniqueId);
-            Assert.Equal("BusinessCode1", context.Request.BusinessCode);
+            context.Request.BusinessCode = "";
             autoUniqueIdMiddleware.Invoke(context).Wait();
-            Assert.NotEmpty(context.Request.UniqueId);
+            Assert.Equal("Default", context.Request.BusinessCode);
+            Assert.NotNull(context.Request.UniqueId);
+        }
 
+        [Fact]
+        public void Invoke_BizContentRequestIsNull_Test()
+        {
+            var autoUniqueIdMiddleware = new AutoUniqueIdMiddleware(_provider, _mockQuickPayExecuteDelegate.Object);
 
-            //_mockQuickPayExecuteDelegate.Verify(x => x.Invoke(It.IsAny<ExecuteContext>()), Times.AtLeastOnce);
+            var request = new AppTradePayRequest();
+            request.SetBizContentRequest(new AppTradeBizContentPayRequest());
+            var context = new ExecuteContext()
+            {
+                Request = request
+            };
+
+            Assert.Equal(QuickPaySettings.Provider.Alipay, context.Request.Provider);
+            autoUniqueIdMiddleware.Invoke(context).Wait();
+            //Assert.True(context.Errors.Any());
+            //_mockQuickPayExecuteDelegate.Verify(x => x.Invoke(It.IsAny<ExecuteContext>()), Times.Never);
 
         }
 

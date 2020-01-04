@@ -71,6 +71,20 @@ namespace QuickPay.Alipay.Requests
         /// </summary>
         public BaseBizContentRequest BizContentRequest { get; set; }
 
+        /// <summary>设置BizContent
+        /// </summary>
+        public void SetBizContentRequest(BaseBizContentRequest baseBizContentRequest)
+        {
+            BizContentRequest = baseBizContentRequest;
+        }
+
+        /// <summary>设置BizContent
+        /// </summary>
+        public void SetBizContentString(string bizContent)
+        {
+            BizContent = bizContent;
+        }
+
         /// <summary>设置必要参数
         /// </summary>
         public override void SetNecessary(QuickPayConfig config, QuickPayApp app)
@@ -84,6 +98,9 @@ namespace QuickPay.Alipay.Requests
             Charset = alipayApp.Charset;
             SignType = alipayApp.SignType;
             Timestamp = AlipayUtil.GenerateTimeStamp();
+
+            //扩展数据
+            Extras.Add(AlipaySettings.ExtraNames.BizContentRequest, BizContentRequest);
         }
     }
 }

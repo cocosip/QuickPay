@@ -1,8 +1,6 @@
 ﻿using DotCommon.Extensions;
 using DotCommon.Utility;
 using Microsoft.Extensions.Logging;
-using QuickPay.Alipay.Requests;
-using QuickPay.Alipay.Responses;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using System;
@@ -15,6 +13,7 @@ namespace QuickPay.Middleware
     public class AutoUniqueIdMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
+
         /// <summary>Ctor
         /// </summary>
         public AutoUniqueIdMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next) : base(provider)
@@ -41,32 +40,6 @@ namespace QuickPay.Middleware
                 if (context.Request.BusinessCode.IsNullOrWhiteSpace())
                 {
                     context.Request.BusinessCode = QuickPaySettings.DefaultBusinessCode;
-                }
-
-                if (context.Request.Provider == QuickPaySettings.Provider.Alipay)
-                {
-
-                    //是否为继承了BaseAlipayRequest<> 类型
-                    //获取支付宝 Context.Request.BizContentRequest中的Id与BusinessCode,并且赋值到Context.Request中
-                    if (context.Request.GetType() == typeof(BaseAlipayRequest<>))
-                    {
-                        var castRequest = (BaseAlipayRequest<BaseAlipayResponse>)context.Request;
-                        if (castRequest.BizContentRequest == null)
-                        {
-                            SetPipelineError(context, new SetUniqueIdError("BizContentRequest为NULL"));
-                            return;
-                        }
-                        //将Request中的UniqueId设置到Context上
-                        if (!castRequest.BizContentRequest.UniqueId.IsNullOrWhiteSpace())
-                        {
-                            context.Request.UniqueId = castRequest.BizContentRequest.UniqueId;
-                        }
-                        if (!castRequest.BizContentRequest.BusinessCode.IsNullOrWhiteSpace())
-                        {
-                            context.Request.BusinessCode = castRequest.BizContentRequest.BusinessCode;
-                        }
-                    }
-
                 }
                 Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
             }

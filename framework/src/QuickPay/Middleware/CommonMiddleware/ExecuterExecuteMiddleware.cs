@@ -15,7 +15,7 @@ namespace QuickPay.Middleware
     public class ExecuterExecuteMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
-        private QuickPayConfigurationOption _option;
+        private readonly QuickPayConfigurationOption _option;
         private readonly IRestClientFactory _restClientFactory;
 
         /// <summary>Ctor

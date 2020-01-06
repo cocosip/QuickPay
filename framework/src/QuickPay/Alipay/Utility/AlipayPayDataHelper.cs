@@ -10,6 +10,7 @@ namespace QuickPay.Alipay.Utility
     public class AlipayPayDataHelper
     {
         private IJsonSerializer _jsonSerializer;
+
         /// <summary>Ctor
         /// </summary>
         public AlipayPayDataHelper(IJsonSerializer jsonSerializer)

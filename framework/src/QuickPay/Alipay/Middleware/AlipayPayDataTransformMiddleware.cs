@@ -41,26 +41,6 @@ namespace QuickPay.Alipay.Middleware
                 }
                 try
                 {
-                    //是否为继承了BaseAlipayRequest<> 类型
-                    //if (ReflectionUtil.IsAssignableToGenericType(context.Request.GetType(), typeof(BaseAlipayRequest<>)))
-                    //{
-                    //    var castRequest = (BaseAlipayRequest<BaseAlipayResponse>)context.Request;
-                    //    if (castRequest.BizContentRequest == null)
-                    //    {
-                    //        SetPipelineError(context, new PayDataTransformError("BizContentRequest为NULL"));
-                    //        return;
-                    //    }
-
-                    //    var value = castRequest.BizContentRequest;
-                    //    var bizContent = _alipayPayDataHelper.ToJson(RequestReflectUtil.ToPayData((BaseBizContentRequest)castRequest.BizContentRequest));
-                    //    castRequest.BizContent = bizContent;
-                    //    //重新赋值
-                    //    context.Request = castRequest;
-                    //}
-                    //else
-                    //{
-                    //    Logger.LogInformation(context.Request.GetLogFormat($"请求Request未继承BaseAlipayRequest<>"));
-                    //}
 
                     //支付宝在转换的时候,BizContent需要自动进行转换
                     if (ReflectionUtil.IsAssignableToGenericType(context.Request.GetType(), typeof(BaseAlipayRequest<>)))

@@ -54,18 +54,18 @@ namespace QuickPay.Alipay.Middleware
                         //获取签名Sign
                         var signKv = payData.GetValue(context.SignFieldName);
                         //数据
-                        var responseWapper = payData.GetValues().FirstOrDefault(x => x.Key != context.SignFieldName);
+                        var responseWrapper = payData.GetValues().FirstOrDefault(x => x.Key != context.SignFieldName);
 
                         var app = (AlipayApp)context.App;
                         var sourceJson = "";
                         if (app.EnableEncrypt)
                         {
-                            sourceJson = AlipayUtil.AesDecrypt(app.EncryptKey, responseWapper.ToString(), app.Charset);
+                            sourceJson = AlipayUtil.AesDecrypt(app.EncryptKey, responseWrapper.ToString(), app.Charset);
                         }
                         else
                         {
                             //未使用加密
-                            sourceJson = _jsonSerializer.Serialize(responseWapper);
+                            sourceJson = _jsonSerializer.Serialize(responseWrapper);
                         }
                         payData = _alipayPayDataHelper.FromJson(sourceJson);
                         payData.SetValue(context.SignFieldName, signKv);

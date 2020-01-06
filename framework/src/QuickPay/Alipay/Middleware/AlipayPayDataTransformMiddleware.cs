@@ -66,8 +66,8 @@ namespace QuickPay.Alipay.Middleware
                     if (ReflectionUtil.IsAssignableToGenericType(context.Request.GetType(), typeof(BaseAlipayRequest<>)))
                     {
                         var bizContentRequestProperty = context.Request.GetType().GetProperty("BizContentRequest");
-                        var reflector = bizContentRequestProperty.GetReflector();
-                        var bizContentRequest = reflector.GetValue(context.Request);
+                        var bizContentRequestPropertyReflector = bizContentRequestProperty.GetReflector();
+                        var bizContentRequest = bizContentRequestPropertyReflector.GetValue(context.Request);
                         if (bizContentRequest == null)
                         {
                             SetPipelineError(context, new PayDataTransformError("BizContentRequest为NULL"));
@@ -77,7 +77,8 @@ namespace QuickPay.Alipay.Middleware
 
                         var bizContent = _alipayPayDataHelper.ToJson(RequestReflectUtil.ToPayData((BaseBizContentRequest)bizContentRequest));
                         var bizContentProperty = context.Request.GetType().GetProperty("BizContent");
-                        bizContentProperty.SetValue(context.Request, bizContent);
+                        var bizContentPropertyReflector = bizContentProperty.GetReflector();
+                        bizContentPropertyReflector.SetValue(context.Request, bizContent);
                     }
                     //将Request转换为PayData
                     context.RequestPayData = RequestReflectUtil.ToPayData(context.Request);

@@ -12,6 +12,7 @@ namespace QuickPay.Middleware
     public class SetNecessaryMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
+
         /// <summary>Ctor
         /// </summary>
         public SetNecessaryMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next) : base(provider)

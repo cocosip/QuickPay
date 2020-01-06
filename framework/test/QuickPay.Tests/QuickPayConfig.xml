@@ -28,8 +28,8 @@
         <![CDATA[App名称]]>
         <Name>App1</Name>
         <![CDATA[应用AppId]]>
-        <![CDATA[应用类型,填1]]>
         <AppId>2017061307479603</AppId>
+        <![CDATA[应用类型,填1]]>
         <AppTypeId>1</AppTypeId>
         <![CDATA[编码,utf-8]]>
         <Charset>utf-8</Charset>
@@ -54,6 +54,10 @@
   </Alipay>
   <WeChatPay>
     <Id>2</Id>
+    <![CDATA[微信支付网关]]>
+    <Gateway>https://api.mch.weixin.qq.com</Gateway>
+    <![CDATA[微信支付沙盒网关]]>
+    <SandboxGateway>https://api.mch.weixin.qq.com/sendbox</SandboxGateway>
     <![CDATA[本地IP地址]]>
     <LocalAddress>8.8.8.8</LocalAddress>
     <![CDATA[本地网关地址]]>

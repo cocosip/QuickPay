@@ -8,6 +8,15 @@
         /// </summary>
         public const string DefaultSignFieldName = "sign";
 
+        /// <summary>扩展数据名称
+        /// </summary>
+        public class ExtraNames
+        {
+            /// <summary>支付宝BizContent
+            /// </summary>
+            public const string BizContentRequest = "BIZ_CONTENT";
+        }
+
         /// <summary>产品码
         /// </summary>
         public class ProductCode

@@ -9,10 +9,6 @@
         /// </summary>
         public const string DefaultBusinessCode = "Default";
 
-        /// <summary>日志名称
-        /// </summary>
-        public const string LoggerName = "QuickPayLogger";
-
         /// <summary>支付通道,微信,支付宝,银联等
         /// </summary>
         public class Provider

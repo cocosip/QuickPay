@@ -16,7 +16,7 @@ namespace QuickPay.ConsoleTest
 
             //初始化
             _provider = Bootstraper.Initialize();
-            _logger = _provider.GetService<ILoggerFactory>().CreateLogger(QuickPaySettings.LoggerName);
+            _logger = _provider.GetService<ILogger<Program>>();
             _logger.LogInformation($"初始化完成");
 
             var alipayDemoService = _provider.GetService<AlipayDemoService>();

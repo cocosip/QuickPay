@@ -16,7 +16,7 @@ namespace QuickPay.Assist.Store
 
         /// <summary>Ctor
         /// </summary>
-        public MySqlRefundStore(ILoggerFactory loggerFactory, QuickPayMySqlOption option) : base(loggerFactory, option)
+        public MySqlRefundStore(ILogger<BaseMySqlStore> logger, QuickPayMySqlOption option) : base(logger, option)
         {
             _tableName = option.RefundTableName;
         }

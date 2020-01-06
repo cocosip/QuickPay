@@ -16,10 +16,10 @@ namespace QuickPay
 
         /// <summary>Ctor
         /// </summary>
-        public BaseMySqlStore(ILoggerFactory loggerFactory, QuickPayMySqlOption option)
+        public BaseMySqlStore(ILogger<BaseMySqlStore> logger, QuickPayMySqlOption option)
         {
+            Logger = logger;
             Option = option;
-            Logger = loggerFactory.CreateLogger(QuickPaySettings.LoggerName);
         }
 
         /// <summary>获取连接

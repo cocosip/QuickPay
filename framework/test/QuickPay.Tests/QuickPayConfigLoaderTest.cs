@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using QuickPay.Configurations;
+using System.Linq;
 using Xunit;
 
 namespace QuickPay.Tests
@@ -22,10 +23,10 @@ namespace QuickPay.Tests
             Assert.Equal("JSON", alipayConfig.Format);
             Assert.Equal("1.0", alipayConfig.Version);
             Assert.Equal("2017061307479603", alipayConfig.DefaultAppId);
-
+            Assert.Equal("/Notify/Alipay", alipayConfig.NotifyUrlFragments);
+            Assert.Equal("/Notify/Alipay/QrcodeNotify", alipayConfig.QrcodeNotifyUrlFragments);
+            Assert.Equal("/Notify/Alipay/BarcodeNotify", alipayConfig.BarcodeNotifyUrlFragments);
             Assert.Equal("http://127.0.0.1/Notify/Alipay", alipayConfig.GetDefaultNotifyUrl());
-
-
 
             var alipayApp = alipayConfig.GetDefaultApp();
             Assert.Equal("2017061307479603", alipayApp.AppId);
@@ -42,6 +43,7 @@ namespace QuickPay.Tests
 
             var weChatPayConfig = configWrapper.WeChatPayConfig;
             Assert.Equal("8.8.8.8", weChatPayConfig.LocalAddress);
+            Assert.Equal("https://api.mch.weixin.qq.com", weChatPayConfig.Gateway);
             Assert.Equal("http://127.0.0.1", weChatPayConfig.WebGateway);
             Assert.Equal("http://127.0.0.1", weChatPayConfig.NotifyGateway);
             Assert.Equal("/Notify/WeChatPay", weChatPayConfig.NotifyUrlFragments);

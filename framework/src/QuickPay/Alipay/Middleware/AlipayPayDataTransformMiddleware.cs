@@ -1,4 +1,5 @@
-﻿using DotCommon.Reflecting;
+﻿using AspectCore.Extensions.Reflection;
+using DotCommon.Reflecting;
 using Microsoft.Extensions.Logging;
 using QuickPay.Alipay.Requests;
 using QuickPay.Alipay.Responses;
@@ -64,8 +65,9 @@ namespace QuickPay.Alipay.Middleware
                     //支付宝在转换的时候,BizContent需要自动进行转换
                     if (ReflectionUtil.IsAssignableToGenericType(context.Request.GetType(), typeof(BaseAlipayRequest<>)))
                     {
-                        var property = context.Request.GetType().GetProperty("BizContentRequest");
-                        var bizContentRequest = property.GetValue(context.Request);
+                        var bizContentRequestProperty = context.Request.GetType().GetProperty("BizContentRequest");
+                        var reflector = bizContentRequestProperty.GetReflector();
+                        var bizContentRequest = reflector.GetValue(context.Request);
                         if (bizContentRequest == null)
                         {
                             SetPipelineError(context, new PayDataTransformError("BizContentRequest为NULL"));

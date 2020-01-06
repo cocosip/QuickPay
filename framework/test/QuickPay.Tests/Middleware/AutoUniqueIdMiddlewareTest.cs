@@ -13,7 +13,6 @@ namespace QuickPay.Tests.Middleware
     {
         private readonly IServiceProvider _provider;
         private readonly Mock<QuickPayExecuteDelegate> _mockQuickPayExecuteDelegate;
-        private readonly Mock<IServiceProvider> _mockIServiceProvider;
         public AutoUniqueIdMiddlewareTest()
         {
             var services = new ServiceCollection();
@@ -21,7 +20,6 @@ namespace QuickPay.Tests.Middleware
             _provider = services.BuildServiceProvider();
 
             _mockQuickPayExecuteDelegate = new Mock<QuickPayExecuteDelegate>();
-            _mockIServiceProvider = new Mock<IServiceProvider>();
 
         }
 

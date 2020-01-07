@@ -1,4 +1,5 @@
-﻿using DotCommon.Utility;
+﻿using AspectCore.Extensions.Reflection;
+using DotCommon.Utility;
 using Microsoft.Extensions.Logging;
 using QuickPay.Alipay.Apps;
 using QuickPay.Alipay.Requests;
@@ -66,7 +67,9 @@ namespace QuickPay.Middleware
 
                 //支付宝是获取bizContentRequest中的数据
                 var property = context.Request.GetType().GetProperty("BizContentRequest");
-                var bizContentRequest = property.GetValue(context.Request);
+                var reflector = property.GetReflector();
+                var bizContentRequest = reflector.GetValue(context.Request);
+                
                 var payData = RequestReflectUtil.ToPayData((BaseBizContentRequest)bizContentRequest);
                 //下单时唯一编号,由本系统生成
                 refund.OutTradeNo = payData.GetValue(x => x.Key.ToLower() == "out_trade_no").ToString();

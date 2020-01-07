@@ -1,4 +1,5 @@
-﻿using DotCommon.Serializing;
+﻿using AspectCore.Extensions.Reflection;
+using DotCommon.Serializing;
 using DotCommon.Utility;
 using Microsoft.Extensions.Logging;
 using QuickPay.Alipay.Apps;
@@ -80,7 +81,8 @@ namespace QuickPay.Middleware
 
                 //支付宝是获取bizContentRequest中的数据
                 var property = context.Request.GetType().GetProperty("BizContentRequest");
-                var bizContentRequest = property.GetValue(context.Request);
+                var reflector = property.GetReflector();
+                var bizContentRequest = reflector.GetValue(context.Request);
                 var payData = RequestReflectUtil.ToPayData((BaseBizContentRequest)bizContentRequest);
                 payment.OutTradeNo = _alipayPayDataHelper.GetAlipayOutTradeNo(payData);
                 //支付宝支付金额

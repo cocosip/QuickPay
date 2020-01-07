@@ -1,10 +1,8 @@
-﻿using DotCommon.Threading;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using QuickPay.Assist;
 using QuickPay.Assist.Store;
 using QuickPay.Exceptions;
 using QuickPay.Infrastructure.RequestData;
-using QuickPay.WeChatPay.Apps;
 using QuickPay.WeChatPay.Utility;
 using System;
 using System.Threading.Tasks;
@@ -47,7 +45,7 @@ namespace QuickPay.WeChatPay.Services.Impl
             //没有值
             if (!payData.HasValue())
             {
-                throw new QuickPayException("微信支付回调出现异常.");
+                throw new QuickPayException("微信支付回调出现异常,PayData数据为空.");
             }
             var payment = await _paymentStore.GetAsync((int)PayPlat.WeChatPay, App.AppId, _weChatPayDataHelper.GetOutTradeNo(payData));
             if (payment == null)

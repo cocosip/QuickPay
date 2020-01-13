@@ -10,13 +10,12 @@ namespace QuickPay.Assist.Store
     /// </summary>
     public class OraclePaymentStore : BaseOracleStore, IPaymentStore
     {
-        private readonly string _tableName;
 
         /// <summary>Ctor
         /// </summary>
         public OraclePaymentStore(ILogger<BaseOracleStore> logger, QuickPayOracleOption option) : base(logger, option)
         {
-            _tableName = option.PaymentTableName;
+
         }
 
         /// <summary>创建或者修改支付信息
@@ -34,12 +33,12 @@ namespace QuickPay.Assist.Store
                     if (queryPayment == null || queryPayment.AppId.IsNullOrWhiteSpace())
                     {
                         //创建
-                        sql = $"INSERT INTO {_tableName} (\"UniqueId\",\"PayPlatId\",\"AppId\",\"OutTradeNo\",\"TradeType\",\"BusinessCode\",\"TransactionId\",\"Amount\",\"PayStatusId\",\"PayObject\",\"Describe\") VALUES (:UniqueId,:PayPlatId,:AppId,:OutTradeNo,:TradeType,:BusinessCode,:TransactionId,:Amount,:PayStatusId,:PayObject,:Describe)";
+                        sql = $@"INSERT INTO {GetSchemaPaymentTableName()} (""UNIQUEID"",""PAY_PLATID"",""APPID"",""OUT_TRADENO"",""TRADE_TYPE"",""BUSINESS_CODE"",""TRANSACTIONID"",""AMOUNT"",""PAY_STATUSID"",""PAY_OBJECT"",""DESCRIBE"") VALUES (:UniqueId,:PayPlatId,:AppId,:OutTradeNo,:TradeType,:BusinessCode,:TransactionId,:Amount,:PayStatusId,:PayObject,:Describe)";
                     }
                     else
                     {
                         //修改
-                        sql = $"UPDATE {_tableName} SET \"UniqueId\"=:UniqueId,\"PayPlatId\"=:PayPlatId,\"AppId\"=:AppId,\"OutTradeNo\"=:AppId,\"TradeType\"=:TradeType,\"BusinessCode\"=:BusinessCode,\"TransactionId\"=:TransactionId,\"Amount\"=:Amount,\"PayStatusId\"=:PayStatusId,\"PayObject\"=:PayObject,\"Describe\"=:Describe";
+                        sql = $@"UPDATE {GetSchemaPaymentTableName()} SET ""UNIQUEID""=:UniqueId,""PAY_PLATID""=:PayPlatId,""APPID""=:AppId,""OUT_TRADENO""=:AppId,""TRADE_TYPE""=:TradeType,""BUSINESS_CODE""=:BusinessCode,""TRANSACTIONID""=:TransactionId,""AMOUNT""=:Amount,""PAY_STATUSID""=:PayStatusId,""PAY_OBJECT""=:PayObject,""Describe""=:Describe";
                     }
                     await connection.ExecuteAsync(sql, payment);
 
@@ -60,7 +59,7 @@ namespace QuickPay.Assist.Store
             {
                 using (var connection = GetConnection())
                 {
-                    var sql = $"SELECT TOP 1 * FROM \"{_tableName}\" WHERE \"PayPlatId\"=:PayPlatId AND \"AppId\"=:AppId AND \"OutTradeNo\"=:OutTradeNo";
+                    var sql = $@"SELECT TOP 1 * FROM  {GetSchemaPaymentTableName()} WHERE ""PAY_PLATID""=:PayPlatId AND ""APPID""=:AppId AND ""OUT_TRADENO""=:OutTradeNo";
                     return await connection.QueryFirstOrDefaultAsync<Payment>(sql, new { PayPlatId = payPlatId, AppId = appId, OutTradeNo = outTradeNo });
                 }
             }
@@ -79,7 +78,7 @@ namespace QuickPay.Assist.Store
             {
                 using (var connection = GetConnection())
                 {
-                    var sql = $"SELECT TOP 1 * FROM \"{_tableName}\" WHERE \"PayPlatId\"=:PayPlatId AND \"AppId\"=:AppId AND \"TransactionId\"=:TransactionId";
+                    var sql = $@"SELECT TOP 1 * FROM  {GetSchemaPaymentTableName()} WHERE ""PAY_PLATID""=:PayPlatId AND ""APPID""=:AppId AND ""TRANSACTIONID""=:TransactionId";
                     return await connection.QueryFirstOrDefaultAsync<Payment>(sql, new { PayPlatId = payPlatId, AppId = appId, TransactionId = transactionId });
                 }
             }
@@ -98,7 +97,7 @@ namespace QuickPay.Assist.Store
             {
                 using (var connection = GetConnection())
                 {
-                    var sql = $"SELECT TOP 1 * FROM \"{_tableName}\" WHERE \"UniqueId\"=:UniqueId";
+                    var sql = $@"SELECT TOP 1 * FROM  {GetSchemaPaymentTableName()} WHERE ""UNIQUEID""=:UniqueId";
                     return await connection.QueryFirstOrDefaultAsync<Payment>(sql, new { UniqueId = uniqueId });
                 }
             }

@@ -22,6 +22,6 @@
 
   <ItemGroup>
     <PackageReference Include="AspectCore.Extensions.Reflection" Version="2.0.0" />
-    <PackageReference Include="WeChat.Framework" Version="0.3.2" />
+    <PackageReference Include="WeChat.Framework" Version="0.4.0" />
   </ItemGroup>
 </Project>

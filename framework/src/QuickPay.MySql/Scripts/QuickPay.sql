@@ -1,0 +1,26 @@
+CREATE TABLE IF NOT EXISTS `Payments` (
+`UniqueId` VARCHAR(40) PRIMARY KEY NOT NULL ,
+`PayPlatId` INT NOT NULL ,
+`AppId` VARCHAR(50) NOT NULL ,
+`OutTradeNo` VARCHAR(50) NOT NULL ,
+`TradeType` VARCHAR(20) NOT NULL ,
+`BusinessCode` VARCHAR(20) NOT NULL ,
+`TransactionId` VARCHAR(50) NULL ,
+`Amount` DECIMAL(18,4) NOT NULL ,
+`PayStatusId` int NOT NULL ,
+`PayObject` TEXT NULL ,
+`Describe` TEXT NULL
+);
+
+CREATE TABLE IF NOT EXISTS `Refunds` (
+`UniqueId` VARCHAR(40) PRIMARY KEY NOT NULL ,
+`PayPlatId` INT NOT NULL ,
+`AppId` VARCHAR(50) NOT NULL ,
+`OutTradeNo` VARCHAR(50) NOT NULL ,
+`TransactionId` VARCHAR(50) NULL ,
+`OutRefundNo` VARCHAR(50) NOT NULL ,
+`RefundAmount` DECIMAL(18,4) NOT NULL ,
+`RefundId` VARCHAR(50) NULL ,
+`PayObject` TEXT NULL ,
+`Describe` TEXT NULL
+);

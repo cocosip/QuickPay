@@ -10,13 +10,10 @@ namespace QuickPay.Assist.Store
     /// </summary>
     public class PostgreSqlPaymentStore : BasePostgreSqlStore, IPaymentStore
     {
-        private readonly string _tableName;
-
         /// <summary>Ctor
         /// </summary>
         public PostgreSqlPaymentStore(ILogger<BasePostgreSqlStore> logger, QuickPayPostgreSqlOption option) : base(logger, option)
         {
-            _tableName = option.PaymentTableName;
         }
 
         /// <summary>创建或者修改支付信息
@@ -34,12 +31,12 @@ namespace QuickPay.Assist.Store
                     if (queryPayment == null || queryPayment.AppId.IsNullOrWhiteSpace())
                     {
                         //创建
-                        sql = $"INSERT INTO {_tableName} (\"UniqueId\",\"PayPlatId\",\"AppId\",\"OutTradeNo\",\"TradeType\",\"BusinessCode\",\"TransactionId\",\"Amount\",\"PayStatusId\",\"PayObject\",\"Describe\") VALUES (:UniqueId,:PayPlatId,:AppId,:OutTradeNo,:TradeType,:BusinessCode,:TransactionId,:Amount,:PayStatusId,:PayObject,:Describe)";
+                        sql = $@"INSERT INTO {GetSchemaPaymentTableName()} (""uniqueid"",""pay_platid"",""appid"",""out_tradeno"",""trade_type"",""business_code"",""transactionid"",""amount"",""pay_statusid"",""pay_object"",""describe"") VALUES (@UniqueId,@PayPlatId,@AppId,@OutTradeNo,@TradeType,@BusinessCode,@TransactionId,@Amount,@PayStatusId,@PayObject,@Describe)";
                     }
                     else
                     {
                         //修改
-                        sql = $"UPDATE {_tableName} SET \"UniqueId\"=:UniqueId,\"PayPlatId\"=:PayPlatId,\"AppId\"=:AppId,\"OutTradeNo\"=:AppId,\"TradeType\"=:TradeType,\"BusinessCode\"=:BusinessCode,\"TransactionId\"=:TransactionId,\"Amount\"=:Amount,\"PayStatusId\"=:PayStatusId,\"PayObject\"=:PayObject,\"Describe\"=:Describe";
+                        sql = $@"UPDATE {GetSchemaPaymentTableName()} SET ""uniqueid""=@UniqueId,""pay_platid""=@PayPlatId,""appid""=@AppId,""out_tradeno""=@AppId,""trade_type""=@TradeType,""business_code""=@BusinessCode,""transactionid""=@TransactionId,""amount""=@Amount,""pay_statusid""=@PayStatusId,""pay_object""=@PayObject,""describe""=@Describe";
                     }
                     await connection.ExecuteAsync(sql, payment);
 
@@ -47,7 +44,7 @@ namespace QuickPay.Assist.Store
             }
             catch (NpgsqlException ex)
             {
-                Logger.LogError($"创建或者修改Payment出错,UniqueId:{payment.UniqueId} {ex.Message}");
+                Logger.LogError($"创建或者修改Payment出错,UniqueId@{payment.UniqueId} {ex.Message}");
                 throw;
             }
         }
@@ -60,7 +57,7 @@ namespace QuickPay.Assist.Store
             {
                 using (var connection = GetConnection())
                 {
-                    var sql = $"SELECT TOP 1 * FROM \"{_tableName}\" WHERE \"PayPlatId\"=:PayPlatId AND \"AppId\"=:AppId AND \"OutTradeNo\"=:OutTradeNo";
+                    var sql = $@"SELECT TOP 1 * FROM {GetSchemaPaymentTableName()} WHERE ""pay_platid""=@PayPlatId AND ""appid""=@AppId AND ""out_tradeno""=@OutTradeNo";
                     return await connection.QueryFirstOrDefaultAsync<Payment>(sql, new { PayPlatId = payPlatId, AppId = appId, OutTradeNo = outTradeNo });
                 }
             }
@@ -79,13 +76,13 @@ namespace QuickPay.Assist.Store
             {
                 using (var connection = GetConnection())
                 {
-                    var sql = $"SELECT TOP 1 * FROM \"{_tableName}\" WHERE \"PayPlatId\"=:PayPlatId AND \"AppId\"=:AppId AND \"TransactionId\"=:TransactionId";
+                    var sql = $@"SELECT TOP 1 * FROM {GetSchemaPaymentTableName()} WHERE ""pay_platid""=@PayPlatId AND ""appid""=@AppId AND ""transactionid""=@TransactionId";
                     return await connection.QueryFirstOrDefaultAsync<Payment>(sql, new { PayPlatId = payPlatId, AppId = appId, TransactionId = transactionId });
                 }
             }
             catch (NpgsqlException ex)
             {
-                Logger.LogError($"获取支付信息Payment出错,PayPlatId:{payPlatId},AppId:{appId},TransactionId:{transactionId}.{ex.Message}");
+                Logger.LogError($"获取支付信息Payment出错,PayPlatId:{payPlatId},AppId:{appId},TransactionId@{transactionId}.{ex.Message}");
                 throw;
             }
         }
@@ -98,13 +95,13 @@ namespace QuickPay.Assist.Store
             {
                 using (var connection = GetConnection())
                 {
-                    var sql = $"SELECT TOP 1 * FROM \"{_tableName}\" WHERE \"UniqueId\"=:UniqueId";
+                    var sql = $@"SELECT TOP 1 * FROM {GetSchemaPaymentTableName()} WHERE ""uniqueid""=@UniqueId";
                     return await connection.QueryFirstOrDefaultAsync<Payment>(sql, new { UniqueId = uniqueId });
                 }
             }
             catch (NpgsqlException ex)
             {
-                Logger.LogError($"根据UniqueId获取支付信息Payment出错,UniqueId:{uniqueId}.{ex.Message}");
+                Logger.LogError($"根据UniqueId获取支付信息Payment出错,UniqueId [{uniqueId}].{ex.Message}");
                 throw;
             }
         }

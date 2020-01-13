@@ -12,13 +12,11 @@ namespace QuickPay.Assist.Store
     /// </summary>
     public class PostgreSqlRefundStore : BasePostgreSqlStore, IRefundStore
     {
-        private readonly string _tableName;
-
         /// <summary>Ctor
         /// </summary>
         public PostgreSqlRefundStore(ILogger<BasePostgreSqlStore> logger, QuickPayPostgreSqlOption option) : base(logger, option)
         {
-            _tableName = option.RefundTableName;
+
         }
         /// <summary>创建或者修改退款信息
         /// </summary>
@@ -35,12 +33,12 @@ namespace QuickPay.Assist.Store
                     if (queryRefund == null || queryRefund.AppId.IsNullOrWhiteSpace())
                     {
                         //创建
-                        sql = $"INSERT INTO {_tableName} (\"UniqueId\",\"PayPlatId\",\"AppId\",\"OutTradeNo\",\"TransactionId\",\"OutRefundNo\",\"RefundAmount\",\"RefundId\",\"PayObject\",\"Describe\") VALUES (:UniqueId,:PayPlatId,:AppId,:OutTradeNo,:TransactionId,:OutRefundNo,:RefundAmount,:RefundId,:PayObject,:Describe)";
+                        sql = $@"INSERT INTO {GetSchemaRefundTableName()} (""uniqueid"",""pay_platid"",""appid"",""out_tradeno"",""transactionid"",""out_refundno"",""refund_amount"",""refundid"",""pay_object"",""describe"") VALUES (@UniqueId,@PayPlatId,@AppId,@OutTradeNo,@TransactionId,@OutRefundNo,@RefundAmount,@RefundId,@PayObject,@Describe)";
                     }
                     else
                     {
                         //修改
-                        sql = $"UPDATE {_tableName} SET \"UniqueId\"=:UniqueId,\"PayPlatId\"=:PayPlatId,\"AppId\"=:AppId,\"OutTradeNo\"=:OutTradeNo,\"TransactionId\"=:TransactionId,\"OutRefundNo\"=:OutRefundNo,\"RefundAmount\"=:RefundAmount,\"RefundId\"=:RefundId,\"PayObject\"=:PayObject,\"Describe\"=:Describe";
+                        sql = $@"UPDATE {GetSchemaRefundTableName()} SET ""uniqueid""=@UniqueId,""pay_platid""=@PayPlatId,""appid""=@AppId,""out_tradeno""=@OutTradeNo,""transactionid""=@TransactionId,""out_refundno""=@OutRefundNo,""refund_amount""=@RefundAmount,""refundid""=@RefundId,""pay_object""=@PayObject,""describe""=@Describe";
                     }
                     await connection.ExecuteAsync(sql, refund);
 
@@ -61,7 +59,7 @@ namespace QuickPay.Assist.Store
             {
                 using (var connection = GetConnection())
                 {
-                    var sql = $"SELECT TOP 1 * FROM \"{_tableName}\" WHERE \"PayPlatId\"=:PayPlatId AND \"AppId\"=:AppId AND \"OutRefundNo\"=:outRefundNo";
+                    var sql = $@"SELECT TOP 1 * FROM  {GetSchemaRefundTableName()} WHERE ""pay_platid""=@PayPlatId AND ""appid""=@AppId AND ""out_refundno""=@OutRefundNo";
                     return await connection.QueryFirstOrDefaultAsync<Refund>(sql, new { PayPlatId = payPlatId, AppId = appId, OutRefundNo = outRefundNo });
                 }
             }
@@ -80,7 +78,7 @@ namespace QuickPay.Assist.Store
             {
                 using (var connection = GetConnection())
                 {
-                    var sql = $"SELECT TOP 1 * FROM \"{_tableName}\" WHERE \"PayPlatId\"=:PayPlatId AND \"AppId\"=:AppId AND \"TransactionId\"=:TransactionId";
+                    var sql = $@"SELECT TOP 1 * FROM  {GetSchemaRefundTableName()} WHERE ""pay_platid""=@PayPlatId AND ""appid""=@AppId AND ""transactionid""=@TransactionId";
                     return await connection.QueryFirstOrDefaultAsync<Refund>(sql, new { PayPlatId = payPlatId, AppId = appId, TransactionId = transactionId });
                 }
             }
@@ -99,7 +97,7 @@ namespace QuickPay.Assist.Store
             {
                 using (var connection = GetConnection())
                 {
-                    var sql = $"SELECT TOP 1 * FROM \"{_tableName}\" WHERE \"UniqueId\"=:UniqueId";
+                    var sql = $@"SELECT TOP 1 * FROM {GetSchemaRefundTableName()} WHERE ""uniqueid""=@UniqueId";
                     return await connection.QueryFirstOrDefaultAsync<Refund>(sql, new { UniqueId = uniqueId });
                 }
             }
@@ -118,7 +116,7 @@ namespace QuickPay.Assist.Store
             {
                 using (var connection = GetConnection())
                 {
-                    var sql = $"SELECT * FROM \"{_tableName}\" WHERE \"PayPlatId\"=:PayPlatId AND \"AppId\"=:AppId AND \"OutTradeNo\"=:OutTradeNo";
+                    var sql = $@"SELECT * FROM  {GetSchemaRefundTableName()}  WHERE ""pay_platid""=@PayPlatId AND ""appid""=@AppId AND ""out_tradeno""=:OutTradeNo";
                     return (await connection.QueryAsync<Refund>(sql, new { PayPlatId = payPlatId, AppId = appId, OutTradeNo = outTradeNo })).ToList();
                 }
             }

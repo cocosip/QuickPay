@@ -29,5 +29,27 @@ namespace QuickPay
             return new SqlConnection(Option.DbConnectionString);
         }
 
+        /// <summary>GetSchemaPaymentTableName
+        /// </summary>
+        protected string GetSchemaPaymentTableName()
+        {
+            return $@"[{Option.Schema}].[{Option.PaymentTableName}]";
+        }
+
+
+        /// <summary>GetSchemaRefundTableName
+        /// </summary>
+        protected string GetSchemaRefundTableName()
+        {
+            return $@"[{Option.Schema}].[{Option.RefundTableName}]";
+        }
+
+        /// <summary>GetSchemaTransferTableName
+        /// </summary>
+        protected string GetSchemaTransferTableName()
+        {
+            return $@"[{Option.Schema}].[{Option.TransferTableName}]";
+        }
+
     }
 }

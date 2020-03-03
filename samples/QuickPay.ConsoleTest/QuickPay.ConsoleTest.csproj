@@ -6,13 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotCommon.Log4Net" Version="3.1.4" />
+    <PackageReference Include="DotCommon.Log4Net" Version="3.1.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\framework\src\QuickPay\QuickPay.csproj" />
-    <ProjectReference Include="..\..\framework\src\QuickPay.SqlServer\QuickPay.SqlServer.csproj" />
-    <ProjectReference Include="..\..\framework\src\QuickPay.Oracle\QuickPay.Oracle.csproj" />
     <ProjectReference Include="..\..\framework\src\QuickPay.AspNetCore.Mvc\QuickPay.AspNetCore.Mvc.csproj" />
   </ItemGroup>
   <ItemGroup>

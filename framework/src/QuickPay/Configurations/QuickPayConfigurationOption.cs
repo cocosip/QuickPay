@@ -1,5 +1,4 @@
 ﻿using QuickPay.Notify;
-using System;
 using System.Collections.Generic;
 
 namespace QuickPay.Configurations

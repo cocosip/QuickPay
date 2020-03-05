@@ -90,7 +90,6 @@ namespace QuickPay
             services.AddTransient<IExecuteContextFactory, ExecuteContextFactory>();
             services.AddTransient<IRequestExecuter, DefaultRequestExecuter>();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
-            services.AddSingleton<IRestClientFactory, RestClientFactory>();
 
             //通知
             services.AddSingleton<INotifyManager, NotifyManager>();

@@ -54,5 +54,18 @@
             public const string PaymentUrlFragments = "/QuickPay/Alipay/PaymentNotify";
         }
 
+        /// <summary>Content-Type 类型
+        /// </summary>
+        public class ContentTypes
+        {
+            /// <summary>Json格式数据
+            /// </summary>
+            public const string ApplicationJson = "application/json";
+
+            /// <summary>Xml
+            /// </summary>
+            public const string ApplicationXml = "application/xml";
+        }
+
     }
 }

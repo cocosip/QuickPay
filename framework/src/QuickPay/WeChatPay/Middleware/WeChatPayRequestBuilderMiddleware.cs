@@ -13,6 +13,7 @@ namespace QuickPay.WeChatPay.Middleware
 {
     /// <summary>微信支付请求创建中间件
     /// </summary>
+    [Obsolete("将不再使用")]
     public class WeChatPayRequestBuilderMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
@@ -47,7 +48,7 @@ namespace QuickPay.WeChatPay.Middleware
 
                         HttpBuilder builder = new HttpBuilder(requestResource, Method.POST, DataFormat.Xml);
                         builder.AddParameter(new Parameter("", requestXml, ParameterType.RequestBody));
-                        context.HttpBuilder = builder;
+                        //context.HttpBuilder = builder;
                     }
 
                     Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));

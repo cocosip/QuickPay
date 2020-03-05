@@ -5,9 +5,9 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using QuickPay.WeChatPay.Authentication.Model;
 using QuickPay.WeChatPay.Utility;
-using RestSharp;
 using System;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace QuickPay.WeChatPay.Authentication
@@ -16,18 +16,18 @@ namespace QuickPay.WeChatPay.Authentication
     /// </summary>
     public class AuthenticationService : IAuthenticationService
     {
-        private readonly IRestClient _client;
         private readonly ILogger _logger;
         private readonly IJsonSerializer _jsonSerializer;
+        private readonly IHttpClientFactory _httpClientFactory;
         private readonly IAccessTokenStore _accessTokenStore;
         private readonly IJsApiTicketStore _jsApiTicketStore;
         private readonly IDistributedCache<WeChatPayAuthenticationStateCacheItem> _stateCache;
 
         /// <summary>Ctor
         /// </summary>
-        public AuthenticationService(ILogger<AuthenticationService> logger, IJsonSerializer jsonSerializer, IAccessTokenStore accessTokenStore, IJsApiTicketStore jsApiTicketStore, IDistributedCache<WeChatPayAuthenticationStateCacheItem> stateCache)
+        public AuthenticationService(ILogger<AuthenticationService> logger, IJsonSerializer jsonSerializer, IHttpClientFactory httpClientFactory, IAccessTokenStore accessTokenStore, IJsApiTicketStore jsApiTicketStore, IDistributedCache<WeChatPayAuthenticationStateCacheItem> stateCache)
         {
-            _client = new RestClient("https://api.weixin.qq.com");
+            _httpClientFactory = httpClientFactory;
             _logger = logger;
             _jsonSerializer = jsonSerializer;
             _accessTokenStore = accessTokenStore;
@@ -43,15 +43,18 @@ namespace QuickPay.WeChatPay.Authentication
         /// <returns></returns>
         public virtual async Task<MiniProgramOpenIdResponse> GetMiniProgramOpenId(string appId, string appSecret, string jsCode)
         {
-            IRestRequest httpRequest = new RestRequest("/sns/jscode2session", Method.GET)
-                .AddQueryParameter("appid", appId)
-                .AddQueryParameter("secret", appSecret)
-                .AddQueryParameter("js_code", jsCode)
-                .AddQueryParameter("grant_type", "authorization_code");
-            var response = await _client.ExecuteTaskAsync(httpRequest);
+            var url = $"https://api.weixin.qq.com/sns/jscode2session?appid={appId}&secret={appSecret}&js_code={jsCode}&grant_type=authorization_code";
+            var client = _httpClientFactory.CreateClient();
+            var response = await client.GetAsync(url);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"获取微信小程序OpenId失败,请求url地址:[{url}],返回Http状态:{response.StatusCode}");
+            }
+            var responseString =await  response.Content.ReadAsStringAsync();
+           
             //记录日志
-            _logger.LogInformation(WeChatPayUtil.ParseLog($"获取小程序用户OpenId返回结果,{response.Content}"));
-            var miniProgramOpenIdResponse = _jsonSerializer.Deserialize<MiniProgramOpenIdResponse>(response.Content);
+            _logger.LogInformation(WeChatPayUtil.ParseLog($"获取小程序用户OpenId返回结果,{responseString}"));
+            var miniProgramOpenIdResponse = _jsonSerializer.Deserialize<MiniProgramOpenIdResponse>(responseString);
             return miniProgramOpenIdResponse;
         }
 
@@ -106,15 +109,18 @@ namespace QuickPay.WeChatPay.Authentication
                 }
             }
 
-            IRestRequest httpRequest = new RestRequest("/sns/oauth2/access_token", Method.GET)
-                .AddQueryParameter("appId", appId)
-                .AddQueryParameter("secret", appSecret)
-                .AddQueryParameter("code", code)
-                .AddQueryParameter("grant_type", "authorization_code");
-            var response = await _client.ExecuteTaskAsync(httpRequest);
+            var url = $"https://api.weixin.qq.com/sns/oauth2/access_token?appid={appId}&secret={appSecret}&code={code}&grant_type=authorization_code";
+            var client = _httpClientFactory.CreateClient();
+            var response = await client.GetAsync(url);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"获取微信用户OpenId失败,请求url地址:[{url}],返回Http状态:{response.StatusCode}");
+            }
+            var responseString = await response.Content.ReadAsStringAsync();
+
             //记录日志
-            _logger.LogInformation(WeChatPayUtil.ParseLog($"获取用户OpenId返回结果,{response.Content}"));
-            var getUserOpenIdResponse = _jsonSerializer.Deserialize<UserOpenIdResponse>(response.Content);
+            _logger.LogInformation(WeChatPayUtil.ParseLog($"获取用户OpenId返回结果,{responseString}"));
+            var getUserOpenIdResponse = _jsonSerializer.Deserialize<UserOpenIdResponse>(responseString);
             return getUserOpenIdResponse.OpenId;
         }
 

@@ -1,5 +1,4 @@
-﻿using DotCommon.Http;
-using QuickPay.Errors;
+﻿using QuickPay.Errors;
 using QuickPay.Infrastructure.Apps;
 using QuickPay.Infrastructure.RequestData;
 using QuickPay.Infrastructure.Requests;
@@ -49,9 +48,9 @@ namespace QuickPay.Middleware
         /// </summary>
         public string SignFieldName { get; set; }
 
-        /// <summary>Http请求所需数据
-        /// </summary>
-        public HttpBuilder HttpBuilder { get; set; }
+        ///// <summary>Http请求所需数据
+        ///// </summary>
+        //public HttpBuilder HttpBuilder { get; set; }
 
         /// <summary>Http响应字符串
         /// </summary>

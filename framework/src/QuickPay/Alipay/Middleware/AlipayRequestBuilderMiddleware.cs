@@ -10,6 +10,7 @@ namespace QuickPay.Alipay.Middleware
 {
     /// <summary>支付宝请求构建中间件
     /// </summary>
+    [Obsolete("将不再使用")]
     public class AlipayRequestBuilderMiddleware : QuickPayMiddleware
     {
         private readonly QuickPayExecuteDelegate _next;
@@ -36,7 +37,7 @@ namespace QuickPay.Alipay.Middleware
                         {
                             builder.AddParameter(pValue.Key, pValue.Value);
                         }
-                        context.HttpBuilder = builder;
+                        //context.HttpBuilder = builder;
 
                         Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
                     }

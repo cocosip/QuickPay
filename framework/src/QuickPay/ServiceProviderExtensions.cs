@@ -27,11 +27,11 @@ namespace QuickPay
                 .UseMiddleware<AutoUniqueIdMiddleware>()
                 .UseMiddleware<AlipayPayDataTransformMiddleware>()
                 .UseMiddleware<AlipaySignMiddleware>()
-                .UseMiddleware<AlipayRequestBuilderMiddleware>()
+                //.UseMiddleware<AlipayRequestBuilderMiddleware>()
 
                 .UseMiddleware<WeChatPayDataTransformMiddleware>()
                 .UseMiddleware<WeChatPaySignMiddleware>()
-                .UseMiddleware<WeChatPayRequestBuilderMiddleware>()
+                //.UseMiddleware<WeChatPayRequestBuilderMiddleware>()
 
                 .UseMiddleware<ExecuterExecuteMiddleware>()
                 .UseMiddleware<AlipayParseResponseMiddleware>()

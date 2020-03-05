@@ -61,6 +61,7 @@ namespace QuickPay.ConsoleTest
                 .AddDotCommon()
                 .AddDotCommonAutoMapper()
                 .AddJson4Net()
+                .AddHttpClient()
                 .AddGenericsMemoryCache()
                 .AddWeChatFramework()
                 //微信基础框架

@@ -28,6 +28,7 @@ namespace QuickPay.Tests
                 .AddDotCommonAutoMapper()
                 .AddGenericsMemoryCache()
                 .AddJson4Net()
+                .AddHttpClient()
                 .AddWeChatFramework() //微信基础框架使用内存存储AccessToken与JsTicket
                 .AddQuickPay(option =>
                 {

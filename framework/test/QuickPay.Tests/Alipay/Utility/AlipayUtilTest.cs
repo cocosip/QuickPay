@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Xunit;
 
-namespace QuickPay.Tests.Alipay.Util
+namespace QuickPay.Tests.Alipay.Utility
 {
     public class AlipayUtilTest
     {

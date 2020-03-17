@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotCommon.AspNetCore.Mvc" Version="4.0.0.1-Pre" />
+    <PackageReference Include="DotCommon.AspNetCore.Mvc" Version="4.0.0.2-Pre" />
   </ItemGroup>
 
 </Project>

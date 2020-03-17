@@ -4,7 +4,7 @@ using QuickPay.Alipay.Utility;
 using QuickPay.Infrastructure.RequestData;
 using Xunit;
 
-namespace QuickPay.Tests.Alipay.Util
+namespace QuickPay.Tests.Alipay.Utility
 {
     public class AlipayPayDataHelperTest
     {

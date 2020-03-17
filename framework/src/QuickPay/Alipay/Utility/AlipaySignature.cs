@@ -1,13 +1,21 @@
 ﻿using DotCommon.Encrypt;
 using System.Collections.Generic;
 using System.Text;
+using DotCommon.Extensions;
+using System.Net;
 
 namespace QuickPay.Alipay.Utility
 {
     /// <summary>支付宝签名工具类
     /// </summary>
-    public class AlipaySignature
+    public static class AlipaySignature
     {
+        private static readonly Dictionary<string, string> _signTypeDict = new Dictionary<string, string>()
+        {
+            {"RSA","SHA1" },
+            {"RSA2","SHA256" }
+        };
+
         /// <summary>获取签名的内容
         /// </summary>
         public static string GetSignContent(IDictionary<string, object> parameters)
@@ -22,9 +30,11 @@ namespace QuickPay.Alipay.Utility
             {
                 string key = dem.Current.Key;
                 string value = dem.Current.Value.ToString();
-                if (!string.IsNullOrEmpty(key) && !string.IsNullOrEmpty(value))
+                if (!key.IsNullOrWhiteSpace() && !value.IsNullOrWhiteSpace())
                 {
-                    query.Append(key).Append("=").Append(value).Append("&");
+                    //Url编码
+                    //query.Append(key).Append("=").Append(value).Append("&");
+                    query.Append(WebUtility.UrlEncode(key)).Append("=").Append(WebUtility.UrlEncode(value)).Append("&");
                 }
             }
             string content = query.ToString().Substring(0, query.Length - 1);
@@ -73,7 +83,7 @@ namespace QuickPay.Alipay.Utility
         /// </summary>
         public static string RSASignCharSet(string data, string privateKeyPem, string charset, string signType)
         {
-            var hashAlgorithmName = signType == "RSA2" ? "SHA256" : "SHA1";
+            var hashAlgorithmName = GetHashAlgorithmName(signType);
             return RSAHelper.SignDataAsBase64(data, privateKeyPem, hashAlgorithmName: hashAlgorithmName, encode: charset);
         }
 
@@ -86,7 +96,7 @@ namespace QuickPay.Alipay.Utility
 
             try
             {
-                var hashAlgorithmName = signType == "RSA2" ? "SHA256" : "SHA1";
+                var hashAlgorithmName = GetHashAlgorithmName(signType);
                 return RSAHelper.VerifyBase64Data(signContent, sign, publicKeyPem, hashAlgorithmName: hashAlgorithmName, encode: charset);
             }
             catch
@@ -94,6 +104,13 @@ namespace QuickPay.Alipay.Utility
                 return false;
             }
 
+        }
+
+        /// <summary>根据SignType获取HashAlgorithmName
+        /// </summary>
+        public static string GetHashAlgorithmName(string signType)
+        {
+            return _signTypeDict[signType];
         }
 
     }

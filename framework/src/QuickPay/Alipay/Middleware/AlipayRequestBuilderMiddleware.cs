@@ -1,5 +1,4 @@
-﻿using DotCommon.Http;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
 using QuickPay.Middleware;
@@ -31,12 +30,12 @@ namespace QuickPay.Alipay.Middleware
                 {
                     if (context.RequestHandler == QuickPaySettings.RequestHandler.Execute)
                     {
-                        HttpBuilder builder = new HttpBuilder(Method.POST);
-                        //构建Http
-                        foreach (var pValue in context.RequestPayData.GetValues())
-                        {
-                            builder.AddParameter(pValue.Key, pValue.Value);
-                        }
+                        //HttpBuilder builder = new HttpBuilder(Method.POST);
+                        ////构建Http
+                        //foreach (var pValue in context.RequestPayData.GetValues())
+                        //{
+                        //    builder.AddParameter(pValue.Key, pValue.Value);
+                        //}
                         //context.HttpBuilder = builder;
 
                         Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));

@@ -42,18 +42,20 @@ namespace QuickPay.Alipay.Utility
         /// </summary>
         public static string AesEncrypt(string encryptKey, string text, string charset)
         {
-            var keyBytes = Convert.FromBase64String(encryptKey);
-            var aesEncrypter = new AesEncryptor(keyBytes, InitIv(16));
-            return aesEncrypter.Encrypt(text, charset);
+            var keyBuffer = Convert.FromBase64String(encryptKey);
+            var data = Encoding.GetEncoding(charset).GetBytes(text);
+            var encryptedBuffer = AESHelper.Encrypt(data, keyBuffer, InitIv(16));
+            return Convert.ToBase64String(encryptedBuffer);
         }
 
         /// <summary>解密
         /// </summary>
         public static string AesDecrypt(string encryptKey, string encryptedText, string charset)
         {
-            var keyBytes = Convert.FromBase64String(encryptKey);
-            var aesEncrypter = new AesEncryptor(keyBytes, InitIv(16));
-            return aesEncrypter.Decrypt(encryptedText, charset);
+            var keyBuffer = Convert.FromBase64String(encryptKey);
+            var data = Convert.FromBase64String(encryptedText);
+            var decryptedBuffer = AESHelper.Decrypt(data, keyBuffer, InitIv(16));
+            return Encoding.GetEncoding(charset).GetString(decryptedBuffer);
         }
 
         /// <summary>初始化AES加密解密向量

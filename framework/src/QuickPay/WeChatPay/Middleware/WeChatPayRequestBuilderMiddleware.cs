@@ -1,5 +1,4 @@
-﻿using DotCommon.Http;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using QuickPay.Configurations;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
@@ -46,8 +45,8 @@ namespace QuickPay.WeChatPay.Middleware
                             return;
                         }
 
-                        HttpBuilder builder = new HttpBuilder(requestResource, Method.POST, DataFormat.Xml);
-                        builder.AddParameter(new Parameter("", requestXml, ParameterType.RequestBody));
+                        //HttpBuilder builder = new HttpBuilder(requestResource, Method.POST, DataFormat.Xml);
+                        //builder.AddParameter(new Parameter("", requestXml, ParameterType.RequestBody));
                         //context.HttpBuilder = builder;
                     }
 

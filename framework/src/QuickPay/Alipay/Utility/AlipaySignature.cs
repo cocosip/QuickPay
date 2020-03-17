@@ -73,10 +73,8 @@ namespace QuickPay.Alipay.Utility
         /// </summary>
         public static string RSASignCharSet(string data, string privateKeyPem, string charset, string signType)
         {
-            var rsaEncryptor = new RsaEncryptor();
-            rsaEncryptor.LoadPrivateKey(privateKeyPem);
-            rsaEncryptor.SetHashAlg(signType);
-            return rsaEncryptor.SignData(data, charset);
+            var hashAlgorithmName = signType == "RSA2" ? "SHA256" : "SHA1";
+            return RSAHelper.SignDataAsBase64(data, privateKeyPem, hashAlgorithmName: hashAlgorithmName, encode: charset);
         }
 
 
@@ -88,10 +86,8 @@ namespace QuickPay.Alipay.Utility
 
             try
             {
-                var rsaEncryptor = new RsaEncryptor();
-                rsaEncryptor.LoadPublicKey(publicKeyPem);
-                rsaEncryptor.SetHashAlg(signType);
-                return rsaEncryptor.VerifyData(signContent, sign, charset);
+                var hashAlgorithmName = signType == "RSA2" ? "SHA256" : "SHA1";
+                return RSAHelper.VerifyBase64Data(signContent, sign, publicKeyPem, hashAlgorithmName: hashAlgorithmName, encode: charset);
             }
             catch
             {

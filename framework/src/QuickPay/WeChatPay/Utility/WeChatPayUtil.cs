@@ -34,7 +34,8 @@ namespace QuickPay.WeChatPay.Utility
             //转url格式
             string str = $"{payData.ToUrl()}";
             //var encrypted = BitConverter.ToString(SHA1.Create().ComputeHash(Encoding.GetEncoding("UTF-8").GetBytes(str))).Replace("-", "");
-            var encrypted = ShaUtil.GetHex16StringSha1Hash(str);
+
+            var encrypted = SHAUtil.GetHex16StringSHA1Hash(str);
             return encrypted;
         }
 
@@ -45,8 +46,7 @@ namespace QuickPay.WeChatPay.Utility
         {
             //转url格式
             string str = $"{payData.ToUrl()}&key={app.Key}";
-            var encrypted = Md5Encryptor.GetMd5(str).ToUpper();
-            return encrypted;
+            return MD5Helper.GetMD5(str);
         }
 
         /// <summary>签名验证

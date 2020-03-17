@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\..\build\common.props" />
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>QuickPay</AssemblyName>
     <PackageId>QuickPay</PackageId>
     <Description>QuickPay快捷支付,使用简单的代码就能实现微信,支付宝等支付形式</Description>
@@ -10,11 +10,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
-    <DocumentationFile>bin\Debug\netstandard2.0\QuickPay.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netstandard2.1\QuickPay.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netstandard2.0\QuickPay.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\netstandard2.1\QuickPay.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>
@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <PackageReference Include="AspectCore.Extensions.Reflection" Version="2.0.0" />
-    <PackageReference Include="WeChat.Framework" Version="0.5.0" />
+    <PackageReference Include="WeChat.Framework" Version="1.0.0.1-Pre" />
   </ItemGroup>
 
 

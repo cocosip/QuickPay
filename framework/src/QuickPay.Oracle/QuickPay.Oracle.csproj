@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <PackageId>QuickPay.Oracle</PackageId>
     <RootNamespace>QuickPay</RootNamespace>
     <Description>QuickPay快捷支付,使用Oracle进行存储的扩展</Description>
@@ -10,11 +10,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
-    <DocumentationFile>bin\Debug\netstandard2.0\QuickPay.Oracle.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netstandard2.1\QuickPay.Oracle.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netstandard2.0\QuickPay.Oracle.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\netstandard2.1\QuickPay.Oracle.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
   </PropertyGroup>

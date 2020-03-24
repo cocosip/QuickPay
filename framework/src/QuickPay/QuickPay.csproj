@@ -1,19 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\..\build\common.props" />
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     <AssemblyName>QuickPay</AssemblyName>
     <PackageId>QuickPay</PackageId>
     <Description>QuickPay快捷支付,使用简单的代码就能实现微信,支付宝等支付形式</Description>
   </PropertyGroup>
   
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)|$(TargetFramework)'=='Debug|AnyCPU|netstandard2.0'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <DocumentationFile>bin\Debug\netstandard2.0\QuickPay.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)|$(TargetFramework)'=='Release|AnyCPU|netstandard2.0'">
+    <DocumentationFile>bin\Release\netstandard2.0\QuickPay.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)|$(TargetFramework)'=='Debug|AnyCPU|netstandard2.1'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
     <DocumentationFile>bin\Debug\netstandard2.1\QuickPay.xml</DocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)|$(TargetFramework)'=='Release|AnyCPU|netstandard2.1'">
     <DocumentationFile>bin\Release\netstandard2.1\QuickPay.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
@@ -22,9 +34,8 @@
 
   <ItemGroup>
     <PackageReference Include="AspectCore.Extensions.Reflection" Version="2.0.0" />
-    <PackageReference Include="WeChat.Framework" Version="1.0.0.2-Pre" />
+    <PackageReference Include="WeChat.Framework" Version="1.0.0.3-Pre" />
   </ItemGroup>
 
-
-  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
+ 
 </Project>

@@ -8,16 +8,14 @@
     <OutputType>Library</OutputType>
     <Description>QuickPay快捷支付,使用AspNetCore进行扩展配置</Description>
   </PropertyGroup>
-  <ItemGroup>
-    <Folder Include="AspNetCore\Mvc\" />
-  </ItemGroup>
+ 
 
   <ItemGroup>
     <ProjectReference Include="..\QuickPay\QuickPay.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotCommon.AspNetCore.Mvc" Version="4.0.0.2-Pre" />
+    <PackageReference Include="DotCommon.AspNetCore.Mvc" Version="4.0.0.3-Pre" />
   </ItemGroup>
 
 </Project>

@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotCommon.Log4Net" Version="4.0.0.3-Pre" />
+    <PackageReference Include="DotCommon.Log4Net" Version="4.0.1" />
   </ItemGroup>
 
   <ItemGroup>

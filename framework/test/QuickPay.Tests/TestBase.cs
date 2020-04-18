@@ -10,6 +10,7 @@ using QuickPay.WeChatPay.Apps;
 using System;
 using WeChat.Framework;
 using DotCommon.AutoMapper;
+using Microsoft.Extensions.Options;
 
 namespace QuickPay.Tests
 {
@@ -42,7 +43,7 @@ namespace QuickPay.Tests
                 .ConfigureDotCommon()
                 .ConfigureQuickPay();
 
-            Wrapper = Provider.GetService<ConfigWrapper>();
+            Wrapper = Provider.GetService<IOptions<ConfigWrapper>>().Value;
 
         }
     }

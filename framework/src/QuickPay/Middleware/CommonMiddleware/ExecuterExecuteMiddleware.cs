@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using QuickPay.Alipay.Apps;
 using QuickPay.Configurations;
 using QuickPay.Errors;
@@ -8,7 +9,6 @@ using QuickPay.WeChatPay.Url;
 using QuickPay.WeChatPay.Utility;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -26,10 +26,10 @@ namespace QuickPay.Middleware
 
         /// <summary>Ctor
         /// </summary>
-        public ExecuterExecuteMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next, QuickPayConfigurationOption option, IHttpClientFactory httpClientFactory, WeChatPayDataHelper weChatPayDataHelper) : base(provider)
+        public ExecuterExecuteMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next, IOptions<QuickPayConfigurationOption> option, IHttpClientFactory httpClientFactory, WeChatPayDataHelper weChatPayDataHelper) : base(provider)
         {
             _next = next;
-            _option = option;
+            _option = option.Value;
             _httpClientFactory = httpClientFactory;
             _weChatPayDataHelper = weChatPayDataHelper;
         }
@@ -58,7 +58,7 @@ namespace QuickPay.Middleware
                     var responseString = await response.Content.ReadAsStringAsync();
                     //设置返回结果
                     context.HttpResponseString = responseString;
-                    
+
                     Logger.LogInformation(context.Request.GetLogFormat($"执行Execute返回结果:[{responseString}]"));
                     Logger.LogDebug(context.Request.GetLogFormat($"模块:{MiddlewareName}执行."));
                 }

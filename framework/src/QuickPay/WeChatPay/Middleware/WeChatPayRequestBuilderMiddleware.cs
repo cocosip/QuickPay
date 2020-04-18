@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using QuickPay.Configurations;
 using QuickPay.Errors;
 using QuickPay.Infrastructure.Requests;
@@ -20,10 +21,10 @@ namespace QuickPay.WeChatPay.Middleware
         private readonly WeChatPayDataHelper _weChatPayDataHelper;
         /// <summary>Ctor
         /// </summary>
-        public WeChatPayRequestBuilderMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next, QuickPayConfigurationOption option, WeChatPayDataHelper weChatPayDataHelper) : base(provider)
+        public WeChatPayRequestBuilderMiddleware(IServiceProvider provider, QuickPayExecuteDelegate next, IOptions<QuickPayConfigurationOption> option, WeChatPayDataHelper weChatPayDataHelper) : base(provider)
         {
             _next = next;
-            _option = option;
+            _option = option.Value;
             _weChatPayDataHelper = weChatPayDataHelper;
         }
 

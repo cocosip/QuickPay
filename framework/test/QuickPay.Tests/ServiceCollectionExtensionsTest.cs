@@ -13,16 +13,6 @@ namespace QuickPay.Tests
         public void AddQuickPay_Test()
         {
             IServiceCollection services = new ServiceCollection();
-
-            Assert.Throws<QuickPayException>(() =>
-            {
-                services.AddQuickPay(o =>
-                {
-                    o.ConfigSourceType = ConfigSourceType.FromClass;
-                }, null, null);
-            });
-
-            services = new ServiceCollection();
             services
                 .AddDotCommon()
                 .AddDotCommonAutoMapper()
@@ -30,10 +20,6 @@ namespace QuickPay.Tests
             services.AddQuickPay(o =>
             {
                 o.ConfigSourceType = ConfigSourceType.FromClass;
-            }, alipayConfig=>
-            {
-            }, weChatPayConfig=>
-            {
             });
         }
 

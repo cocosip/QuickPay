@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using QuickPay.Alipay.Middleware;
 using QuickPay.Configurations;
+using QuickPay.Exceptions;
 using QuickPay.Middleware;
 using QuickPay.Middleware.Pipeline;
 using QuickPay.Notify;
@@ -16,7 +18,24 @@ namespace QuickPay
         /// </summary>
         public static IServiceProvider ConfigureQuickPay(this IServiceProvider provider)
         {
-            var option = provider.GetService<QuickPayConfigurationOption>();
+            var option = provider.GetService<IOptions<QuickPayConfigurationOption>>().Value;
+            var configWrapper = provider.GetService<IOptions<ConfigWrapper>>().Value;
+
+            if (option.ConfigSourceType == ConfigSourceType.FromClass)
+            {
+                if (configWrapper == null)
+                {
+                    throw new QuickPayException($"当前配置的类型为:{ConfigSourceType.FromClass},但是'ConfigWrapper' 的配置始终为空!");
+                }
+            }
+            else if (option.ConfigSourceType == ConfigSourceType.FromConfigFile)
+            {
+                var fileConfigWrapper = ConfigurationFileHelper.TranslateToConfigWrapper(option.ConfigFileName);
+                configWrapper.AlipayConfig = fileConfigWrapper.AlipayConfig;
+                configWrapper.WeChatPayConfig = fileConfigWrapper.WeChatPayConfig;
+            }
+
+
             //设置NotifyManager中的Notify
             provider.RegisterNotifies(option);
 

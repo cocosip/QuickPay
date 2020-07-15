@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\..\build\common.props" />
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>QuickPay.WeChatPay</AssemblyName>
+    <PackageId>QuickPay.WeChatPay</PackageId>
+    <RootNamespace>QuickPay</RootNamespace>
+    <Description>QuickPay快捷支付,微信支付通道</Description>
+  </PropertyGroup>
+  
+</Project>

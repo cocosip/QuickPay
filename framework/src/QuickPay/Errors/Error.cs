@@ -23,7 +23,7 @@
         /// </summary>
         public override string ToString()
         {
-            if (Code != default(int))
+            if (Code != 0)
             {
                 return Message;
             }
